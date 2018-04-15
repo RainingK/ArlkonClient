@@ -4,21 +4,21 @@
 <xsd:import namespace="http://webservices/" schemaLocation="http://localhost:8080/ArlkonServer/SessionWS?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="hello">
-<part name="parameters" element="tns:hello"/>
+<message name="login">
+<part name="parameters" element="tns:login"/>
 </message>
-<message name="helloResponse">
-<part name="parameters" element="tns:helloResponse"/>
+<message name="loginResponse">
+<part name="parameters" element="tns:loginResponse"/>
 </message>
 <portType name="SessionWS">
-<operation name="hello">
-<input wsam:Action="http://webservices/SessionWS/helloRequest" message="tns:hello"/>
-<output wsam:Action="http://webservices/SessionWS/helloResponse" message="tns:helloResponse"/>
+<operation name="login">
+<input wsam:Action="http://webservices/SessionWS/loginRequest" message="tns:login"/>
+<output wsam:Action="http://webservices/SessionWS/loginResponse" message="tns:loginResponse"/>
 </operation>
 </portType>
 <binding name="SessionWSPortBinding" type="tns:SessionWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="hello">
+<operation name="login">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
