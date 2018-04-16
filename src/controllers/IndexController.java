@@ -11,13 +11,15 @@ import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.transform.Translate;
 import javafx.util.Duration;
 
 /**
@@ -34,6 +36,9 @@ public class IndexController implements Initializable {
     @FXML Pane right_signup_pane;
     @FXML Label noAccountLabel;
     @FXML Label haveAccountLabel;
+    
+    //@FXML ImageView close_btn;
+    //@FXML ImageView minimize_btn;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -80,6 +85,9 @@ public class IndexController implements Initializable {
                         if(login){
                             System.out.println("Logged in!");
                         } else {
+                            // Change text field border bottom color to red to indicate error
+                            login_username_input.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
+                            login_password_input.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
                             login_btn.setDisable(false);
                         }
                     }
@@ -88,6 +96,7 @@ public class IndexController implements Initializable {
                 login_thread.start();
             }
         });
+        
     }
     
     private static Boolean login(java.lang.String username, java.lang.String password) {

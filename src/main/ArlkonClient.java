@@ -26,7 +26,6 @@ public class ArlkonClient extends Application {
         Scene scene = new Scene(root, 1024, 537);
         
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
