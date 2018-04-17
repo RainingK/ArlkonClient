@@ -4,6 +4,10 @@
 
 <xs:element name="loginResponse" type="tns:loginResponse"/>
 
+<xs:element name="signUp" type="tns:signUp"/>
+
+<xs:element name="signUpResponse" type="tns:signUpResponse"/>
+
 <xs:complexType name="login">
 <xs:sequence>
 <xs:element name="username" type="xs:string" minOccurs="0"/>
@@ -12,6 +16,21 @@
 </xs:complexType>
 
 <xs:complexType name="loginResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="signUp">
+<xs:sequence>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="Cpassword" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="signUpResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>

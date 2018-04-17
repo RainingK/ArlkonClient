@@ -10,15 +10,34 @@
 <message name="loginResponse">
 <part name="parameters" element="tns:loginResponse"/>
 </message>
+<message name="signUp">
+<part name="parameters" element="tns:signUp"/>
+</message>
+<message name="signUpResponse">
+<part name="parameters" element="tns:signUpResponse"/>
+</message>
 <portType name="SessionWS">
 <operation name="login">
 <input wsam:Action="http://webservices/SessionWS/loginRequest" message="tns:login"/>
 <output wsam:Action="http://webservices/SessionWS/loginResponse" message="tns:loginResponse"/>
 </operation>
+<operation name="signUp">
+<input wsam:Action="http://webservices/SessionWS/signUpRequest" message="tns:signUp"/>
+<output wsam:Action="http://webservices/SessionWS/signUpResponse" message="tns:signUpResponse"/>
+</operation>
 </portType>
 <binding name="SessionWSPortBinding" type="tns:SessionWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
 <operation name="login">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="signUp">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
