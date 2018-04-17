@@ -8,18 +8,24 @@ package controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -36,6 +42,8 @@ public class IndexController implements Initializable {
     @FXML Pane right_signup_pane;
     @FXML Label noAccountLabel;
     @FXML Label haveAccountLabel;
+    
+    @FXML Pane main_window;
     
     //@FXML ImageView close_btn;
     //@FXML ImageView minimize_btn;
@@ -83,7 +91,8 @@ public class IndexController implements Initializable {
                         Boolean login = login(username, password);
                         
                         if(login){
-                            System.out.println("Logged in!");
+                            // Send user to home page
+                            fadeOutTransition();
                         } else {
                             // Change text field border bottom color to red to indicate error
                             login_username_input.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
@@ -96,7 +105,34 @@ public class IndexController implements Initializable {
                 login_thread.start();
             }
         });
+    }
+    
+    private void fadeOutTransition(){
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setDuration(Duration.millis(300));
+        fadeTransition.setNode(main_window);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
         
+        fadeTransition.setOnFinished((ActionEvent event) -> {
+            try {
+                loadNextScene();
+            } catch (IOException ex) {
+                Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        fadeTransition.play();
+    }
+    
+    private void loadNextScene() throws IOException {
+        Parent nextView;
+        nextView = (Pane) FXMLLoader.load(getClass().getResource("/views/binaryTrading.fxml"));
+        
+        Scene nextScene = new Scene(nextView);
+        Stage curStage = (Stage) main_window.getScene().getWindow();
+        
+        curStage.setScene(nextScene);
     }
     
     private static Boolean login(java.lang.String username, java.lang.String password) {
