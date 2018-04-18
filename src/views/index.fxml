@@ -53,10 +53,10 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="signup_username_input" layoutX="46.0" layoutY="155.0" onKeyTyped="#allowSignup" prefHeight="35.0" prefWidth="187.0" promptText="Username" style="-fx-prompt-text-fill: #8e8e8e;" unFocusColor="#4d4d4db2" />
-            <JFXTextField fx:id="signup_email_input" layoutX="45.0" layoutY="206.0" onKeyTyped="#allowSignup" prefHeight="35.0" prefWidth="187.0" promptText="Email" style="-fx-prompt-text-fill: #8e8e8e;" unFocusColor="#4d4d4db2" />
-            <JFXPasswordField fx:id="signup_password_input" layoutX="46.0" layoutY="257.0" onKeyTyped="#allowSignup" prefHeight="35.0" prefWidth="187.0" promptText="Password" style="-fx-prompt-text-fill: #8e8e8e;" unFocusColor="#4d4d4db2" />
-            <JFXPasswordField fx:id="signup_confirm_password_input" layoutX="46.0" layoutY="309.0" onKeyTyped="#allowSignup" prefHeight="35.0" prefWidth="187.0" promptText="Confirm Password" style="-fx-prompt-text-fill: #8e8e8e;" unFocusColor="#4d4d4db2" />
+            <JFXTextField fx:id="signup_username_input" layoutX="46.0" layoutY="155.0" onKeyReleased="#disableSubmitIfShort" prefHeight="35.0" prefWidth="187.0" promptText="Username" style="-fx-prompt-text-fill: #8e8e8e;" unFocusColor="#4d4d4db2" />
+            <JFXTextField fx:id="signup_email_input" layoutX="45.0" layoutY="206.0" onKeyReleased="#disableSubmitIfShort" prefHeight="35.0" prefWidth="187.0" promptText="Email" style="-fx-prompt-text-fill: #8e8e8e;" unFocusColor="#4d4d4db2" />
+            <JFXPasswordField fx:id="signup_password_input" layoutX="46.0" layoutY="257.0" onKeyReleased="#disableSubmitIfShort" prefHeight="35.0" prefWidth="187.0" promptText="Password" style="-fx-prompt-text-fill: #8e8e8e;" unFocusColor="#4d4d4db2" />
+            <JFXPasswordField fx:id="signup_confirm_password_input" layoutX="46.0" layoutY="309.0" onKeyReleased="#disableSubmitIfShort" prefHeight="35.0" prefWidth="187.0" promptText="Confirm Password" style="-fx-prompt-text-fill: #8e8e8e;" unFocusColor="#4d4d4db2" />
             <JFXButton id="signin_btn" fx:id="signup_btn" layoutX="45.0" layoutY="367.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="187.0" text="Register" textFill="WHITE">
                <font>
                   <Font size="14.0" />

@@ -2,4 +2,6 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8080/ArlkonServer/SessionWS?wsdl" uri="wsdl/localhost_8080/ArlkonServer/SessionWS.wsdl"/>
     <system systemId="http://localhost:8080/ArlkonServer/SessionWS?xsd=1" uri="wsdl/localhost_8080/ArlkonServer/SessionWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl" uri="wsdl/localhost_8080/ArlkonServer/CurrencyApiWS.wsdl"/>
+    <system systemId="http://localhost:8080/ArlkonServer/CurrencyApiWS?xsd=1" uri="wsdl/localhost_8080/ArlkonServer/CurrencyApiWS.xsd_1.xsd"/>
 </catalog>

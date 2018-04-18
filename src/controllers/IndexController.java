@@ -185,7 +185,7 @@ public class IndexController implements Initializable {
     }
     
     @FXML
-    void allowSignup(KeyEvent event) {        
+    void disableSubmitIfShort(KeyEvent event) {        
         if((signup_username_input.getText().trim().length() < 4) || (signup_email_input.getText().trim().length() < 7) ||
                 (signup_password_input.getText().trim().length() < 6) || (signup_confirm_password_input.getText().trim().length() < 6)){
             signup_btn.setDisable(true);

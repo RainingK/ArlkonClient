@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.AreaChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -8,7 +9,7 @@
 <Pane fx:id="main_window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BinaryTradingController">
    <children>
       <Pane layoutX="732.0" prefHeight="537.0" prefWidth="292.0" />
-      <LineChart fx:id="lineChart" axisSortingPolicy="Y_AXIS" layoutX="105.0" layoutY="57.0">
+      <LineChart fx:id="lineChart" cache="true" layoutX="31.0" layoutY="51.0" legendVisible="false" mouseTransparent="true">
         <xAxis>
           <CategoryAxis side="BOTTOM" fx:id="xAxis" />
         </xAxis>
@@ -16,5 +17,13 @@
           <NumberAxis fx:id="yAxis" side="LEFT" />
         </yAxis>
       </LineChart>
+      <AreaChart fx:id="areaChart" focusTraversable="true" layoutX="552.0" layoutY="59.0" legendVisible="false" prefHeight="400.0" prefWidth="430.0" stylesheets="@../res/css/binarytrading.css">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" fx:id="xAxisVal" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="yAxisVal" side="LEFT" />
+        </yAxis>
+      </AreaChart>
    </children>
 </Pane>

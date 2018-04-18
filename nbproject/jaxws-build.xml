@@ -33,5 +33,22 @@
         <delete dir="${build.generated.dir}/jax-wsCache/SessionWS"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-SessionWS"/>
+    <target name="wsimport-client-CurrencyApiWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/CurrencyApiWS"/>
+        <property name="wsdl-CurrencyApiWS" location="xml-resources/web-service-references/CurrencyApiWS/wsdl/localhost_8080/ArlkonServer/CurrencyApiWS.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/CurrencyApiWS" destdir="${build.generated.dir}/jax-wsCache/CurrencyApiWS" wsdl="${wsdl-CurrencyApiWS}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-CurrencyApiWS}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/CurrencyApiWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/CurrencyApiWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-CurrencyApiWS" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/CurrencyApiWS"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-SessionWS, wsimport-client-CurrencyApiWS"/>
 </project>
