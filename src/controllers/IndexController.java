@@ -7,6 +7,7 @@ package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
@@ -16,6 +17,8 @@ import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,6 +29,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -58,6 +62,8 @@ public class IndexController implements Initializable {
     @FXML ImageView close_btn;
     @FXML ImageView minimize_btn;
     
+    @FXML JFXSpinner loading_spinner;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -88,34 +94,33 @@ public class IndexController implements Initializable {
             }
         });
         
+        // Login on Enter in username field
+        login_username_input.setOnKeyPressed(new EventHandler<KeyEvent>() {
+ 
+            @Override
+            public void handle(KeyEvent event) {
+                if(event.getCode().equals(KeyCode.ENTER)) {
+                     loginThread();
+                }
+            }
+        });
+        
+        // Login on Enter in password field
+        login_password_input.setOnKeyPressed(new EventHandler<KeyEvent>() {
+ 
+            @Override
+            public void handle(KeyEvent event) {
+                if(event.getCode().equals(KeyCode.ENTER)) {
+                     loginThread();
+                }
+            }
+        });
+        
+        // Login on Button click
         login_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
-                // Disable button when clicked once
-                login_btn.setDisable(true);
-                
-                // Get user inputs
-                String username = login_username_input.getText();
-                String password = login_password_input.getText();
-                
-                Thread login_thread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Boolean login = login(username, password);
-                        
-                        if(login){
-                            // Send user to home page
-                            fadeOutTransition("/views/binaryTrading.fxml");
-                        } else {
-                            // Change text field border bottom color to red to indicate error
-                            login_username_input.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
-                            login_password_input.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
-                            login_btn.setDisable(false);
-                        }
-                    }
-                });
-                
-                login_thread.start();
+                loginThread();
             }
         });
         
@@ -150,9 +155,52 @@ public class IndexController implements Initializable {
         minimizeProgram(minimize_btn);
     }
     
+    private void loginThread(){
+       // Show loading spinner 
+       loading_spinner.setVisible(true);
+        
+       // Disable button when clicked once
+       login_btn.setDisable(true);
+
+       // Get user inputs
+       String username = login_username_input.getText();
+       String password = login_password_input.getText();
+       
+       Task<Boolean> task = new Task<Boolean>() {
+            @Override 
+            protected Boolean call() throws Exception {
+                return login(username, password);
+            }
+        };
+       
+        task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent t) {
+                
+                Boolean login = task.getValue();
+                
+                if(login){
+                    try {
+                       loadNextScene("/views/binaryTrading.fxml");
+                    } catch (IOException ex) {
+                       Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    // Change text field border bottom color to red to indicate error
+                    login_username_input.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
+                    login_password_input.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
+                    login_btn.setDisable(false);
+                    loading_spinner.setVisible(false);
+                }
+            }
+        });
+       
+        new Thread(task).start();
+    }
+    
     private void fadeOutTransition(String sceneLoc){
         FadeTransition fadeTransition = new FadeTransition();
-        fadeTransition.setDuration(Duration.millis(300));
+        fadeTransition.setDuration(Duration.millis(100));
         fadeTransition.setNode(main_window);
         fadeTransition.setFromValue(1);
         fadeTransition.setToValue(0);

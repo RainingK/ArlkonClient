@@ -2,6 +2,72 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
+#right_pane, #top_pane {
+    -fx-background-color: #121c1e;
+}
 
+#main_window, #areaChart {
+    -fx-background-color: #152123;
+}
+
+#amount_textfield {
+    -fx-prompt-text-fill: white;
+}
+
+#call_btn {
+    -fx-border-radius: 10px;
+    -fx-background-color: #009e4e;
+}
+
+#call_btn:hover {
+    -fx-background-color: #009147;
+}
+
+#put_btn:hover {
+    -fx-background-color: #b71f28;
+}
+
+#put_btn {
+    -fx-border-radius: 10px;
+    -fx-background-color: #be222c;
+}
+
+#areaChart {
+    -fx-background-color: #152123;
+}
+
+#areaChart .chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+#areaChart .chart-horizontal-grid-lines {
+    -fx-stroke: #2e4649;
+}
+
+#areaChart .axis {
+    -fx-tick-label-fill: white;
+}
+
+#areaChart .default-color0.chart-series-area-line {
+    -fx-stroke: #dda0dd;
+    -fx-stroke: white;
+}
+
+#areaChart .default-color0.chart-series-area-fill {
+    -fx-fill: #d8bfd833;
+    -fx-fill: #3c575b33;
+}
+
+#currency1_dropdown, #currency2_dropdown {
+    -fx-background-color: #1a282a;
+}
+
+#time_hour_dropdown, #time_min_dropdown {
+    -fx-background-color: #202f32;
+    -fx-prompt-text-fill: white;
+    -fx-padding: 0 0 0 7;
+}
+
+#currency1_dropdown > .list-cell .label, #currency2_dropdown > .list-cell .label, #time_min_dropdown > .list-cell .label, #time_hour_dropdown > .list-cell .label {
+    -fx-text-fill: white;
 }
