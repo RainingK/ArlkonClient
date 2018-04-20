@@ -19,8 +19,6 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
-import javafx.concurrent.ScheduledService;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -33,9 +31,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import utils.WindowHandler;
 
 /**
  * FXML Controller class
@@ -44,37 +42,32 @@ import javafx.util.Duration;
  */
 public class BinaryTradingController implements Initializable {
 
-    @FXML
-    private Pane main_window;
+    // Main Pane
+    @FXML private Pane main_window;
     
-    @FXML
-    private JFXComboBox time_min_dropdown, time_hour_dropdown;
+    // Dropdowns
+    @FXML private JFXComboBox time_min_dropdown, time_hour_dropdown;
     
-    @FXML
-    private Pane home_btn_pane, profile_btn_pane, settings_btn_pane, help_btn_pane;
+    // Header
+    @FXML private Pane home_btn_pane, profile_btn_pane, settings_btn_pane, help_btn_pane;
+    @FXML private ImageView home_btn, profile_btn, settings_btn, help_btn;
+    @FXML private Label home_btn_label, profile_btn_label, settings_btn_label, help_btn_label;
     
-    @FXML
-    private ImageView home_btn, profile_btn, settings_btn, help_btn;
+    // Date and time label
+    @FXML private Label current_datetime_label;
     
-    @FXML
-    private Label home_btn_label, profile_btn_label, settings_btn_label, help_btn_label;
+    // Close and Minimize button
+    @FXML private ImageView close_btn, minimize_btn;
     
-    @FXML
-    private Label current_datetime_label;
-    
-    @FXML
-    private AreaChart<?, ?> areaChart;
-
-    @FXML
-    private NumberAxis yAxisVal;
+    // Area Chart
+    @FXML private AreaChart<?, ?> areaChart;
+    @FXML private NumberAxis yAxisVal;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("LOADING");
-
         // Fade in window
         //main_window.setOpacity(0);
         fadeInTransition();     
@@ -93,6 +86,11 @@ public class BinaryTradingController implements Initializable {
         
         // Display current time
         displayCurrentTime();
+        
+        // Set up close and minimize buttons
+        WindowHandler wh = new WindowHandler();
+        wh.closeProgram(close_btn);
+        wh.minimizeProgram(minimize_btn);
         
     }
     
