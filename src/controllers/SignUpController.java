@@ -49,6 +49,8 @@ public class SignUpController implements Initializable {
     @FXML RadioButton TCRadioBtn;
     @FXML JFXButton signup_next2_btn;
     
+    @FXML Pane home_btn_pane;
+    
     @FXML Pane rightPane3;
     
     private boolean usernameNext = false;
@@ -113,6 +115,13 @@ public class SignUpController implements Initializable {
         wh.closeProgram(close_btn);
         wh.minimizeProgram(minimize_btn);
 }
+    
+    @FXML
+    void openHomeScene(MouseEvent event){
+        Transition trans = new Transition();
+        trans.setWindow(main_window);
+        trans.fadeOutTransition("/views/index.fxml");
+    }
     
     //Controls the Terms and Condition Radio Button
     @FXML
@@ -188,12 +197,11 @@ public class SignUpController implements Initializable {
             signup_next1_btn.setDisable(true);
             usernameNext = false;
         } else {
-            username_label.setTextFill(Color.web("#00e557"));
+            username_label.setTextFill(Color.web("#009e3c"));
             usernameNext = true;
         }
         
         if(usernameNext && emailNext && passwordNext && CPasswordNext){
-            System.out.println("Should enable button");
             signup_next1_btn.setDisable(false);
         }
     }
@@ -206,12 +214,11 @@ public class SignUpController implements Initializable {
             emailNext = false;
             
         } else {
-            email_label.setTextFill(Color.web("#00e557"));
+            email_label.setTextFill(Color.web("#009e3c"));
             emailNext = true;
         }
         
         if(usernameNext && emailNext && passwordNext && CPasswordNext){
-            System.out.println("Should enable button");
             signup_next1_btn.setDisable(false);
         }
     }
@@ -223,12 +230,11 @@ public class SignUpController implements Initializable {
             password_label.setTextFill(Color.web("#ea0e3d"));
             passwordNext = false;
         } else {
-            password_label.setTextFill(Color.web("#00e557"));
+            password_label.setTextFill(Color.web("#009e3c"));
             passwordNext = true;
         }
         
         if(usernameNext && emailNext && passwordNext && CPasswordNext){
-            System.out.println("Should enable button");
             signup_next1_btn.setDisable(false);
         }
     }
@@ -240,8 +246,7 @@ public class SignUpController implements Initializable {
             cpassword_label.setTextFill(Color.web("#ea0e3d"));
             CPasswordNext = false;
         } else {
-            System.out.println("CPassword Confirmed");
-            cpassword_label.setTextFill(Color.web("#00e557"));
+            cpassword_label.setTextFill(Color.web("#009e3c"));
             CPasswordNext = true;
         }
         
