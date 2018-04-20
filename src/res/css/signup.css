@@ -1,0 +1,45 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+#signup_left_pane {
+    -fx-background-color: #152123;
+}
+
+#signup_next_btn, #signup_next2_btn, #signup_final_btn{
+    -fx-background-color: #009e4e;
+}
+
+#signup_back1_btn, #signup_back2_btn {
+    -fx-background-color: #ea0e3d;
+}
+
+#signup_next_btn, #signup_next2_btn, #signup_final_btn:hover {
+	-fx-background-color: #008742;
+	-fx-cursor: hand;
+}
+
+#signup_back1_btn, #signup_back2_btn:hover {
+    -fx-background-color: #d10833;
+    -fx-cursor: hand;
+}
+
+#have_account:hover {
+    -fx-cursor: hand;
+}
+
+#close_image, #minimize_image:hover {
+	-fx-cursor: hand;
+}
+
+#signup_first_right_pane {
+    -fx-background-color: #ecebe4;
+}
+
+#signup_second_right_pane {
+    -fx-background-color: #ecebe4;
+}
+
+#signup_third_right_pane {
+    -fx-background-color: #ecebe4;
+}
