@@ -4,11 +4,15 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
@@ -29,6 +33,8 @@ import utils.WindowHandler;
  * @author DELL
  */
 public class IndexController implements Initializable {
+    String username;
+    String password;
     
     // Main Pane
     @FXML Pane main_window;
@@ -113,15 +119,14 @@ public class IndexController implements Initializable {
     }
     
     private void loginThread(){
-       // Show loading spinner 
-       loading_spinner.setVisible(true);
+     
         
        // Disable button when clicked once
        login_btn.setDisable(true);
 
        // Get user inputs
-       String username = login_username_input.getText();
-       String password = login_password_input.getText();
+       username = login_username_input.getText();
+       password = login_password_input.getText();
        
        Task<Boolean> task = new Task<Boolean>() {
             @Override 
@@ -129,6 +134,15 @@ public class IndexController implements Initializable {
                 return login(username, password);
             }
         };
+       
+       task.setOnRunning(new EventHandler<WorkerStateEvent>() {
+           @Override
+           public void handle(WorkerStateEvent event) {
+                 // Show loading spinner 
+                 loading_spinner.setVisible(true);
+           }
+       
+       });
        
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
@@ -138,8 +152,18 @@ public class IndexController implements Initializable {
                 
                 if(login){
                     trans.setWindow(main_window);
+                    
+                    
+                    // Get user id from username
+                    int user_id = getUserIdFromUsername(username);
                     try {
-                        trans.loadNextScene("/views/binaryTrading.fxml");
+                        saveIdToFile(user_id);
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    try {
+                        trans.loadNextScene("/views/Home.fxml");
                     } catch (IOException ex) {
                         Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -156,9 +180,21 @@ public class IndexController implements Initializable {
         new Thread(task).start();
     }
     
+    private void saveIdToFile(int user_id) throws FileNotFoundException{
+        PrintWriter writer = new PrintWriter("user_data.txt");
+        writer.println(user_id);
+        writer.close();
+    }
+    
     private static Boolean login(java.lang.String username, java.lang.String password) {
         webservices.SessionWS_Service service = new webservices.SessionWS_Service();
         webservices.SessionWS port = service.getSessionWSPort();
         return port.login(username, password);
     }    
+
+    private static int getUserIdFromUsername(java.lang.String username) {
+        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS port = service.getUserWSPort();
+        return port.getUserIdFromUsername(username);
+    }
 }

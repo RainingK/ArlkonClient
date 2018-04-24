@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://webservices/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservices/">
+
+<xs:element name="getLossValue" type="tns:getLossValue"/>
+
+<xs:element name="getLossValueResponse" type="tns:getLossValueResponse"/>
+
+<xs:element name="getProfitValue" type="tns:getProfitValue"/>
+
+<xs:element name="getProfitValueResponse" type="tns:getProfitValueResponse"/>
+
+<xs:element name="getTransactionAmount" type="tns:getTransactionAmount"/>
+
+<xs:element name="getTransactionAmountResponse" type="tns:getTransactionAmountResponse"/>
+
+<xs:element name="insertIntoDB" type="tns:insertIntoDB"/>
+
+<xs:element name="insertIntoDBResponse" type="tns:insertIntoDBResponse"/>
+
+<xs:element name="insertIntoDetails" type="tns:insertIntoDetails"/>
+
+<xs:element name="insertIntoDetailsResponse" type="tns:insertIntoDetailsResponse"/>
+
+<xs:complexType name="getLossValue">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLossValueResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertIntoDB">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+<xs:element name="transaction_amount" type="xs:double"/>
+<xs:element name="profit_value" type="xs:double"/>
+<xs:element name="loss_value" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertIntoDBResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getProfitValue">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProfitValueResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertIntoDetails">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+<xs:element name="transaction_result" type="xs:double"/>
+<xs:element name="end_method" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertIntoDetailsResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getTransactionAmount">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTransactionAmountResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
