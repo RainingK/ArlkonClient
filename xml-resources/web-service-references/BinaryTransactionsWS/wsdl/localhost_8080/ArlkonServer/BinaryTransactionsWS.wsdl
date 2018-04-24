@@ -4,21 +4,59 @@
 <xsd:import namespace="http://webservices/" schemaLocation="http://localhost:8080/ArlkonServer/BinaryTransactionsWS?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="setResult">
+<part name="parameters" element="tns:setResult"/>
+</message>
+<message name="setResultResponse">
+<part name="parameters" element="tns:setResultResponse"/>
+</message>
 <message name="insertIntoDb">
 <part name="parameters" element="tns:insertIntoDb"/>
 </message>
 <message name="insertIntoDbResponse">
 <part name="parameters" element="tns:insertIntoDbResponse"/>
 </message>
+<message name="getCallEndPrice">
+<part name="parameters" element="tns:getCallEndPrice"/>
+</message>
+<message name="getCallEndPriceResponse">
+<part name="parameters" element="tns:getCallEndPriceResponse"/>
+</message>
 <portType name="BinaryTransactionsWS">
+<operation name="setResult">
+<input wsam:Action="http://webservices/BinaryTransactionsWS/setResultRequest" message="tns:setResult"/>
+<output wsam:Action="http://webservices/BinaryTransactionsWS/setResultResponse" message="tns:setResultResponse"/>
+</operation>
 <operation name="insertIntoDb">
 <input wsam:Action="http://webservices/BinaryTransactionsWS/insertIntoDbRequest" message="tns:insertIntoDb"/>
 <output wsam:Action="http://webservices/BinaryTransactionsWS/insertIntoDbResponse" message="tns:insertIntoDbResponse"/>
 </operation>
+<operation name="getCallEndPrice">
+<input wsam:Action="http://webservices/BinaryTransactionsWS/getCallEndPriceRequest" message="tns:getCallEndPrice"/>
+<output wsam:Action="http://webservices/BinaryTransactionsWS/getCallEndPriceResponse" message="tns:getCallEndPriceResponse"/>
+</operation>
 </portType>
 <binding name="BinaryTransactionsWSPortBinding" type="tns:BinaryTransactionsWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="setResult">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="insertIntoDb">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getCallEndPrice">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

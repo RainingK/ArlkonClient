@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="main_window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="1024.0" stylesheets="@../res/css/signup.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpController">
+   <children>
+      <Pane id="signup_left_pane" prefHeight="537.0" prefWidth="302.0" stylesheets="@../res/css/signup.css">
+         <children>
+            <Label fx:id="details_label" layoutX="60.0" layoutY="126.0" text="1. Registration form" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="TC_label" layoutX="60.0" layoutY="175.0" text="2. Terms and Conditions" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="SignUp_label" layoutX="60.0" layoutY="224.0" text="3. Complete Registration" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="79.0" fitWidth="96.0" layoutX="21.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/logo.png" />
+               </image>
+            </ImageView>
+            <Pane fx:id="home_btn_pane" layoutX="102.0" layoutY="481.0" onMouseClicked="#openHomeScene" prefHeight="28.0" prefWidth="96.0">
+               <children>
+                  <Label layoutX="40.0" text="Home" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+                  <ImageView fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../res/assets/icons/home_white.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children></Pane>
+      <Pane id="Signup_first_right_pane" fx:id="rightPane1" layoutX="302.0" prefHeight="537.0" prefWidth="723.0" stylesheets="@../res/css/signup.css">
+         <children>
+            <JFXTextField fx:id="signup_username_input" layoutX="83.0" layoutY="120.0" onKeyReleased="#disableSubmitIfShortUsername" promptText="Username" />
+            <JFXTextField fx:id="signup_email_input" layoutX="83.0" layoutY="179.0" onKeyReleased="#disableSubmitIfShortEmail" promptText="Email" />
+            <JFXButton id="signup_next_btn" fx:id="signup_next1_btn" layoutX="83.0" layoutY="379.0" prefHeight="32.0" prefWidth="135.0" stylesheets="@../res/css/signup.css" text="Next" textFill="WHITE" />
+            <JFXPasswordField fx:id="signup_password_input" layoutX="83.0" layoutY="244.0" onKeyReleased="#disableSubmitIfShortPassword" promptText="Password" />
+            <JFXPasswordField fx:id="signup_confirm_password_input" layoutX="83.0" layoutY="313.0" onKeyReleased="#disableSubmitIfShortCPassword" promptText="Confirm Password" />
+            <Label layoutX="83.0" layoutY="43.0" text="Sign Up">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="username_label" layoutX="278.0" layoutY="127.0" text="Username should be atleast 4 characters">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font></Label>
+            <Label fx:id="email_label" layoutX="278.0" layoutY="187.0" text="Email should be atleast 7 characters">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font></Label>
+            <Label fx:id="password_label" layoutX="278.0" layoutY="252.0" text="Password should be atleast 6 characters">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font></Label>
+            <Label fx:id="cpassword_label" layoutX="278.0" layoutY="320.0" text="Passwords should match">
+               <font>
+                  <Font name="System Italic" size="15.0" />
+               </font></Label>
+         </children>
+      </Pane>
+      <Pane id="signup_second_right_pane" fx:id="rightPane2" layoutX="1033.0" prefHeight="537.0" prefWidth="723.0" stylesheets="@../res/css/signup.css">
+         <children>
+            <ScrollPane layoutX="37.0" layoutY="62.0" prefHeight="348.0" prefWidth="672.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="415.0" prefWidth="670.0" />
+              </content>
+            </ScrollPane>
+            <JFXRadioButton fx:id="TCRadioBtn" layoutX="240.0" layoutY="432.0" onAction="#selected" text="I Accept The Terms And Conditions" />
+            <JFXButton id="signup_next2_btn" fx:id="signup_next2_btn" layoutX="362.0" layoutY="478.0" onMouseClicked="#nextPane" prefHeight="32.0" prefWidth="135.0" stylesheets="@../res/css/signup.css" text="Next" textFill="WHITE" />
+            <JFXButton id="signup_back1_btn" fx:id="signup_back1_btn" layoutX="218.0" layoutY="478.0" onAction="#backPane1" prefHeight="32.0" prefWidth="135.0" stylesheets="@../res/css/signup.css" text="Back" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane id="signup_third_right_pane" fx:id="rightPane3" layoutX="1033.0" prefHeight="537.0" prefWidth="723.0" stylesheets="@../res/css/signup.css">
+         <children>
+            <JFXButton id="signup_final_btn" fx:id="signup_next1_btn1" layoutX="380.0" layoutY="410.0" onAction="#SignUpFinal" prefHeight="32.0" prefWidth="135.0" stylesheets="@../res/css/signup.css" text="Sign Up" textFill="WHITE" />
+            <JFXButton id="signup_back2_btn" fx:id="signup_back2_btn" layoutX="227.0" layoutY="410.0" onAction="#backPane2" prefHeight="32.0" prefWidth="135.0" stylesheets="@../res/css/signup.css" text="Back" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Pane layoutX="954.0" layoutY="11.0" prefHeight="26.0" prefWidth="57.0">
+         <children>
+            <ImageView id="close_image" fx:id="close_btn" fitHeight="19.0" fitWidth="14.0" layoutX="35.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/close_black.png" />
+               </image>
+            </ImageView>
+            <ImageView id="minimize_image" fx:id="minimize_btn" fitHeight="19.0" fitWidth="14.0" layoutX="1.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" styleClass="minimize_image">
+               <image>
+                  <Image url="@../res/assets/icons/minus_black.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</Pane>

@@ -7,7 +7,10 @@ package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,6 +20,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -25,6 +29,7 @@ import javafx.animation.TranslateTransition;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -71,11 +76,14 @@ public class BinaryTradingController implements Initializable {
     // Commission fee label
     @FXML private Label commission_fee_label;
     
+    // Profit rate label
+    @FXML private Label profit_rate_label;
+    
     // Balance label
     @FXML private Label balance_val_label;
     
     // Called amount and end time labels
-    @FXML private Label called_amount_label, end_time_label;
+    @FXML private Label called_amount_label, end_time_label, called_at_val_label;
     
     // Amount input field
     @FXML private JFXTextField amount_input;
@@ -93,11 +101,13 @@ public class BinaryTradingController implements Initializable {
     // View Button
     @FXML private JFXButton view_btn;
     
-    private final double COMMISSION_RATE = 0.02;
+    // Random value added to the currencies
+    private double generatedDecimal;
+    private int remaining_seconds = 0;
     
-    /**
-     * Initializes the controller class.
-     */
+    private final double COMMISSION_RATE = 0.02;
+    private final double PROFIT_PERCENTAGE = 0.86;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Fade in window
@@ -117,6 +127,9 @@ public class BinaryTradingController implements Initializable {
         applyHeaderEffect(profile_btn_pane, profile_btn, profile_btn_label);
         applyHeaderEffect(settings_btn_pane, settings_btn, settings_btn_label);
         applyHeaderEffect(help_btn_pane, help_btn, help_btn_label);
+        
+        // Set profit percentage
+        setProfitPercentage();
         
         // Display current time
         displayCurrentTime();
@@ -199,7 +212,7 @@ public class BinaryTradingController implements Initializable {
                 
                 // Generate random decimals
                 Random rand = new Random();
-                double generatedDecimal = -0.01 + (0.1 - (-0.01)) * rand.nextDouble();
+                generatedDecimal = -0.01 + (0.1 - (-0.01)) * rand.nextDouble();
                 generatedDecimal = Math.round(generatedDecimal * 100.0) / 100.0;
                 
                 if(((currentPrice) - 0.1) < min){
@@ -276,23 +289,124 @@ public class BinaryTradingController implements Initializable {
         });
     }
     
-    public void startCallTimeCountdown(){
-        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, event -> {
-                int seconds = Integer.parseInt(end_time_label.getText());
-                seconds--;
-                
-                if(seconds < 1){
-                    return;
-                }
-                end_time_label.setText("" + seconds);
-            }),
-            // Refresh every 1 second
-            new KeyFrame(Duration.seconds(1))
-        );
-
-        clock.setCycleCount(Animation.INDEFINITE);
-        clock.play();
+    private void setProfitPercentage(){
+        profit_rate_label.setText("" + (PROFIT_PERCENTAGE * 100) + "%");
     }
+    
+    // Start time left countdown
+    public void startCallTimeCountdown(){
+        remaining_seconds = Integer.parseInt(end_time_label.getText());
+        final String currency1 = currency1_dropdown.getValue().toString();
+        final String currency2 = currency2_dropdown.getValue().toString();
+        
+        Timeline clock = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                remaining_seconds--;
+                
+                end_time_label.setText("" + remaining_seconds);
+            }
+        }));
+        
+        // Run the timeline for the remaining seconds
+        clock.setCycleCount(remaining_seconds - 1);
+        clock.play();
+        
+        // When the countdown is over, show a message with the result
+        clock.setOnFinished(e -> {
+            processCompletedCall(getCurrentPrice(currency1, currency2));
+            call_btn.setDisable(false);
+        });
+    }
+    
+    // When call is completed, process the results
+    private void processCompletedCall(double currentPrice){
+        
+        int current_user_id = 0;
+        try {
+            current_user_id = getIdFromFile();
+        } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException: " + ex);
+        }
+        
+        String message = "";
+        double endPrice = getCurrentPrice(currency1_dropdown.getValue().toString(), currency2_dropdown.getValue().toString()) + generatedDecimal;
+        double amount = Double.parseDouble(called_amount_label.getText().substring(1, called_amount_label.getText().length()));
+        double result = 0;
+        
+        System.out.println("FINISHED AT: " + (getCurrentPrice(currency1_dropdown.getValue().toString(), currency2_dropdown.getValue().toString()) + generatedDecimal));
+        
+        if(endPrice > currentPrice){
+            // Won call
+            result = (amount + (amount * PROFIT_PERCENTAGE));
+            message = "Congratulations! You have earned " + result + "!";
+            
+            // Insert into db
+            setResult(result, current_user_id);
+        } else if(currentPrice > endPrice){
+            // Lost call
+            result = -amount;
+            message = "Oops! Unfortunately you have lost " + amount + " this time, try again soon!";
+            
+            // Insert into db
+            setResult(result, current_user_id);
+            
+            /**************** Insert into sales db *****************/
+        } else {
+            // Start price level and end price level is equal
+            result = -(amount * COMMISSION_RATE);
+            
+            message = "Well, it seems like your price level has remained the same";
+            setResult( result, current_user_id);
+        }
+        
+        // Deduct result from balance
+        //balance_val_label.setText(); // getBalance() from DB + result -> Before this, when they click on call, their balance should be deducted
+        
+        final JFXSnackbar snackBar = new JFXSnackbar(main_window);
+        
+        EventHandler handler = new EventHandler(){
+            @Override
+            public void handle(Event event) {
+                // Hide the snackbar
+                snackBar.unregisterSnackbarContainer(main_window);
+            }
+        };
+        
+        snackBar.show(message, "Close", 7000, handler);
+        
+        // Set the graph back to its position
+        Transition trans = new Transition();
+        trans.setWindow(main_window);
+        
+        calls_container.setVisible(false);
+        trans.translate(100, areaChart);
+    }
+    
+    private int getIdFromFile() throws FileNotFoundException {
+        Scanner in = new Scanner(new FileReader("user_data.txt"));
+        
+        int user_id = 0;
+        if(in.hasNext()) {
+            user_id = in.nextInt();
+        }
+        
+        in.close();
+        
+        return user_id;
+    }
+    
+    /* user logged in:
+     * In client -> If countdown hits < 1, show dialog "Call completed", calculate amount and set it to balance (show notification if possible)
+     
+    /* user not logged in:
+     * In server, run a thread that's always checking if the seconds == 0; (should run every second and decrement seconds)
+     * Make sure this is not only for a single user. 
+     * In server check if the user's log in time is past their "Call completed" time. If yes, then show completed message,
+        else start the client's timer from how much is left. (Add transaction_timeframe to the transaction_datetime to get the final datetime
+    
+    */
     
     @FXML
     private void validateAmount(KeyEvent event) {
@@ -360,8 +474,11 @@ public class BinaryTradingController implements Initializable {
         }
     }
     
+    // Start call transaction -> Validate, Insert
     @FXML
     private void makeCallTransaction(MouseEvent e){
+        
+        call_btn.setDisable(true);
         
         String amount = amount_input.getText();
         String currency1 = currency1_dropdown.getValue().toString();
@@ -400,18 +517,15 @@ public class BinaryTradingController implements Initializable {
         }
         
         final int final_totalSeconds = totalSeconds;
-        System.out.println("secs: " + final_totalSeconds);
         
         // Insert into DB
         Task<Boolean> task = new Task<Boolean>() {
             @Override 
             protected Boolean call() throws Exception {
-                boolean insert = insertIntoDb(1, "call", currency1, currency2, Double.parseDouble(amount), final_totalSeconds);
+                boolean insert = insertIntoDb(getIdFromFile(), "call", currency1, currency2, Double.parseDouble(amount), (getCurrentPrice(currency1, currency2) + generatedDecimal), final_totalSeconds);
                 return insert;
             }
         };
-        
-        // Do the effect part here (translation); Also, user_id is hardcoded. Get it from file
         
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
            @Override
@@ -428,11 +542,15 @@ public class BinaryTradingController implements Initializable {
                 // Set amount to the label in calls_container
                 called_amount_label.setText("$" + amount);
 
+                // Set the price level at which user called
+                called_at_val_label.setText("" + (getCurrentPrice(currency1, currency2) + generatedDecimal));
+                
+                // Set the max time remaining
                 end_time_label.setText("" + final_totalSeconds);
                 
+                System.out.println("CLICKED AT: " + (getCurrentPrice(currency1, currency2) + generatedDecimal));
                 startCallTimeCountdown();
            }
-       
        });
         
         new Thread(task).start();
@@ -452,16 +570,33 @@ public class BinaryTradingController implements Initializable {
         return port.getCurrentPrice(currency1, currency2);
     }
 
-    private static boolean insertIntoDb(int userId, java.lang.String type, java.lang.String currency1, java.lang.String currency2, double amount, int seconds) {
+    private static boolean insertIntoDb(int userId, java.lang.String type, java.lang.String currency1, java.lang.String currency2, double amount, double priceLevel, int seconds) {
         webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
-        return port.insertIntoDb(userId, type, currency1, currency2, amount, seconds);
+        return port.insertIntoDb(userId, type, currency1, currency2, amount, priceLevel, seconds);
     }
-
+ 
     private static java.util.List<java.lang.String> getCurrencyList() {
         webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
         return port.getCurrencyList();
     }
-    
+
+    private static double getCallEndPrice(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getCallEndPrice(userId);
+    }
+
+    private static void setResult(double result, int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        port.setResult(result, userId);
+    }
 }
+
+/* Todo: 
+ * add called amount to the Calls pane -- DONE
+ * Add method to update end_price_level in DB
+ * end time in hours and minutes
+*/

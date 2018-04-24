@@ -67,23 +67,6 @@
         <delete dir="${build.generated.dir}/jax-wsCache/BinaryTransactionsWS"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
     </target>
-    <target name="wsimport-client-IWWS" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/IWWS"/>
-        <property name="wsdl-IWWS" location="xml-resources/web-service-references/IWWS/wsdl/localhost_8080/ArlkonServer/IWWS.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/IWWS" destdir="${build.generated.dir}/jax-wsCache/IWWS" wsdl="${wsdl-IWWS}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/ArlkonServer/IWWS?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${wsdl-IWWS}"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/IWWS"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/IWWS">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-IWWS" depends="-init-project">
-        <delete dir="${build.generated.dir}/jax-wsCache/IWWS"/>
-        <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
-    </target>
     <target name="wsimport-client-UserWS" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/UserWS"/>
         <property name="wsdl-UserWS" location="xml-resources/web-service-references/UserWS/wsdl/localhost_8080/ArlkonServer/UserWS.wsdl"/>
@@ -101,5 +84,22 @@
         <delete dir="${build.generated.dir}/jax-wsCache/UserWS"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-SessionWS, wsimport-client-CurrencyApiWS, wsimport-client-BinaryTransactionsWS, wsimport-client-IWWS, wsimport-client-UserWS"/>
+    <target name="wsimport-client-IWWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/IWWS"/>
+        <property name="wsdl-IWWS" location="xml-resources/web-service-references/IWWS/wsdl/localhost_8080/ArlkonServer/IWWS.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/IWWS" destdir="${build.generated.dir}/jax-wsCache/IWWS" wsdl="${wsdl-IWWS}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/ArlkonServer/IWWS?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-IWWS}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/IWWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/IWWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-IWWS" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/IWWS"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-SessionWS, wsimport-client-CurrencyApiWS, wsimport-client-BinaryTransactionsWS, wsimport-client-UserWS, wsimport-client-IWWS"/>
 </project>

@@ -1,0 +1,21 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+#invest_btn  {
+    -fx-border-radius: 10px;
+    -fx-background-color: #009e4e;
+}
+
+#currency_dropdown {
+    -fx-background-color: #1a282a;
+    -fx-prompt-text-fill: white;
+}
+
+#amount_textfield, #currency_dropdown > .list-cell {
+    -fx-text-fill: white;
+}
+
+#take_profit_btn, #stop_loss_btn {
+    -fx-background-color: #1e282a;
+}

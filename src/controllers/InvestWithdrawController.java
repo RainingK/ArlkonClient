@@ -336,11 +336,9 @@ public class InvestWithdrawController implements Initializable {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(InvestWithdrawController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-     
     }
     
-    int getIdFromFile() throws FileNotFoundException {
+    private int getIdFromFile() throws FileNotFoundException {
         Scanner in = new Scanner(new FileReader("user_data.txt"));
         
         int user_id = 0;
