@@ -119,8 +119,6 @@ public class IndexController implements Initializable {
     }
     
     private void loginThread(){
-     
-        
        // Disable button when clicked once
        login_btn.setDisable(true);
 
@@ -140,6 +138,15 @@ public class IndexController implements Initializable {
            public void handle(WorkerStateEvent event) {
                  // Show loading spinner 
                  loading_spinner.setVisible(true);
+           }
+       
+       });
+       
+       task.setOnRunning(new EventHandler<WorkerStateEvent>() {
+           @Override
+           public void handle(WorkerStateEvent event) {
+               // Show loading spinner 
+               loading_spinner.setVisible(true);
            }
        
        });

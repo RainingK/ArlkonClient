@@ -6,6 +6,7 @@
 package controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,6 +16,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.animation.Animation;
@@ -38,11 +40,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import utils.WindowHandler;
-import static java.lang.System.*;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.prefs.Preferences;
+import javafx.concurrent.Task;
 import utils.Transition;
 
 /**
@@ -88,6 +89,9 @@ public class InvestWithdrawController implements Initializable {
     //Textfields
     @FXML private JFXTextField amount_textfield;
     
+    // Dropdown
+    @FXML private JFXComboBox currency_dropdown;
+    
     private int user_id;
     
     // Constants
@@ -117,6 +121,9 @@ public class InvestWithdrawController implements Initializable {
         
         // Display current time
         displayCurrentTime();
+        
+        // Populate dropdowns
+        populateDropdowns();
         
           // Set up close and minimize buttons
         WindowHandler wh = new WindowHandler();
@@ -243,27 +250,39 @@ public class InvestWithdrawController implements Initializable {
         });
     }
     
+    private void populateDropdowns(){
+        List<String> currencies = getCurrencyList();
+            
+        currency_dropdown.getItems().addAll(currencies);
+        
+        // Default values
+        currency_dropdown.setValue(currencies.get(0));
+    }
     
     @FXML
     void buy_clicked(ActionEvent event) {
         
         double updatedBalance = getBalance(user_id);
-         balance_val_label.setText("$" + updatedBalance);
-         double currentPrice = getCurrentPrice("BTC", "USD");
-         System.out.println("Current price : " +currentPrice);
-         double range= PROFIT_PERCENTAGE * currentPrice;
-         double lossVal= currentPrice - range;
-         double profitVal= currentPrice + range;
-         
-         System.out.println("Profit value at invest : " +profitVal);
-        try {
-            int id= getIdFromFile();
-            double amount = Double.parseDouble(amount_textfield.getText());
-            insertIntoDB(id, amount, profitVal, lossVal);
+        balance_val_label.setText("$" + updatedBalance);
         
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(InvestWithdrawController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        double currentPrice = getCurrentPrice("BTC", "USD");
+        double range= PROFIT_PERCENTAGE * currentPrice;
+        double lossVal= currentPrice - range;
+        double profitVal= currentPrice + range;
+
+        // Insert into DB
+        Task<Void> task = new Task<Void>() {
+            @Override 
+            protected Void call() throws FileNotFoundException {
+                int id = getIdFromFile();
+                double amount = Double.parseDouble(amount_textfield.getText());
+                
+                insertIntoDB(id, amount, profitVal, lossVal);
+                return null;
+            }
+        };
+        
+        new Thread(task).start();
        
     }
     
@@ -345,24 +364,6 @@ public class InvestWithdrawController implements Initializable {
         webservices.UserWS_Service service = new webservices.UserWS_Service();
         webservices.UserWS port = service.getUserWSPort();
         return port.getBalance(userId);
-    } 
-
-    private static double getLossValue(int userId) {
-        webservices.IWWS_Service service = new webservices.IWWS_Service();
-        webservices.IWWS port = service.getIWWSPort();
-        return port.getLossValue(userId);
-    }
-
-    private static double getProfitValue(int userId) {
-        webservices.IWWS_Service service = new webservices.IWWS_Service();
-        webservices.IWWS port = service.getIWWSPort();
-        return port.getProfitValue(userId);
-    }
-
-    private static double getTransactionAmount(int userId) {
-        webservices.IWWS_Service service = new webservices.IWWS_Service();
-        webservices.IWWS port = service.getIWWSPort();
-        return port.getTransactionAmount(userId);
     }
 
     private static void insertIntoDB(int userId, double transactionAmount, double profitValue, double lossValue) {
@@ -377,4 +378,27 @@ public class InvestWithdrawController implements Initializable {
         port.insertIntoDetails(userId, transactionResult, endMethod);
     }
 
-   }
+    private static double getTransactionAmount(int userId) {
+        webservices.IWWS_Service service = new webservices.IWWS_Service();
+        webservices.IWWS port = service.getIWWSPort();
+        return port.getTransactionAmount(userId);
+    }
+
+    private static double getProfitValue(int userId) {
+        webservices.IWWS_Service service = new webservices.IWWS_Service();
+        webservices.IWWS port = service.getIWWSPort();
+        return port.getProfitValue(userId);
+    }
+
+    private static double getLossValue(int userId) {
+        webservices.IWWS_Service service = new webservices.IWWS_Service();
+        webservices.IWWS port = service.getIWWSPort();
+        return port.getLossValue(userId);
+    }
+
+    private static java.util.List<java.lang.String> getCurrencyList() {
+        webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
+        webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
+        return port.getCurrencyList();
+    }
+}

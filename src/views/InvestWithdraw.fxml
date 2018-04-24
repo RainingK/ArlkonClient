@@ -31,7 +31,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <JFXTextField id="amount_textfield" fx:id="amount_textfield" focusColor="#e8e8e8" layoutX="29.0" layoutY="224.0" onKeyReleased="#validateAmount" onKeyTyped="#numberValidation" prefHeight="45.0" prefWidth="214.0" promptText="Enter an Amount ($)" unFocusColor="WHITE" />
+            <JFXTextField id="amount_textfield" fx:id="amount_textfield" focusColor="#e8e8e8" layoutX="29.0" layoutY="224.0" onKeyReleased="#validateAmount" onKeyTyped="#numberValidation" prefHeight="45.0" prefWidth="214.0" promptText="Enter an Amount ($)" stylesheets="@../res/css/investwithdraw.css" unFocusColor="WHITE" />
             <Label layoutX="24.0" layoutY="304.0" text="Commision Rate" textFill="WHITE">
                <font>
                   <Font size="20.0" />
@@ -42,7 +42,7 @@
                   <Font size="23.0" />
                </font>
             </Label>
-            <JFXButton id="call_btn" fx:id="buy_btn" layoutX="33.0" layoutY="399.0" onAction="#buy_clicked" prefHeight="52.0" prefWidth="214.0" text="INVEST" textFill="WHITE">
+            <JFXButton id="invest_btn" fx:id="buy_btn" layoutX="33.0" layoutY="399.0" onAction="#buy_clicked" prefHeight="52.0" prefWidth="214.0" stylesheets="@../res/css/investwithdraw.css" text="INVEST" textFill="WHITE">
                <font>
                   <Font size="22.0" />
                </font>
@@ -139,13 +139,13 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <JFXComboBox id="currency1_dropdown" focusColor="#1a282a" layoutX="129.0" layoutY="107.0" prefHeight="14.0" prefWidth="68.0" unFocusColor="#1a282a" />
+      <JFXComboBox id="currency_dropdown" fx:id="currency_dropdown" focusColor="#1a282a" layoutX="129.0" layoutY="107.0" prefHeight="31.0" prefWidth="102.0" stylesheets="@../res/css/investwithdraw.css" unFocusColor="#1a282a" />
       <Label fx:id="current_datetime_label" layoutX="336.0" layoutY="480.0" prefHeight="52.0" prefWidth="145.0" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <JFXButton fx:id="takeProfit_btn" layoutX="321.0" layoutY="115.0" onAction="#takeProfit_clicked" prefHeight="34.0" prefWidth="111.0" text="Take Profit" textFill="#cdbaba" />
-      <JFXButton fx:id="stopLoss_btn" layoutX="512.0" layoutY="115.0" onAction="#stopLoss_clicked" prefHeight="34.0" prefWidth="127.0" text="Stop Loss" textFill="#bfadad" />
+      <JFXButton id="take_profit_btn" fx:id="takeProfit_btn" layoutX="321.0" layoutY="115.0" onAction="#takeProfit_clicked" prefHeight="34.0" prefWidth="111.0" stylesheets="@../res/css/investwithdraw.css" text="Take Profit" textFill="#baccbd" />
+      <JFXButton id="stop_loss_btn" fx:id="stopLoss_btn" layoutX="512.0" layoutY="115.0" onAction="#stopLoss_clicked" prefHeight="34.0" prefWidth="127.0" stylesheets="@../res/css/investwithdraw.css" text="Stop Loss" textFill="#bfadad" />
    </children>
 </Pane>

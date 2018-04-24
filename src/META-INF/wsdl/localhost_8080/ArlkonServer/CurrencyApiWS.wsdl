@@ -10,15 +10,34 @@
 <message name="getCurrentPriceResponse">
 <part name="parameters" element="tns:getCurrentPriceResponse"/>
 </message>
+<message name="getCurrencyList">
+<part name="parameters" element="tns:getCurrencyList"/>
+</message>
+<message name="getCurrencyListResponse">
+<part name="parameters" element="tns:getCurrencyListResponse"/>
+</message>
 <portType name="CurrencyApiWS">
 <operation name="getCurrentPrice">
 <input wsam:Action="http://webservices/CurrencyApiWS/getCurrentPriceRequest" message="tns:getCurrentPrice"/>
 <output wsam:Action="http://webservices/CurrencyApiWS/getCurrentPriceResponse" message="tns:getCurrentPriceResponse"/>
 </operation>
+<operation name="getCurrencyList">
+<input wsam:Action="http://webservices/CurrencyApiWS/getCurrencyListRequest" message="tns:getCurrencyList"/>
+<output wsam:Action="http://webservices/CurrencyApiWS/getCurrencyListResponse" message="tns:getCurrencyListResponse"/>
+</operation>
 </portType>
 <binding name="CurrencyApiWSPortBinding" type="tns:CurrencyApiWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
 <operation name="getCurrentPrice">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getCurrencyList">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

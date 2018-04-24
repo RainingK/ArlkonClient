@@ -10,9 +10,12 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -58,6 +61,16 @@ public class Transition {
         fadeTransition.play();
     }
     
+    public void fadeInTransition(Node node, int duration){
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setDuration(Duration.millis(duration));
+        fadeTransition.setNode(node);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        
+        fadeTransition.play();
+    }
+    
     public void loadNextScene(String sceneLoc) throws IOException {
         Parent nextView;
         nextView = (Pane) FXMLLoader.load(getClass().getResource(sceneLoc));
@@ -66,5 +79,13 @@ public class Transition {
         Stage curStage = (Stage) main_window.getScene().getWindow();
         
         curStage.setScene(nextScene);
+    }
+    
+    public void translate(int val, Node node){
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1.5), node);
+        translateTransition.setToX(val);
+        translateTransition.setCycleCount(1);
+        translateTransition.setAutoReverse(true);     
+        translateTransition.play();
     }
 }

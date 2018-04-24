@@ -4,8 +4,13 @@
     <system systemId="http://localhost:8080/ArlkonServer/SessionWS?xsd=1" uri="wsdl/localhost_8080/ArlkonServer/SessionWS.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl" uri="wsdl/localhost_8080/ArlkonServer/CurrencyApiWS.wsdl"/>
     <system systemId="http://localhost:8080/ArlkonServer/CurrencyApiWS?xsd=1" uri="wsdl/localhost_8080/ArlkonServer/CurrencyApiWS.xsd_1.xsd"/>
+<<<<<<< Upstream, based on origin/master
     <system systemId="http://localhost:8080/ArlkonServer/IWWS?wsdl" uri="wsdl/localhost_8080/ArlkonServer/IWWS.wsdl"/>
     <system systemId="http://localhost:8080/ArlkonServer/IWWS?xsd=1" uri="wsdl/localhost_8080/ArlkonServer/IWWS.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/ArlkonServer/UserWS?wsdl" uri="wsdl/localhost_8080/ArlkonServer/UserWS.wsdl"/>
     <system systemId="http://localhost:8080/ArlkonServer/UserWS?xsd=1" uri="wsdl/localhost_8080/ArlkonServer/UserWS.xsd_1.xsd"/>
+=======
+    <system systemId="http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl" uri="wsdl/localhost_8080/ArlkonServer/BinaryTransactionsWS.wsdl"/>
+    <system systemId="http://localhost:8080/ArlkonServer/BinaryTransactionsWS?xsd=1" uri="wsdl/localhost_8080/ArlkonServer/BinaryTransactionsWS.xsd_1.xsd"/>
+>>>>>>> feb74e8 Inserts call details to db
 </catalog>

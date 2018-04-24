@@ -58,16 +58,17 @@
     -fx-fill: #3c575b33;
 }
 
-#currency1_dropdown, #currency2_dropdown {
-    -fx-background-color: #1a282a;
-}
-
 #time_hour_dropdown, #time_min_dropdown {
     -fx-background-color: #202f32;
     -fx-prompt-text-fill: white;
     -fx-padding: 0 0 0 7;
 }
 
-#currency1_dropdown > .list-cell .label, #currency2_dropdown > .list-cell .label, #time_min_dropdown > .list-cell .label, #time_hour_dropdown > .list-cell .label {
+#currency1_dropdown, #currency2_dropdown {
+    -fx-background-color: #1a282a;
+    -fx-prompt-text-fill: white;
+}
+
+#currency1_dropdown > .list-cell, #currency2_dropdown > .list-cell, #time_min_dropdown > .list-cell, #time_hour_dropdown > .list-cell {
     -fx-text-fill: white;
 }
