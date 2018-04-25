@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="user_id" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="transaction_amount" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element name="currency" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="profit_value" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *         &lt;element name="loss_value" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *       &lt;/sequence>
@@ -33,6 +34,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "insertIntoDB", propOrder = {
     "userId",
     "transactionAmount",
+    "currency",
     "profitValue",
     "lossValue"
 })
@@ -42,6 +44,7 @@ public class InsertIntoDB {
     protected int userId;
     @XmlElement(name = "transaction_amount")
     protected double transactionAmount;
+    protected String currency;
     @XmlElement(name = "profit_value")
     protected double profitValue;
     @XmlElement(name = "loss_value")
@@ -77,6 +80,30 @@ public class InsertIntoDB {
      */
     public void setTransactionAmount(double value) {
         this.transactionAmount = value;
+    }
+
+    /**
+     * Gets the value of the currency property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCurrency() {
+        return currency;
+    }
+
+    /**
+     * Sets the value of the currency property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCurrency(String value) {
+        this.currency = value;
     }
 
     /**

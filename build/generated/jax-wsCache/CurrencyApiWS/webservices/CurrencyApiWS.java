@@ -27,6 +27,18 @@ public interface CurrencyApiWS {
 
     /**
      * 
+     * @return
+     *     returns java.util.List<java.lang.String>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getCurrencyList", targetNamespace = "http://webservices/", className = "webservices.GetCurrencyList")
+    @ResponseWrapper(localName = "getCurrencyListResponse", targetNamespace = "http://webservices/", className = "webservices.GetCurrencyListResponse")
+    @Action(input = "http://webservices/CurrencyApiWS/getCurrencyListRequest", output = "http://webservices/CurrencyApiWS/getCurrencyListResponse")
+    public List<String> getCurrencyList();
+
+    /**
+     * 
      * @param currency1
      * @param currency2
      * @return
@@ -42,17 +54,5 @@ public interface CurrencyApiWS {
         String currency1,
         @WebParam(name = "currency2", targetNamespace = "")
         String currency2);
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<java.lang.String>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getCurrencyList", targetNamespace = "http://webservices/", className = "webservices.GetCurrencyList")
-    @ResponseWrapper(localName = "getCurrencyListResponse", targetNamespace = "http://webservices/", className = "webservices.GetCurrencyListResponse")
-    @Action(input = "http://webservices/CurrencyApiWS/getCurrencyListRequest", output = "http://webservices/CurrencyApiWS/getCurrencyListResponse")
-    public List<String> getCurrencyList();
 
 }

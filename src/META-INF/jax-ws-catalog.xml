@@ -13,4 +13,7 @@
     <system systemId="http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl" uri="wsdl/localhost_8080/ArlkonServer/BinaryTransactionsWS.wsdl"/>
     <system systemId="http://localhost:8080/ArlkonServer/BinaryTransactionsWS?xsd=1" uri="wsdl/localhost_8080/ArlkonServer/BinaryTransactionsWS.xsd_1.xsd"/>
 >>>>>>> feb74e8 Inserts call details to db
+
+    <system systemId="http://localhost:8080/ArlkonServer/ProfileWS?wsdl" uri="wsdl/localhost_8080/ArlkonServer/ProfileWS.wsdl"/>
+    <system systemId="http://localhost:8080/ArlkonServer/ProfileWS?xsd=1" uri="wsdl/localhost_8080/ArlkonServer/ProfileWS.xsd_1.xsd"/>
 </catalog>

@@ -1,16 +1,52 @@
 <?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://webservices/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservices/">
 
-<xs:element name="getCallEndPrice" type="tns:getCallEndPrice"/>
+<xs:element name="getAmount" type="tns:getAmount"/>
 
-<xs:element name="getCallEndPriceResponse" type="tns:getCallEndPriceResponse"/>
+<xs:element name="getAmountResponse" type="tns:getAmountResponse"/>
+
+<xs:element name="getCurrency1" type="tns:getCurrency1"/>
+
+<xs:element name="getCurrency1Response" type="tns:getCurrency1Response"/>
+
+<xs:element name="getCurrency2" type="tns:getCurrency2"/>
+
+<xs:element name="getCurrency2Response" type="tns:getCurrency2Response"/>
+
+<xs:element name="getEndPrice" type="tns:getEndPrice"/>
+
+<xs:element name="getEndPriceResponse" type="tns:getEndPriceResponse"/>
+
+<xs:element name="getStartPrice" type="tns:getStartPrice"/>
+
+<xs:element name="getStartPriceResponse" type="tns:getStartPriceResponse"/>
+
+<xs:element name="getTimeFrame" type="tns:getTimeFrame"/>
+
+<xs:element name="getTimeFrameResponse" type="tns:getTimeFrameResponse"/>
 
 <xs:element name="insertIntoDb" type="tns:insertIntoDb"/>
 
 <xs:element name="insertIntoDbResponse" type="tns:insertIntoDbResponse"/>
 
+<xs:element name="setEndPrice" type="tns:setEndPrice"/>
+
+<xs:element name="setEndPriceResponse" type="tns:setEndPriceResponse"/>
+
 <xs:element name="setResult" type="tns:setResult"/>
 
 <xs:element name="setResultResponse" type="tns:setResultResponse"/>
+
+<xs:complexType name="getTimeFrame">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTimeFrameResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
 
 <xs:complexType name="setResult">
 <xs:sequence>
@@ -23,15 +59,39 @@
 <xs:sequence/>
 </xs:complexType>
 
-<xs:complexType name="getCallEndPrice">
+<xs:complexType name="getCurrency1">
 <xs:sequence>
 <xs:element name="user_id" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getCallEndPriceResponse">
+<xs:complexType name="getCurrency1Response">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getStartPrice">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getStartPriceResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCurrency2">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCurrency2Response">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -50,6 +110,41 @@
 <xs:complexType name="insertIntoDbResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setEndPrice">
+<xs:sequence>
+<xs:element name="price" type="xs:double"/>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setEndPriceResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getEndPrice">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getEndPriceResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAmount">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAmountResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

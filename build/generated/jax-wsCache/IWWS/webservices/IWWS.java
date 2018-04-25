@@ -26,54 +26,21 @@ public interface IWWS {
 
     /**
      * 
+     * @param endMethod
      * @param userId
-     * @return
-     *     returns double
+     * @param transactionResult
      */
     @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getProfitValue", targetNamespace = "http://webservices/", className = "webservices.GetProfitValue")
-    @ResponseWrapper(localName = "getProfitValueResponse", targetNamespace = "http://webservices/", className = "webservices.GetProfitValueResponse")
-    @Action(input = "http://webservices/IWWS/getProfitValueRequest", output = "http://webservices/IWWS/getProfitValueResponse")
-    public double getProfitValue(
-        @WebParam(name = "user_id", targetNamespace = "")
-        int userId);
-
-    /**
-     * 
-     * @param transactionAmount
-     * @param lossValue
-     * @param userId
-     * @param profitValue
-     */
-    @WebMethod
-    @RequestWrapper(localName = "insertIntoDB", targetNamespace = "http://webservices/", className = "webservices.InsertIntoDB")
-    @ResponseWrapper(localName = "insertIntoDBResponse", targetNamespace = "http://webservices/", className = "webservices.InsertIntoDBResponse")
-    @Action(input = "http://webservices/IWWS/insertIntoDBRequest", output = "http://webservices/IWWS/insertIntoDBResponse")
-    public void insertIntoDB(
+    @RequestWrapper(localName = "insertIntoDetails", targetNamespace = "http://webservices/", className = "webservices.InsertIntoDetails")
+    @ResponseWrapper(localName = "insertIntoDetailsResponse", targetNamespace = "http://webservices/", className = "webservices.InsertIntoDetailsResponse")
+    @Action(input = "http://webservices/IWWS/insertIntoDetailsRequest", output = "http://webservices/IWWS/insertIntoDetailsResponse")
+    public void insertIntoDetails(
         @WebParam(name = "user_id", targetNamespace = "")
         int userId,
-        @WebParam(name = "transaction_amount", targetNamespace = "")
-        double transactionAmount,
-        @WebParam(name = "profit_value", targetNamespace = "")
-        double profitValue,
-        @WebParam(name = "loss_value", targetNamespace = "")
-        double lossValue);
-
-    /**
-     * 
-     * @param userId
-     * @return
-     *     returns double
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getLossValue", targetNamespace = "http://webservices/", className = "webservices.GetLossValue")
-    @ResponseWrapper(localName = "getLossValueResponse", targetNamespace = "http://webservices/", className = "webservices.GetLossValueResponse")
-    @Action(input = "http://webservices/IWWS/getLossValueRequest", output = "http://webservices/IWWS/getLossValueResponse")
-    public double getLossValue(
-        @WebParam(name = "user_id", targetNamespace = "")
-        int userId);
+        @WebParam(name = "transaction_result", targetNamespace = "")
+        double transactionResult,
+        @WebParam(name = "end_method", targetNamespace = "")
+        String endMethod);
 
     /**
      * 
@@ -92,20 +59,56 @@ public interface IWWS {
 
     /**
      * 
-     * @param endMethod
      * @param userId
-     * @param transactionResult
+     * @return
+     *     returns double
      */
     @WebMethod
-    @RequestWrapper(localName = "insertIntoDetails", targetNamespace = "http://webservices/", className = "webservices.InsertIntoDetails")
-    @ResponseWrapper(localName = "insertIntoDetailsResponse", targetNamespace = "http://webservices/", className = "webservices.InsertIntoDetailsResponse")
-    @Action(input = "http://webservices/IWWS/insertIntoDetailsRequest", output = "http://webservices/IWWS/insertIntoDetailsResponse")
-    public void insertIntoDetails(
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getLossValue", targetNamespace = "http://webservices/", className = "webservices.GetLossValue")
+    @ResponseWrapper(localName = "getLossValueResponse", targetNamespace = "http://webservices/", className = "webservices.GetLossValueResponse")
+    @Action(input = "http://webservices/IWWS/getLossValueRequest", output = "http://webservices/IWWS/getLossValueResponse")
+    public double getLossValue(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param transactionAmount
+     * @param currency
+     * @param lossValue
+     * @param userId
+     * @param profitValue
+     */
+    @WebMethod
+    @RequestWrapper(localName = "insertIntoDB", targetNamespace = "http://webservices/", className = "webservices.InsertIntoDB")
+    @ResponseWrapper(localName = "insertIntoDBResponse", targetNamespace = "http://webservices/", className = "webservices.InsertIntoDBResponse")
+    @Action(input = "http://webservices/IWWS/insertIntoDBRequest", output = "http://webservices/IWWS/insertIntoDBResponse")
+    public void insertIntoDB(
         @WebParam(name = "user_id", targetNamespace = "")
         int userId,
-        @WebParam(name = "transaction_result", targetNamespace = "")
-        double transactionResult,
-        @WebParam(name = "end_method", targetNamespace = "")
-        String endMethod);
+        @WebParam(name = "transaction_amount", targetNamespace = "")
+        double transactionAmount,
+        @WebParam(name = "currency", targetNamespace = "")
+        String currency,
+        @WebParam(name = "profit_value", targetNamespace = "")
+        double profitValue,
+        @WebParam(name = "loss_value", targetNamespace = "")
+        double lossValue);
+
+    /**
+     * 
+     * @param userId
+     * @return
+     *     returns double
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getProfitValue", targetNamespace = "http://webservices/", className = "webservices.GetProfitValue")
+    @ResponseWrapper(localName = "getProfitValueResponse", targetNamespace = "http://webservices/", className = "webservices.GetProfitValueResponse")
+    @Action(input = "http://webservices/IWWS/getProfitValueRequest", output = "http://webservices/IWWS/getProfitValueResponse")
+    public double getProfitValue(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
 
 }

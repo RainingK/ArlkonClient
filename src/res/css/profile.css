@@ -1,0 +1,17 @@
+#close_image, #minimize_image:hover {
+	-fx-cursor: hand;
+}
+
+#main_window {
+	-fx-background-color: #152123;
+}
+
+.table-row-cell:odd {
+    -fx-background-color:#6e93e5;
+    -fx-background-insets:0, 0 0 1 0;
+}
+
+.table-row-cell:even {
+    -fx-background-color:#5450d8;
+    -fx-background-insets:0, 0 0 1 0;
+}

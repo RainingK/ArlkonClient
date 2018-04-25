@@ -25,7 +25,9 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _GetUserIdFromUsername_QNAME = new QName("http://webservices/", "getUserIdFromUsername");
+    private final static QName _SetBalance_QNAME = new QName("http://webservices/", "setBalance");
     private final static QName _GetBalanceResponse_QNAME = new QName("http://webservices/", "getBalanceResponse");
+    private final static QName _SetBalanceResponse_QNAME = new QName("http://webservices/", "setBalanceResponse");
     private final static QName _GetUserIdFromUsernameResponse_QNAME = new QName("http://webservices/", "getUserIdFromUsernameResponse");
     private final static QName _GetBalance_QNAME = new QName("http://webservices/", "getBalance");
 
@@ -53,6 +55,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SetBalanceResponse }
+     * 
+     */
+    public SetBalanceResponse createSetBalanceResponse() {
+        return new SetBalanceResponse();
+    }
+
+    /**
      * Create an instance of {@link GetBalanceResponse }
      * 
      */
@@ -69,6 +79,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SetBalance }
+     * 
+     */
+    public SetBalance createSetBalance() {
+        return new SetBalance();
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetUserIdFromUsername }{@code >}}
      * 
      */
@@ -78,12 +96,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetBalance }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "setBalance")
+    public JAXBElement<SetBalance> createSetBalance(SetBalance value) {
+        return new JAXBElement<SetBalance>(_SetBalance_QNAME, SetBalance.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetBalanceResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://webservices/", name = "getBalanceResponse")
     public JAXBElement<GetBalanceResponse> createGetBalanceResponse(GetBalanceResponse value) {
         return new JAXBElement<GetBalanceResponse>(_GetBalanceResponse_QNAME, GetBalanceResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetBalanceResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "setBalanceResponse")
+    public JAXBElement<SetBalanceResponse> createSetBalanceResponse(SetBalanceResponse value) {
+        return new JAXBElement<SetBalanceResponse>(_SetBalanceResponse_QNAME, SetBalanceResponse.class, null, value);
     }
 
     /**

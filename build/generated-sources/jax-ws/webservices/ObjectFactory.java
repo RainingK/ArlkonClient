@@ -24,10 +24,24 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _SignUp_QNAME = new QName("http://webservices/", "signUp");
-    private final static QName _Login_QNAME = new QName("http://webservices/", "login");
-    private final static QName _SignUpResponse_QNAME = new QName("http://webservices/", "signUpResponse");
-    private final static QName _LoginResponse_QNAME = new QName("http://webservices/", "loginResponse");
+    private final static QName _GetAmount_QNAME = new QName("http://webservices/", "getAmount");
+    private final static QName _GetEndPrice_QNAME = new QName("http://webservices/", "getEndPrice");
+    private final static QName _InsertIntoDb_QNAME = new QName("http://webservices/", "insertIntoDb");
+    private final static QName _GetAmountResponse_QNAME = new QName("http://webservices/", "getAmountResponse");
+    private final static QName _GetCurrency1_QNAME = new QName("http://webservices/", "getCurrency1");
+    private final static QName _GetStartPrice_QNAME = new QName("http://webservices/", "getStartPrice");
+    private final static QName _GetCurrency2_QNAME = new QName("http://webservices/", "getCurrency2");
+    private final static QName _GetStartPriceResponse_QNAME = new QName("http://webservices/", "getStartPriceResponse");
+    private final static QName _GetTimeFrame_QNAME = new QName("http://webservices/", "getTimeFrame");
+    private final static QName _GetTimeFrameResponse_QNAME = new QName("http://webservices/", "getTimeFrameResponse");
+    private final static QName _SetEndPriceResponse_QNAME = new QName("http://webservices/", "setEndPriceResponse");
+    private final static QName _GetCurrency1Response_QNAME = new QName("http://webservices/", "getCurrency1Response");
+    private final static QName _GetCurrency2Response_QNAME = new QName("http://webservices/", "getCurrency2Response");
+    private final static QName _SetEndPrice_QNAME = new QName("http://webservices/", "setEndPrice");
+    private final static QName _GetEndPriceResponse_QNAME = new QName("http://webservices/", "getEndPriceResponse");
+    private final static QName _InsertIntoDbResponse_QNAME = new QName("http://webservices/", "insertIntoDbResponse");
+    private final static QName _SetResultResponse_QNAME = new QName("http://webservices/", "setResultResponse");
+    private final static QName _SetResult_QNAME = new QName("http://webservices/", "setResult");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservices
@@ -37,71 +51,309 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LoginResponse }
+     * Create an instance of {@link SetResult }
      * 
      */
-    public LoginResponse createLoginResponse() {
-        return new LoginResponse();
+    public SetResult createSetResult() {
+        return new SetResult();
     }
 
     /**
-     * Create an instance of {@link SignUpResponse }
+     * Create an instance of {@link InsertIntoDbResponse }
      * 
      */
-    public SignUpResponse createSignUpResponse() {
-        return new SignUpResponse();
+    public InsertIntoDbResponse createInsertIntoDbResponse() {
+        return new InsertIntoDbResponse();
     }
 
     /**
-     * Create an instance of {@link Login }
+     * Create an instance of {@link SetResultResponse }
      * 
      */
-    public Login createLogin() {
-        return new Login();
+    public SetResultResponse createSetResultResponse() {
+        return new SetResultResponse();
     }
 
     /**
-     * Create an instance of {@link SignUp }
+     * Create an instance of {@link GetEndPriceResponse }
      * 
      */
-    public SignUp createSignUp() {
-        return new SignUp();
+    public GetEndPriceResponse createGetEndPriceResponse() {
+        return new GetEndPriceResponse();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SignUp }{@code >}}
+     * Create an instance of {@link SetEndPrice }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "signUp")
-    public JAXBElement<SignUp> createSignUp(SignUp value) {
-        return new JAXBElement<SignUp>(_SignUp_QNAME, SignUp.class, null, value);
+    public SetEndPrice createSetEndPrice() {
+        return new SetEndPrice();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Login }{@code >}}
+     * Create an instance of {@link GetCurrency1Response }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "login")
-    public JAXBElement<Login> createLogin(Login value) {
-        return new JAXBElement<Login>(_Login_QNAME, Login.class, null, value);
+    public GetCurrency1Response createGetCurrency1Response() {
+        return new GetCurrency1Response();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SignUpResponse }{@code >}}
+     * Create an instance of {@link GetCurrency2Response }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "signUpResponse")
-    public JAXBElement<SignUpResponse> createSignUpResponse(SignUpResponse value) {
-        return new JAXBElement<SignUpResponse>(_SignUpResponse_QNAME, SignUpResponse.class, null, value);
+    public GetCurrency2Response createGetCurrency2Response() {
+        return new GetCurrency2Response();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link LoginResponse }{@code >}}
+     * Create an instance of {@link SetEndPriceResponse }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "loginResponse")
-    public JAXBElement<LoginResponse> createLoginResponse(LoginResponse value) {
-        return new JAXBElement<LoginResponse>(_LoginResponse_QNAME, LoginResponse.class, null, value);
+    public SetEndPriceResponse createSetEndPriceResponse() {
+        return new SetEndPriceResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetTimeFrameResponse }
+     * 
+     */
+    public GetTimeFrameResponse createGetTimeFrameResponse() {
+        return new GetTimeFrameResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetTimeFrame }
+     * 
+     */
+    public GetTimeFrame createGetTimeFrame() {
+        return new GetTimeFrame();
+    }
+
+    /**
+     * Create an instance of {@link GetCurrency2 }
+     * 
+     */
+    public GetCurrency2 createGetCurrency2() {
+        return new GetCurrency2();
+    }
+
+    /**
+     * Create an instance of {@link GetStartPriceResponse }
+     * 
+     */
+    public GetStartPriceResponse createGetStartPriceResponse() {
+        return new GetStartPriceResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetCurrency1 }
+     * 
+     */
+    public GetCurrency1 createGetCurrency1() {
+        return new GetCurrency1();
+    }
+
+    /**
+     * Create an instance of {@link GetStartPrice }
+     * 
+     */
+    public GetStartPrice createGetStartPrice() {
+        return new GetStartPrice();
+    }
+
+    /**
+     * Create an instance of {@link GetAmountResponse }
+     * 
+     */
+    public GetAmountResponse createGetAmountResponse() {
+        return new GetAmountResponse();
+    }
+
+    /**
+     * Create an instance of {@link InsertIntoDb }
+     * 
+     */
+    public InsertIntoDb createInsertIntoDb() {
+        return new InsertIntoDb();
+    }
+
+    /**
+     * Create an instance of {@link GetEndPrice }
+     * 
+     */
+    public GetEndPrice createGetEndPrice() {
+        return new GetEndPrice();
+    }
+
+    /**
+     * Create an instance of {@link GetAmount }
+     * 
+     */
+    public GetAmount createGetAmount() {
+        return new GetAmount();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAmount }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getAmount")
+    public JAXBElement<GetAmount> createGetAmount(GetAmount value) {
+        return new JAXBElement<GetAmount>(_GetAmount_QNAME, GetAmount.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetEndPrice }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getEndPrice")
+    public JAXBElement<GetEndPrice> createGetEndPrice(GetEndPrice value) {
+        return new JAXBElement<GetEndPrice>(_GetEndPrice_QNAME, GetEndPrice.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InsertIntoDb }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "insertIntoDb")
+    public JAXBElement<InsertIntoDb> createInsertIntoDb(InsertIntoDb value) {
+        return new JAXBElement<InsertIntoDb>(_InsertIntoDb_QNAME, InsertIntoDb.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAmountResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getAmountResponse")
+    public JAXBElement<GetAmountResponse> createGetAmountResponse(GetAmountResponse value) {
+        return new JAXBElement<GetAmountResponse>(_GetAmountResponse_QNAME, GetAmountResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrency1 }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrency1")
+    public JAXBElement<GetCurrency1> createGetCurrency1(GetCurrency1 value) {
+        return new JAXBElement<GetCurrency1>(_GetCurrency1_QNAME, GetCurrency1 .class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetStartPrice }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getStartPrice")
+    public JAXBElement<GetStartPrice> createGetStartPrice(GetStartPrice value) {
+        return new JAXBElement<GetStartPrice>(_GetStartPrice_QNAME, GetStartPrice.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrency2 }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrency2")
+    public JAXBElement<GetCurrency2> createGetCurrency2(GetCurrency2 value) {
+        return new JAXBElement<GetCurrency2>(_GetCurrency2_QNAME, GetCurrency2 .class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetStartPriceResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getStartPriceResponse")
+    public JAXBElement<GetStartPriceResponse> createGetStartPriceResponse(GetStartPriceResponse value) {
+        return new JAXBElement<GetStartPriceResponse>(_GetStartPriceResponse_QNAME, GetStartPriceResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetTimeFrame }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getTimeFrame")
+    public JAXBElement<GetTimeFrame> createGetTimeFrame(GetTimeFrame value) {
+        return new JAXBElement<GetTimeFrame>(_GetTimeFrame_QNAME, GetTimeFrame.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetTimeFrameResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getTimeFrameResponse")
+    public JAXBElement<GetTimeFrameResponse> createGetTimeFrameResponse(GetTimeFrameResponse value) {
+        return new JAXBElement<GetTimeFrameResponse>(_GetTimeFrameResponse_QNAME, GetTimeFrameResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetEndPriceResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "setEndPriceResponse")
+    public JAXBElement<SetEndPriceResponse> createSetEndPriceResponse(SetEndPriceResponse value) {
+        return new JAXBElement<SetEndPriceResponse>(_SetEndPriceResponse_QNAME, SetEndPriceResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrency1Response }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrency1Response")
+    public JAXBElement<GetCurrency1Response> createGetCurrency1Response(GetCurrency1Response value) {
+        return new JAXBElement<GetCurrency1Response>(_GetCurrency1Response_QNAME, GetCurrency1Response.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrency2Response }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrency2Response")
+    public JAXBElement<GetCurrency2Response> createGetCurrency2Response(GetCurrency2Response value) {
+        return new JAXBElement<GetCurrency2Response>(_GetCurrency2Response_QNAME, GetCurrency2Response.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetEndPrice }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "setEndPrice")
+    public JAXBElement<SetEndPrice> createSetEndPrice(SetEndPrice value) {
+        return new JAXBElement<SetEndPrice>(_SetEndPrice_QNAME, SetEndPrice.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetEndPriceResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getEndPriceResponse")
+    public JAXBElement<GetEndPriceResponse> createGetEndPriceResponse(GetEndPriceResponse value) {
+        return new JAXBElement<GetEndPriceResponse>(_GetEndPriceResponse_QNAME, GetEndPriceResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InsertIntoDbResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "insertIntoDbResponse")
+    public JAXBElement<InsertIntoDbResponse> createInsertIntoDbResponse(InsertIntoDbResponse value) {
+        return new JAXBElement<InsertIntoDbResponse>(_InsertIntoDbResponse_QNAME, InsertIntoDbResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetResultResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "setResultResponse")
+    public JAXBElement<SetResultResponse> createSetResultResponse(SetResultResponse value) {
+        return new JAXBElement<SetResultResponse>(_SetResultResponse_QNAME, SetResultResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetResult }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "setResult")
+    public JAXBElement<SetResult> createSetResult(SetResult value) {
+        return new JAXBElement<SetResult>(_SetResult_QNAME, SetResult.class, null, value);
     }
 
 }

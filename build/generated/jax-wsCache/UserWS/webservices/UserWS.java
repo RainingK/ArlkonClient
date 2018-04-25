@@ -54,4 +54,19 @@ public interface UserWS {
         @WebParam(name = "user_id", targetNamespace = "")
         int userId);
 
+    /**
+     * 
+     * @param balance
+     * @param userId
+     */
+    @WebMethod
+    @RequestWrapper(localName = "setBalance", targetNamespace = "http://webservices/", className = "webservices.SetBalance")
+    @ResponseWrapper(localName = "setBalanceResponse", targetNamespace = "http://webservices/", className = "webservices.SetBalanceResponse")
+    @Action(input = "http://webservices/UserWS/setBalanceRequest", output = "http://webservices/UserWS/setBalanceResponse")
+    public void setBalance(
+        @WebParam(name = "balance", targetNamespace = "")
+        double balance,
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
 }

@@ -277,7 +277,7 @@ public class InvestWithdrawController implements Initializable {
                 int id = getIdFromFile();
                 double amount = Double.parseDouble(amount_textfield.getText());
                 
-                insertIntoDB(id, amount, profitVal, lossVal);
+                insertIntoDB(id, amount, "USD", profitVal, lossVal);
                 return null;
             }
         };
@@ -363,11 +363,11 @@ public class InvestWithdrawController implements Initializable {
         webservices.UserWS port = service.getUserWSPort();
         return port.getBalance(userId);
     }
-
-    private static void insertIntoDB(int userId, double transactionAmount, double profitValue, double lossValue) {
+    
+    private static void insertIntoDB(int userId, double transactionAmount, java.lang.String currency, double profitValue, double lossValue) {
         webservices.IWWS_Service service = new webservices.IWWS_Service();
         webservices.IWWS port = service.getIWWSPort();
-        port.insertIntoDB(userId, transactionAmount, profitValue, lossValue);
+        port.insertIntoDB(userId, transactionAmount, currency, profitValue, lossValue);
     }
 
     private static void insertIntoDetails(int userId, double transactionResult, java.lang.String endMethod) {

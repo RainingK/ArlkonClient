@@ -36,6 +36,7 @@
 <xs:sequence>
 <xs:element name="user_id" type="xs:int"/>
 <xs:element name="transaction_amount" type="xs:double"/>
+<xs:element name="currency" type="xs:string" minOccurs="0"/>
 <xs:element name="profit_value" type="xs:double"/>
 <xs:element name="loss_value" type="xs:double"/>
 </xs:sequence>

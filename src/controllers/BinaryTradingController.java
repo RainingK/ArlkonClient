@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -57,179 +59,207 @@ import utils.WindowHandler;
 public class BinaryTradingController implements Initializable {
 
     // Containers
-    @FXML private Pane main_window;
-    @FXML private Pane calls_container;
-    @FXML private StackPane chart_container;
-    
+    @FXML
+    private Pane main_window;
+    @FXML
+    private Pane calls_container, put_container;
+    @FXML
+    private StackPane chart_container;
+
     // Dropdowns
-    @FXML private JFXComboBox time_min_dropdown, time_hour_dropdown;
-    @FXML private JFXComboBox currency1_dropdown, currency2_dropdown;
-    
+    @FXML
+    private JFXComboBox time_min_dropdown, time_hour_dropdown;
+    @FXML
+    private JFXComboBox currency1_dropdown, currency2_dropdown;
+
     // Header
-    @FXML private Pane home_btn_pane, profile_btn_pane, settings_btn_pane, help_btn_pane;
-    @FXML private ImageView home_btn, profile_btn, settings_btn, help_btn;
-    @FXML private Label home_btn_label, profile_btn_label, settings_btn_label, help_btn_label;
-    
+    @FXML
+    private Pane home_btn_pane, profile_btn_pane, settings_btn_pane, help_btn_pane;
+    @FXML
+    private ImageView home_btn, profile_btn, settings_btn, help_btn;
+    @FXML
+    private Label home_btn_label, profile_btn_label, settings_btn_label, help_btn_label;
+
     // Date and time label
-    @FXML private Label current_datetime_label;
-    
+    @FXML
+    private Label current_datetime_label;
+
     // Commission fee label
-    @FXML private Label commission_fee_label;
-    
+    @FXML
+    private Label commission_fee_label;
+
     // Profit rate label
-    @FXML private Label profit_rate_label;
-    
+    @FXML
+    private Label profit_rate_label;
+
     // Balance label
-    @FXML private Label balance_val_label;
-    
+    @FXML
+    private Label balance_val_label;
+
     // Called amount and end time labels
-    @FXML private Label called_amount_label, end_time_label, called_at_val_label;
-    
+    @FXML
+    private Label called_amount_label, end_time_label, called_at_val_label, put_amount_label, put_end_time_label, put_at_val_label;
+
     // Amount input field
-    @FXML private JFXTextField amount_input;
-    
+    @FXML
+    private JFXTextField amount_input;
+
     // Call and put button
-    @FXML private JFXButton call_btn, put_btn;
-    
+    @FXML
+    private JFXButton call_btn, put_btn;
+
     // Close and Minimize button
-    @FXML private ImageView close_btn, minimize_btn;
-    
+    @FXML
+    private ImageView close_btn, minimize_btn;
+
     // Area Chart
-    @FXML private AreaChart<?, ?> areaChart;
-    @FXML private NumberAxis yAxisVal;
-    
+    @FXML
+    private AreaChart<?, ?> areaChart;
+    @FXML
+    private NumberAxis yAxisVal;
+
     // View Button
-    @FXML private JFXButton view_btn;
-    
+    @FXML
+    private JFXButton view_btn;
+
     // Random value added to the currencies
     private double generatedDecimal;
+
     private int remaining_seconds = 0;
-    
+
     private final double COMMISSION_RATE = 0.02;
     private final double PROFIT_PERCENTAGE = 0.86;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Fade in window
-        
+
         Transition trans = new Transition();
         trans.setWindow(main_window);
-        trans.fadeInTransition();     
-        
+        trans.fadeInTransition();
+
         // Populate all dropdowns
         populateDropdowns();
-        
+
         // Load the default graph
         loadGraph("USD", "EUR");
-        
+
         // Header effects
         applyHeaderEffect(home_btn_pane, home_btn, home_btn_label);
         applyHeaderEffect(profile_btn_pane, profile_btn, profile_btn_label);
         applyHeaderEffect(settings_btn_pane, settings_btn, settings_btn_label);
         applyHeaderEffect(help_btn_pane, help_btn, help_btn_label);
-        
+
         // Set profit percentage
         setProfitPercentage();
-        
+
         // Display current time
         displayCurrentTime();
-        
+
+        // Set user's balance on load
+        loadBalanceToLabel();
+
         // Left align commission fee
         commission_fee_label.setTextAlignment(TextAlignment.RIGHT);
-        
+
         // Set up close and minimize buttons
         WindowHandler wh = new WindowHandler();
         wh.closeProgram(close_btn);
         wh.minimizeProgram(minimize_btn);
     }
-    
-    private void populateDropdowns(){
+
+    private void populateDropdowns() {
         List<String> currencies = getCurrencyList();
-            
+
         currency1_dropdown.getItems().addAll(currencies);
         currency2_dropdown.getItems().addAll(currencies);
-        
+
         // Default values
         currency1_dropdown.setValue(currencies.get(0));
         currency2_dropdown.setValue(currencies.get(1));
-        
+
         // Time - minutes dropdown
-        for(int i = 1; i <= 59; i++){
+        for (int i = 1; i <= 59; i++) {
             time_min_dropdown.getItems().add("" + i);
         }
-        
+
         // Time - hour dropdown
-        for(int i = 1; i <= 5; i++){
+        for (int i = 1; i <= 5; i++) {
             time_hour_dropdown.getItems().add("" + i);
         }
     }
-    
-    private void displayCurrentTime(){
-        
-        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {            
+
+    private void displayCurrentTime() {
+
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             Calendar cal = Calendar.getInstance();
 
             // Specify Locale
             ZoneId zone = ZoneId.of("Asia/Dubai");
-            
+
             // Format the time
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
 
             // Get the current date
             LocalDate today = LocalDate.now();
-            
+
             // Get the current time
             String now = LocalTime.now(zone).format(dtf);
-            
+
             // Set date and time to the label
             current_datetime_label.setText(today.getDayOfMonth() + "/" + today.getMonthValue() + "/" + today.getYear() + "\n" + now);
         }),
-            // Refresh every 1 second
-            new KeyFrame(Duration.seconds(1))
+                // Refresh every 1 second
+                new KeyFrame(Duration.seconds(1))
         );
-        
+
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
     }
-    
-    private void loadGraph(String currency1, String currency2){
+
+    private void loadGraph(String currency1, String currency2) {
         double currentPrice = getCurrentPrice(currency1, currency2);
-        
+
         XYChart.Series series = new XYChart.Series();
-        
+
         yAxisVal.setAutoRanging(false);
         yAxisVal.setLowerBound(currentPrice - 0.01);
         yAxisVal.setUpperBound(currentPrice + 0.01);
         yAxisVal.setTickUnit(0.1);
-        
-        Timeline tenSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {      
+
+        Timeline graphThread = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
             int xVal = 0;
-            double min = (currentPrice) - 0.1, max = (currentPrice) + 0.1;
-            
+            double min, max;
+
             @Override
             public void handle(ActionEvent event) {
                 double currentPrice = getCurrentPrice(currency1, currency2);
-                
+                min = (currentPrice) - 0.1;
+                max = (currentPrice) + 0.1;
+
+                System.out.println("MIN: " + min);
+                System.out.println("MAX: " + max);
+
                 // Generate random decimals
                 Random rand = new Random();
                 generatedDecimal = -0.01 + (0.1 - (-0.01)) * rand.nextDouble();
                 generatedDecimal = Math.round(generatedDecimal * 100.0) / 100.0;
-                
-                if(((currentPrice) - 0.1) < min){
+
+                if ((currentPrice - 0.1) < min) {
                     min = (currentPrice) - 0.1;
                 }
-                
-                if(((currentPrice) + 0.1) > max){
+
+                if ((currentPrice + 0.1) > max) {
                     max = (currentPrice) + 0.1;
                 }
-                
+
                 // Change upper and lower bound according to the currency price
                 yAxisVal.setLowerBound(min);
                 yAxisVal.setUpperBound(max);
-                
+
                 // Add 1 to the x-axis every iteration
                 XYChart.Data data = new XYChart.Data("" + xVal++, currentPrice + generatedDecimal);
-                
+
                 // Remove the circle points from area chart
                 Rectangle rect = new Rectangle(0, 0);
                 rect.setVisible(false);
@@ -237,37 +267,37 @@ public class BinaryTradingController implements Initializable {
                 series.getData().add(data);
             }
         }));
-        
+
         areaChart.getData().addAll(series);
-        tenSecondsWonder.setCycleCount(Timeline.INDEFINITE);
-        tenSecondsWonder.play();
+        graphThread.setCycleCount(Timeline.INDEFINITE);
+        graphThread.play();
     }
-    
-    private void applyHeaderEffect(Pane btn_pane, ImageView btn, Label label){
+
+    private void applyHeaderEffect(Pane btn_pane, ImageView btn, Label label) {
         TranslateTransition transition = new TranslateTransition(Duration.seconds(0.2), btn);
         FadeTransition fadeTransition = new FadeTransition();
-        
+
         // Mouse hover effect
         btn_pane.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 btn_pane.setCursor(Cursor.HAND);
-                
+
                 transition.setDelay(Duration.seconds(0.1));
                 transition.setToY(-7);
                 transition.setCycleCount(1);
                 transition.play();
-                
+
                 fadeTransition.setDuration(Duration.millis(300));
                 fadeTransition.setNode(label);
                 fadeTransition.setFromValue(0);
                 fadeTransition.setToValue(1);
                 fadeTransition.play();
-                
+
                 label.setVisible(true);
             }
         });
-        
+
         // Mouse exited effect
         btn_pane.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
@@ -277,149 +307,367 @@ public class BinaryTradingController implements Initializable {
                 transition.setToY(0);
                 transition.setCycleCount(1);
                 transition.play();
-                
+
                 fadeTransition.setDuration(Duration.millis(300));
                 fadeTransition.setNode(label);
                 fadeTransition.setFromValue(1);
                 fadeTransition.setToValue(0);
                 fadeTransition.play();
-                
+
                 label.setVisible(false);
             }
         });
     }
-    
-    private void setProfitPercentage(){
+
+    private void setProfitPercentage() {
         profit_rate_label.setText("" + (PROFIT_PERCENTAGE * 100) + "%");
     }
-    
+
     // Start time left countdown
-    public void startCallTimeCountdown(){
-        remaining_seconds = Integer.parseInt(end_time_label.getText());
-        final String currency1 = currency1_dropdown.getValue().toString();
-        final String currency2 = currency2_dropdown.getValue().toString();
+    public void startCallTimeCountdown() {
+        int current_user_id = 0;
         
-        Timeline clock = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+        try {
+            current_user_id = getIdFromFile();
+        } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException: " + ex.getMessage());
+        }
+        
+        remaining_seconds = getTimeFrame(current_user_id);
+
+        Timeline call_thread = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
                 remaining_seconds--;
-                
+
                 end_time_label.setText("" + remaining_seconds);
             }
         }));
-        
+
         // Run the timeline for the remaining seconds
-        clock.setCycleCount(remaining_seconds - 1);
-        clock.play();
-        
+        call_thread.setCycleCount(remaining_seconds - 1);
+        call_thread.play();
+
         // When the countdown is over, show a message with the result
-        clock.setOnFinished(e -> {
-            processCompletedCall(getCurrentPrice(currency1, currency2));
+        call_thread.setOnFinished(e -> {
+            processCompletedTransaction("call");
             call_btn.setDisable(false);
+            put_btn.setDisable(false);
         });
     }
     
-    // When call is completed, process the results
-    private void processCompletedCall(double currentPrice){
+    public void startPutTimeCountdown() {
+        int current_user_id = 0;
         
+        try {
+            current_user_id = getIdFromFile();
+        } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException: " + ex.getMessage());
+        }
+        
+        remaining_seconds = getTimeFrame(current_user_id);
+        System.out.println("SECS: " + remaining_seconds);
+
+        Timeline put_thread = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                remaining_seconds--;
+
+                put_end_time_label.setText("" + remaining_seconds);
+            }
+        }));
+
+        // Run the timeline for the remaining seconds
+        put_thread.setCycleCount(remaining_seconds - 1);
+        put_thread.play();
+
+        // When the countdown is over, show a message with the result
+        put_thread.setOnFinished(e -> {
+            processCompletedTransaction("put");
+            
+            call_btn.setDisable(false);
+            put_btn.setDisable(false);
+        });
+    }
+
+    // When call is completed, process the results
+    private void processCompletedTransaction(String type) {
+
         int current_user_id = 0;
         try {
             current_user_id = getIdFromFile();
         } catch (FileNotFoundException ex) {
             System.out.println("FileNotFoundException: " + ex);
         }
-        
+
         String message = "";
-        double endPrice = getCurrentPrice(currency1_dropdown.getValue().toString(), currency2_dropdown.getValue().toString()) + generatedDecimal;
-        double amount = Double.parseDouble(called_amount_label.getText().substring(1, called_amount_label.getText().length()));
+        // Price at which the user's transaction ended
+        double endPrice = getCurrentPrice(getCurrency1(current_user_id), getCurrency2(current_user_id)) + generatedDecimal;
+
+        // The amount entered by the user
+        double amount = getAmount(current_user_id);
         double result = 0;
         
-        System.out.println("FINISHED AT: " + (getCurrentPrice(currency1_dropdown.getValue().toString(), currency2_dropdown.getValue().toString()) + generatedDecimal));
-        
-        if(endPrice > currentPrice){
-            // Won call
-            result = (amount + (amount * PROFIT_PERCENTAGE));
-            message = "Congratulations! You have earned " + result + "!";
+        if (endPrice > getStartPrice(current_user_id)) {
             
-            // Insert into db
-            setResult(result, current_user_id);
-        } else if(currentPrice > endPrice){
-            // Lost call
-            result = -amount;
-            message = "Oops! Unfortunately you have lost " + amount + " this time, try again soon!";
+            if(type.equals("call")){
+                // Won call
+                result = (amount + (amount * PROFIT_PERCENTAGE));
+                
+                message = "Congratulations! You have earned " + result + "!";
+
+                // Insert into db
+                setResult(result, current_user_id);
+            } else if(type.equals("put")){
+                // Lost put
+                message = "Oops! Unfortunately you have lost " + amount + " this time, try again soon!";
+            }
             
-            // Insert into db
-            setResult(result, current_user_id);
+            setEndPrice(endPrice, current_user_id);
             
-            /**************** Insert into sales db *****************/
+        } else if (getStartPrice(current_user_id) > endPrice) {
+            
+            if(type.equals("call")){
+                // Lost call
+                // Do not insert any result into DB because the user's balance is already deducted when call button is pressed
+                message = "Oops! Unfortunately you have lost " + amount + " this time, try again soon!";
+            } else if(type.equals("put")){
+                // Won put
+                result = (amount + (amount * PROFIT_PERCENTAGE));
+                
+                message = "Congratulations! You have earned " + result + "!";
+
+                // Insert into db
+                setResult(result, current_user_id);
+            }
+            
+            setEndPrice(endPrice, current_user_id);
+            
+            /**
+             * ************** Insert into sales db ****************
+             */
         } else {
             // Start price level and end price level is equal
             result = -(amount * COMMISSION_RATE);
-            
+
             message = "Well, it seems like your price level has remained the same";
-            setResult( result, current_user_id);
+            setResult(result, current_user_id);
         }
-        
+
         // Deduct result from balance
-        //balance_val_label.setText(); // getBalance() from DB + result -> Before this, when they click on call, their balance should be deducted
-        
+        double currentBalance = getBalance(current_user_id);
+        double final_balance = currentBalance + result;
+
+        // Store the new balance in the database
+        setBalance(final_balance, current_user_id);
+
+        // Show the latest balance in the label
+        setBalanceToLabel(final_balance);
+
         final JFXSnackbar snackBar = new JFXSnackbar(main_window);
-        
-        EventHandler handler = new EventHandler(){
+
+        EventHandler handler = new EventHandler() {
             @Override
             public void handle(Event event) {
                 // Hide the snackbar
                 snackBar.unregisterSnackbarContainer(main_window);
             }
         };
-        
-        snackBar.show(message, "Close", 7000, handler);
-        
+
+        snackBar.show(message, "Close", 100000, handler);
+
         // Set the graph back to its position
         Transition trans = new Transition();
         trans.setWindow(main_window);
-        
+        trans.translate(10, chart_container);
+
         calls_container.setVisible(false);
-        trans.translate(100, areaChart);
+        put_container.setVisible(false);
     }
-    
+
     private int getIdFromFile() throws FileNotFoundException {
         Scanner in = new Scanner(new FileReader("user_data.txt"));
-        
+
         int user_id = 0;
-        if(in.hasNext()) {
+        if (in.hasNext()) {
             user_id = in.nextInt();
         }
-        
+
         in.close();
-        
+
         return user_id;
     }
+
+    private void loadBalanceToLabel() {
+        double balance = 0;
+        
+        try {
+            balance = getBalance(getIdFromFile());
+        } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException: " + ex.getMessage());
+        }
+        
+        setBalanceToLabel(balance);
+    }
+
+    private void setBalanceToLabel(double bal){
+        // Round balance to 2 decimal points
+        bal = bal * 100;
+        bal = Math.round(bal);
+        bal = bal / 100;
+        
+        balance_val_label.setText("$" + bal);
+    }
     
-    /* user logged in:
-     * In client -> If countdown hits < 1, show dialog "Call completed", calculate amount and set it to balance (show notification if possible)
-     
-    /* user not logged in:
-     * In server, run a thread that's always checking if the seconds == 0; (should run every second and decrement seconds)
-     * Make sure this is not only for a single user. 
-     * In server check if the user's log in time is past their "Call completed" time. If yes, then show completed message,
-        else start the client's timer from how much is left. (Add transaction_timeframe to the transaction_datetime to get the final datetime
+    private int getTransactionSeconds(){
+        
+        int minutes = 0, hour = 0, totalSeconds = 0;
+
+        if (time_hour_dropdown.getSelectionModel().isEmpty()) {
+            // Only minute is selected
+            minutes = Integer.parseInt(time_min_dropdown.getValue().toString());
+            totalSeconds = minutes * 60;
+        } else if (time_min_dropdown.getSelectionModel().isEmpty()) {
+            // Only hour is selected
+            hour = Integer.parseInt(time_hour_dropdown.getValue().toString());
+            totalSeconds = hour * 60 * 60;
+        } else if (!time_min_dropdown.getSelectionModel().isEmpty() && !time_hour_dropdown.getSelectionModel().isEmpty()) {
+            // Both are selected
+            minutes = Integer.parseInt(time_min_dropdown.getValue().toString());
+            hour = Integer.parseInt(time_hour_dropdown.getValue().toString());
+
+            totalSeconds = (minutes * 60) + (hour * 60 * 60);
+        }
+        
+        return totalSeconds;
+    }
     
-    */
+    // Start transaction -> Validate, Insert
+    private void makeTransaction(String type) {
+        String amount = amount_input.getText();
+        String currency1 = currency1_dropdown.getValue().toString();
+        String currency2 = currency2_dropdown.getValue().toString();
+
+        // No time is selected
+        if (time_min_dropdown.getSelectionModel().isEmpty() && time_hour_dropdown.getSelectionModel().isEmpty()) {
+            time_min_dropdown.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
+            time_hour_dropdown.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
+            return;
+        }
+
+        if (amount.equals("")) {
+            amount_input.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
+            return;
+        }
+        
+        // Validation passed
+        try {
+            setBalanceToLabel(getBalance(getIdFromFile()) - Double.parseDouble(amount));
+        } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException: " + ex.getMessage());
+        }
+        
+        time_min_dropdown.setStyle("-jfx-focus-color: #202f32; -jfx-unfocus-color: #202f32;");
+        time_hour_dropdown.setStyle("-jfx-focus-color: #202f32; -jfx-unfocus-color: #202f32;");
+
+        // Disallow buttons when a transaction is already running
+        call_btn.setDisable(true);
+        put_btn.setDisable(true);
+
+        // Get transaction seconds
+        int final_totalSeconds = getTransactionSeconds();
+        
+        // Insert into DB
+        Task<Boolean> task = new Task<Boolean>() {
+            @Override
+            protected Boolean call() throws Exception {
+                // Insert to DB
+                boolean insert = insertIntoDb(getIdFromFile(), type, currency1, currency2, Double.parseDouble(amount), (getCurrentPrice(currency1, currency2) + generatedDecimal), final_totalSeconds);
+
+                int user_id = getIdFromFile();
+
+                // Get the current balance of the user from database
+                double currentAmount = getBalance(user_id);
+
+                // Set new balance for the user
+                setBalance((currentAmount - Double.parseDouble(amount)), user_id);
+
+                return insert;
+            }
+        };
+
+        task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                // Translate Graph to the right
+                
+                displayTransactionInfo(amount, currency1, currency2, final_totalSeconds, type);
+                
+                if(type.equals("call")){
+                    startCallTimeCountdown();
+                } else if(type.equals("put")){
+                    startPutTimeCountdown();
+                }
+            }
+        });
+
+        new Thread(task).start();
+    }
+    
+    private void displayTransactionInfo(String amount, String currency1, String currency2, int final_totalSeconds, String type){
+        // Translate Graph to the right
+        Transition trans = new Transition();
+        trans.setWindow(main_window);
+
+        trans.translate(-100, chart_container);
+
+        if(type.equals("call")){
+            trans.fadeInTransition(calls_container, 500);
+            calls_container.setVisible(true);
+
+            // Set amount to the label in calls_container
+            called_amount_label.setText("$" + amount);
+
+            // Set the price level at which user called
+            called_at_val_label.setText("" + (getCurrentPrice(currency1, currency2) + generatedDecimal));
+
+            // Set the max time remaining
+            end_time_label.setText("" + final_totalSeconds);
+        } else if(type.equals("put")){
+            trans.fadeInTransition(put_container, 500);
+            put_container.setVisible(true);
+
+            // Set amount to the label in calls_container
+            put_amount_label.setText("$" + amount);
+
+            // Set the price level at which user called
+            put_at_val_label.setText("" + (getCurrentPrice(currency1, currency2) + generatedDecimal));
+
+            // Set the max time remaining
+            put_end_time_label.setText("" + final_totalSeconds);
+        }
+    }
     
     @FXML
     private void validateAmount(KeyEvent event) {
-        String balance = balance_val_label.getText().substring(1, balance_val_label.getText().length());
+        double balance = 0;
+        
+        try {
+            balance = getBalance(getIdFromFile());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String amountText = amount_input.getText();
-        
+
         double amount = 0;
-        
-        if(!amountText.equals("")){
+
+        if (!amountText.equals("")) {
             amount = Double.parseDouble(amountText);
         }
-        
-        if(Double.parseDouble (balance) < amount){
+
+        if (balance < amount) {
             call_btn.setDisable(true);
             put_btn.setDisable(true);
         } else {
@@ -428,20 +676,20 @@ public class BinaryTradingController implements Initializable {
             put_btn.setDisable(false);
         }
     }
-    
+
     // Display graph based on user selected currencies
     @FXML
-    private void displayGraph(){
-        final String currency1 = currency1_dropdown.getValue().toString();
-        final String currency2 = currency2_dropdown.getValue().toString();
-
+    private void displayGraph() {
         // View Button is clicked
         view_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent t) {
+                String currency1 = currency1_dropdown.getValue().toString();
+                String currency2 = currency2_dropdown.getValue().toString();
+
                 view_btn.setDisable(true);
-                
-                if(!currency1.equals(currency2)){
+
+                if (!currency1.equals(currency2)) {
                     main_window.getChildren().remove(areaChart);
                     areaChart.getData().removeAll(areaChart.getData());
                     loadGraph(currency1, currency2);
@@ -449,121 +697,67 @@ public class BinaryTradingController implements Initializable {
             }
         });
     }
-    
+
     @FXML
     private void currency1Listener(ActionEvent event) {
         String currency1 = currency1_dropdown.getValue().toString();
         String currency2 = currency2_dropdown.getValue().toString();
-        
-        if(!currency1.equals(currency2)){
+
+        if (!currency1.equals(currency2)) {
             view_btn.setDisable(false);
         } else {
             view_btn.setDisable(true);
         }
     }
-    
+
     @FXML
-    private void currency2Listener(ActionEvent event){
+    private void currency2Listener(ActionEvent event) {
         String currency1 = currency1_dropdown.getValue().toString();
         String currency2 = currency2_dropdown.getValue().toString();
-        
-        if(!currency2.equals(currency1)){
+
+        if (!currency2.equals(currency1)) {
             view_btn.setDisable(false);
         } else {
             view_btn.setDisable(true);
         }
     }
-    
-    // Start call transaction -> Validate, Insert
+
     @FXML
     private void makeCallTransaction(MouseEvent e){
-        
-        call_btn.setDisable(true);
-        
-        String amount = amount_input.getText();
-        String currency1 = currency1_dropdown.getValue().toString();
-        String currency2 = currency2_dropdown.getValue().toString();
-        
-        int totalSeconds = 0;
-        int minutes = 0;
-        int hour = 0;
-        
-        // No time is selected
-        if(time_min_dropdown.getSelectionModel().isEmpty() && time_hour_dropdown.getSelectionModel().isEmpty()){
-            time_min_dropdown.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
-            time_hour_dropdown.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
-            return;
-        }
-        
-        if(amount.equals("")){
-            amount_input.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
-            return;
-        }
-        
-        if(time_hour_dropdown.getSelectionModel().isEmpty()){
-            // Only minute is selected
-            minutes = Integer.parseInt(time_min_dropdown.getValue().toString());
-            totalSeconds = minutes * 60;
-        } else if(time_min_dropdown.getSelectionModel().isEmpty()){
-            // Only hour is selected
-            hour = Integer.parseInt(time_hour_dropdown.getValue().toString());
-            totalSeconds = hour * 60 * 60;
-        } else if(!time_min_dropdown.getSelectionModel().isEmpty() && !time_hour_dropdown.getSelectionModel().isEmpty()){
-            // Both are selected
-            minutes = Integer.parseInt(time_min_dropdown.getValue().toString());
-            hour = Integer.parseInt(time_hour_dropdown.getValue().toString());
-            
-            totalSeconds = (minutes * 60) + (hour * 60 * 60);
-        }
-        
-        final int final_totalSeconds = totalSeconds;
-        
-        // Insert into DB
-        Task<Boolean> task = new Task<Boolean>() {
-            @Override 
-            protected Boolean call() throws Exception {
-                boolean insert = insertIntoDb(getIdFromFile(), "call", currency1, currency2, Double.parseDouble(amount), (getCurrentPrice(currency1, currency2) + generatedDecimal), final_totalSeconds);
-                return insert;
-            }
-        };
-        
-        task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-           @Override
-           public void handle(WorkerStateEvent event) {
-               // Translate Graph to the right
-                Transition trans = new Transition();
-                trans.setWindow(main_window);
-
-                trans.translate(-100, chart_container);
-
-                trans.fadeInTransition(calls_container, 500);
-                calls_container.setVisible(true);
-
-                // Set amount to the label in calls_container
-                called_amount_label.setText("$" + amount);
-
-                // Set the price level at which user called
-                called_at_val_label.setText("" + (getCurrentPrice(currency1, currency2) + generatedDecimal));
-                
-                // Set the max time remaining
-                end_time_label.setText("" + final_totalSeconds);
-                
-                System.out.println("CLICKED AT: " + (getCurrentPrice(currency1, currency2) + generatedDecimal));
-                startCallTimeCountdown();
-           }
-       });
-        
-        new Thread(task).start();
+        makeTransaction("call");
+    }
+    
+    @FXML
+    private void makePutTransaction(MouseEvent e){
+        makeTransaction("put");
     }
     
     @FXML
     void numberValidation(KeyEvent event) {
-        if(!(event.getCharacter().matches("[0-9.]"))) {
+        if (!(event.getCharacter().matches("[0-9.]"))) {
             event.consume();
         }
     }
+
+    @FXML
+    void loadProfile(MouseEvent event) {
+        Transition trans = new Transition();
+        trans.setWindow(main_window);
+        
+        trans.fadeOutTransition("/views/profile.fxml");
+    }
+
+    @FXML
+    void loadHome(MouseEvent event) {
+        Transition trans = new Transition();
+        trans.setWindow(main_window);
+        
+        trans.fadeOutTransition("/views/Home.fxml");
+    }
     
-    /************* SERVER RETRIEVED FUNCTIONS *************/
+    /**
+     * *********** SERVER RETRIEVED FUNCTIONS ************
+     */
     private static double getCurrentPrice(java.lang.String currency1, java.lang.String currency2) {
         webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
@@ -575,17 +769,11 @@ public class BinaryTradingController implements Initializable {
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.insertIntoDb(userId, type, currency1, currency2, amount, priceLevel, seconds);
     }
- 
+
     private static java.util.List<java.lang.String> getCurrencyList() {
         webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
         return port.getCurrencyList();
-    }
-
-    private static double getCallEndPrice(int userId) {
-        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
-        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
-        return port.getCallEndPrice(userId);
     }
 
     private static void setResult(double result, int userId) {
@@ -593,10 +781,83 @@ public class BinaryTradingController implements Initializable {
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         port.setResult(result, userId);
     }
+
+    private static void setBalance(double balance, int userId) {
+        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS port = service.getUserWSPort();
+        port.setBalance(balance, userId);
+    }
+
+    private static void setEndPrice(double price, int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        port.setEndPrice(price, userId);
+    }
+    
+    private static double getBalance(int userId) {
+        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS port = service.getUserWSPort();
+        return port.getBalance(userId);
+    }
+    
+    private static double getStartPrice(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getStartPrice(userId);
+    }
+
+    private static double getEndPrice(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getEndPrice(userId);
+    }
+    
+    private static double getAmount(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getAmount(userId);
+    }
+
+    private static String getCurrency1(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getCurrency1(userId);
+    }
+
+    private static String getCurrency2(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getCurrency2(userId);
+    }
+
+    private static int getTimeFrame(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getTimeFrame(userId);
+    }
 }
 
 /* Todo: 
  * add called amount to the Calls pane -- DONE
- * Add method to update end_price_level in DB
+ * Add method to update end_price_level in DB -- DONE
  * end time in hours and minutes
+ * enable call button when minutes is not entered -- DONE
+ * have database values instead of dropdown.getText() -- DONE
+ * round the balance
+ * if any call already exists when the page loads, show it (remaining seconds should be calculated accordingly)
+*/
+
+/*  user logged in:
+    * In client -> If countdown hits < 1, show dialog "Call completed", calculate amount and set it to balance (show notification if possible) -- DONE
+     
+    * user not logged in:
+    * In server, run a thread that's always checking if the seconds == 0; (should run every second and decrement seconds)
+    * Make sure this is not only for a single user. 
+    * In server check if the user's log in time is past their "Call completed" time. If yes, then show completed message,
+       else start the client's timer from how much is left. (Add transaction_timeframe to the transaction_datetime to get the final datetime
+    
+*/
+
+/* FLOW for call
+ * makeCallTransaction() -> makeTransaction() -> displayTransactionInfo() -> startCallTimeCountdown() -> processCompletedTransaction()
 */

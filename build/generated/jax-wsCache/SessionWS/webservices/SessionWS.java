@@ -27,6 +27,24 @@ public interface SessionWS {
     /**
      * 
      * @param password
+     * @param username
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "login", targetNamespace = "http://webservices/", className = "webservices.Login")
+    @ResponseWrapper(localName = "loginResponse", targetNamespace = "http://webservices/", className = "webservices.LoginResponse")
+    @Action(input = "http://webservices/SessionWS/loginRequest", output = "http://webservices/SessionWS/loginResponse")
+    public Boolean login(
+        @WebParam(name = "username", targetNamespace = "")
+        String username,
+        @WebParam(name = "password", targetNamespace = "")
+        String password);
+
+    /**
+     * 
+     * @param password
      * @param email
      * @param cpassword
      * @param username
@@ -47,23 +65,5 @@ public interface SessionWS {
         String password,
         @WebParam(name = "Cpassword", targetNamespace = "")
         String cpassword);
-
-    /**
-     * 
-     * @param password
-     * @param username
-     * @return
-     *     returns java.lang.Boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "login", targetNamespace = "http://webservices/", className = "webservices.Login")
-    @ResponseWrapper(localName = "loginResponse", targetNamespace = "http://webservices/", className = "webservices.LoginResponse")
-    @Action(input = "http://webservices/SessionWS/loginRequest", output = "http://webservices/SessionWS/loginResponse")
-    public Boolean login(
-        @WebParam(name = "username", targetNamespace = "")
-        String username,
-        @WebParam(name = "password", targetNamespace = "")
-        String password);
 
 }

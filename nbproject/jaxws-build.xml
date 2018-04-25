@@ -101,5 +101,22 @@
         <delete dir="${build.generated.dir}/jax-wsCache/IWWS"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-SessionWS, wsimport-client-CurrencyApiWS, wsimport-client-BinaryTransactionsWS, wsimport-client-UserWS, wsimport-client-IWWS"/>
+    <target name="wsimport-client-ProfileWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/ProfileWS"/>
+        <property name="wsdl-ProfileWS" location="xml-resources/web-service-references/ProfileWS/wsdl/localhost_8080/ArlkonServer/ProfileWS.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/ProfileWS" destdir="${build.generated.dir}/jax-wsCache/ProfileWS" wsdl="${wsdl-ProfileWS}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/ArlkonServer/ProfileWS?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-ProfileWS}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/ProfileWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/ProfileWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-ProfileWS" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/ProfileWS"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-SessionWS, wsimport-client-CurrencyApiWS, wsimport-client-BinaryTransactionsWS, wsimport-client-UserWS, wsimport-client-IWWS, wsimport-client-ProfileWS"/>
 </project>

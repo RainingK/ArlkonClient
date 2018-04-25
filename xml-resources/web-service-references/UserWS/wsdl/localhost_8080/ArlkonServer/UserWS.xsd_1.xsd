@@ -8,6 +8,10 @@
 
 <xs:element name="getUserIdFromUsernameResponse" type="tns:getUserIdFromUsernameResponse"/>
 
+<xs:element name="setBalance" type="tns:setBalance"/>
+
+<xs:element name="setBalanceResponse" type="tns:setBalanceResponse"/>
+
 <xs:complexType name="getBalance">
 <xs:sequence>
 <xs:element name="user_id" type="xs:int"/>
@@ -30,5 +34,16 @@
 <xs:sequence>
 <xs:element name="return" type="xs:int"/>
 </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setBalance">
+<xs:sequence>
+<xs:element name="balance" type="xs:double"/>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setBalanceResponse">
+<xs:sequence/>
 </xs:complexType>
 </xs:schema>
