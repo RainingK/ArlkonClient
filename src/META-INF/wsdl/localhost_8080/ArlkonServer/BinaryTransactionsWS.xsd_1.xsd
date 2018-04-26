@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://webservices/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservices/">
 
+<xs:element name="checkTransactionExists" type="tns:checkTransactionExists"/>
+
+<xs:element name="checkTransactionExistsResponse" type="tns:checkTransactionExistsResponse"/>
+
 <xs:element name="getAmount" type="tns:getAmount"/>
 
 <xs:element name="getAmountResponse" type="tns:getAmountResponse"/>
@@ -12,9 +16,21 @@
 
 <xs:element name="getCurrency2Response" type="tns:getCurrency2Response"/>
 
+<xs:element name="getDateTime" type="tns:getDateTime"/>
+
+<xs:element name="getDateTimeResponse" type="tns:getDateTimeResponse"/>
+
 <xs:element name="getEndPrice" type="tns:getEndPrice"/>
 
 <xs:element name="getEndPriceResponse" type="tns:getEndPriceResponse"/>
+
+<xs:element name="getExpiryDateTime" type="tns:getExpiryDateTime"/>
+
+<xs:element name="getExpiryDateTimeResponse" type="tns:getExpiryDateTimeResponse"/>
+
+<xs:element name="getPendingTransactionType" type="tns:getPendingTransactionType"/>
+
+<xs:element name="getPendingTransactionTypeResponse" type="tns:getPendingTransactionTypeResponse"/>
 
 <xs:element name="getStartPrice" type="tns:getStartPrice"/>
 
@@ -48,15 +64,16 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="setResult">
+<xs:complexType name="checkTransactionExists">
 <xs:sequence>
-<xs:element name="result" type="xs:double"/>
 <xs:element name="user_id" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="setResultResponse">
-<xs:sequence/>
+<xs:complexType name="checkTransactionExistsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="getCurrency1">
@@ -113,17 +130,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="setEndPrice">
-<xs:sequence>
-<xs:element name="price" type="xs:double"/>
-<xs:element name="user_id" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="setEndPriceResponse">
-<xs:sequence/>
-</xs:complexType>
-
 <xs:complexType name="getEndPrice">
 <xs:sequence>
 <xs:element name="user_id" type="xs:int"/>
@@ -145,6 +151,64 @@
 <xs:complexType name="getAmountResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setResult">
+<xs:sequence>
+<xs:element name="result" type="xs:double"/>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setResultResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getDateTime">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getDateTimeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setEndPrice">
+<xs:sequence>
+<xs:element name="price" type="xs:double"/>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setEndPriceResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getPendingTransactionType">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPendingTransactionTypeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getExpiryDateTime">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getExpiryDateTimeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

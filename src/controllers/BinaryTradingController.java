@@ -12,15 +12,20 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.Animation;
@@ -125,7 +130,7 @@ public class BinaryTradingController implements Initializable {
     // Random value added to the currencies
     private double generatedDecimal;
 
-    private int remaining_seconds = 0;
+    private int remaining_seconds;
 
     private final double COMMISSION_RATE = 0.02;
     private final double PROFIT_PERCENTAGE = 0.86;
@@ -143,6 +148,9 @@ public class BinaryTradingController implements Initializable {
 
         // Load the default graph
         loadGraph("USD", "EUR");
+        
+        // Load pending transaction if any
+        loadPendingTransaction();
 
         // Header effects
         applyHeaderEffect(home_btn_pane, home_btn, home_btn_label);
@@ -323,6 +331,232 @@ public class BinaryTradingController implements Initializable {
         profit_rate_label.setText("" + (PROFIT_PERCENTAGE * 100) + "%");
     }
 
+    private int getIdFromFile() throws FileNotFoundException {
+        Scanner in = new Scanner(new FileReader("user_data.txt"));
+
+        int user_id = 0;
+        if (in.hasNext()) {
+            user_id = in.nextInt();
+        }
+
+        in.close();
+
+        return user_id;
+    }
+
+    private void loadBalanceToLabel() {
+        double balance = 0;
+        
+        try {
+            balance = getBalance(getIdFromFile());
+        } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException: " + ex.getMessage());
+        }
+        
+        setBalanceToLabel(balance);
+    }
+
+    private void setBalanceToLabel(double bal){
+        // Round balance to 2 decimal points
+        bal = bal * 100;
+        bal = Math.round(bal);
+        bal = bal / 100;
+        
+        balance_val_label.setText("$" + bal);
+    }
+    
+    private void loadPendingTransaction(){
+        
+        int current_user_id = 0;
+        
+        try {
+            current_user_id = getIdFromFile();
+        } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException: " + ex.getMessage());
+        }
+        
+        // No pending transaction
+        if(checkTransactionExists(current_user_id) == false){
+            return;
+        }
+        
+        System.out.println("Buser_id: " + current_user_id);
+        
+        // PROBLEM IN CALLING THIS FUNCTION
+        String expiryDateString = getExpiryDateTime(current_user_id);
+        
+        System.out.println("Auser_id: " + current_user_id);
+        Date expiryDate = null;
+        Date nowDate = null;
+        
+        // Get the current date and time
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+        LocalDateTime ldt = LocalDateTime.now();
+        String now = dtf.format(ldt);
+        
+        // Get the expiry date of a transaction and the current date
+        System.out.println("EXPIRYDATESTRING: " + expiryDateString);
+        
+        try {
+            expiryDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(expiryDateString);
+        } catch (ParseException ex) {
+            System.out.println("ParseException: " + ex.getMessage());
+        }
+        
+        try {
+            nowDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(now);
+        } catch (ParseException ex) {
+            System.out.println("ParseException: " + ex.getMessage());
+        }
+        
+        // Transaction Expired
+        if(nowDate.after(expiryDate)){
+            return;
+        }
+        
+        String pendingType = getPendingTransactionType(current_user_id);
+        
+        // Disallow buttons when a transaction is already running
+        call_btn.setDisable(true);
+        put_btn.setDisable(true);
+        
+        // Get transaction seconds
+        int final_totalSeconds = 0;
+        
+        String amount = Double.toString(getAmount(current_user_id));
+        
+        displayTransactionInfo(amount, getCurrency1(current_user_id), getCurrency2(current_user_id), final_totalSeconds, pendingType);
+                
+        if(pendingType.equals("call")){
+            startCallTimeCountdown();
+        } else if(pendingType.equals("put")){
+            startPutTimeCountdown();
+        }
+        
+    }
+    
+    public int getRemainingSeconds(Date expiryDate){
+        // Get the current date and time
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+        LocalDateTime ldt = LocalDateTime.now();
+        String now = dtf.format(ldt);
+        
+        Date nowDate = null;
+        long seconds = 0;
+        
+        try {
+            nowDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(now);
+        } catch (ParseException ex) {
+            System.out.println("ParseException: " + ex.getMessage());
+        }
+        
+        if(nowDate.before(expiryDate)){
+            // Get seconds differences between the time
+            seconds = (expiryDate.getTime() - nowDate.getTime()) / 1000;
+        } else {
+            return -1;
+        }
+        
+        return (int) seconds;
+    }
+    
+    /***************** START TRANSACTIONS *****************/
+    
+    private int getTransactionSeconds(){
+        
+        int minutes = 0, hour = 0, totalSeconds = 0;
+
+        if (time_hour_dropdown.getSelectionModel().isEmpty()) {
+            // Only minute is selected
+            minutes = Integer.parseInt(time_min_dropdown.getValue().toString());
+            totalSeconds = minutes * 60;
+        } else if (time_min_dropdown.getSelectionModel().isEmpty()) {
+            // Only hour is selected
+            hour = Integer.parseInt(time_hour_dropdown.getValue().toString());
+            totalSeconds = hour * 60 * 60;
+        } else if (!time_min_dropdown.getSelectionModel().isEmpty() && !time_hour_dropdown.getSelectionModel().isEmpty()) {
+            // Both are selected
+            minutes = Integer.parseInt(time_min_dropdown.getValue().toString());
+            hour = Integer.parseInt(time_hour_dropdown.getValue().toString());
+
+            totalSeconds = (minutes * 60) + (hour * 60 * 60);
+        }
+        
+        return totalSeconds;
+    }
+    
+    // Start transaction -> Validate, Insert
+    private void makeTransaction(String type) {
+        String amount = amount_input.getText();
+        String currency1 = currency1_dropdown.getValue().toString();
+        String currency2 = currency2_dropdown.getValue().toString();
+
+        // No time is selected
+        if (time_min_dropdown.getSelectionModel().isEmpty() && time_hour_dropdown.getSelectionModel().isEmpty()) {
+            time_min_dropdown.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
+            time_hour_dropdown.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
+            return;
+        }
+
+        if (amount.equals("")) {
+            amount_input.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
+            return;
+        }
+        
+        // Validation passed
+        try {
+            setBalanceToLabel(getBalance(getIdFromFile()) - Double.parseDouble(amount));
+        } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException: " + ex.getMessage());
+        }
+        
+        time_min_dropdown.setStyle("-jfx-focus-color: #202f32; -jfx-unfocus-color: #202f32;");
+        time_hour_dropdown.setStyle("-jfx-focus-color: #202f32; -jfx-unfocus-color: #202f32;");
+
+        // Disallow buttons when a transaction is already running
+        call_btn.setDisable(true);
+        put_btn.setDisable(true);
+
+        // Get transaction seconds
+        int final_totalSeconds = getTransactionSeconds();
+        
+        // Insert into DB
+        Task<Boolean> task = new Task<Boolean>() {
+            @Override
+            protected Boolean call() throws Exception {
+                // Insert to DB
+                boolean insert = insertIntoDb(getIdFromFile(), type, currency1, currency2, Double.parseDouble(amount), (getCurrentPrice(currency1, currency2) + generatedDecimal), final_totalSeconds);
+
+                int user_id = getIdFromFile();
+
+                // Get the current balance of the user from database
+                double currentAmount = getBalance(user_id);
+
+                // Set new balance for the user
+                setBalance((currentAmount - Double.parseDouble(amount)), user_id);
+
+                return insert;
+            }
+        };
+
+        task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                // Translate Graph to the right
+                
+                displayTransactionInfo(amount, currency1, currency2, final_totalSeconds, type);
+                
+                if(type.equals("call")){
+                    startCallTimeCountdown();
+                } else if(type.equals("put")){
+                    startPutTimeCountdown();
+                }
+            }
+        });
+
+        new Thread(task).start();
+    }
+    
     // Start time left countdown
     public void startCallTimeCountdown() {
         int current_user_id = 0;
@@ -333,8 +567,19 @@ public class BinaryTradingController implements Initializable {
             System.out.println("FileNotFoundException: " + ex.getMessage());
         }
         
-        remaining_seconds = getTimeFrame(current_user_id);
-
+        String expiryDateString = getExpiryDateTime(current_user_id);
+        Date expiryDate = null;
+        
+        // Get the expiry date of a transaction and the current date
+        try {
+            expiryDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(expiryDateString);
+        } catch (ParseException ex) {
+            System.out.println("ParseException: " + ex.getMessage());
+        }
+        
+        //remaining_seconds = getTimeFrame(current_user_id);
+        remaining_seconds = getRemainingSeconds(expiryDate);
+        
         Timeline call_thread = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 
             @Override
@@ -366,7 +611,17 @@ public class BinaryTradingController implements Initializable {
             System.out.println("FileNotFoundException: " + ex.getMessage());
         }
         
-        remaining_seconds = getTimeFrame(current_user_id);
+        String expiryDateString = getExpiryDateTime(current_user_id);
+        Date expiryDate = null;
+        
+        // Get the expiry date of a transaction and the current date
+        try {
+            expiryDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(expiryDateString);
+        } catch (ParseException ex) {
+            System.out.println("ParseException: " + ex.getMessage());
+        }
+        
+        remaining_seconds = getRemainingSeconds(expiryDate);
         System.out.println("SECS: " + remaining_seconds);
 
         Timeline put_thread = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
@@ -486,135 +741,6 @@ public class BinaryTradingController implements Initializable {
         calls_container.setVisible(false);
         put_container.setVisible(false);
     }
-
-    private int getIdFromFile() throws FileNotFoundException {
-        Scanner in = new Scanner(new FileReader("user_data.txt"));
-
-        int user_id = 0;
-        if (in.hasNext()) {
-            user_id = in.nextInt();
-        }
-
-        in.close();
-
-        return user_id;
-    }
-
-    private void loadBalanceToLabel() {
-        double balance = 0;
-        
-        try {
-            balance = getBalance(getIdFromFile());
-        } catch (FileNotFoundException ex) {
-            System.out.println("FileNotFoundException: " + ex.getMessage());
-        }
-        
-        setBalanceToLabel(balance);
-    }
-
-    private void setBalanceToLabel(double bal){
-        // Round balance to 2 decimal points
-        bal = bal * 100;
-        bal = Math.round(bal);
-        bal = bal / 100;
-        
-        balance_val_label.setText("$" + bal);
-    }
-    
-    private int getTransactionSeconds(){
-        
-        int minutes = 0, hour = 0, totalSeconds = 0;
-
-        if (time_hour_dropdown.getSelectionModel().isEmpty()) {
-            // Only minute is selected
-            minutes = Integer.parseInt(time_min_dropdown.getValue().toString());
-            totalSeconds = minutes * 60;
-        } else if (time_min_dropdown.getSelectionModel().isEmpty()) {
-            // Only hour is selected
-            hour = Integer.parseInt(time_hour_dropdown.getValue().toString());
-            totalSeconds = hour * 60 * 60;
-        } else if (!time_min_dropdown.getSelectionModel().isEmpty() && !time_hour_dropdown.getSelectionModel().isEmpty()) {
-            // Both are selected
-            minutes = Integer.parseInt(time_min_dropdown.getValue().toString());
-            hour = Integer.parseInt(time_hour_dropdown.getValue().toString());
-
-            totalSeconds = (minutes * 60) + (hour * 60 * 60);
-        }
-        
-        return totalSeconds;
-    }
-    
-    // Start transaction -> Validate, Insert
-    private void makeTransaction(String type) {
-        String amount = amount_input.getText();
-        String currency1 = currency1_dropdown.getValue().toString();
-        String currency2 = currency2_dropdown.getValue().toString();
-
-        // No time is selected
-        if (time_min_dropdown.getSelectionModel().isEmpty() && time_hour_dropdown.getSelectionModel().isEmpty()) {
-            time_min_dropdown.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
-            time_hour_dropdown.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
-            return;
-        }
-
-        if (amount.equals("")) {
-            amount_input.setStyle("-jfx-focus-color: #be222c; -jfx-unfocus-color: #be222c;");
-            return;
-        }
-        
-        // Validation passed
-        try {
-            setBalanceToLabel(getBalance(getIdFromFile()) - Double.parseDouble(amount));
-        } catch (FileNotFoundException ex) {
-            System.out.println("FileNotFoundException: " + ex.getMessage());
-        }
-        
-        time_min_dropdown.setStyle("-jfx-focus-color: #202f32; -jfx-unfocus-color: #202f32;");
-        time_hour_dropdown.setStyle("-jfx-focus-color: #202f32; -jfx-unfocus-color: #202f32;");
-
-        // Disallow buttons when a transaction is already running
-        call_btn.setDisable(true);
-        put_btn.setDisable(true);
-
-        // Get transaction seconds
-        int final_totalSeconds = getTransactionSeconds();
-        
-        // Insert into DB
-        Task<Boolean> task = new Task<Boolean>() {
-            @Override
-            protected Boolean call() throws Exception {
-                // Insert to DB
-                boolean insert = insertIntoDb(getIdFromFile(), type, currency1, currency2, Double.parseDouble(amount), (getCurrentPrice(currency1, currency2) + generatedDecimal), final_totalSeconds);
-
-                int user_id = getIdFromFile();
-
-                // Get the current balance of the user from database
-                double currentAmount = getBalance(user_id);
-
-                // Set new balance for the user
-                setBalance((currentAmount - Double.parseDouble(amount)), user_id);
-
-                return insert;
-            }
-        };
-
-        task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent event) {
-                // Translate Graph to the right
-                
-                displayTransactionInfo(amount, currency1, currency2, final_totalSeconds, type);
-                
-                if(type.equals("call")){
-                    startCallTimeCountdown();
-                } else if(type.equals("put")){
-                    startPutTimeCountdown();
-                }
-            }
-        });
-
-        new Thread(task).start();
-    }
     
     private void displayTransactionInfo(String amount, String currency1, String currency2, int final_totalSeconds, String type){
         // Translate Graph to the right
@@ -649,6 +775,8 @@ public class BinaryTradingController implements Initializable {
             put_end_time_label.setText("" + final_totalSeconds);
         }
     }
+    
+    /***************** END TRANSACTIONS *****************/
     
     @FXML
     private void validateAmount(KeyEvent event) {
@@ -835,6 +963,31 @@ public class BinaryTradingController implements Initializable {
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getTimeFrame(userId);
     }
+
+    private static String getDateTime(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getDateTime(userId);
+    }
+    
+    private static String getPendingTransactionType(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getPendingTransactionType(userId);
+    }
+    
+    private static boolean checkTransactionExists(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.checkTransactionExists(userId);
+    }
+
+    private static String getExpiryDateTime(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getExpiryDateTime(userId);
+    }
+
 }
 
 /* Todo: 
@@ -844,7 +997,7 @@ public class BinaryTradingController implements Initializable {
  * enable call button when minutes is not entered -- DONE
  * have database values instead of dropdown.getText() -- DONE
  * round the balance
- * if any call already exists when the page loads, show it (remaining seconds should be calculated accordingly)
+ * if any call already exists when the page loads, show it (remaining seconds should be calculated accordingly) -- DONE
 */
 
 /*  user logged in:

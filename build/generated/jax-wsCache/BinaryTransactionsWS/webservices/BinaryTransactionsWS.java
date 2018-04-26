@@ -41,36 +41,6 @@ public interface BinaryTransactionsWS {
 
     /**
      * 
-     * @param userId
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getCurrency1", targetNamespace = "http://webservices/", className = "webservices.GetCurrency1")
-    @ResponseWrapper(localName = "getCurrency1Response", targetNamespace = "http://webservices/", className = "webservices.GetCurrency1Response")
-    @Action(input = "http://webservices/BinaryTransactionsWS/getCurrency1Request", output = "http://webservices/BinaryTransactionsWS/getCurrency1Response")
-    public String getCurrency1(
-        @WebParam(name = "user_id", targetNamespace = "")
-        int userId);
-
-    /**
-     * 
-     * @param userId
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getCurrency2", targetNamespace = "http://webservices/", className = "webservices.GetCurrency2")
-    @ResponseWrapper(localName = "getCurrency2Response", targetNamespace = "http://webservices/", className = "webservices.GetCurrency2Response")
-    @Action(input = "http://webservices/BinaryTransactionsWS/getCurrency2Request", output = "http://webservices/BinaryTransactionsWS/getCurrency2Response")
-    public String getCurrency2(
-        @WebParam(name = "user_id", targetNamespace = "")
-        int userId);
-
-    /**
-     * 
      * @param currency1
      * @param amount
      * @param seconds
@@ -104,36 +74,6 @@ public interface BinaryTransactionsWS {
 
     /**
      * 
-     * @param userId
-     * @return
-     *     returns double
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getAmount", targetNamespace = "http://webservices/", className = "webservices.GetAmount")
-    @ResponseWrapper(localName = "getAmountResponse", targetNamespace = "http://webservices/", className = "webservices.GetAmountResponse")
-    @Action(input = "http://webservices/BinaryTransactionsWS/getAmountRequest", output = "http://webservices/BinaryTransactionsWS/getAmountResponse")
-    public double getAmount(
-        @WebParam(name = "user_id", targetNamespace = "")
-        int userId);
-
-    /**
-     * 
-     * @param userId
-     * @return
-     *     returns double
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getStartPrice", targetNamespace = "http://webservices/", className = "webservices.GetStartPrice")
-    @ResponseWrapper(localName = "getStartPriceResponse", targetNamespace = "http://webservices/", className = "webservices.GetStartPriceResponse")
-    @Action(input = "http://webservices/BinaryTransactionsWS/getStartPriceRequest", output = "http://webservices/BinaryTransactionsWS/getStartPriceResponse")
-    public double getStartPrice(
-        @WebParam(name = "user_id", targetNamespace = "")
-        int userId);
-
-    /**
-     * 
      * @param price
      * @param userId
      */
@@ -144,6 +84,36 @@ public interface BinaryTransactionsWS {
     public void setEndPrice(
         @WebParam(name = "price", targetNamespace = "")
         double price,
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param userId
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getCurrency1", targetNamespace = "http://webservices/", className = "webservices.GetCurrency1")
+    @ResponseWrapper(localName = "getCurrency1Response", targetNamespace = "http://webservices/", className = "webservices.GetCurrency1Response")
+    @Action(input = "http://webservices/BinaryTransactionsWS/getCurrency1Request", output = "http://webservices/BinaryTransactionsWS/getCurrency1Response")
+    public String getCurrency1(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param userId
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getTimeFrame", targetNamespace = "http://webservices/", className = "webservices.GetTimeFrame")
+    @ResponseWrapper(localName = "getTimeFrameResponse", targetNamespace = "http://webservices/", className = "webservices.GetTimeFrameResponse")
+    @Action(input = "http://webservices/BinaryTransactionsWS/getTimeFrameRequest", output = "http://webservices/BinaryTransactionsWS/getTimeFrameResponse")
+    public int getTimeFrame(
         @WebParam(name = "user_id", targetNamespace = "")
         int userId);
 
@@ -166,14 +136,104 @@ public interface BinaryTransactionsWS {
      * 
      * @param userId
      * @return
-     *     returns int
+     *     returns double
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getTimeFrame", targetNamespace = "http://webservices/", className = "webservices.GetTimeFrame")
-    @ResponseWrapper(localName = "getTimeFrameResponse", targetNamespace = "http://webservices/", className = "webservices.GetTimeFrameResponse")
-    @Action(input = "http://webservices/BinaryTransactionsWS/getTimeFrameRequest", output = "http://webservices/BinaryTransactionsWS/getTimeFrameResponse")
-    public int getTimeFrame(
+    @RequestWrapper(localName = "getStartPrice", targetNamespace = "http://webservices/", className = "webservices.GetStartPrice")
+    @ResponseWrapper(localName = "getStartPriceResponse", targetNamespace = "http://webservices/", className = "webservices.GetStartPriceResponse")
+    @Action(input = "http://webservices/BinaryTransactionsWS/getStartPriceRequest", output = "http://webservices/BinaryTransactionsWS/getStartPriceResponse")
+    public double getStartPrice(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param userId
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getCurrency2", targetNamespace = "http://webservices/", className = "webservices.GetCurrency2")
+    @ResponseWrapper(localName = "getCurrency2Response", targetNamespace = "http://webservices/", className = "webservices.GetCurrency2Response")
+    @Action(input = "http://webservices/BinaryTransactionsWS/getCurrency2Request", output = "http://webservices/BinaryTransactionsWS/getCurrency2Response")
+    public String getCurrency2(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param userId
+     * @return
+     *     returns double
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAmount", targetNamespace = "http://webservices/", className = "webservices.GetAmount")
+    @ResponseWrapper(localName = "getAmountResponse", targetNamespace = "http://webservices/", className = "webservices.GetAmountResponse")
+    @Action(input = "http://webservices/BinaryTransactionsWS/getAmountRequest", output = "http://webservices/BinaryTransactionsWS/getAmountResponse")
+    public double getAmount(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param userId
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getExpiryDateTime", targetNamespace = "http://webservices/", className = "webservices.GetExpiryDateTime")
+    @ResponseWrapper(localName = "getExpiryDateTimeResponse", targetNamespace = "http://webservices/", className = "webservices.GetExpiryDateTimeResponse")
+    @Action(input = "http://webservices/BinaryTransactionsWS/getExpiryDateTimeRequest", output = "http://webservices/BinaryTransactionsWS/getExpiryDateTimeResponse")
+    public String getExpiryDateTime(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param userId
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getPendingTransactionType", targetNamespace = "http://webservices/", className = "webservices.GetPendingTransactionType")
+    @ResponseWrapper(localName = "getPendingTransactionTypeResponse", targetNamespace = "http://webservices/", className = "webservices.GetPendingTransactionTypeResponse")
+    @Action(input = "http://webservices/BinaryTransactionsWS/getPendingTransactionTypeRequest", output = "http://webservices/BinaryTransactionsWS/getPendingTransactionTypeResponse")
+    public String getPendingTransactionType(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param userId
+     * @return
+     *     returns boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "checkTransactionExists", targetNamespace = "http://webservices/", className = "webservices.CheckTransactionExists")
+    @ResponseWrapper(localName = "checkTransactionExistsResponse", targetNamespace = "http://webservices/", className = "webservices.CheckTransactionExistsResponse")
+    @Action(input = "http://webservices/BinaryTransactionsWS/checkTransactionExistsRequest", output = "http://webservices/BinaryTransactionsWS/checkTransactionExistsResponse")
+    public boolean checkTransactionExists(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param userId
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getDateTime", targetNamespace = "http://webservices/", className = "webservices.GetDateTime")
+    @ResponseWrapper(localName = "getDateTimeResponse", targetNamespace = "http://webservices/", className = "webservices.GetDateTimeResponse")
+    @Action(input = "http://webservices/BinaryTransactionsWS/getDateTimeRequest", output = "http://webservices/BinaryTransactionsWS/getDateTimeResponse")
+    public String getDateTime(
         @WebParam(name = "user_id", targetNamespace = "")
         int userId);
 
