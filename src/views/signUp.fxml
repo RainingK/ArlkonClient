@@ -86,6 +86,7 @@
                <font>
                   <Font name="System Italic" size="15.0" />
                </font></Label>
+            <Label fx:id="errors_label" layoutX="83.0" layoutY="457.0" prefHeight="32.0" prefWidth="262.0" style="-fx-text-fill: #be222c;" />
          </children>
       </Pane>
       <Pane id="signup_second_right_pane" fx:id="rightPane2" layoutX="1033.0" prefHeight="537.0" prefWidth="723.0" stylesheets="@../res/css/signup.css">

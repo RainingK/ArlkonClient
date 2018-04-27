@@ -24,9 +24,11 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _CheckUsernameExists_QNAME = new QName("http://webservices/", "checkUsernameExists");
     private final static QName _SignUp_QNAME = new QName("http://webservices/", "signUp");
     private final static QName _Login_QNAME = new QName("http://webservices/", "login");
     private final static QName _SignUpResponse_QNAME = new QName("http://webservices/", "signUpResponse");
+    private final static QName _CheckUsernameExistsResponse_QNAME = new QName("http://webservices/", "checkUsernameExistsResponse");
     private final static QName _LoginResponse_QNAME = new QName("http://webservices/", "loginResponse");
 
     /**
@@ -34,6 +36,14 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link CheckUsernameExistsResponse }
+     * 
+     */
+    public CheckUsernameExistsResponse createCheckUsernameExistsResponse() {
+        return new CheckUsernameExistsResponse();
     }
 
     /**
@@ -69,6 +79,23 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link CheckUsernameExists }
+     * 
+     */
+    public CheckUsernameExists createCheckUsernameExists() {
+        return new CheckUsernameExists();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckUsernameExists }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkUsernameExists")
+    public JAXBElement<CheckUsernameExists> createCheckUsernameExists(CheckUsernameExists value) {
+        return new JAXBElement<CheckUsernameExists>(_CheckUsernameExists_QNAME, CheckUsernameExists.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link SignUp }{@code >}}
      * 
      */
@@ -93,6 +120,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "signUpResponse")
     public JAXBElement<SignUpResponse> createSignUpResponse(SignUpResponse value) {
         return new JAXBElement<SignUpResponse>(_SignUpResponse_QNAME, SignUpResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckUsernameExistsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkUsernameExistsResponse")
+    public JAXBElement<CheckUsernameExistsResponse> createCheckUsernameExistsResponse(CheckUsernameExistsResponse value) {
+        return new JAXBElement<CheckUsernameExistsResponse>(_CheckUsernameExistsResponse_QNAME, CheckUsernameExistsResponse.class, null, value);
     }
 
     /**

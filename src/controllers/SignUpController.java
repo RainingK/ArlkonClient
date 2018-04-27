@@ -54,6 +54,9 @@ public class SignUpController implements Initializable {
     @FXML Label password_label;
     @FXML Label cpassword_label;
     
+    // Errors label
+    @FXML Label errors_label;
+    
     // Signup Panes
     @FXML Pane rightPane1;
     @FXML Pane rightPane2;
@@ -264,6 +267,10 @@ public class SignUpController implements Initializable {
         webservices.SessionWS port = service.getSessionWSPort();
         return port.signUp(username, email, password, cpassword);
     }
-    
-    
+
+    private static Boolean checkUsernameExists(java.lang.String username) {
+        webservices.SessionWS_Service service = new webservices.SessionWS_Service();
+        webservices.SessionWS port = service.getSessionWSPort();
+        return port.checkUsernameExists(username);
+    }
 }
