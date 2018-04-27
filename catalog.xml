@@ -14,8 +14,7 @@
     
     
     
-    <system systemId="http://localhost:8080/ArlkonServer/UserWS?wsdl" uri="xml-resources/web-service-references/UserWS/wsdl/localhost_8080/ArlkonServer/UserWS.wsdl"/>
-    <system systemId="http://localhost:8080/ArlkonServer/UserWS?xsd=1" uri="xml-resources/web-service-references/UserWS/wsdl/localhost_8080/ArlkonServer/UserWS.xsd_1.xsd"/>
+    
     <system systemId="http://localhost:8080/ArlkonServer/IWWS?wsdl" uri="xml-resources/web-service-references/IWWS/wsdl/localhost_8080/ArlkonServer/IWWS.wsdl"/>
     <system systemId="http://localhost:8080/ArlkonServer/IWWS?xsd=1" uri="xml-resources/web-service-references/IWWS/wsdl/localhost_8080/ArlkonServer/IWWS.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl" uri="xml-resources/web-service-references/CurrencyApiWS/wsdl/localhost_8080/ArlkonServer/CurrencyApiWS.wsdl"/>
@@ -26,4 +25,6 @@
     <system systemId="http://localhost:8080/ArlkonServer/ProfileWS?xsd=1" uri="xml-resources/web-service-references/ProfileWS/wsdl/localhost_8080/ArlkonServer/ProfileWS.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/ArlkonServer/SessionWS?wsdl" uri="xml-resources/web-service-references/SessionWS/wsdl/localhost_8080/ArlkonServer/SessionWS.wsdl"/>
     <system systemId="http://localhost:8080/ArlkonServer/SessionWS?xsd=1" uri="xml-resources/web-service-references/SessionWS/wsdl/localhost_8080/ArlkonServer/SessionWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ArlkonServer/UserWS?wsdl" uri="xml-resources/web-service-references/UserWS/wsdl/localhost_8080/ArlkonServer/UserWS.wsdl"/>
+    <system systemId="http://localhost:8080/ArlkonServer/UserWS?xsd=1" uri="xml-resources/web-service-references/UserWS/wsdl/localhost_8080/ArlkonServer/UserWS.xsd_1.xsd"/>
 </catalog>

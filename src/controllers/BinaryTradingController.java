@@ -7,10 +7,14 @@ package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -47,6 +51,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import utils.Transition;
@@ -75,11 +80,11 @@ public class BinaryTradingController implements Initializable {
 
     // Header
     @FXML
-    private Pane home_btn_pane, profile_btn_pane, settings_btn_pane, help_btn_pane;
+    private Pane home_btn_pane, profile_btn_pane, settings_btn_pane, help_btn_pane, logout_btn_pane;
     @FXML
-    private ImageView home_btn, profile_btn, settings_btn, help_btn;
+    private ImageView home_btn, profile_btn, settings_btn, help_btn, logout_btn;
     @FXML
-    private Label home_btn_label, profile_btn_label, settings_btn_label, help_btn_label;
+    private Label home_btn_label, profile_btn_label, settings_btn_label, help_btn_label, logout_btn_label;
 
     // Date and time label
     @FXML
@@ -152,6 +157,7 @@ public class BinaryTradingController implements Initializable {
         trans.applyHeaderEffect(home_btn_pane, home_btn, home_btn_label);
         trans.applyHeaderEffect(profile_btn_pane, profile_btn, profile_btn_label);
         trans.applyHeaderEffect(settings_btn_pane, settings_btn, settings_btn_label);
+        trans.applyHeaderEffect(logout_btn_pane, logout_btn, logout_btn_label);
         trans.applyHeaderEffect(help_btn_pane, help_btn, help_btn_label);
 
         // Set profit percentage
@@ -831,6 +837,48 @@ public class BinaryTradingController implements Initializable {
         trans.setWindow(main_window);
         
         trans.fadeOutTransition("/views/Home.fxml");
+    }
+    
+    @FXML
+    void logout(MouseEvent event){
+        File file = new File("user_data.txt");
+        
+        if(file.delete()) {
+            Transition trans = new Transition();
+            
+            trans.setWindow(main_window);
+            try {
+                trans.loadNextScene("/views/index.fxml");
+            } catch (IOException ex) {
+                System.out.println("IOException: " + ex.getMessage());
+            }
+        } else {
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setHeading(new Text("Oops!"));
+            content.setBody(new Text("There was a problem logging out, please try again!"));
+            
+            StackPane dialog_container = new StackPane();
+            
+            // Add stack pane to the main_window
+            main_window.getChildren().add(dialog_container);
+            
+            // Center the dialog container
+            dialog_container.layoutXProperty().bind(main_window.widthProperty().subtract(dialog_container.widthProperty()).divide(2));
+            dialog_container.layoutYProperty().bind(main_window.heightProperty().subtract(dialog_container.heightProperty()).divide(2));
+            
+            JFXDialog dialog = new JFXDialog(dialog_container, content, JFXDialog.DialogTransition.CENTER);
+            JFXButton button = new JFXButton("Okay");
+            
+            button.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent event) {
+                    dialog.close();
+                }
+            });
+            
+            content.setActions(button);
+            dialog.show();
+        }
     }
     
     /**

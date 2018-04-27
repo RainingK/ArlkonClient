@@ -24,10 +24,14 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _PrintData_QNAME = new QName("http://webservices/", "printData");
-    private final static QName _PrintDataResponse_QNAME = new QName("http://webservices/", "printDataResponse");
-    private final static QName _PrintInvestData_QNAME = new QName("http://webservices/", "printInvestData");
-    private final static QName _PrintInvestDataResponse_QNAME = new QName("http://webservices/", "printInvestDataResponse");
+    private final static QName _GetUserIdFromUsername_QNAME = new QName("http://webservices/", "getUserIdFromUsername");
+    private final static QName _SetBalance_QNAME = new QName("http://webservices/", "setBalance");
+    private final static QName _GetBalanceResponse_QNAME = new QName("http://webservices/", "getBalanceResponse");
+    private final static QName _GetRecentActivities_QNAME = new QName("http://webservices/", "getRecentActivities");
+    private final static QName _SetBalanceResponse_QNAME = new QName("http://webservices/", "setBalanceResponse");
+    private final static QName _GetUserIdFromUsernameResponse_QNAME = new QName("http://webservices/", "getUserIdFromUsernameResponse");
+    private final static QName _GetBalance_QNAME = new QName("http://webservices/", "getBalance");
+    private final static QName _GetRecentActivitiesResponse_QNAME = new QName("http://webservices/", "getRecentActivitiesResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservices
@@ -37,71 +41,139 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link PrintInvestData }
+     * Create an instance of {@link GetRecentActivitiesResponse }
      * 
      */
-    public PrintInvestData createPrintInvestData() {
-        return new PrintInvestData();
+    public GetRecentActivitiesResponse createGetRecentActivitiesResponse() {
+        return new GetRecentActivitiesResponse();
     }
 
     /**
-     * Create an instance of {@link PrintInvestDataResponse }
+     * Create an instance of {@link GetBalance }
      * 
      */
-    public PrintInvestDataResponse createPrintInvestDataResponse() {
-        return new PrintInvestDataResponse();
+    public GetBalance createGetBalance() {
+        return new GetBalance();
     }
 
     /**
-     * Create an instance of {@link PrintDataResponse }
+     * Create an instance of {@link GetUserIdFromUsernameResponse }
      * 
      */
-    public PrintDataResponse createPrintDataResponse() {
-        return new PrintDataResponse();
+    public GetUserIdFromUsernameResponse createGetUserIdFromUsernameResponse() {
+        return new GetUserIdFromUsernameResponse();
     }
 
     /**
-     * Create an instance of {@link PrintData }
+     * Create an instance of {@link SetBalanceResponse }
      * 
      */
-    public PrintData createPrintData() {
-        return new PrintData();
+    public SetBalanceResponse createSetBalanceResponse() {
+        return new SetBalanceResponse();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link PrintData }{@code >}}
+     * Create an instance of {@link GetRecentActivities }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "printData")
-    public JAXBElement<PrintData> createPrintData(PrintData value) {
-        return new JAXBElement<PrintData>(_PrintData_QNAME, PrintData.class, null, value);
+    public GetRecentActivities createGetRecentActivities() {
+        return new GetRecentActivities();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link PrintDataResponse }{@code >}}
+     * Create an instance of {@link GetBalanceResponse }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "printDataResponse")
-    public JAXBElement<PrintDataResponse> createPrintDataResponse(PrintDataResponse value) {
-        return new JAXBElement<PrintDataResponse>(_PrintDataResponse_QNAME, PrintDataResponse.class, null, value);
+    public GetBalanceResponse createGetBalanceResponse() {
+        return new GetBalanceResponse();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link PrintInvestData }{@code >}}
+     * Create an instance of {@link GetUserIdFromUsername }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "printInvestData")
-    public JAXBElement<PrintInvestData> createPrintInvestData(PrintInvestData value) {
-        return new JAXBElement<PrintInvestData>(_PrintInvestData_QNAME, PrintInvestData.class, null, value);
+    public GetUserIdFromUsername createGetUserIdFromUsername() {
+        return new GetUserIdFromUsername();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link PrintInvestDataResponse }{@code >}}
+     * Create an instance of {@link SetBalance }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "printInvestDataResponse")
-    public JAXBElement<PrintInvestDataResponse> createPrintInvestDataResponse(PrintInvestDataResponse value) {
-        return new JAXBElement<PrintInvestDataResponse>(_PrintInvestDataResponse_QNAME, PrintInvestDataResponse.class, null, value);
+    public SetBalance createSetBalance() {
+        return new SetBalance();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserIdFromUsername }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getUserIdFromUsername")
+    public JAXBElement<GetUserIdFromUsername> createGetUserIdFromUsername(GetUserIdFromUsername value) {
+        return new JAXBElement<GetUserIdFromUsername>(_GetUserIdFromUsername_QNAME, GetUserIdFromUsername.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetBalance }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "setBalance")
+    public JAXBElement<SetBalance> createSetBalance(SetBalance value) {
+        return new JAXBElement<SetBalance>(_SetBalance_QNAME, SetBalance.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetBalanceResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getBalanceResponse")
+    public JAXBElement<GetBalanceResponse> createGetBalanceResponse(GetBalanceResponse value) {
+        return new JAXBElement<GetBalanceResponse>(_GetBalanceResponse_QNAME, GetBalanceResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRecentActivities }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getRecentActivities")
+    public JAXBElement<GetRecentActivities> createGetRecentActivities(GetRecentActivities value) {
+        return new JAXBElement<GetRecentActivities>(_GetRecentActivities_QNAME, GetRecentActivities.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetBalanceResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "setBalanceResponse")
+    public JAXBElement<SetBalanceResponse> createSetBalanceResponse(SetBalanceResponse value) {
+        return new JAXBElement<SetBalanceResponse>(_SetBalanceResponse_QNAME, SetBalanceResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserIdFromUsernameResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getUserIdFromUsernameResponse")
+    public JAXBElement<GetUserIdFromUsernameResponse> createGetUserIdFromUsernameResponse(GetUserIdFromUsernameResponse value) {
+        return new JAXBElement<GetUserIdFromUsernameResponse>(_GetUserIdFromUsernameResponse_QNAME, GetUserIdFromUsernameResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetBalance }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getBalance")
+    public JAXBElement<GetBalance> createGetBalance(GetBalance value) {
+        return new JAXBElement<GetBalance>(_GetBalance_QNAME, GetBalance.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRecentActivitiesResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getRecentActivitiesResponse")
+    public JAXBElement<GetRecentActivitiesResponse> createGetRecentActivitiesResponse(GetRecentActivitiesResponse value) {
+        return new JAXBElement<GetRecentActivitiesResponse>(_GetRecentActivitiesResponse_QNAME, GetRecentActivitiesResponse.class, null, value);
     }
 
 }

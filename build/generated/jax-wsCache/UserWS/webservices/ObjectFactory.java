@@ -27,15 +27,25 @@ public class ObjectFactory {
     private final static QName _GetUserIdFromUsername_QNAME = new QName("http://webservices/", "getUserIdFromUsername");
     private final static QName _SetBalance_QNAME = new QName("http://webservices/", "setBalance");
     private final static QName _GetBalanceResponse_QNAME = new QName("http://webservices/", "getBalanceResponse");
+    private final static QName _GetRecentActivities_QNAME = new QName("http://webservices/", "getRecentActivities");
     private final static QName _SetBalanceResponse_QNAME = new QName("http://webservices/", "setBalanceResponse");
     private final static QName _GetUserIdFromUsernameResponse_QNAME = new QName("http://webservices/", "getUserIdFromUsernameResponse");
     private final static QName _GetBalance_QNAME = new QName("http://webservices/", "getBalance");
+    private final static QName _GetRecentActivitiesResponse_QNAME = new QName("http://webservices/", "getRecentActivitiesResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservices
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link GetRecentActivitiesResponse }
+     * 
+     */
+    public GetRecentActivitiesResponse createGetRecentActivitiesResponse() {
+        return new GetRecentActivitiesResponse();
     }
 
     /**
@@ -60,6 +70,14 @@ public class ObjectFactory {
      */
     public SetBalanceResponse createSetBalanceResponse() {
         return new SetBalanceResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetRecentActivities }
+     * 
+     */
+    public GetRecentActivities createGetRecentActivities() {
+        return new GetRecentActivities();
     }
 
     /**
@@ -114,6 +132,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRecentActivities }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getRecentActivities")
+    public JAXBElement<GetRecentActivities> createGetRecentActivities(GetRecentActivities value) {
+        return new JAXBElement<GetRecentActivities>(_GetRecentActivities_QNAME, GetRecentActivities.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link SetBalanceResponse }{@code >}}
      * 
      */
@@ -138,6 +165,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "getBalance")
     public JAXBElement<GetBalance> createGetBalance(GetBalance value) {
         return new JAXBElement<GetBalance>(_GetBalance_QNAME, GetBalance.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRecentActivitiesResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getRecentActivitiesResponse")
+    public JAXBElement<GetRecentActivitiesResponse> createGetRecentActivitiesResponse(GetRecentActivitiesResponse value) {
+        return new JAXBElement<GetRecentActivitiesResponse>(_GetRecentActivitiesResponse_QNAME, GetRecentActivitiesResponse.class, null, value);
     }
 
 }

@@ -4,6 +4,10 @@
 
 <xs:element name="getBalanceResponse" type="tns:getBalanceResponse"/>
 
+<xs:element name="getRecentActivities" type="tns:getRecentActivities"/>
+
+<xs:element name="getRecentActivitiesResponse" type="tns:getRecentActivitiesResponse"/>
+
 <xs:element name="getUserIdFromUsername" type="tns:getUserIdFromUsername"/>
 
 <xs:element name="getUserIdFromUsernameResponse" type="tns:getUserIdFromUsernameResponse"/>
@@ -24,15 +28,15 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getUserIdFromUsername">
+<xs:complexType name="getRecentActivities">
 <xs:sequence>
-<xs:element name="username" type="xs:string" minOccurs="0"/>
+<xs:element name="arg0" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getUserIdFromUsernameResponse">
+<xs:complexType name="getRecentActivitiesResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:int"/>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -45,5 +49,17 @@
 
 <xs:complexType name="setBalanceResponse">
 <xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getUserIdFromUsername">
+<xs:sequence>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserIdFromUsernameResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
 </xs:complexType>
 </xs:schema>

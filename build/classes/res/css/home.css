@@ -10,6 +10,14 @@
     -fx-background-color: #121c1e;
 }
 
-.feature_containers {
+.feature_containers, .feature_labels, .feature_icons {
     -fx-cursor: hand;
+}
+
+.single_activity_containers {
+    -fx-background-color: #3c575b33;
+}
+
+.activity_title_labels, .activity_subtitle_labels {
+    -fx-alignment: center-right;
 }
