@@ -28,10 +28,8 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.Animation;
-import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -39,7 +37,6 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -152,10 +149,10 @@ public class BinaryTradingController implements Initializable {
         loadPendingTransaction();
 
         // Header effects
-        applyHeaderEffect(home_btn_pane, home_btn, home_btn_label);
-        applyHeaderEffect(profile_btn_pane, profile_btn, profile_btn_label);
-        applyHeaderEffect(settings_btn_pane, settings_btn, settings_btn_label);
-        applyHeaderEffect(help_btn_pane, help_btn, help_btn_label);
+        trans.applyHeaderEffect(home_btn_pane, home_btn, home_btn_label);
+        trans.applyHeaderEffect(profile_btn_pane, profile_btn, profile_btn_label);
+        trans.applyHeaderEffect(settings_btn_pane, settings_btn, settings_btn_label);
+        trans.applyHeaderEffect(help_btn_pane, help_btn, help_btn_label);
 
         // Set profit percentage
         setProfitPercentage();
@@ -278,52 +275,6 @@ public class BinaryTradingController implements Initializable {
         areaChart.getData().addAll(series);
         graphThread.setCycleCount(Timeline.INDEFINITE);
         graphThread.play();
-    }
-
-    private void applyHeaderEffect(Pane btn_pane, ImageView btn, Label label) {
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.2), btn);
-        FadeTransition fadeTransition = new FadeTransition();
-
-        // Mouse hover effect
-        btn_pane.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                btn_pane.setCursor(Cursor.HAND);
-
-                transition.setDelay(Duration.seconds(0.1));
-                transition.setToY(-7);
-                transition.setCycleCount(1);
-                transition.play();
-
-                fadeTransition.setDuration(Duration.millis(300));
-                fadeTransition.setNode(label);
-                fadeTransition.setFromValue(0);
-                fadeTransition.setToValue(1);
-                fadeTransition.play();
-
-                label.setVisible(true);
-            }
-        });
-
-        // Mouse exited effect
-        btn_pane.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                TranslateTransition transition = new TranslateTransition(Duration.seconds(0.2), btn);
-                transition.setDelay(Duration.seconds(0.1));
-                transition.setToY(0);
-                transition.setCycleCount(1);
-                transition.play();
-
-                fadeTransition.setDuration(Duration.millis(300));
-                fadeTransition.setNode(label);
-                fadeTransition.setFromValue(1);
-                fadeTransition.setToValue(0);
-                fadeTransition.play();
-
-                label.setVisible(false);
-            }
-        });
     }
 
     private void setProfitPercentage() {
@@ -995,7 +946,7 @@ public class BinaryTradingController implements Initializable {
  * end time in hours and minutes
  * enable call button when minutes is not entered -- DONE
  * have database values instead of dropdown.getText() -- DONE
- * round the balance
+ * round the balance -- DONE
  * if any call already exists when the page loads, show it (remaining seconds should be calculated accordingly) -- DONE
 */
 

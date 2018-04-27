@@ -10,21 +10,21 @@
 	-fx-background-color: #ecebe4;
 }
 
-#signin_btn, #signup_btn {
-	-fx-background-color: #009e4e;
-}
-
-#signin_btn, #signup_btn:hover {
+#signin_btn {
 	-fx-background-color: #008742;
 	-fx-cursor: hand;
+}
+
+#signin_btn:hover {
+	-fx-background-color: #01773b;
 }
 
 .signin_links {
 	-fx-cursor: hand;
 }
 
-#signup_window {
-	-fx-background-color: #ecebe4;
+.signin_links:hover {
+    -fx-text-fill: #1f6b70;
 }
 
 #close_image, #minimize_image:hover {

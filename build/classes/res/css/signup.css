@@ -14,13 +14,17 @@
     -fx-background-color: #be222c;
 }
 
-#signup_next_btn, #signup_next2_btn, #signup_final_btn:hover {
+#signup_next_btn, #signup_next2_btn, #signup_final_btn {
 	-fx-background-color: #008742;
 	-fx-cursor: hand;
 }
 
-#signup_back1_btn, #signup_back2_btn:hover {
-    -fx-background-color: #d10833;
+#signup_next_btn:hover, #signup_next2_btn:hover, #signup_final_btn:hover {
+	-fx-background-color: #01773b;
+}
+
+#signup_back1_btn:hover, #signup_back2_btn:hover {
+    -fx-background-color: #ad1d26;
     -fx-cursor: hand;
 }
 
@@ -29,7 +33,7 @@
 }
 
 #close_image, #minimize_image:hover {
-	-fx-cursor: hand;
+    -fx-cursor: hand;
 }
 
 #signup_first_right_pane {

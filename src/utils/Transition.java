@@ -13,11 +13,16 @@ import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -87,5 +92,51 @@ public class Transition {
         translateTransition.setCycleCount(1);
         translateTransition.setAutoReverse(true);     
         translateTransition.play();
+    }
+    
+    public void applyHeaderEffect(Pane btn_pane, ImageView btn, Label label) {
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.2), btn);
+        FadeTransition fadeTransition = new FadeTransition();
+
+        // Mouse hover effect
+        btn_pane.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                btn_pane.setCursor(Cursor.HAND);
+
+                transition.setDelay(Duration.seconds(0.1));
+                transition.setToY(-7);
+                transition.setCycleCount(1);
+                transition.play();
+
+                fadeTransition.setDuration(Duration.millis(300));
+                fadeTransition.setNode(label);
+                fadeTransition.setFromValue(0);
+                fadeTransition.setToValue(1);
+                fadeTransition.play();
+
+                label.setVisible(true);
+            }
+        });
+
+        // Mouse exited effect
+        btn_pane.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                TranslateTransition transition = new TranslateTransition(Duration.seconds(0.2), btn);
+                transition.setDelay(Duration.seconds(0.1));
+                transition.setToY(0);
+                transition.setCycleCount(1);
+                transition.play();
+
+                fadeTransition.setDuration(Duration.millis(300));
+                fadeTransition.setNode(label);
+                fadeTransition.setFromValue(1);
+                fadeTransition.setToValue(0);
+                fadeTransition.play();
+
+                label.setVisible(false);
+            }
+        });
     }
 }

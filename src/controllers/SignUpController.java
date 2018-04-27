@@ -2,10 +2,24 @@ package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXSpinner;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.animation.TranslateTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,14 +62,18 @@ public class SignUpController implements Initializable {
     
     @FXML JFXButton signup_back1_btn;
     
+    // Loading spinner
+    @FXML JFXSpinner loading_spinner;
+    
     // Signup constraints labels
     @FXML Label username_label;
     @FXML Label email_label;
     @FXML Label password_label;
     @FXML Label cpassword_label;
     
-    // Errors label
+    // Errors label and icon
     @FXML Label errors_label;
+    @FXML ImageView error_icon;
     
     // Signup Panes
     @FXML Pane rightPane1;
@@ -97,31 +115,42 @@ public class SignUpController implements Initializable {
         trans.setWindow(main_window);
         trans.fadeInTransition();
 
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rightPane2);
-
-        signup_next1_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent t) {
-                details_label.setFont(Font.font("System", FontWeight.NORMAL, 14));
-                TC_label.setFont(Font.font("System", FontWeight.BOLD, 14));
-
-                // Get user inputs
-                username = signup_username_input.getText().trim();
-                email = signup_email_input.getText().trim();
-                password = signup_password_input.getText().trim();
-                Cpassword = signup_confirm_password_input.getText().trim();
-
-                transition.setDelay(Duration.seconds(0.2));
-                transition.setToX(-731);
-                transition.setCycleCount(1);
-                transition.play();
-            }
-        });
-
         WindowHandler wh = new WindowHandler();
         wh.closeProgram(close_btn);
         wh.minimizeProgram(minimize_btn);
-}
+    }
+    
+    @FXML
+    void validateDetailsAndTranslate(MouseEvent event){
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rightPane2);
+        details_label.setFont(Font.font("System", FontWeight.NORMAL, 14));
+        TC_label.setFont(Font.font("System", FontWeight.BOLD, 14));
+
+        // Get user inputs
+        username = signup_username_input.getText().trim();
+        email = signup_email_input.getText().trim();
+        password = signup_password_input.getText().trim();
+        Cpassword = signup_confirm_password_input.getText().trim();
+        
+        if(checkUsernameExists(username)){
+            error_icon.setVisible(true);
+            errors_label.setText("Username already exists, please try a different one!");
+            signup_next1_btn.setDisable(true);
+            
+            return;
+        } else if(checkEmailExists(email)){
+            error_icon.setVisible(true);
+            errors_label.setText("E-mail already exists, please try a different one!");
+            signup_next1_btn.setDisable(true);
+            
+            return;
+        }
+
+        transition.setDelay(Duration.seconds(0.2));
+        transition.setToX(-731);
+        transition.setCycleCount(1);
+        transition.play();
+    }
     
     @FXML
     void openHomeScene(MouseEvent event){
@@ -167,21 +196,64 @@ public class SignUpController implements Initializable {
     //Final Sign Up Button
     @FXML
     void SignUpFinal(ActionEvent event) {
-        Thread SignUp_Thread = new Thread(new Runnable() {
+        Task<Boolean> task = new Task<Boolean>() {
             @Override
-            public void run() {
-                Boolean signUp = signUp(username, email, password, Cpassword);
+            protected Boolean call() throws Exception {
+                // Insert to DB
+                return signUp(username, email, password, Cpassword);
+            }
+        };
+        
+        task.setOnRunning(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                loading_spinner.setVisible(true);
+            }
+            
+        });
 
+        task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                Boolean signUp = task.getValue();
+                
                 if(signUp){
-                    //trans.setWindow(main_window);
-                    //trans.fadeOutTransition("/views/home.fxml");
+                    Transition trans = new Transition();
+                    trans.setWindow(main_window);
+                    
+                    // Set logged in
+                    int user_id = getUserIdFromUsername(username);
+                    
+                    try {
+                        saveIdToFile(user_id);
+                    } catch (FileNotFoundException ex) {
+                        System.out.println("FileNotFoundException: " + ex.getMessage());
+                    }
+                    
+                    try {
+                        trans.loadNextScene("/views/Home.fxml");
+                    } catch (IOException ex) {
+                        System.out.println("IOException: " + ex.getMessage());
+                    }
                 } else {
-                    System.out.println("Error");
+                    loading_spinner.setVisible(false);
+                    
+                    final JFXSnackbar snackBar = new JFXSnackbar(main_window);
+
+                    EventHandler handler = new EventHandler() {
+                        @Override
+                        public void handle(Event event) {
+                            // Hide the snackbar
+                            snackBar.unregisterSnackbarContainer(main_window);
+                        }
+                    };
+
+                    snackBar.show("There was an error while signing up", "Close", 10000, handler);
                 }
             }
         });
 
-        SignUp_Thread.start();
+        new Thread(task).start();
     }
     
     //Final Back Button
@@ -198,23 +270,33 @@ public class SignUpController implements Initializable {
     }
     
     @FXML
-    void disableSubmitIfShortUsername(KeyEvent event) {        
+    void disableSubmitIfInvalidUsername(KeyEvent event) {        
         if((signup_username_input.getText().trim().length() < 4) ){
             username_label.setTextFill(Color.web("#ea0e3d"));
             signup_next1_btn.setDisable(true);
             usernameNext = false;
         } else {
             username_label.setTextFill(Color.web("#009e3c"));
-            usernameNext = true;
-        }
-        
-        if(usernameNext && emailNext && passwordNext && CPasswordNext){
-            signup_next1_btn.setDisable(false);
+            
+            if(checkUsernameExists(signup_username_input.getText().trim())){
+                error_icon.setVisible(true);
+                errors_label.setText("Username already exists, please try a different one!");
+                usernameNext = false;
+                signup_next1_btn.setDisable(true);
+            } else {
+                error_icon.setVisible(false);
+                errors_label.setText("");
+                usernameNext = true;
+
+                if(usernameNext && emailNext && passwordNext && CPasswordNext){
+                   signup_next1_btn.setDisable(false);
+                }
+            }
         }
     }
     
     @FXML
-    void disableSubmitIfShortEmail(KeyEvent event) {
+    void disableSubmitIfInvalidEmail(KeyEvent event) {
         if((signup_email_input.getText().trim().length() < 7)){
             email_label.setTextFill(Color.web("#ea0e3d"));
             signup_next1_btn.setDisable(true);
@@ -222,11 +304,32 @@ public class SignUpController implements Initializable {
             
         } else {
             email_label.setTextFill(Color.web("#009e3c"));
-            emailNext = true;
-        }
-        
-        if(usernameNext && emailNext && passwordNext && CPasswordNext){
-            signup_next1_btn.setDisable(false);
+            
+            // Validate email
+            Matcher matcher = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE).matcher(signup_email_input.getText().trim());
+
+            if(matcher.find()) {
+                if(checkEmailExists(signup_email_input.getText().trim())){
+                    error_icon.setVisible(true);
+                    errors_label.setText("E-mail already exists, please try a different one!");
+                    signup_next1_btn.setDisable(true);
+                } else {
+                    error_icon.setVisible(false);
+                    errors_label.setText("");
+                    
+                    emailNext = true;
+
+                    if(usernameNext && emailNext && passwordNext && CPasswordNext){
+                        signup_next1_btn.setDisable(false);
+                        
+                    }
+                }
+            } else {
+                error_icon.setVisible(true);
+                errors_label.setText("The given e-mail address is invalid");
+
+                signup_next1_btn.setDisable(true);
+            }
         }
     }
     
@@ -261,6 +364,12 @@ public class SignUpController implements Initializable {
             signup_next1_btn.setDisable(false);
         }
     }
+    
+    private void saveIdToFile(int user_id) throws FileNotFoundException{
+        PrintWriter writer = new PrintWriter("user_data.txt");
+        writer.println(user_id);
+        writer.close();
+    }
 
     private static Boolean signUp(java.lang.String username, java.lang.String email, java.lang.String password, java.lang.String cpassword) {
         webservices.SessionWS_Service service = new webservices.SessionWS_Service();
@@ -272,5 +381,17 @@ public class SignUpController implements Initializable {
         webservices.SessionWS_Service service = new webservices.SessionWS_Service();
         webservices.SessionWS port = service.getSessionWSPort();
         return port.checkUsernameExists(username);
+    }
+
+    private static Boolean checkEmailExists(java.lang.String email) {
+        webservices.SessionWS_Service service = new webservices.SessionWS_Service();
+        webservices.SessionWS port = service.getSessionWSPort();
+        return port.checkEmailExists(email);
+    }
+
+    private static int getUserIdFromUsername(java.lang.String username) {
+        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS port = service.getUserWSPort();
+        return port.getUserIdFromUsername(username);
     }
 }

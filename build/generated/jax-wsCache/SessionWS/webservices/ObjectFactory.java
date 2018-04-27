@@ -25,9 +25,11 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _CheckUsernameExists_QNAME = new QName("http://webservices/", "checkUsernameExists");
+    private final static QName _CheckEmailExistsResponse_QNAME = new QName("http://webservices/", "checkEmailExistsResponse");
     private final static QName _SignUp_QNAME = new QName("http://webservices/", "signUp");
     private final static QName _Login_QNAME = new QName("http://webservices/", "login");
     private final static QName _SignUpResponse_QNAME = new QName("http://webservices/", "signUpResponse");
+    private final static QName _CheckEmailExists_QNAME = new QName("http://webservices/", "checkEmailExists");
     private final static QName _CheckUsernameExistsResponse_QNAME = new QName("http://webservices/", "checkUsernameExistsResponse");
     private final static QName _LoginResponse_QNAME = new QName("http://webservices/", "loginResponse");
 
@@ -55,6 +57,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link CheckEmailExists }
+     * 
+     */
+    public CheckEmailExists createCheckEmailExists() {
+        return new CheckEmailExists();
+    }
+
+    /**
      * Create an instance of {@link SignUpResponse }
      * 
      */
@@ -68,6 +78,14 @@ public class ObjectFactory {
      */
     public Login createLogin() {
         return new Login();
+    }
+
+    /**
+     * Create an instance of {@link CheckEmailExistsResponse }
+     * 
+     */
+    public CheckEmailExistsResponse createCheckEmailExistsResponse() {
+        return new CheckEmailExistsResponse();
     }
 
     /**
@@ -96,6 +114,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckEmailExistsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkEmailExistsResponse")
+    public JAXBElement<CheckEmailExistsResponse> createCheckEmailExistsResponse(CheckEmailExistsResponse value) {
+        return new JAXBElement<CheckEmailExistsResponse>(_CheckEmailExistsResponse_QNAME, CheckEmailExistsResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link SignUp }{@code >}}
      * 
      */
@@ -120,6 +147,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "signUpResponse")
     public JAXBElement<SignUpResponse> createSignUpResponse(SignUpResponse value) {
         return new JAXBElement<SignUpResponse>(_SignUpResponse_QNAME, SignUpResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckEmailExists }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkEmailExists")
+    public JAXBElement<CheckEmailExists> createCheckEmailExists(CheckEmailExists value) {
+        return new JAXBElement<CheckEmailExists>(_CheckEmailExists_QNAME, CheckEmailExists.class, null, value);
     }
 
     /**

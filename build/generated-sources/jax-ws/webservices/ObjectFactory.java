@@ -24,12 +24,10 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _CheckUsernameExists_QNAME = new QName("http://webservices/", "checkUsernameExists");
-    private final static QName _SignUp_QNAME = new QName("http://webservices/", "signUp");
-    private final static QName _Login_QNAME = new QName("http://webservices/", "login");
-    private final static QName _SignUpResponse_QNAME = new QName("http://webservices/", "signUpResponse");
-    private final static QName _CheckUsernameExistsResponse_QNAME = new QName("http://webservices/", "checkUsernameExistsResponse");
-    private final static QName _LoginResponse_QNAME = new QName("http://webservices/", "loginResponse");
+    private final static QName _PrintData_QNAME = new QName("http://webservices/", "printData");
+    private final static QName _PrintDataResponse_QNAME = new QName("http://webservices/", "printDataResponse");
+    private final static QName _PrintInvestData_QNAME = new QName("http://webservices/", "printInvestData");
+    private final static QName _PrintInvestDataResponse_QNAME = new QName("http://webservices/", "printInvestDataResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservices
@@ -39,105 +37,71 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CheckUsernameExistsResponse }
+     * Create an instance of {@link PrintInvestData }
      * 
      */
-    public CheckUsernameExistsResponse createCheckUsernameExistsResponse() {
-        return new CheckUsernameExistsResponse();
+    public PrintInvestData createPrintInvestData() {
+        return new PrintInvestData();
     }
 
     /**
-     * Create an instance of {@link LoginResponse }
+     * Create an instance of {@link PrintInvestDataResponse }
      * 
      */
-    public LoginResponse createLoginResponse() {
-        return new LoginResponse();
+    public PrintInvestDataResponse createPrintInvestDataResponse() {
+        return new PrintInvestDataResponse();
     }
 
     /**
-     * Create an instance of {@link SignUpResponse }
+     * Create an instance of {@link PrintDataResponse }
      * 
      */
-    public SignUpResponse createSignUpResponse() {
-        return new SignUpResponse();
+    public PrintDataResponse createPrintDataResponse() {
+        return new PrintDataResponse();
     }
 
     /**
-     * Create an instance of {@link Login }
+     * Create an instance of {@link PrintData }
      * 
      */
-    public Login createLogin() {
-        return new Login();
+    public PrintData createPrintData() {
+        return new PrintData();
     }
 
     /**
-     * Create an instance of {@link SignUp }
+     * Create an instance of {@link JAXBElement }{@code <}{@link PrintData }{@code >}}
      * 
      */
-    public SignUp createSignUp() {
-        return new SignUp();
+    @XmlElementDecl(namespace = "http://webservices/", name = "printData")
+    public JAXBElement<PrintData> createPrintData(PrintData value) {
+        return new JAXBElement<PrintData>(_PrintData_QNAME, PrintData.class, null, value);
     }
 
     /**
-     * Create an instance of {@link CheckUsernameExists }
+     * Create an instance of {@link JAXBElement }{@code <}{@link PrintDataResponse }{@code >}}
      * 
      */
-    public CheckUsernameExists createCheckUsernameExists() {
-        return new CheckUsernameExists();
+    @XmlElementDecl(namespace = "http://webservices/", name = "printDataResponse")
+    public JAXBElement<PrintDataResponse> createPrintDataResponse(PrintDataResponse value) {
+        return new JAXBElement<PrintDataResponse>(_PrintDataResponse_QNAME, PrintDataResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CheckUsernameExists }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link PrintInvestData }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "checkUsernameExists")
-    public JAXBElement<CheckUsernameExists> createCheckUsernameExists(CheckUsernameExists value) {
-        return new JAXBElement<CheckUsernameExists>(_CheckUsernameExists_QNAME, CheckUsernameExists.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "printInvestData")
+    public JAXBElement<PrintInvestData> createPrintInvestData(PrintInvestData value) {
+        return new JAXBElement<PrintInvestData>(_PrintInvestData_QNAME, PrintInvestData.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SignUp }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link PrintInvestDataResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "signUp")
-    public JAXBElement<SignUp> createSignUp(SignUp value) {
-        return new JAXBElement<SignUp>(_SignUp_QNAME, SignUp.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Login }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "login")
-    public JAXBElement<Login> createLogin(Login value) {
-        return new JAXBElement<Login>(_Login_QNAME, Login.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SignUpResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "signUpResponse")
-    public JAXBElement<SignUpResponse> createSignUpResponse(SignUpResponse value) {
-        return new JAXBElement<SignUpResponse>(_SignUpResponse_QNAME, SignUpResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CheckUsernameExistsResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "checkUsernameExistsResponse")
-    public JAXBElement<CheckUsernameExistsResponse> createCheckUsernameExistsResponse(CheckUsernameExistsResponse value) {
-        return new JAXBElement<CheckUsernameExistsResponse>(_CheckUsernameExistsResponse_QNAME, CheckUsernameExistsResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link LoginResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "loginResponse")
-    public JAXBElement<LoginResponse> createLoginResponse(LoginResponse value) {
-        return new JAXBElement<LoginResponse>(_LoginResponse_QNAME, LoginResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "printInvestDataResponse")
+    public JAXBElement<PrintInvestDataResponse> createPrintInvestDataResponse(PrintInvestDataResponse value) {
+        return new JAXBElement<PrintInvestDataResponse>(_PrintInvestDataResponse_QNAME, PrintInvestDataResponse.class, null, value);
     }
 
 }

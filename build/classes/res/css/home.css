@@ -2,6 +2,14 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
+#main_window {
+    -fx-background-color: #152123;
+}
 
+#right_pane, #top_pane {
+    -fx-background-color: #121c1e;
+}
+
+.feature_containers {
+    -fx-cursor: hand;
 }

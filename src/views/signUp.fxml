@@ -3,13 +3,12 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXSpinner?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -60,9 +59,9 @@
          </children></Pane>
       <Pane id="Signup_first_right_pane" fx:id="rightPane1" layoutX="302.0" prefHeight="537.0" prefWidth="723.0" stylesheets="@../res/css/signup.css">
          <children>
-            <JFXTextField fx:id="signup_username_input" layoutX="83.0" layoutY="120.0" onKeyReleased="#disableSubmitIfShortUsername" promptText="Username" />
-            <JFXTextField fx:id="signup_email_input" layoutX="83.0" layoutY="179.0" onKeyReleased="#disableSubmitIfShortEmail" promptText="Email" />
-            <JFXButton id="signup_next_btn" fx:id="signup_next1_btn" layoutX="83.0" layoutY="379.0" prefHeight="32.0" prefWidth="135.0" stylesheets="@../res/css/signup.css" text="Next" textFill="WHITE" />
+            <JFXTextField fx:id="signup_username_input" layoutX="83.0" layoutY="120.0" onKeyReleased="#disableSubmitIfInvalidUsername" promptText="Username" />
+            <JFXTextField fx:id="signup_email_input" layoutX="83.0" layoutY="179.0" onKeyReleased="#disableSubmitIfInvalidEmail" promptText="Email" />
+            <JFXButton id="signup_next_btn" fx:id="signup_next1_btn" layoutX="83.0" layoutY="379.0" onMouseClicked="#validateDetailsAndTranslate" prefHeight="32.0" prefWidth="168.0" stylesheets="@../res/css/signup.css" text="Next" textFill="WHITE" />
             <JFXPasswordField fx:id="signup_password_input" layoutX="83.0" layoutY="244.0" onKeyReleased="#disableSubmitIfShortPassword" promptText="Password" />
             <JFXPasswordField fx:id="signup_confirm_password_input" layoutX="83.0" layoutY="313.0" onKeyReleased="#disableSubmitIfShortCPassword" promptText="Confirm Password" />
             <Label layoutX="83.0" layoutY="43.0" text="Sign Up">
@@ -86,25 +85,66 @@
                <font>
                   <Font name="System Italic" size="15.0" />
                </font></Label>
-            <Label fx:id="errors_label" layoutX="83.0" layoutY="457.0" prefHeight="32.0" prefWidth="262.0" style="-fx-text-fill: #be222c;" />
+            <Label fx:id="errors_label" layoutX="128.0" layoutY="456.0" prefHeight="32.0" prefWidth="415.0" style="-fx-text-fill: #be222c;">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <ImageView fx:id="error_icon" fitHeight="26.0" fitWidth="28.0" layoutX="83.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../res/assets/icons/error.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane id="signup_second_right_pane" fx:id="rightPane2" layoutX="1033.0" prefHeight="537.0" prefWidth="723.0" stylesheets="@../res/css/signup.css">
          <children>
-            <ScrollPane layoutX="37.0" layoutY="62.0" prefHeight="348.0" prefWidth="672.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="415.0" prefWidth="670.0" />
-              </content>
-            </ScrollPane>
-            <JFXRadioButton fx:id="TCRadioBtn" layoutX="240.0" layoutY="432.0" onAction="#selected" text="I Accept The Terms And Conditions" />
-            <JFXButton id="signup_next2_btn" fx:id="signup_next2_btn" layoutX="362.0" layoutY="478.0" onMouseClicked="#nextPane" prefHeight="32.0" prefWidth="135.0" stylesheets="@../res/css/signup.css" text="Next" textFill="WHITE" />
-            <JFXButton id="signup_back1_btn" fx:id="signup_back1_btn" layoutX="218.0" layoutY="478.0" onAction="#backPane1" prefHeight="32.0" prefWidth="135.0" stylesheets="@../res/css/signup.css" text="Back" textFill="WHITE" />
+            <JFXRadioButton fx:id="TCRadioBtn" layoutX="212.0" layoutY="417.0" onAction="#selected" prefHeight="21.0" prefWidth="302.0" text="I Accept The Terms And Conditions" />
+            <JFXButton id="signup_next2_btn" fx:id="signup_next2_btn" layoutX="362.0" layoutY="463.0" onMouseClicked="#nextPane" prefHeight="32.0" prefWidth="135.0" stylesheets="@../res/css/signup.css" text="Next" textFill="WHITE" />
+            <JFXButton id="signup_back1_btn" fx:id="signup_back1_btn" layoutX="218.0" layoutY="463.0" onAction="#backPane1" prefHeight="32.0" prefWidth="135.0" stylesheets="@../res/css/signup.css" text="Back" textFill="WHITE" />
+            <Pane layoutX="58.0" layoutY="51.0" prefHeight="346.0" prefWidth="610.0">
+               <children>
+                  <Label layoutX="-1.0" prefHeight="53.0" prefWidth="610.0" text="Terms and Conditions">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Label>
+                  <Label layoutY="59.0" prefHeight="78.0" prefWidth="601.0" text="1) Arlkon does not involve any kind of real monetary transactions. The money earned or lost by the users is a virtual representation resulting from their actions within the application." wrapText="true" />
+                  <Label layoutY="146.0" prefHeight="78.0" prefWidth="610.0" text="2) Arlkon receives the live currency/cryptocurrency pricing data from a free API provide called Cryptocompare. Arlkon is not responsible for an incorrect price level. The application provides a basic simulation of the price levels and is meant for educational purposes only." wrapText="true" />
+                  <Label layoutY="224.0" prefHeight="78.0" prefWidth="610.0" text="3) Every user activity performed in the application is recorded. The user's IP address is stored in addition to other session information." wrapText="true" />
+               </children>
+            </Pane>
          </children>
       </Pane>
       <Pane id="signup_third_right_pane" fx:id="rightPane3" layoutX="1033.0" prefHeight="537.0" prefWidth="723.0" stylesheets="@../res/css/signup.css">
          <children>
-            <JFXButton id="signup_final_btn" fx:id="signup_next1_btn1" layoutX="380.0" layoutY="410.0" onAction="#SignUpFinal" prefHeight="32.0" prefWidth="135.0" stylesheets="@../res/css/signup.css" text="Sign Up" textFill="WHITE" />
-            <JFXButton id="signup_back2_btn" fx:id="signup_back2_btn" layoutX="227.0" layoutY="410.0" onAction="#backPane2" prefHeight="32.0" prefWidth="135.0" stylesheets="@../res/css/signup.css" text="Back" textFill="WHITE" />
+            <JFXButton id="signup_final_btn" fx:id="signup_next1_btn1" layoutX="368.0" layoutY="461.0" onAction="#SignUpFinal" prefHeight="32.0" prefWidth="135.0" stylesheets="@../res/css/signup.css" text="Sign Up" textFill="WHITE" />
+            <JFXButton id="signup_back2_btn" fx:id="signup_back2_btn" layoutX="218.0" layoutY="461.0" onAction="#backPane2" prefHeight="32.0" prefWidth="135.0" stylesheets="@../res/css/signup.css" text="Back" textFill="WHITE" />
+            <Label layoutX="302.0" layoutY="87.0" prefHeight="109.0" prefWidth="150.0" text="Yay!" textFill="#3c595e">
+               <font>
+                  <Font size="75.0" />
+               </font>
+            </Label>
+            <Label layoutX="177.0" layoutY="205.0" prefHeight="94.0" prefWidth="370.0" text="Click Sign Up to complete your registration and start earning... Virtual money." textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="204.0" layoutY="299.0" prefHeight="46.0" prefWidth="328.0" text="You will be starting with a balance of" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="255.0" layoutY="345.0" prefHeight="28.0" prefWidth="78.0" text="\$10,000.">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="336.0" layoutY="344.0" text=" Spend it well!">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <JFXSpinner fx:id="loading_spinner" layoutX="341.0" layoutY="400.0" prefHeight="32.0" prefWidth="36.0" visible="false" />
          </children>
       </Pane>
       <Pane layoutX="954.0" layoutY="11.0" prefHeight="26.0" prefWidth="57.0">

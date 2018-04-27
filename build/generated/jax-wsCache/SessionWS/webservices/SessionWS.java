@@ -50,6 +50,21 @@ public interface SessionWS {
 
     /**
      * 
+     * @param email
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "checkEmailExists", targetNamespace = "http://webservices/", className = "webservices.CheckEmailExists")
+    @ResponseWrapper(localName = "checkEmailExistsResponse", targetNamespace = "http://webservices/", className = "webservices.CheckEmailExistsResponse")
+    @Action(input = "http://webservices/SessionWS/checkEmailExistsRequest", output = "http://webservices/SessionWS/checkEmailExistsResponse")
+    public Boolean checkEmailExists(
+        @WebParam(name = "email", targetNamespace = "")
+        String email);
+
+    /**
+     * 
      * @param password
      * @param username
      * @return
