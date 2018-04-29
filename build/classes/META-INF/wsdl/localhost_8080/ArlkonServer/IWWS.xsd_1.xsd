@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://webservices/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservices/">
 
+<xs:element name="getEndMethod" type="tns:getEndMethod"/>
+
+<xs:element name="getEndMethodResponse" type="tns:getEndMethodResponse"/>
+
 <xs:element name="getLossValue" type="tns:getLossValue"/>
 
 <xs:element name="getLossValueResponse" type="tns:getLossValueResponse"/>
@@ -11,6 +15,10 @@
 <xs:element name="getTransactionAmount" type="tns:getTransactionAmount"/>
 
 <xs:element name="getTransactionAmountResponse" type="tns:getTransactionAmountResponse"/>
+
+<xs:element name="getTransactionResult" type="tns:getTransactionResult"/>
+
+<xs:element name="getTransactionResultResponse" type="tns:getTransactionResultResponse"/>
 
 <xs:element name="insertIntoDB" type="tns:insertIntoDB"/>
 
@@ -44,6 +52,30 @@
 
 <xs:complexType name="insertIntoDBResponse">
 <xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getEndMethod">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getEndMethodResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTransactionResult">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTransactionResultResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="getProfitValue">

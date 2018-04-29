@@ -174,7 +174,7 @@ public class BinaryTradingController implements Initializable {
 
         // Set up close and minimize buttons
         WindowHandler wh = new WindowHandler();
-        wh.closeProgram(close_btn);
+        wh.closeProgram(close_btn, main_window);
         wh.minimizeProgram(minimize_btn);
     }
 
@@ -335,13 +335,9 @@ public class BinaryTradingController implements Initializable {
         if(checkTransactionExists(current_user_id) == false){
             return;
         }
-        
-        System.out.println("Buser_id: " + current_user_id);
-        
-        // PROBLEM IN CALLING THIS FUNCTION
+     
         String expiryDateString = getExpiryDateTime(current_user_id);
         
-        System.out.println("Auser_id: " + current_user_id);
         Date expiryDate = null;
         Date nowDate = null;
         
@@ -350,16 +346,8 @@ public class BinaryTradingController implements Initializable {
         LocalDateTime ldt = LocalDateTime.now();
         String now = dtf.format(ldt);
         
-        // Get the expiry date of a transaction and the current date
-        System.out.println("EXPIRYDATESTRING: " + expiryDateString);
-        
         try {
             expiryDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(expiryDateString);
-        } catch (ParseException ex) {
-            System.out.println("ParseException: " + ex.getMessage());
-        }
-        
-        try {
             nowDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(now);
         } catch (ParseException ex) {
             System.out.println("ParseException: " + ex.getMessage());

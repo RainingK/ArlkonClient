@@ -37,6 +37,11 @@
                </font>
             </Label>
             <JFXSpinner fx:id="loading_spinner" layoutX="124.0" layoutY="458.0" prefHeight="45.0" prefWidth="43.0" visible="false" />
+            <Label fx:id="errors_label" alignment="CENTER" layoutX="29.0" layoutY="451.0" prefHeight="45.0" prefWidth="226.0" textFill="#be222c" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
          </children></Pane>
       <ImageView fitHeight="83.0" fitWidth="155.0" layoutX="23.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
          <image>

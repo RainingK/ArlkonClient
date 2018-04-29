@@ -26,6 +26,21 @@ public interface IWWS {
 
     /**
      * 
+     * @param userId
+     * @return
+     *     returns double
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getTransactionResult", targetNamespace = "http://webservices/", className = "webservices.GetTransactionResult")
+    @ResponseWrapper(localName = "getTransactionResultResponse", targetNamespace = "http://webservices/", className = "webservices.GetTransactionResultResponse")
+    @Action(input = "http://webservices/IWWS/getTransactionResultRequest", output = "http://webservices/IWWS/getTransactionResultResponse")
+    public double getTransactionResult(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
      * @param endMethod
      * @param userId
      * @param transactionResult
@@ -54,6 +69,21 @@ public interface IWWS {
     @ResponseWrapper(localName = "getTransactionAmountResponse", targetNamespace = "http://webservices/", className = "webservices.GetTransactionAmountResponse")
     @Action(input = "http://webservices/IWWS/getTransactionAmountRequest", output = "http://webservices/IWWS/getTransactionAmountResponse")
     public double getTransactionAmount(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param userId
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getEndMethod", targetNamespace = "http://webservices/", className = "webservices.GetEndMethod")
+    @ResponseWrapper(localName = "getEndMethodResponse", targetNamespace = "http://webservices/", className = "webservices.GetEndMethodResponse")
+    @Action(input = "http://webservices/IWWS/getEndMethodRequest", output = "http://webservices/IWWS/getEndMethodResponse")
+    public String getEndMethod(
         @WebParam(name = "user_id", targetNamespace = "")
         int userId);
 

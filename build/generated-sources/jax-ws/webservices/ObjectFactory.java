@@ -24,14 +24,20 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _GetUserIdFromUsername_QNAME = new QName("http://webservices/", "getUserIdFromUsername");
-    private final static QName _SetBalance_QNAME = new QName("http://webservices/", "setBalance");
-    private final static QName _GetBalanceResponse_QNAME = new QName("http://webservices/", "getBalanceResponse");
-    private final static QName _GetRecentActivities_QNAME = new QName("http://webservices/", "getRecentActivities");
-    private final static QName _SetBalanceResponse_QNAME = new QName("http://webservices/", "setBalanceResponse");
-    private final static QName _GetUserIdFromUsernameResponse_QNAME = new QName("http://webservices/", "getUserIdFromUsernameResponse");
-    private final static QName _GetBalance_QNAME = new QName("http://webservices/", "getBalance");
-    private final static QName _GetRecentActivitiesResponse_QNAME = new QName("http://webservices/", "getRecentActivitiesResponse");
+    private final static QName _GetProfitValueResponse_QNAME = new QName("http://webservices/", "getProfitValueResponse");
+    private final static QName _GetTransactionAmountResponse_QNAME = new QName("http://webservices/", "getTransactionAmountResponse");
+    private final static QName _GetLossValue_QNAME = new QName("http://webservices/", "getLossValue");
+    private final static QName _GetLossValueResponse_QNAME = new QName("http://webservices/", "getLossValueResponse");
+    private final static QName _InsertIntoDB_QNAME = new QName("http://webservices/", "insertIntoDB");
+    private final static QName _InsertIntoDetails_QNAME = new QName("http://webservices/", "insertIntoDetails");
+    private final static QName _GetTransactionAmount_QNAME = new QName("http://webservices/", "getTransactionAmount");
+    private final static QName _GetTransactionResultResponse_QNAME = new QName("http://webservices/", "getTransactionResultResponse");
+    private final static QName _GetProfitValue_QNAME = new QName("http://webservices/", "getProfitValue");
+    private final static QName _GetEndMethod_QNAME = new QName("http://webservices/", "getEndMethod");
+    private final static QName _InsertIntoDetailsResponse_QNAME = new QName("http://webservices/", "insertIntoDetailsResponse");
+    private final static QName _GetTransactionResult_QNAME = new QName("http://webservices/", "getTransactionResult");
+    private final static QName _GetEndMethodResponse_QNAME = new QName("http://webservices/", "getEndMethodResponse");
+    private final static QName _InsertIntoDBResponse_QNAME = new QName("http://webservices/", "insertIntoDBResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservices
@@ -41,139 +47,241 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetRecentActivitiesResponse }
+     * Create an instance of {@link GetEndMethodResponse }
      * 
      */
-    public GetRecentActivitiesResponse createGetRecentActivitiesResponse() {
-        return new GetRecentActivitiesResponse();
+    public GetEndMethodResponse createGetEndMethodResponse() {
+        return new GetEndMethodResponse();
     }
 
     /**
-     * Create an instance of {@link GetBalance }
+     * Create an instance of {@link InsertIntoDBResponse }
      * 
      */
-    public GetBalance createGetBalance() {
-        return new GetBalance();
+    public InsertIntoDBResponse createInsertIntoDBResponse() {
+        return new InsertIntoDBResponse();
     }
 
     /**
-     * Create an instance of {@link GetUserIdFromUsernameResponse }
+     * Create an instance of {@link GetTransactionResult }
      * 
      */
-    public GetUserIdFromUsernameResponse createGetUserIdFromUsernameResponse() {
-        return new GetUserIdFromUsernameResponse();
+    public GetTransactionResult createGetTransactionResult() {
+        return new GetTransactionResult();
     }
 
     /**
-     * Create an instance of {@link SetBalanceResponse }
+     * Create an instance of {@link GetEndMethod }
      * 
      */
-    public SetBalanceResponse createSetBalanceResponse() {
-        return new SetBalanceResponse();
+    public GetEndMethod createGetEndMethod() {
+        return new GetEndMethod();
     }
 
     /**
-     * Create an instance of {@link GetRecentActivities }
+     * Create an instance of {@link InsertIntoDetailsResponse }
      * 
      */
-    public GetRecentActivities createGetRecentActivities() {
-        return new GetRecentActivities();
+    public InsertIntoDetailsResponse createInsertIntoDetailsResponse() {
+        return new InsertIntoDetailsResponse();
     }
 
     /**
-     * Create an instance of {@link GetBalanceResponse }
+     * Create an instance of {@link GetProfitValue }
      * 
      */
-    public GetBalanceResponse createGetBalanceResponse() {
-        return new GetBalanceResponse();
+    public GetProfitValue createGetProfitValue() {
+        return new GetProfitValue();
     }
 
     /**
-     * Create an instance of {@link GetUserIdFromUsername }
+     * Create an instance of {@link GetTransactionResultResponse }
      * 
      */
-    public GetUserIdFromUsername createGetUserIdFromUsername() {
-        return new GetUserIdFromUsername();
+    public GetTransactionResultResponse createGetTransactionResultResponse() {
+        return new GetTransactionResultResponse();
     }
 
     /**
-     * Create an instance of {@link SetBalance }
+     * Create an instance of {@link GetTransactionAmount }
      * 
      */
-    public SetBalance createSetBalance() {
-        return new SetBalance();
+    public GetTransactionAmount createGetTransactionAmount() {
+        return new GetTransactionAmount();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserIdFromUsername }{@code >}}
+     * Create an instance of {@link InsertIntoDetails }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getUserIdFromUsername")
-    public JAXBElement<GetUserIdFromUsername> createGetUserIdFromUsername(GetUserIdFromUsername value) {
-        return new JAXBElement<GetUserIdFromUsername>(_GetUserIdFromUsername_QNAME, GetUserIdFromUsername.class, null, value);
+    public InsertIntoDetails createInsertIntoDetails() {
+        return new InsertIntoDetails();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SetBalance }{@code >}}
+     * Create an instance of {@link GetLossValueResponse }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "setBalance")
-    public JAXBElement<SetBalance> createSetBalance(SetBalance value) {
-        return new JAXBElement<SetBalance>(_SetBalance_QNAME, SetBalance.class, null, value);
+    public GetLossValueResponse createGetLossValueResponse() {
+        return new GetLossValueResponse();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetBalanceResponse }{@code >}}
+     * Create an instance of {@link InsertIntoDB }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getBalanceResponse")
-    public JAXBElement<GetBalanceResponse> createGetBalanceResponse(GetBalanceResponse value) {
-        return new JAXBElement<GetBalanceResponse>(_GetBalanceResponse_QNAME, GetBalanceResponse.class, null, value);
+    public InsertIntoDB createInsertIntoDB() {
+        return new InsertIntoDB();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetRecentActivities }{@code >}}
+     * Create an instance of {@link GetLossValue }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getRecentActivities")
-    public JAXBElement<GetRecentActivities> createGetRecentActivities(GetRecentActivities value) {
-        return new JAXBElement<GetRecentActivities>(_GetRecentActivities_QNAME, GetRecentActivities.class, null, value);
+    public GetLossValue createGetLossValue() {
+        return new GetLossValue();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SetBalanceResponse }{@code >}}
+     * Create an instance of {@link GetTransactionAmountResponse }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "setBalanceResponse")
-    public JAXBElement<SetBalanceResponse> createSetBalanceResponse(SetBalanceResponse value) {
-        return new JAXBElement<SetBalanceResponse>(_SetBalanceResponse_QNAME, SetBalanceResponse.class, null, value);
+    public GetTransactionAmountResponse createGetTransactionAmountResponse() {
+        return new GetTransactionAmountResponse();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserIdFromUsernameResponse }{@code >}}
+     * Create an instance of {@link GetProfitValueResponse }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getUserIdFromUsernameResponse")
-    public JAXBElement<GetUserIdFromUsernameResponse> createGetUserIdFromUsernameResponse(GetUserIdFromUsernameResponse value) {
-        return new JAXBElement<GetUserIdFromUsernameResponse>(_GetUserIdFromUsernameResponse_QNAME, GetUserIdFromUsernameResponse.class, null, value);
+    public GetProfitValueResponse createGetProfitValueResponse() {
+        return new GetProfitValueResponse();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetBalance }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProfitValueResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getBalance")
-    public JAXBElement<GetBalance> createGetBalance(GetBalance value) {
-        return new JAXBElement<GetBalance>(_GetBalance_QNAME, GetBalance.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "getProfitValueResponse")
+    public JAXBElement<GetProfitValueResponse> createGetProfitValueResponse(GetProfitValueResponse value) {
+        return new JAXBElement<GetProfitValueResponse>(_GetProfitValueResponse_QNAME, GetProfitValueResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetRecentActivitiesResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetTransactionAmountResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getRecentActivitiesResponse")
-    public JAXBElement<GetRecentActivitiesResponse> createGetRecentActivitiesResponse(GetRecentActivitiesResponse value) {
-        return new JAXBElement<GetRecentActivitiesResponse>(_GetRecentActivitiesResponse_QNAME, GetRecentActivitiesResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "getTransactionAmountResponse")
+    public JAXBElement<GetTransactionAmountResponse> createGetTransactionAmountResponse(GetTransactionAmountResponse value) {
+        return new JAXBElement<GetTransactionAmountResponse>(_GetTransactionAmountResponse_QNAME, GetTransactionAmountResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetLossValue }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getLossValue")
+    public JAXBElement<GetLossValue> createGetLossValue(GetLossValue value) {
+        return new JAXBElement<GetLossValue>(_GetLossValue_QNAME, GetLossValue.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetLossValueResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getLossValueResponse")
+    public JAXBElement<GetLossValueResponse> createGetLossValueResponse(GetLossValueResponse value) {
+        return new JAXBElement<GetLossValueResponse>(_GetLossValueResponse_QNAME, GetLossValueResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InsertIntoDB }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "insertIntoDB")
+    public JAXBElement<InsertIntoDB> createInsertIntoDB(InsertIntoDB value) {
+        return new JAXBElement<InsertIntoDB>(_InsertIntoDB_QNAME, InsertIntoDB.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InsertIntoDetails }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "insertIntoDetails")
+    public JAXBElement<InsertIntoDetails> createInsertIntoDetails(InsertIntoDetails value) {
+        return new JAXBElement<InsertIntoDetails>(_InsertIntoDetails_QNAME, InsertIntoDetails.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetTransactionAmount }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getTransactionAmount")
+    public JAXBElement<GetTransactionAmount> createGetTransactionAmount(GetTransactionAmount value) {
+        return new JAXBElement<GetTransactionAmount>(_GetTransactionAmount_QNAME, GetTransactionAmount.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetTransactionResultResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getTransactionResultResponse")
+    public JAXBElement<GetTransactionResultResponse> createGetTransactionResultResponse(GetTransactionResultResponse value) {
+        return new JAXBElement<GetTransactionResultResponse>(_GetTransactionResultResponse_QNAME, GetTransactionResultResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProfitValue }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getProfitValue")
+    public JAXBElement<GetProfitValue> createGetProfitValue(GetProfitValue value) {
+        return new JAXBElement<GetProfitValue>(_GetProfitValue_QNAME, GetProfitValue.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetEndMethod }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getEndMethod")
+    public JAXBElement<GetEndMethod> createGetEndMethod(GetEndMethod value) {
+        return new JAXBElement<GetEndMethod>(_GetEndMethod_QNAME, GetEndMethod.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InsertIntoDetailsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "insertIntoDetailsResponse")
+    public JAXBElement<InsertIntoDetailsResponse> createInsertIntoDetailsResponse(InsertIntoDetailsResponse value) {
+        return new JAXBElement<InsertIntoDetailsResponse>(_InsertIntoDetailsResponse_QNAME, InsertIntoDetailsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetTransactionResult }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getTransactionResult")
+    public JAXBElement<GetTransactionResult> createGetTransactionResult(GetTransactionResult value) {
+        return new JAXBElement<GetTransactionResult>(_GetTransactionResult_QNAME, GetTransactionResult.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetEndMethodResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getEndMethodResponse")
+    public JAXBElement<GetEndMethodResponse> createGetEndMethodResponse(GetEndMethodResponse value) {
+        return new JAXBElement<GetEndMethodResponse>(_GetEndMethodResponse_QNAME, GetEndMethodResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InsertIntoDBResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "insertIntoDBResponse")
+    public JAXBElement<InsertIntoDBResponse> createInsertIntoDBResponse(InsertIntoDBResponse value) {
+        return new JAXBElement<InsertIntoDBResponse>(_InsertIntoDBResponse_QNAME, InsertIntoDBResponse.class, null, value);
     }
 
 }

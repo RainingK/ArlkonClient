@@ -13,7 +13,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import javafx.event.ActionEvent;
@@ -57,9 +62,6 @@ public class HomeController implements Initializable {
     // Labels
     @FXML
     private Label balance_val_label;
-    
-     @FXML
-    private Pane recent_activities_container;
 
     // Recent activities
     @FXML
@@ -101,7 +103,7 @@ public class HomeController implements Initializable {
         
         // Set up close and minimize buttons
         WindowHandler wh = new WindowHandler();
-        wh.closeProgram(close_btn);
+        wh.closeProgram(close_btn, main_window);
         wh.minimizeProgram(minimize_btn);
     }
     
@@ -154,7 +156,6 @@ public class HomeController implements Initializable {
     }
     
     private String getRecentActivityIcon(String message){
-        System.out.println("---->" + message.substring(0, message.indexOf(' ')));
         if(message.substring(0, message.indexOf(' ')).equals("Called")){
             return "res/assets/icons/updown.png";
         } else if(message.substring(0, message.indexOf(' ')).equals("Put")){
@@ -162,8 +163,6 @@ public class HomeController implements Initializable {
         } else { //else if(message.substring(0, message.indexOf(' ')).equals("Invested")){
             return "res/assets/icons/investment_home.png";
         }
-        
-        //return null;
     }
     
     private void loadBalanceToLabel() {
@@ -185,6 +184,46 @@ public class HomeController implements Initializable {
         bal = bal / 100;
         
         balance_val_label.setText("$" + bal);
+    }
+    
+    private void showCompletedBinaryTransaction(){
+        int user_id = 0;
+        
+        try {
+            user_id = getIdFromFile();
+        } catch(FileNotFoundException ex){
+            System.out.println("FileNotFoundException: " + ex.getMessage());
+        }
+        
+        // No previous incomplete & unseen transaction exists
+        if(!checkTransactionExists(user_id)){
+            return;
+        }
+        
+        // Transaction exists
+        String expiryDateString = getExpiryDateTime(user_id);
+        
+        Date expiryDate = null;
+        Date nowDate = null;
+        
+        // Get the current date and time
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+        LocalDateTime ldt = LocalDateTime.now();
+        String now = dtf.format(ldt);
+        
+        try {
+            expiryDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(expiryDateString);
+            nowDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(now);
+        } catch (ParseException ex) {
+            System.out.println("ParseException: " + ex.getMessage());
+        }
+        
+        // Transaction Expired
+        if(nowDate.after(expiryDate)){
+            String pendingType = getPendingTransactionType(user_id);
+            
+            
+        }
     }
 
     @FXML
@@ -227,7 +266,7 @@ public class HomeController implements Initializable {
         if(file.delete()) {
             trans.setWindow(main_window);
             try {
-                trans.loadNextScene("/view/index.fxml");
+                trans.loadNextScene("/views/index.fxml");
             } catch (IOException ex) {
                 System.out.println("IOException: " + ex.getMessage());
             }
@@ -293,5 +332,23 @@ public class HomeController implements Initializable {
         webservices.UserWS_Service service = new webservices.UserWS_Service();
         webservices.UserWS port = service.getUserWSPort();
         return port.getRecentActivities(arg0);
+    }
+
+    private static boolean checkTransactionExists(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.checkTransactionExists(userId);
+    }
+
+    private static String getPendingTransactionType(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getPendingTransactionType(userId);
+    }
+
+    private static String getExpiryDateTime(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getExpiryDateTime(userId);
     }
 }

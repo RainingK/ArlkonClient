@@ -5,9 +5,11 @@
  */
 package utils;
 
+import java.io.File;
 import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -16,8 +18,18 @@ import javafx.stage.Stage;
  */
 public class WindowHandler {
     public void closeProgram(ImageView img){
-            img.setOnMouseClicked((MouseEvent e) -> {
+        img.setOnMouseClicked((MouseEvent e) -> {
             Platform.exit();
+        });
+    }
+    
+    public void closeProgram(ImageView img, Pane main_window){
+        img.setOnMouseClicked((MouseEvent e) -> {
+            File file = new File("user_data.txt");
+        
+            if(file.delete()) {
+                Platform.exit();
+            }
         });
     }
     

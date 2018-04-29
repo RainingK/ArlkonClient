@@ -4,6 +4,12 @@
 <xsd:import namespace="http://webservices/" schemaLocation="http://localhost:8080/ArlkonServer/IWWS?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="getTransactionResult">
+<part name="parameters" element="tns:getTransactionResult"/>
+</message>
+<message name="getTransactionResultResponse">
+<part name="parameters" element="tns:getTransactionResultResponse"/>
+</message>
 <message name="insertIntoDetails">
 <part name="parameters" element="tns:insertIntoDetails"/>
 </message>
@@ -15,6 +21,12 @@
 </message>
 <message name="getTransactionAmountResponse">
 <part name="parameters" element="tns:getTransactionAmountResponse"/>
+</message>
+<message name="getEndMethod">
+<part name="parameters" element="tns:getEndMethod"/>
+</message>
+<message name="getEndMethodResponse">
+<part name="parameters" element="tns:getEndMethodResponse"/>
 </message>
 <message name="getLossValue">
 <part name="parameters" element="tns:getLossValue"/>
@@ -35,6 +47,10 @@
 <part name="parameters" element="tns:getProfitValueResponse"/>
 </message>
 <portType name="IWWS">
+<operation name="getTransactionResult">
+<input wsam:Action="http://webservices/IWWS/getTransactionResultRequest" message="tns:getTransactionResult"/>
+<output wsam:Action="http://webservices/IWWS/getTransactionResultResponse" message="tns:getTransactionResultResponse"/>
+</operation>
 <operation name="insertIntoDetails">
 <input wsam:Action="http://webservices/IWWS/insertIntoDetailsRequest" message="tns:insertIntoDetails"/>
 <output wsam:Action="http://webservices/IWWS/insertIntoDetailsResponse" message="tns:insertIntoDetailsResponse"/>
@@ -42,6 +58,10 @@
 <operation name="getTransactionAmount">
 <input wsam:Action="http://webservices/IWWS/getTransactionAmountRequest" message="tns:getTransactionAmount"/>
 <output wsam:Action="http://webservices/IWWS/getTransactionAmountResponse" message="tns:getTransactionAmountResponse"/>
+</operation>
+<operation name="getEndMethod">
+<input wsam:Action="http://webservices/IWWS/getEndMethodRequest" message="tns:getEndMethod"/>
+<output wsam:Action="http://webservices/IWWS/getEndMethodResponse" message="tns:getEndMethodResponse"/>
 </operation>
 <operation name="getLossValue">
 <input wsam:Action="http://webservices/IWWS/getLossValueRequest" message="tns:getLossValue"/>
@@ -58,6 +78,15 @@
 </portType>
 <binding name="IWWSPortBinding" type="tns:IWWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="getTransactionResult">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="insertIntoDetails">
 <soap:operation soapAction=""/>
 <input>
@@ -68,6 +97,15 @@
 </output>
 </operation>
 <operation name="getTransactionAmount">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getEndMethod">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

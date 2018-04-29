@@ -63,21 +63,9 @@
                   </Label>
                </children>
             </Pane>
-            <ImageView fx:id="first_activity_icon" fitHeight="45.0" fitWidth="31.0" layoutX="14.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true" styleClass="feature_icons">
-               <image>
-                  <Image url="@../res/assets/icons/investment_home.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="second_activity_icon" fitHeight="45.0" fitWidth="31.0" layoutX="13.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true" styleClass="feature_icons">
-               <image>
-                  <Image url="@../res/assets/icons/investment_home.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="third_activity_icon" fitHeight="45.0" fitWidth="31.0" layoutX="14.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true" styleClass="feature_icons">
-               <image>
-                  <Image url="@../res/assets/icons/updown.png" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="first_activity_icon" fitHeight="45.0" fitWidth="31.0" layoutX="14.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true" styleClass="feature_icons" />
+            <ImageView fx:id="second_activity_icon" fitHeight="45.0" fitWidth="31.0" layoutX="13.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true" styleClass="feature_icons" />
+            <ImageView fx:id="third_activity_icon" fitHeight="45.0" fitWidth="31.0" layoutX="14.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true" styleClass="feature_icons" />
          </children>
       </Pane>
       <Pane id="top_pane" prefHeight="73.0" prefWidth="752.0" stylesheets="@../res/css/home.css">

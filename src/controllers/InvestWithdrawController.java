@@ -7,6 +7,7 @@ package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -44,6 +45,9 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.Event;
+import javafx.scene.layout.StackPane;
 import utils.Transition;
 
 /**
@@ -53,183 +57,269 @@ import utils.Transition;
  */
 public class InvestWithdrawController implements Initializable {
 
-     // Main Pane
-    @FXML private Pane main_window;
-    
-     // Close and Minimize button
-    @FXML private ImageView close_btn;
-    
+    // Main Pane
+    @FXML
+    private Pane main_window;
+
+    //Invest container
+    @FXML
+    private Pane invest_container;
+
+    // Close and Minimize button
+    @FXML
+    private ImageView close_btn, minimize_btn;
+
     //Labels
     // Balance Label
-    @FXML private Label balance_val_label;
+    @FXML
+    private Label balance_val_label;
+
     // Date and time label
-    @FXML private Label current_datetime_label;
+    @FXML
+    private Label current_datetime_label;
+
     // Commission rate label
-    @FXML private Label commissionRateLabel;
-    
-     // Header
-    @FXML private Pane home_btn_pane, profile_btn_pane, settings_btn_pane, help_btn_pane;
-    @FXML private ImageView home_btn, profile_btn, settings_btn, help_btn;
-    @FXML private Label home_btn_label, profile_btn_label, settings_btn_label, help_btn_label;
-    
-    
+    @FXML
+    private Label commissionRateLabel;
+
+    //Profit earned label
+    @FXML
+    private Label profit_label;
+
+    @FXML
+    private Label amount_earned_label;
+
+    // amount container amount earned label
+    @FXML
+    private Label invest_val_label;
+
+    // amount container amount earned label
+    @FXML
+    private Label invest_at_val_label;
+
+    // Header
+    @FXML
+    private Pane home_btn_pane, profile_btn_pane, settings_btn_pane, help_btn_pane;
+    @FXML
+    private ImageView home_btn, profile_btn, settings_btn, help_btn;
+    @FXML
+    private Label home_btn_label, profile_btn_label, settings_btn_label, help_btn_label;
+
     // Area Chart
-    @FXML private AreaChart<?, ?> areaChart;
-    @FXML private NumberAxis yAxisVal;
-    
+    @FXML
+    private AreaChart<?, ?> areaChart;
+    @FXML
+    private NumberAxis yAxisVal;
+
+    //Containers
+    @FXML
+    private StackPane chartContainer;
+
     //Buttons
-    @FXML private JFXButton buy_btn;
-    
-      @FXML
+    @FXML
+    private JFXButton buy_btn;
+
+    @FXML
+    private JFXButton invest_close_btn;
+
+    @FXML
     private JFXButton takeProfit_btn;
 
     @FXML
     private JFXButton stopLoss_btn;
-    
+
+    @FXML
+    private JFXButton view_graph_btn;
+
     //Textfields
-    @FXML private JFXTextField amount_textfield;
-    
+    @FXML
+    private JFXTextField amount_textfield;
+
     // Dropdown
-    @FXML private JFXComboBox currency_dropdown;
-    
-    private int user_id;
-    
+    @FXML
+    private JFXComboBox currency_dropdown;
+
+    @FXML
+    private Pane makeProfit_container;
+
+    @FXML
+    private Label profit_earned_label;
+
+    @FXML
+    private Label profitPercent_earned_label;
+
+    @FXML
+    private Label profit_price_level_label;
+
     // Constants
-    private final double PROFIT_PERCENTAGE = 0.7;
-    
+    private final double PROFIT_PERCENTAGE = 0.0001;
+
+    //
+    private double generatedDecimal = 0;
+    private int user_id;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Transition trans = new Transition();
         trans.setWindow(main_window);
-        trans.fadeInTransition();     
-        
+        trans.fadeInTransition();
+
         // Set the user ID
         try {
             user_id = getIdFromFile();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(InvestWithdrawController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         // Start currency graph
         startGraph();
-       
+
         // Header effects
         applyHeaderEffect(home_btn_pane, home_btn, home_btn_label);
         applyHeaderEffect(profile_btn_pane, profile_btn, profile_btn_label);
         applyHeaderEffect(settings_btn_pane, settings_btn, settings_btn_label);
         applyHeaderEffect(help_btn_pane, help_btn, help_btn_label);
-        
+
         // Display current time
         displayCurrentTime();
-        
+
+        // Show user's balance when page loads
+        loadBalanceToLabel();
+
         // Populate dropdowns
         populateDropdowns();
-        
-          // Set up close and minimize buttons
+
+        // Set up close and minimize buttons
         WindowHandler wh = new WindowHandler();
-        wh.closeProgram(close_btn);
+        wh.closeProgram(close_btn, main_window);
+        wh.minimizeProgram(minimize_btn);
     }
-       
-    private void displayCurrentTime(){
-        
-        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {            
+
+    private void displayCurrentTime() {
+
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             Calendar cal = Calendar.getInstance();
 
             // Specify Locale
             ZoneId zone = ZoneId.of("Asia/Dubai");
-            
+
             // Format the time
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
 
             // Get the current date
             LocalDate today = LocalDate.now();
-            
+
             // Get the current time
             String now = LocalTime.now(zone).format(dtf);
-            
+
             // Set date and time to the label
             current_datetime_label.setText(today.getDayOfMonth() + "/" + today.getMonthValue() + "/" + today.getYear() + "\n" + now);
         }),
-            // Refresh every 1 second
-            new KeyFrame(Duration.seconds(1))
+                // Refresh every 1 second
+                new KeyFrame(Duration.seconds(1))
         );
-        
+
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
     }
-    
-    private void startGraph(){
+
+    private void startGraph() {
         XYChart.Series series = new XYChart.Series();
-        
-        double currentPrice = getCurrentPrice("BTC", "USD");
-        
+
+        double currentPrice = getCurrentPrice("USD", "INR");
+
         yAxisVal.setAutoRanging(false);
         yAxisVal.setLowerBound(currentPrice - 0.01);
         yAxisVal.setUpperBound(currentPrice + 0.01);
         yAxisVal.setTickUnit(0.1);
-        
-        Timeline tenSecondsWonder = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {      
+
+        double range = PROFIT_PERCENTAGE * (currentPrice + generatedDecimal);
+        double lossVal = ((currentPrice + generatedDecimal) - range);
+        double profitVal = Math.round(((currentPrice + generatedDecimal) + range) * 100.0) / 100.0;
+
+        Timeline graphThread = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
             int xVal = 0;
             double min = (currentPrice) - 0.1, max = (currentPrice) + 0.1;
-            
+
             @Override
             public void handle(ActionEvent event) {
-                
+
                 Random rand = new Random();
-                double generatedDecimal = -0.01 + (0.1 - (-0.01)) * rand.nextDouble();
+                generatedDecimal = -0.09 + (0.9 - (-0.09)) * rand.nextDouble();
                 generatedDecimal = Math.round(generatedDecimal * 100.0) / 100.0;
-                
-                if(((currentPrice) - 0.1) < min){
-                    min = (currentPrice) - 0.1;
+
+                if (((currentPrice) - 0.9) < min) {
+                    min = (currentPrice) - 0.9;
                 }
-                
-                if(((currentPrice) + 0.1) > max){
-                    max = (currentPrice) + 0.1;
+
+                if (((currentPrice) + 0.9) > max) {
+                    max = (currentPrice) + 0.9;
                 }
-                
+
                 yAxisVal.setLowerBound(min);
                 yAxisVal.setUpperBound(max);
-                
+
                 XYChart.Data data = new XYChart.Data("" + xVal++, currentPrice + generatedDecimal);
-                
+
                 Rectangle rect = new Rectangle(0, 0);
                 rect.setVisible(false);
                 data.setNode(rect);
-                
+
                 series.getData().add(data);
-                
+
+                if ((currentPrice + generatedDecimal) > profitVal) {
+                    // Take profit
+
+                    //Disabling all buttons except take profit 
+                    invest_close_btn.setDisable(true);
+                    takeProfit_btn.setDisable(false);
+                    stopLoss_btn.setDisable(true);
+                } else if ((currentPrice + generatedDecimal) < lossVal) {
+                    // Stop loss 
+
+                    //Disabling all buttons except stop loss
+                    invest_close_btn.setDisable(true);
+                    stopLoss_btn.setDisable(false);
+                    takeProfit_btn.setDisable(true);
+                } else if ((currentPrice + generatedDecimal) < profitVal && (currentPrice + generatedDecimal) > lossVal) {
+                    // Close transaction
+                    invest_close_btn.setDisable(false);
+                    stopLoss_btn.setDisable(true);
+                    takeProfit_btn.setDisable(true);
+                }
             }
         }));
-        
+
+        //
         areaChart.getData().addAll(series);
-        tenSecondsWonder.setCycleCount(Timeline.INDEFINITE);
-        tenSecondsWonder.play();
+        graphThread.setCycleCount(Timeline.INDEFINITE);
+        graphThread.play();
     }
-    
-    private void applyHeaderEffect(Pane btn_pane, ImageView btn, Label label){
+
+    private void applyHeaderEffect(Pane btn_pane, ImageView btn, Label label) {
         TranslateTransition transition = new TranslateTransition(Duration.seconds(0.2), btn);
         FadeTransition fadeTransition = new FadeTransition();
-        
+
         btn_pane.setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 btn_pane.setCursor(Cursor.HAND);
-                
+
                 transition.setDelay(Duration.seconds(0.1));
                 transition.setToY(-7);
                 transition.setCycleCount(1);
                 transition.play();
-                
+
                 fadeTransition.setDuration(Duration.millis(300));
                 fadeTransition.setNode(label);
                 fadeTransition.setFromValue(0);
                 fadeTransition.setToValue(1);
                 fadeTransition.play();
-                
+
                 label.setVisible(true);
             }
         });
-        
+
         btn_pane.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -238,136 +328,295 @@ public class InvestWithdrawController implements Initializable {
                 transition.setToY(0);
                 transition.setCycleCount(1);
                 transition.play();
-                
+
                 fadeTransition.setDuration(Duration.millis(300));
                 fadeTransition.setNode(label);
                 fadeTransition.setFromValue(1);
                 fadeTransition.setToValue(0);
                 fadeTransition.play();
-                
+
                 label.setVisible(false);
             }
         });
     }
-    
-    private void populateDropdowns(){
+
+    private void populateDropdowns() {
         List<String> currencies = getCurrencyList();
-            
+
         currency_dropdown.getItems().addAll(currencies);
-        
+
         // Default values
         currency_dropdown.setValue(currencies.get(0));
     }
-    
-    @FXML
-    void buy_clicked(ActionEvent event) {
-        
-        double updatedBalance = getBalance(user_id);
-        balance_val_label.setText("$" + updatedBalance);
-        
-        double currentPrice = getCurrentPrice("BTC", "USD");
-        double range= PROFIT_PERCENTAGE * currentPrice;
-        double lossVal= currentPrice - range;
-        double profitVal= currentPrice + range;
 
+    @FXML
+    void buy_clicked(ActionEvent event) throws FileNotFoundException {
+
+        double currentBalance = getBalance(user_id);
+        int id = getIdFromFile();
+        double currentPrice = Math.round((getCurrentPrice("USD", "INR") + generatedDecimal) * 10000d) / 10000d;
+        System.out.println("Current price at invest : " + currentPrice);
+        double range = PROFIT_PERCENTAGE * currentPrice;
+
+        double lossVal = Math.round((currentPrice - range) * 10000d) / 10000d;
+        double profitVal = Math.round((currentPrice + range) * 10000d) / 10000d;
+        double amount = Double.parseDouble(amount_textfield.getText());
         // Insert into DB
         Task<Void> task = new Task<Void>() {
-            @Override 
+            @Override
             protected Void call() throws FileNotFoundException {
-                int id = getIdFromFile();
-                double amount = Double.parseDouble(amount_textfield.getText());
-                
-                insertIntoDB(id, amount, "USD", profitVal, lossVal);
+
+                String currency = currency_dropdown.getValue().toString();
+                insertIntoDB(id, amount, currency, profitVal, lossVal);
+                setBalance(currentBalance - amount, user_id);
+
                 return null;
             }
         };
-        
+
+        task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+
+                balance_val_label.setText("$" + getBalance(id));
+                // Translate Graph to the right
+                Transition trans = new Transition();
+                trans.setWindow(main_window);
+                trans.translate(-100, chartContainer);
+                makeProfit_container.setVisible(true);
+
+                //Setting the investment amount label in container
+                invest_val_label.setVisible(true);
+                invest_val_label.setText("$" + amount);
+
+                //Setting the current price at investment label in container
+                invest_at_val_label.setVisible(true);
+                invest_at_val_label.setText("$" + currentPrice);
+
+                // Display controls
+                profit_label.setVisible(true);
+                takeProfit_btn.setVisible(true);
+                stopLoss_btn.setVisible(true);
+                invest_close_btn.setVisible(true);
+            }
+
+        });
+
         new Thread(task).start();
-       
     }
-    
+
     @FXML
     void numberValidation(KeyEvent event) {
-        if(!(event.getCharacter().matches("[0-9.]"))) {
+        if (!(event.getCharacter().matches("[0-9.]"))) {
             event.consume();
         }
     }
-    
+
     @FXML
     void validateAmount(KeyEvent event) {
         String balance = balance_val_label.getText();
         balance = balance.substring(1, balance_val_label.getText().length());
-        
+
         double LCdouble = 0;
-        
-        if(!amount_textfield.getText().equals("")){
+
+        if (!amount_textfield.getText().equals("")) {
             LCdouble = Double.parseDouble(amount_textfield.getText());
         }
 
-        if(Double.parseDouble (balance) < LCdouble){
+        if (Double.parseDouble(balance) < LCdouble) {
             buy_btn.setDisable(true);
         } else {
             commissionRateLabel.setText("" + (LCdouble * 0.02));
             buy_btn.setDisable(false);
         }
     }
-    
+
     @FXML
-    void stopLoss_clicked(ActionEvent event) {
+    void stopLoss_clicked(ActionEvent event) throws FileNotFoundException {
+            int id = getIdFromFile();
+             double invest_amount = getTransactionAmount(id);
+             double lossAmount = 0.5 * invest_amount;
+              double currentPrice = Math.round((getCurrentPrice("USD", "INR") + generatedDecimal) * 10000d) / 10000d;
+              System.out.println("Current price at stop loss : " +currentPrice);
+             String end_method = "stop_loss";
+            Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws FileNotFoundException {
+       
+                insertIntoDetails(id, lossAmount, end_method);
+                setBalance(getBalance(id) + (invest_amount - lossAmount), id);
+                return null;
+            }
+        };
         
+        task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                setBalanceToLabel(getBalance(id));
+                popUp(end_method, lossAmount, currentPrice);
+                resetControlPositions();
+            }
+
+        });
+
+        new Thread(task).start();
     }
 
     @FXML
-    void takeProfit_clicked(ActionEvent event) {
-        try {
-                int id = getIdFromFile();
-                
-               double invest_amount = getTransactionAmount(id);
-               System.out.println("Investment amount :" +invest_amount);
-               double profit_value = getProfitValue(id);
-               System.out.println("profit value :" +profit_value);
-                double currentPrice = getCurrentPrice("BTC", "USD");
-                System.out.println("Current price : " +currentPrice);
-               if(currentPrice > profit_value){
-                     double profitAmount= 0.5 * invest_amount;
-                     System.out.println("Profit Amount : " +profitAmount);
-               }
-            
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(InvestWithdrawController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    void takeProfit_clicked(ActionEvent event) throws FileNotFoundException {
+        int id = getIdFromFile();
+        double currentPrice = Math.round((getCurrentPrice("USD", "INR") + generatedDecimal) * 10000d) / 10000d;
+
+        double invest_amount = getTransactionAmount(id);
+        double profitAmount = 0.5 * invest_amount;
+        String end_method = "take_profit";
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws FileNotFoundException {
+
+                insertIntoDetails(id, profitAmount, end_method);
+
+                setBalance(getBalance(id) + invest_amount + profitAmount, id);
+                return null;
+            }
+        };
+        task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                popUp(end_method, profitAmount, currentPrice);
+                amount_earned_label.setText("$" + getTransactionResult(id)); //wait gotta be perfect
+                setBalanceToLabel(getBalance(id));
+
+                resetControlPositions();
+            }
+
+        });
+
+        new Thread(task).start();
     }
     
-    private int getIdFromFile() throws FileNotFoundException {
-        Scanner in = new Scanner(new FileReader("user_data.txt"));
+ 
+    
+    @FXML
+    void close_btn_clicked(ActionEvent event) throws FileNotFoundException {
+            String message="";
+            int id = getIdFromFile();
+            
+            String end_method= getEndMethod(id);
+            double currentPrice = Math.round((getCurrentPrice("USD", "INR") + generatedDecimal) * 10000d) / 10000d;
+            if(end_method.equals("take_profit")){
+                  message = "Your transaction has been closed with a profit earned of $ " +getTransactionResult(id) + " at price level $ " + currentPrice;
+            }
+            else if(end_method.equals("stop_loss")){
+                message = "Your transaction has been closed with a loss of $ " +getTransactionResult(id) + " at price level $ " +currentPrice;
+            }
+            else
+            {
+                message = "Closed transaction ";
+            }
+         
+            final JFXSnackbar snackBar = new JFXSnackbar(main_window);
+
+            EventHandler handler = new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    // Hide the snackbar
+                    snackBar.unregisterSnackbarContainer(main_window);
+                }
+            };
+
+            snackBar.show(message, "Close", 100000, handler);
+
+    }
+
+    void popUp(String end_method, double amount, double current_price) {
+        if (end_method.equals("take_profit")) {
+            String message = "Congratulations, you've earned a profit of $" + amount + " at current price level $" + current_price;
+
+            final JFXSnackbar snackBar = new JFXSnackbar(main_window);
+
+            EventHandler handler = new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    // Hide the snackbar
+                    snackBar.unregisterSnackbarContainer(main_window);
+                }
+            };
+
+            snackBar.show(message, "Close", 100000, handler);
+
+        }else if(end_method.equals("stop_loss")){
+            String message = "Oops, you've unfortunately incurred a loss of $ " + amount + " at price level $ " +current_price;
+            
+               final JFXSnackbar snackBar = new JFXSnackbar(main_window);
+
+            EventHandler handler = new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    // Hide the snackbar
+                    snackBar.unregisterSnackbarContainer(main_window);
+                }
+            };
+
+            snackBar.show(message, "Close", 100000, handler);
         
+        }
+
+    }
+
+    private void loadBalanceToLabel() {
+        double balance = 0;
+
+        try {
+            balance = getBalance(getIdFromFile());
+        } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException: " + ex.getMessage());
+        }
+
+        setBalanceToLabel(balance);
+    }
+
+    private void setBalanceToLabel(double bal) {
+        // Round balance to 2 decimal points
+        bal = bal * 100;
+        bal = Math.round(bal);
+        bal = bal / 100;
+
+        balance_val_label.setText("$" + bal);
+    }
+
+    int getIdFromFile() throws FileNotFoundException {
+        Scanner in = new Scanner(new FileReader("user_data.txt"));
+
         int user_id = 0;
-        if(in.hasNext()) {
+        if (in.hasNext()) {
             user_id = in.nextInt();
         }
-        
+
         in.close();
-        
+
         return user_id;
     }
-    
-    /************* SERVER RETRIEVED FUNCTIONS *************/
+
+    private void resetControlPositions() {
+        Transition trans = new Transition();
+        trans.setWindow(main_window);
+        trans.translate(0, chartContainer);
+        makeProfit_container.setVisible(false);
+    }
+
+    @FXML
+    void view_graph_clicked(ActionEvent event) {
+
+    }
+
+    /**
+     * *********** SERVER RETRIEVED FUNCTIONS ************
+     */
     private static double getCurrentPrice(java.lang.String currency1, java.lang.String currency2) {
         webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
         return port.getCurrentPrice(currency1, currency2);
-    }
-
-    private static double getBalance(int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
-        webservices.UserWS port = service.getUserWSPort();
-        return port.getBalance(userId);
-    }
-    
-    private static void insertIntoDB(int userId, double transactionAmount, java.lang.String currency, double profitValue, double lossValue) {
-        webservices.IWWS_Service service = new webservices.IWWS_Service();
-        webservices.IWWS port = service.getIWWSPort();
-        port.insertIntoDB(userId, transactionAmount, currency, profitValue, lossValue);
     }
 
     private static void insertIntoDetails(int userId, double transactionResult, java.lang.String endMethod) {
@@ -399,4 +648,43 @@ public class InvestWithdrawController implements Initializable {
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
         return port.getCurrencyList();
     }
+
+    private static void insertIntoDB(int userId, double transactionAmount, java.lang.String currency, double profitValue, double lossValue) {
+        webservices.IWWS_Service service = new webservices.IWWS_Service();
+        webservices.IWWS port = service.getIWWSPort();
+        port.insertIntoDB(userId, transactionAmount, currency, profitValue, lossValue);
+    }
+
+    private static double getBalance(int userId) {
+        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS port = service.getUserWSPort();
+        return port.getBalance(userId);
+    }
+
+    private static void setBalance(double balance, int userId) {
+        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS port = service.getUserWSPort();
+        port.setBalance(balance, userId);
+    }
+
+    private static double getTransactionResult(int userId) {
+        webservices.IWWS_Service service = new webservices.IWWS_Service();
+        webservices.IWWS port = service.getIWWSPort();
+        return port.getTransactionResult(userId);
+    }
+
+    private static String getEndMethod(int userId) {
+        webservices.IWWS_Service service = new webservices.IWWS_Service();
+        webservices.IWWS port = service.getIWWSPort();
+        return port.getEndMethod(userId);
+    }
 }
+
+// 1) Move graph back
+// 2) Hide the investment details
+// 3) Do the close button 
+// 4) When investment starts, it should allow close but it allows take profit
+// 5) Remove space between $ 56 -> amount in snackbar
+// 6) Hide Take Profit, Stop Loss, Close button once one of these button's clicked
+
+//it gives wrong current price even though its exact see

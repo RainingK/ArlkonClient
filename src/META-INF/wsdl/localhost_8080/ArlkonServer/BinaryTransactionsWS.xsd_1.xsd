@@ -52,18 +52,6 @@
 
 <xs:element name="setResultResponse" type="tns:setResultResponse"/>
 
-<xs:complexType name="getTimeFrame">
-<xs:sequence>
-<xs:element name="user_id" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getTimeFrameResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="checkTransactionExists">
 <xs:sequence>
 <xs:element name="user_id" type="xs:int"/>
@@ -76,15 +64,15 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getCurrency1">
+<xs:complexType name="getTimeFrame">
 <xs:sequence>
 <xs:element name="user_id" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getCurrency1Response">
+<xs:complexType name="getTimeFrameResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
+<xs:element name="return" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -97,6 +85,18 @@
 <xs:complexType name="getStartPriceResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCurrency1">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCurrency1Response">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -177,17 +177,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="setEndPrice">
-<xs:sequence>
-<xs:element name="price" type="xs:double"/>
-<xs:element name="user_id" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="setEndPriceResponse">
-<xs:sequence/>
-</xs:complexType>
-
 <xs:complexType name="getPendingTransactionType">
 <xs:sequence>
 <xs:element name="user_id" type="xs:int"/>
@@ -198,6 +187,17 @@
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setEndPrice">
+<xs:sequence>
+<xs:element name="price" type="xs:double"/>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setEndPriceResponse">
+<xs:sequence/>
 </xs:complexType>
 
 <xs:complexType name="getExpiryDateTime">

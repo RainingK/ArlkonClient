@@ -52,7 +52,7 @@ public class ProfileController implements Initializable {
         
         //Close and Minimize Buttons
         WindowHandler wh = new WindowHandler();
-        wh.closeProgram(close_btn);
+        wh.closeProgram(close_btn, main_window);
         wh.minimizeProgram(minimize_btn);
         
     }
