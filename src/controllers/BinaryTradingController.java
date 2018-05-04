@@ -763,8 +763,15 @@ public class BinaryTradingController implements Initializable {
             // Set amount to the label in calls_container
             put_amount_label.setText("$" + amount);
 
+            double put_at = (getCurrentPrice(currency1, currency2) + generatedDecimal);
+            
+            // Round to 3 decimals
+            put_at = put_at * 1000;
+            put_at = Math.round(put_at);
+            put_at = put_at /1000;
+            
             // Set the price level at which user called
-            put_at_val_label.setText("" + (getCurrentPrice(currency1, currency2) + generatedDecimal));
+            put_at_val_label.setText("" + put_at);
 
             // Set the max time remaining
             put_end_time_label.setText("" + final_totalSeconds);

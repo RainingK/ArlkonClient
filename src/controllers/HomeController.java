@@ -136,7 +136,7 @@ public class HomeController implements Initializable {
         
         ArrayList<String> activities = (ArrayList<String>) getRecentActivities(user_id);
         
-        if(activities == null){
+        if(activities.size() == 0){
             first_activity.setVisible(false);
             second_activity.setVisible(false);
             third_activity.setVisible(false);
@@ -146,17 +146,17 @@ public class HomeController implements Initializable {
         }
         
         switch(activities.size()){
-            case 6: first_title_label.setText(activities.get(0));
-                    first_subtitle_label.setText(activities.get(1));
-                    first_activity_icon.setImage(new Image(getRecentActivityIcon(activities.get(0))));
+            case 6: third_title_label.setText(activities.get(4));
+                    third_subtitle_label.setText(activities.get(5));
+                    third_activity_icon.setImage(new Image(getRecentActivityIcon(activities.get(5))));
                     
             case 4: second_title_label.setText(activities.get(2));
                     second_subtitle_label.setText(activities.get(3));
                     second_activity_icon.setImage(new Image(getRecentActivityIcon(activities.get(2))));
                     
-            case 2: third_title_label.setText(activities.get(4));
-                    third_subtitle_label.setText(activities.get(5));
-                    third_activity_icon.setImage(new Image(getRecentActivityIcon(activities.get(4))));
+            case 2: first_title_label.setText(activities.get(0));
+                    first_subtitle_label.setText(activities.get(1));
+                    first_activity_icon.setImage(new Image(getRecentActivityIcon(activities.get(0))));
         }
     }
     
