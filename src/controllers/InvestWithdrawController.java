@@ -423,7 +423,7 @@ public class InvestWithdrawController implements Initializable {
             LCdouble = Double.parseDouble(amount_textfield.getText());
         }
 
-        if (Double.parseDouble(balance) < LCdouble) {
+        if (Double.parseDouble(balance) < LCdouble || LCdouble < 1) {
             buy_btn.setDisable(true);
         } else {
             commissionRateLabel.setText("" + (LCdouble * 0.02));
@@ -494,9 +494,7 @@ public class InvestWithdrawController implements Initializable {
 
         new Thread(task).start();
     }
-    
- 
-    
+        
     @FXML
     void close_btn_clicked(ActionEvent event) throws FileNotFoundException {
             String message="";

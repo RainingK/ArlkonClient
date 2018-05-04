@@ -25,15 +25,37 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _GetCurrencyList_QNAME = new QName("http://webservices/", "getCurrencyList");
+    private final static QName _GetAverage_QNAME = new QName("http://webservices/", "getAverage");
+    private final static QName _ReturnCurrency_QNAME = new QName("http://webservices/", "returnCurrency");
+    private final static QName _GetAverageResponse_QNAME = new QName("http://webservices/", "getAverageResponse");
     private final static QName _GetCurrentPrice_QNAME = new QName("http://webservices/", "getCurrentPrice");
     private final static QName _GetCurrencyListResponse_QNAME = new QName("http://webservices/", "getCurrencyListResponse");
+    private final static QName _ReturnCurrencyResponse_QNAME = new QName("http://webservices/", "returnCurrencyResponse");
     private final static QName _GetCurrentPriceResponse_QNAME = new QName("http://webservices/", "getCurrentPriceResponse");
+    private final static QName _GetHistoricalDataResponse_QNAME = new QName("http://webservices/", "getHistoricalDataResponse");
+    private final static QName _GetHistoricalData_QNAME = new QName("http://webservices/", "getHistoricalData");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservices
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link GetHistoricalData }
+     * 
+     */
+    public GetHistoricalData createGetHistoricalData() {
+        return new GetHistoricalData();
+    }
+
+    /**
+     * Create an instance of {@link GetHistoricalDataResponse }
+     * 
+     */
+    public GetHistoricalDataResponse createGetHistoricalDataResponse() {
+        return new GetHistoricalDataResponse();
     }
 
     /**
@@ -45,6 +67,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ReturnCurrencyResponse }
+     * 
+     */
+    public ReturnCurrencyResponse createReturnCurrencyResponse() {
+        return new ReturnCurrencyResponse();
+    }
+
+    /**
      * Create an instance of {@link GetCurrencyListResponse }
      * 
      */
@@ -53,11 +83,35 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetAverageResponse }
+     * 
+     */
+    public GetAverageResponse createGetAverageResponse() {
+        return new GetAverageResponse();
+    }
+
+    /**
      * Create an instance of {@link GetCurrentPrice }
      * 
      */
     public GetCurrentPrice createGetCurrentPrice() {
         return new GetCurrentPrice();
+    }
+
+    /**
+     * Create an instance of {@link GetAverage }
+     * 
+     */
+    public GetAverage createGetAverage() {
+        return new GetAverage();
+    }
+
+    /**
+     * Create an instance of {@link ReturnCurrency }
+     * 
+     */
+    public ReturnCurrency createReturnCurrency() {
+        return new ReturnCurrency();
     }
 
     /**
@@ -75,6 +129,33 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "getCurrencyList")
     public JAXBElement<GetCurrencyList> createGetCurrencyList(GetCurrencyList value) {
         return new JAXBElement<GetCurrencyList>(_GetCurrencyList_QNAME, GetCurrencyList.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAverage }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getAverage")
+    public JAXBElement<GetAverage> createGetAverage(GetAverage value) {
+        return new JAXBElement<GetAverage>(_GetAverage_QNAME, GetAverage.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ReturnCurrency }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "returnCurrency")
+    public JAXBElement<ReturnCurrency> createReturnCurrency(ReturnCurrency value) {
+        return new JAXBElement<ReturnCurrency>(_ReturnCurrency_QNAME, ReturnCurrency.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAverageResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getAverageResponse")
+    public JAXBElement<GetAverageResponse> createGetAverageResponse(GetAverageResponse value) {
+        return new JAXBElement<GetAverageResponse>(_GetAverageResponse_QNAME, GetAverageResponse.class, null, value);
     }
 
     /**
@@ -96,12 +177,39 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ReturnCurrencyResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "returnCurrencyResponse")
+    public JAXBElement<ReturnCurrencyResponse> createReturnCurrencyResponse(ReturnCurrencyResponse value) {
+        return new JAXBElement<ReturnCurrencyResponse>(_ReturnCurrencyResponse_QNAME, ReturnCurrencyResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrentPriceResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://webservices/", name = "getCurrentPriceResponse")
     public JAXBElement<GetCurrentPriceResponse> createGetCurrentPriceResponse(GetCurrentPriceResponse value) {
         return new JAXBElement<GetCurrentPriceResponse>(_GetCurrentPriceResponse_QNAME, GetCurrentPriceResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetHistoricalDataResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getHistoricalDataResponse")
+    public JAXBElement<GetHistoricalDataResponse> createGetHistoricalDataResponse(GetHistoricalDataResponse value) {
+        return new JAXBElement<GetHistoricalDataResponse>(_GetHistoricalDataResponse_QNAME, GetHistoricalDataResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetHistoricalData }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getHistoricalData")
+    public JAXBElement<GetHistoricalData> createGetHistoricalData(GetHistoricalData value) {
+        return new JAXBElement<GetHistoricalData>(_GetHistoricalData_QNAME, GetHistoricalData.class, null, value);
     }
 
 }

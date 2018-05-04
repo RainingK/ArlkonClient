@@ -10,29 +10,11 @@
 <message name="setResultResponse">
 <part name="parameters" element="tns:setResultResponse"/>
 </message>
-<message name="checkTransactionExists">
-<part name="parameters" element="tns:checkTransactionExists"/>
+<message name="insertIntoDb">
+<part name="parameters" element="tns:insertIntoDb"/>
 </message>
-<message name="checkTransactionExistsResponse">
-<part name="parameters" element="tns:checkTransactionExistsResponse"/>
-</message>
-<message name="getPendingTransactionType">
-<part name="parameters" element="tns:getPendingTransactionType"/>
-</message>
-<message name="getPendingTransactionTypeResponse">
-<part name="parameters" element="tns:getPendingTransactionTypeResponse"/>
-</message>
-<message name="getExpiryDateTime">
-<part name="parameters" element="tns:getExpiryDateTime"/>
-</message>
-<message name="getExpiryDateTimeResponse">
-<part name="parameters" element="tns:getExpiryDateTimeResponse"/>
-</message>
-<message name="getTimeFrame">
-<part name="parameters" element="tns:getTimeFrame"/>
-</message>
-<message name="getTimeFrameResponse">
-<part name="parameters" element="tns:getTimeFrameResponse"/>
+<message name="insertIntoDbResponse">
+<part name="parameters" element="tns:insertIntoDbResponse"/>
 </message>
 <message name="getCurrency2">
 <part name="parameters" element="tns:getCurrency2"/>
@@ -40,11 +22,11 @@
 <message name="getCurrency2Response">
 <part name="parameters" element="tns:getCurrency2Response"/>
 </message>
-<message name="getStartPrice">
-<part name="parameters" element="tns:getStartPrice"/>
+<message name="getCurrency1">
+<part name="parameters" element="tns:getCurrency1"/>
 </message>
-<message name="getStartPriceResponse">
-<part name="parameters" element="tns:getStartPriceResponse"/>
+<message name="getCurrency1Response">
+<part name="parameters" element="tns:getCurrency1Response"/>
 </message>
 <message name="setEndPrice">
 <part name="parameters" element="tns:setEndPrice"/>
@@ -52,11 +34,11 @@
 <message name="setEndPriceResponse">
 <part name="parameters" element="tns:setEndPriceResponse"/>
 </message>
-<message name="insertIntoDb">
-<part name="parameters" element="tns:insertIntoDb"/>
+<message name="getEndPrice">
+<part name="parameters" element="tns:getEndPrice"/>
 </message>
-<message name="insertIntoDbResponse">
-<part name="parameters" element="tns:insertIntoDbResponse"/>
+<message name="getEndPriceResponse">
+<part name="parameters" element="tns:getEndPriceResponse"/>
 </message>
 <message name="getAmount">
 <part name="parameters" element="tns:getAmount"/>
@@ -64,76 +46,94 @@
 <message name="getAmountResponse">
 <part name="parameters" element="tns:getAmountResponse"/>
 </message>
-<message name="getEndPrice">
-<part name="parameters" element="tns:getEndPrice"/>
-</message>
-<message name="getEndPriceResponse">
-<part name="parameters" element="tns:getEndPriceResponse"/>
-</message>
-<message name="getCurrency1">
-<part name="parameters" element="tns:getCurrency1"/>
-</message>
-<message name="getCurrency1Response">
-<part name="parameters" element="tns:getCurrency1Response"/>
-</message>
 <message name="getDateTime">
 <part name="parameters" element="tns:getDateTime"/>
 </message>
 <message name="getDateTimeResponse">
 <part name="parameters" element="tns:getDateTimeResponse"/>
 </message>
+<message name="getTimeFrame">
+<part name="parameters" element="tns:getTimeFrame"/>
+</message>
+<message name="getTimeFrameResponse">
+<part name="parameters" element="tns:getTimeFrameResponse"/>
+</message>
+<message name="getStartPrice">
+<part name="parameters" element="tns:getStartPrice"/>
+</message>
+<message name="getStartPriceResponse">
+<part name="parameters" element="tns:getStartPriceResponse"/>
+</message>
+<message name="checkTransactionExists">
+<part name="parameters" element="tns:checkTransactionExists"/>
+</message>
+<message name="checkTransactionExistsResponse">
+<part name="parameters" element="tns:checkTransactionExistsResponse"/>
+</message>
+<message name="getExpiryDateTime">
+<part name="parameters" element="tns:getExpiryDateTime"/>
+</message>
+<message name="getExpiryDateTimeResponse">
+<part name="parameters" element="tns:getExpiryDateTimeResponse"/>
+</message>
+<message name="getPendingTransactionType">
+<part name="parameters" element="tns:getPendingTransactionType"/>
+</message>
+<message name="getPendingTransactionTypeResponse">
+<part name="parameters" element="tns:getPendingTransactionTypeResponse"/>
+</message>
 <portType name="BinaryTransactionsWS">
 <operation name="setResult">
 <input wsam:Action="http://webservices/BinaryTransactionsWS/setResultRequest" message="tns:setResult"/>
 <output wsam:Action="http://webservices/BinaryTransactionsWS/setResultResponse" message="tns:setResultResponse"/>
 </operation>
-<operation name="checkTransactionExists">
-<input wsam:Action="http://webservices/BinaryTransactionsWS/checkTransactionExistsRequest" message="tns:checkTransactionExists"/>
-<output wsam:Action="http://webservices/BinaryTransactionsWS/checkTransactionExistsResponse" message="tns:checkTransactionExistsResponse"/>
-</operation>
-<operation name="getPendingTransactionType">
-<input wsam:Action="http://webservices/BinaryTransactionsWS/getPendingTransactionTypeRequest" message="tns:getPendingTransactionType"/>
-<output wsam:Action="http://webservices/BinaryTransactionsWS/getPendingTransactionTypeResponse" message="tns:getPendingTransactionTypeResponse"/>
-</operation>
-<operation name="getExpiryDateTime">
-<input wsam:Action="http://webservices/BinaryTransactionsWS/getExpiryDateTimeRequest" message="tns:getExpiryDateTime"/>
-<output wsam:Action="http://webservices/BinaryTransactionsWS/getExpiryDateTimeResponse" message="tns:getExpiryDateTimeResponse"/>
-</operation>
-<operation name="getTimeFrame">
-<input wsam:Action="http://webservices/BinaryTransactionsWS/getTimeFrameRequest" message="tns:getTimeFrame"/>
-<output wsam:Action="http://webservices/BinaryTransactionsWS/getTimeFrameResponse" message="tns:getTimeFrameResponse"/>
+<operation name="insertIntoDb">
+<input wsam:Action="http://webservices/BinaryTransactionsWS/insertIntoDbRequest" message="tns:insertIntoDb"/>
+<output wsam:Action="http://webservices/BinaryTransactionsWS/insertIntoDbResponse" message="tns:insertIntoDbResponse"/>
 </operation>
 <operation name="getCurrency2">
 <input wsam:Action="http://webservices/BinaryTransactionsWS/getCurrency2Request" message="tns:getCurrency2"/>
 <output wsam:Action="http://webservices/BinaryTransactionsWS/getCurrency2Response" message="tns:getCurrency2Response"/>
 </operation>
-<operation name="getStartPrice">
-<input wsam:Action="http://webservices/BinaryTransactionsWS/getStartPriceRequest" message="tns:getStartPrice"/>
-<output wsam:Action="http://webservices/BinaryTransactionsWS/getStartPriceResponse" message="tns:getStartPriceResponse"/>
+<operation name="getCurrency1">
+<input wsam:Action="http://webservices/BinaryTransactionsWS/getCurrency1Request" message="tns:getCurrency1"/>
+<output wsam:Action="http://webservices/BinaryTransactionsWS/getCurrency1Response" message="tns:getCurrency1Response"/>
 </operation>
 <operation name="setEndPrice">
 <input wsam:Action="http://webservices/BinaryTransactionsWS/setEndPriceRequest" message="tns:setEndPrice"/>
 <output wsam:Action="http://webservices/BinaryTransactionsWS/setEndPriceResponse" message="tns:setEndPriceResponse"/>
 </operation>
-<operation name="insertIntoDb">
-<input wsam:Action="http://webservices/BinaryTransactionsWS/insertIntoDbRequest" message="tns:insertIntoDb"/>
-<output wsam:Action="http://webservices/BinaryTransactionsWS/insertIntoDbResponse" message="tns:insertIntoDbResponse"/>
+<operation name="getEndPrice">
+<input wsam:Action="http://webservices/BinaryTransactionsWS/getEndPriceRequest" message="tns:getEndPrice"/>
+<output wsam:Action="http://webservices/BinaryTransactionsWS/getEndPriceResponse" message="tns:getEndPriceResponse"/>
 </operation>
 <operation name="getAmount">
 <input wsam:Action="http://webservices/BinaryTransactionsWS/getAmountRequest" message="tns:getAmount"/>
 <output wsam:Action="http://webservices/BinaryTransactionsWS/getAmountResponse" message="tns:getAmountResponse"/>
 </operation>
-<operation name="getEndPrice">
-<input wsam:Action="http://webservices/BinaryTransactionsWS/getEndPriceRequest" message="tns:getEndPrice"/>
-<output wsam:Action="http://webservices/BinaryTransactionsWS/getEndPriceResponse" message="tns:getEndPriceResponse"/>
-</operation>
-<operation name="getCurrency1">
-<input wsam:Action="http://webservices/BinaryTransactionsWS/getCurrency1Request" message="tns:getCurrency1"/>
-<output wsam:Action="http://webservices/BinaryTransactionsWS/getCurrency1Response" message="tns:getCurrency1Response"/>
-</operation>
 <operation name="getDateTime">
 <input wsam:Action="http://webservices/BinaryTransactionsWS/getDateTimeRequest" message="tns:getDateTime"/>
 <output wsam:Action="http://webservices/BinaryTransactionsWS/getDateTimeResponse" message="tns:getDateTimeResponse"/>
+</operation>
+<operation name="getTimeFrame">
+<input wsam:Action="http://webservices/BinaryTransactionsWS/getTimeFrameRequest" message="tns:getTimeFrame"/>
+<output wsam:Action="http://webservices/BinaryTransactionsWS/getTimeFrameResponse" message="tns:getTimeFrameResponse"/>
+</operation>
+<operation name="getStartPrice">
+<input wsam:Action="http://webservices/BinaryTransactionsWS/getStartPriceRequest" message="tns:getStartPrice"/>
+<output wsam:Action="http://webservices/BinaryTransactionsWS/getStartPriceResponse" message="tns:getStartPriceResponse"/>
+</operation>
+<operation name="checkTransactionExists">
+<input wsam:Action="http://webservices/BinaryTransactionsWS/checkTransactionExistsRequest" message="tns:checkTransactionExists"/>
+<output wsam:Action="http://webservices/BinaryTransactionsWS/checkTransactionExistsResponse" message="tns:checkTransactionExistsResponse"/>
+</operation>
+<operation name="getExpiryDateTime">
+<input wsam:Action="http://webservices/BinaryTransactionsWS/getExpiryDateTimeRequest" message="tns:getExpiryDateTime"/>
+<output wsam:Action="http://webservices/BinaryTransactionsWS/getExpiryDateTimeResponse" message="tns:getExpiryDateTimeResponse"/>
+</operation>
+<operation name="getPendingTransactionType">
+<input wsam:Action="http://webservices/BinaryTransactionsWS/getPendingTransactionTypeRequest" message="tns:getPendingTransactionType"/>
+<output wsam:Action="http://webservices/BinaryTransactionsWS/getPendingTransactionTypeResponse" message="tns:getPendingTransactionTypeResponse"/>
 </operation>
 </portType>
 <binding name="BinaryTransactionsWSPortBinding" type="tns:BinaryTransactionsWS">
@@ -147,34 +147,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="checkTransactionExists">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getPendingTransactionType">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getExpiryDateTime">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getTimeFrame">
+<operation name="insertIntoDb">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -192,7 +165,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getStartPrice">
+<operation name="getCurrency1">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -210,7 +183,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="insertIntoDb">
+<operation name="getEndPrice">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -228,25 +201,52 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getEndPrice">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getCurrency1">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="getDateTime">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getTimeFrame">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getStartPrice">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="checkTransactionExists">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getExpiryDateTime">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getPendingTransactionType">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

@@ -27,6 +27,24 @@ public interface CurrencyApiWS {
 
     /**
      * 
+     * @param currency1
+     * @param currency2
+     * @return
+     *     returns double
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getCurrentPrice", targetNamespace = "http://webservices/", className = "webservices.GetCurrentPrice")
+    @ResponseWrapper(localName = "getCurrentPriceResponse", targetNamespace = "http://webservices/", className = "webservices.GetCurrentPriceResponse")
+    @Action(input = "http://webservices/CurrencyApiWS/getCurrentPriceRequest", output = "http://webservices/CurrencyApiWS/getCurrentPriceResponse")
+    public double getCurrentPrice(
+        @WebParam(name = "currency1", targetNamespace = "")
+        String currency1,
+        @WebParam(name = "currency2", targetNamespace = "")
+        String currency2);
+
+    /**
+     * 
      * @return
      *     returns java.util.List<java.lang.String>
      */
@@ -39,6 +57,30 @@ public interface CurrencyApiWS {
 
     /**
      * 
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAverage", targetNamespace = "http://webservices/", className = "webservices.GetAverage")
+    @ResponseWrapper(localName = "getAverageResponse", targetNamespace = "http://webservices/", className = "webservices.GetAverageResponse")
+    @Action(input = "http://webservices/CurrencyApiWS/getAverageRequest", output = "http://webservices/CurrencyApiWS/getAverageResponse")
+    public String getAverage();
+
+    /**
+     * 
+     * @return
+     *     returns double
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "returnCurrency", targetNamespace = "http://webservices/", className = "webservices.ReturnCurrency")
+    @ResponseWrapper(localName = "returnCurrencyResponse", targetNamespace = "http://webservices/", className = "webservices.ReturnCurrencyResponse")
+    @Action(input = "http://webservices/CurrencyApiWS/returnCurrencyRequest", output = "http://webservices/CurrencyApiWS/returnCurrencyResponse")
+    public double returnCurrency();
+
+    /**
+     * 
      * @param currency1
      * @param currency2
      * @return
@@ -46,10 +88,10 @@ public interface CurrencyApiWS {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getCurrentPrice", targetNamespace = "http://webservices/", className = "webservices.GetCurrentPrice")
-    @ResponseWrapper(localName = "getCurrentPriceResponse", targetNamespace = "http://webservices/", className = "webservices.GetCurrentPriceResponse")
-    @Action(input = "http://webservices/CurrencyApiWS/getCurrentPriceRequest", output = "http://webservices/CurrencyApiWS/getCurrentPriceResponse")
-    public double getCurrentPrice(
+    @RequestWrapper(localName = "getHistoricalData", targetNamespace = "http://webservices/", className = "webservices.GetHistoricalData")
+    @ResponseWrapper(localName = "getHistoricalDataResponse", targetNamespace = "http://webservices/", className = "webservices.GetHistoricalDataResponse")
+    @Action(input = "http://webservices/CurrencyApiWS/getHistoricalDataRequest", output = "http://webservices/CurrencyApiWS/getHistoricalDataResponse")
+    public double getHistoricalData(
         @WebParam(name = "currency1", targetNamespace = "")
         String currency1,
         @WebParam(name = "currency2", targetNamespace = "")

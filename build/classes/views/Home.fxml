@@ -33,7 +33,7 @@
                   </Label>
                   <Pane fx:id="first_activity" layoutY="39.0" prefHeight="94.0" prefWidth="214.0" styleClass="single_activity_containers">
                      <children>
-                        <Label fx:id="first_title_label" layoutX="56.0" layoutY="7.0" prefHeight="21.0" prefWidth="152.0" styleClass="activity_title_labels" textFill="WHITE" />
+                        <Label fx:id="first_title_label" layoutX="8.0" layoutY="7.0" prefHeight="21.0" prefWidth="200.0" styleClass="activity_title_labels" textFill="WHITE" />
                         <Label fx:id="first_subtitle_label" layoutX="7.0" layoutY="35.0" prefHeight="51.0" prefWidth="200.0" styleClass="activity_subtitle_labels" textFill="WHITE">
                            <font>
                               <Font size="13.0" />

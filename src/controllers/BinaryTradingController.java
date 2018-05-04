@@ -34,6 +34,7 @@ import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -102,6 +103,10 @@ public class BinaryTradingController implements Initializable {
     @FXML
     private Label balance_val_label;
 
+    //Tip Label
+    @FXML
+    private Label tip_content_label;
+    
     // Called amount and end time labels
     @FXML
     private Label called_amount_label, end_time_label, called_at_val_label, put_amount_label, put_end_time_label, put_at_val_label;
@@ -139,7 +144,6 @@ public class BinaryTradingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Fade in window
-
         Transition trans = new Transition();
         trans.setWindow(main_window);
         trans.fadeInTransition();
@@ -229,6 +233,34 @@ public class BinaryTradingController implements Initializable {
 
     private void loadGraph(String currency1, String currency2) {
         double currentPrice = getCurrentPrice(currency1, currency2);
+        
+        Task<String> showTipTask = new Task<String>() {
+            @Override
+            protected String call() throws Exception {
+                String avg = getAverage();
+                
+                return avg;
+            }
+        };
+        
+        showTipTask.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                String averageCurrency = showTipTask.getValue();
+                
+                if(averageCurrency.equals("")){
+                    tip_content_label.setText("Historical data is unavailable");
+                } else {
+                    if(returnCurrency() < 0) {
+                        tip_content_label.setText("How about a PUT on " + averageCurrency + "?");
+                    } else {
+                        tip_content_label.setText("How about a CALL on " + averageCurrency + "?");
+                    }
+                }
+            }
+        });
+        
+        new Thread(showTipTask).start();
 
         XYChart.Series series = new XYChart.Series();
 
@@ -243,13 +275,22 @@ public class BinaryTradingController implements Initializable {
 
             @Override
             public void handle(ActionEvent event) {
-                double currentPrice = getCurrentPrice(currency1, currency2);
+                String currency1 = currency1_dropdown.getSelectionModel().getSelectedItem().toString();
+                String currency2 = currency2_dropdown.getSelectionModel().getSelectedItem().toString();
+                
+                double currentPrice = 0.0;
+                
+                if(currency1.equals(currency2)){
+                    currency1_dropdown.getSelectionModel().select(0);
+                    currency2_dropdown.getSelectionModel().select(1);
+                    currentPrice = getCurrentPrice("USD", "EUR");
+                } else {
+                    currentPrice = getCurrentPrice(currency1, currency2);
+                }
+                
                 min = (currentPrice) - 0.1;
                 max = (currentPrice) + 0.1;
-
-                System.out.println("MIN: " + min);
-                System.out.println("MAX: " + max);
-
+                
                 // Generate random decimals
                 Random rand = new Random();
                 generatedDecimal = -0.01 + (0.1 - (-0.01)) * rand.nextDouble();
@@ -739,7 +780,7 @@ public class BinaryTradingController implements Initializable {
             amount = Double.parseDouble(amountText);
         }
 
-        if (balance < amount) {
+        if (balance < amount || amount < 1) {
             call_btn.setDisable(true);
             put_btn.setDisable(true);
         } else {
@@ -753,20 +794,22 @@ public class BinaryTradingController implements Initializable {
     @FXML
     private void displayGraph() {
         // View Button is clicked
-        view_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent t) {
-                String currency1 = currency1_dropdown.getValue().toString();
-                String currency2 = currency2_dropdown.getValue().toString();
+        Platform.runLater(() -> {
+            view_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent t) {
+                    String currency1 = currency1_dropdown.getValue().toString();
+                    String currency2 = currency2_dropdown.getValue().toString();
 
-                view_btn.setDisable(true);
+                    view_btn.setDisable(true);
 
-                if (!currency1.equals(currency2)) {
-                    main_window.getChildren().remove(areaChart);
-                    areaChart.getData().removeAll(areaChart.getData());
-                    loadGraph(currency1, currency2);
+                    if (!currency1.equals(currency2)) {
+                        main_window.getChildren().remove(areaChart);
+                        areaChart.getData().removeAll(areaChart.getData());
+                        loadGraph(currency1, currency2);
+                    }
                 }
-            }
+            });
         });
     }
 
@@ -919,12 +962,6 @@ public class BinaryTradingController implements Initializable {
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getStartPrice(userId);
     }
-
-    private static double getEndPrice(int userId) {
-        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
-        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
-        return port.getEndPrice(userId);
-    }
     
     private static double getAmount(int userId) {
         webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
@@ -942,18 +979,6 @@ public class BinaryTradingController implements Initializable {
         webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getCurrency2(userId);
-    }
-
-    private static int getTimeFrame(int userId) {
-        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
-        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
-        return port.getTimeFrame(userId);
-    }
-
-    private static String getDateTime(int userId) {
-        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
-        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
-        return port.getDateTime(userId);
     }
     
     private static String getPendingTransactionType(int userId) {
@@ -974,6 +999,17 @@ public class BinaryTradingController implements Initializable {
         return port.getExpiryDateTime(userId);
     }
 
+    private static String getAverage() {
+        webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
+        webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
+        return port.getAverage();
+    }
+
+    private static double returnCurrency() {
+        webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
+        webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
+        return port.returnCurrency();
+    }
 }
 
 /* Todo: 
