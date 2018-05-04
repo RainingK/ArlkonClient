@@ -239,6 +239,9 @@ public class BinaryTradingController implements Initializable {
             protected String call() throws Exception {
                 String avg = getAverage();
                 
+                if(avg.equals("")){
+                    call();
+                }
                 return avg;
             }
         };
@@ -742,7 +745,14 @@ public class BinaryTradingController implements Initializable {
             called_amount_label.setText("$" + amount);
 
             // Set the price level at which user called
-            called_at_val_label.setText("" + (getCurrentPrice(currency1, currency2) + generatedDecimal));
+            double called_at = (getCurrentPrice(currency1, currency2) + generatedDecimal);
+            
+            // Round to 3 decimals
+            called_at = called_at * 1000;
+            called_at = Math.round(called_at);
+            called_at = called_at /1000;
+            
+            called_at_val_label.setText("" + called_at);
 
             // Set the max time remaining
             end_time_label.setText("" + final_totalSeconds);

@@ -26,6 +26,7 @@ public class ObjectFactory {
 
     private final static QName _GetEndPrice_QNAME = new QName("http://webservices/", "getEndPrice");
     private final static QName _GetPendingTransactionTypeResponse_QNAME = new QName("http://webservices/", "getPendingTransactionTypeResponse");
+    private final static QName _GetFinishedTransactionPriceResponse_QNAME = new QName("http://webservices/", "getFinishedTransactionPriceResponse");
     private final static QName _GetAmountResponse_QNAME = new QName("http://webservices/", "getAmountResponse");
     private final static QName _GetStartPriceResponse_QNAME = new QName("http://webservices/", "getStartPriceResponse");
     private final static QName _CheckTransactionExists_QNAME = new QName("http://webservices/", "checkTransactionExists");
@@ -50,12 +51,21 @@ public class ObjectFactory {
     private final static QName _GetPendingTransactionType_QNAME = new QName("http://webservices/", "getPendingTransactionType");
     private final static QName _InsertIntoDbResponse_QNAME = new QName("http://webservices/", "insertIntoDbResponse");
     private final static QName _SetResult_QNAME = new QName("http://webservices/", "setResult");
+    private final static QName _GetFinishedTransactionPrice_QNAME = new QName("http://webservices/", "getFinishedTransactionPrice");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservices
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link GetFinishedTransactionPrice }
+     * 
+     */
+    public GetFinishedTransactionPrice createGetFinishedTransactionPrice() {
+        return new GetFinishedTransactionPrice();
     }
 
     /**
@@ -251,6 +261,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetFinishedTransactionPriceResponse }
+     * 
+     */
+    public GetFinishedTransactionPriceResponse createGetFinishedTransactionPriceResponse() {
+        return new GetFinishedTransactionPriceResponse();
+    }
+
+    /**
      * Create an instance of {@link GetEndPrice }
      * 
      */
@@ -282,6 +300,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "getPendingTransactionTypeResponse")
     public JAXBElement<GetPendingTransactionTypeResponse> createGetPendingTransactionTypeResponse(GetPendingTransactionTypeResponse value) {
         return new JAXBElement<GetPendingTransactionTypeResponse>(_GetPendingTransactionTypeResponse_QNAME, GetPendingTransactionTypeResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetFinishedTransactionPriceResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getFinishedTransactionPriceResponse")
+    public JAXBElement<GetFinishedTransactionPriceResponse> createGetFinishedTransactionPriceResponse(GetFinishedTransactionPriceResponse value) {
+        return new JAXBElement<GetFinishedTransactionPriceResponse>(_GetFinishedTransactionPriceResponse_QNAME, GetFinishedTransactionPriceResponse.class, null, value);
     }
 
     /**
@@ -498,6 +525,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "setResult")
     public JAXBElement<SetResult> createSetResult(SetResult value) {
         return new JAXBElement<SetResult>(_SetResult_QNAME, SetResult.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetFinishedTransactionPrice }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getFinishedTransactionPrice")
+    public JAXBElement<GetFinishedTransactionPrice> createGetFinishedTransactionPrice(GetFinishedTransactionPrice value) {
+        return new JAXBElement<GetFinishedTransactionPrice>(_GetFinishedTransactionPrice_QNAME, GetFinishedTransactionPrice.class, null, value);
     }
 
 }

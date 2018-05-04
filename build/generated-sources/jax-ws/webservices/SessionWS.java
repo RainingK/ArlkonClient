@@ -26,45 +26,6 @@ public interface SessionWS {
 
     /**
      * 
-     * @param password
-     * @param email
-     * @param cpassword
-     * @param username
-     * @return
-     *     returns java.lang.Boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "signUp", targetNamespace = "http://webservices/", className = "webservices.SignUp")
-    @ResponseWrapper(localName = "signUpResponse", targetNamespace = "http://webservices/", className = "webservices.SignUpResponse")
-    @Action(input = "http://webservices/SessionWS/signUpRequest", output = "http://webservices/SessionWS/signUpResponse")
-    public Boolean signUp(
-        @WebParam(name = "username", targetNamespace = "")
-        String username,
-        @WebParam(name = "email", targetNamespace = "")
-        String email,
-        @WebParam(name = "password", targetNamespace = "")
-        String password,
-        @WebParam(name = "Cpassword", targetNamespace = "")
-        String cpassword);
-
-    /**
-     * 
-     * @param email
-     * @return
-     *     returns java.lang.Boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "checkEmailExists", targetNamespace = "http://webservices/", className = "webservices.CheckEmailExists")
-    @ResponseWrapper(localName = "checkEmailExistsResponse", targetNamespace = "http://webservices/", className = "webservices.CheckEmailExistsResponse")
-    @Action(input = "http://webservices/SessionWS/checkEmailExistsRequest", output = "http://webservices/SessionWS/checkEmailExistsResponse")
-    public Boolean checkEmailExists(
-        @WebParam(name = "email", targetNamespace = "")
-        String email);
-
-    /**
-     * 
      * @param username
      * @return
      *     returns java.lang.Boolean
@@ -95,5 +56,44 @@ public interface SessionWS {
         String username,
         @WebParam(name = "password", targetNamespace = "")
         String password);
+
+    /**
+     * 
+     * @param email
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "checkEmailExists", targetNamespace = "http://webservices/", className = "webservices.CheckEmailExists")
+    @ResponseWrapper(localName = "checkEmailExistsResponse", targetNamespace = "http://webservices/", className = "webservices.CheckEmailExistsResponse")
+    @Action(input = "http://webservices/SessionWS/checkEmailExistsRequest", output = "http://webservices/SessionWS/checkEmailExistsResponse")
+    public Boolean checkEmailExists(
+        @WebParam(name = "email", targetNamespace = "")
+        String email);
+
+    /**
+     * 
+     * @param password
+     * @param email
+     * @param cpassword
+     * @param username
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "signUp", targetNamespace = "http://webservices/", className = "webservices.SignUp")
+    @ResponseWrapper(localName = "signUpResponse", targetNamespace = "http://webservices/", className = "webservices.SignUpResponse")
+    @Action(input = "http://webservices/SessionWS/signUpRequest", output = "http://webservices/SessionWS/signUpResponse")
+    public Boolean signUp(
+        @WebParam(name = "username", targetNamespace = "")
+        String username,
+        @WebParam(name = "email", targetNamespace = "")
+        String email,
+        @WebParam(name = "password", targetNamespace = "")
+        String password,
+        @WebParam(name = "Cpassword", targetNamespace = "")
+        String cpassword);
 
 }

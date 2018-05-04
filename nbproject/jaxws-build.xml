@@ -50,23 +50,6 @@
         <delete dir="${build.generated.dir}/jax-wsCache/CurrencyApiWS"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
     </target>
-    <target name="wsimport-client-BinaryTransactionsWS" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/BinaryTransactionsWS"/>
-        <property name="wsdl-BinaryTransactionsWS" location="xml-resources/web-service-references/BinaryTransactionsWS/wsdl/localhost_8080/ArlkonServer/BinaryTransactionsWS.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/BinaryTransactionsWS" destdir="${build.generated.dir}/jax-wsCache/BinaryTransactionsWS" wsdl="${wsdl-BinaryTransactionsWS}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl" xnocompile="true" xendorsed="true">
-            <depends file="${wsdl-BinaryTransactionsWS}"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/BinaryTransactionsWS"/>
-        </wsimport>
-        <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/BinaryTransactionsWS">
-                <include name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="wsimport-client-clean-BinaryTransactionsWS" depends="-init-project">
-        <delete dir="${build.generated.dir}/jax-wsCache/BinaryTransactionsWS"/>
-        <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
-    </target>
     <target name="wsimport-client-UserWS" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/UserWS"/>
         <property name="wsdl-UserWS" location="xml-resources/web-service-references/UserWS/wsdl/localhost_8080/ArlkonServer/UserWS.wsdl"/>
@@ -118,5 +101,22 @@
         <delete dir="${build.generated.dir}/jax-wsCache/IWWS"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-SessionWS, wsimport-client-CurrencyApiWS, wsimport-client-BinaryTransactionsWS, wsimport-client-UserWS, wsimport-client-ProfileWS, wsimport-client-IWWS"/>
+    <target name="wsimport-client-BinaryTransactionsWS" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/BinaryTransactionsWS"/>
+        <property name="wsdl-BinaryTransactionsWS" location="xml-resources/web-service-references/BinaryTransactionsWS/wsdl/localhost_8080/ArlkonServer/BinaryTransactionsWS.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/BinaryTransactionsWS" destdir="${build.generated.dir}/jax-wsCache/BinaryTransactionsWS" wsdl="${wsdl-BinaryTransactionsWS}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-BinaryTransactionsWS}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/BinaryTransactionsWS"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/BinaryTransactionsWS">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-BinaryTransactionsWS" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/BinaryTransactionsWS"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-SessionWS, wsimport-client-CurrencyApiWS, wsimport-client-UserWS, wsimport-client-ProfileWS, wsimport-client-IWWS, wsimport-client-BinaryTransactionsWS"/>
 </project>

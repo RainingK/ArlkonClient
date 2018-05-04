@@ -27,6 +27,30 @@ public interface CurrencyApiWS {
 
     /**
      * 
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getAverage", targetNamespace = "http://webservices/", className = "webservices.GetAverage")
+    @ResponseWrapper(localName = "getAverageResponse", targetNamespace = "http://webservices/", className = "webservices.GetAverageResponse")
+    @Action(input = "http://webservices/CurrencyApiWS/getAverageRequest", output = "http://webservices/CurrencyApiWS/getAverageResponse")
+    public String getAverage();
+
+    /**
+     * 
+     * @return
+     *     returns double
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "returnCurrency", targetNamespace = "http://webservices/", className = "webservices.ReturnCurrency")
+    @ResponseWrapper(localName = "returnCurrencyResponse", targetNamespace = "http://webservices/", className = "webservices.ReturnCurrencyResponse")
+    @Action(input = "http://webservices/CurrencyApiWS/returnCurrencyRequest", output = "http://webservices/CurrencyApiWS/returnCurrencyResponse")
+    public double returnCurrency();
+
+    /**
+     * 
      * @param currency1
      * @param currency2
      * @return
@@ -54,30 +78,6 @@ public interface CurrencyApiWS {
     @ResponseWrapper(localName = "getCurrencyListResponse", targetNamespace = "http://webservices/", className = "webservices.GetCurrencyListResponse")
     @Action(input = "http://webservices/CurrencyApiWS/getCurrencyListRequest", output = "http://webservices/CurrencyApiWS/getCurrencyListResponse")
     public List<String> getCurrencyList();
-
-    /**
-     * 
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getAverage", targetNamespace = "http://webservices/", className = "webservices.GetAverage")
-    @ResponseWrapper(localName = "getAverageResponse", targetNamespace = "http://webservices/", className = "webservices.GetAverageResponse")
-    @Action(input = "http://webservices/CurrencyApiWS/getAverageRequest", output = "http://webservices/CurrencyApiWS/getAverageResponse")
-    public String getAverage();
-
-    /**
-     * 
-     * @return
-     *     returns double
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "returnCurrency", targetNamespace = "http://webservices/", className = "webservices.ReturnCurrency")
-    @ResponseWrapper(localName = "returnCurrencyResponse", targetNamespace = "http://webservices/", className = "webservices.ReturnCurrencyResponse")
-    @Action(input = "http://webservices/CurrencyApiWS/returnCurrencyRequest", output = "http://webservices/CurrencyApiWS/returnCurrencyResponse")
-    public double returnCurrency();
 
     /**
      * 

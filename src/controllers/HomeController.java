@@ -85,12 +85,17 @@ public class HomeController implements Initializable {
     
     // Transition
     Transition trans = new Transition();
+    
+    private final double PROFIT_PERCENTAGE = 0.86;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
         // Load recent activities
         loadRecentActivities();
+        
+        // Show result of any completed transaction
+        showCompletedBinaryTransaction();
         
         // Header effects
         trans.applyHeaderEffect(profile_btn_pane, profile_btn, profile_btn_label);
@@ -221,8 +226,67 @@ public class HomeController implements Initializable {
         // Transaction Expired
         if(nowDate.after(expiryDate)){
             String pendingType = getPendingTransactionType(user_id);
+            double startPrice = getStartPrice(user_id);
+            double endPrice = getFinishedTransactionPrice(user_id);
+            double result = 0;
+            double amount = getAmount(user_id);
             
+            String message = "";
             
+            if((endPrice > startPrice)){
+                if(pendingType.equals("call")){
+                    // Won call
+                    result = (amount + (amount * PROFIT_PERCENTAGE));
+                    message = "Congratulations! You have earned " + result + " from your last CALL transaction!";
+                    
+                    // Set end result
+                    setResult(result, user_id);
+                } else if(pendingType.equals("put")){
+                    // Lost put
+                    message = "Oops! You have lost " + amount + " from your last PUT transaction!";
+                }
+            } else if(endPrice < startPrice){
+                if(pendingType.equals("put")){
+                    // Won put
+                    result = (amount + (amount * PROFIT_PERCENTAGE));
+                    message = "Congratulations! You have earned " + result + " from your last PUT transaction!";
+                    
+                    // Set end result
+                    setResult(result, user_id);
+                } else if(pendingType.equals("call")){
+                    // Lost call
+                    message = "Oops! You have lost " + amount + " from your last CALL transaction!";
+                }
+            }
+            
+            // Set the end price level to show it is completed
+            setEndPrice(endPrice, user_id);
+            
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setHeading(new Text("Your last transaction has ended!"));
+            content.setBody(new Text(message));
+            
+            StackPane dialog_container = new StackPane();
+            
+            // Add stack pane to the main_window
+            main_window.getChildren().add(dialog_container);
+            
+            // Center the dialog container
+            dialog_container.layoutXProperty().bind(main_window.widthProperty().subtract(dialog_container.widthProperty()).divide(2));
+            dialog_container.layoutYProperty().bind(main_window.heightProperty().subtract(dialog_container.heightProperty()).divide(2));
+            
+            JFXDialog dialog = new JFXDialog(dialog_container, content, JFXDialog.DialogTransition.CENTER);
+            JFXButton button = new JFXButton("Okay");
+            
+            button.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent event) {
+                    dialog.close();
+                }
+            });
+            
+            content.setActions(button);
+            dialog.show();
         }
     }
 
@@ -350,5 +414,35 @@ public class HomeController implements Initializable {
         webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getExpiryDateTime(userId);
+    }
+
+    private static double getStartPrice(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getStartPrice(userId);
+    }
+
+    private static double getFinishedTransactionPrice(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getFinishedTransactionPrice(userId);
+    }
+
+    private static void setEndPrice(double price, int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        port.setEndPrice(price, userId);
+    }
+
+    private static double getAmount(int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getAmount(userId);
+    }
+
+    private static void setResult(double result, int userId) {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        port.setResult(result, userId);
     }
 }

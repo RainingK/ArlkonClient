@@ -24,20 +24,34 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _GetProfitValueResponse_QNAME = new QName("http://webservices/", "getProfitValueResponse");
-    private final static QName _GetTransactionAmountResponse_QNAME = new QName("http://webservices/", "getTransactionAmountResponse");
-    private final static QName _GetLossValue_QNAME = new QName("http://webservices/", "getLossValue");
-    private final static QName _GetLossValueResponse_QNAME = new QName("http://webservices/", "getLossValueResponse");
-    private final static QName _InsertIntoDB_QNAME = new QName("http://webservices/", "insertIntoDB");
-    private final static QName _InsertIntoDetails_QNAME = new QName("http://webservices/", "insertIntoDetails");
-    private final static QName _GetTransactionAmount_QNAME = new QName("http://webservices/", "getTransactionAmount");
-    private final static QName _GetTransactionResultResponse_QNAME = new QName("http://webservices/", "getTransactionResultResponse");
-    private final static QName _GetProfitValue_QNAME = new QName("http://webservices/", "getProfitValue");
-    private final static QName _GetEndMethod_QNAME = new QName("http://webservices/", "getEndMethod");
-    private final static QName _InsertIntoDetailsResponse_QNAME = new QName("http://webservices/", "insertIntoDetailsResponse");
-    private final static QName _GetTransactionResult_QNAME = new QName("http://webservices/", "getTransactionResult");
-    private final static QName _GetEndMethodResponse_QNAME = new QName("http://webservices/", "getEndMethodResponse");
-    private final static QName _InsertIntoDBResponse_QNAME = new QName("http://webservices/", "insertIntoDBResponse");
+    private final static QName _GetEndPrice_QNAME = new QName("http://webservices/", "getEndPrice");
+    private final static QName _GetPendingTransactionTypeResponse_QNAME = new QName("http://webservices/", "getPendingTransactionTypeResponse");
+    private final static QName _GetFinishedTransactionPriceResponse_QNAME = new QName("http://webservices/", "getFinishedTransactionPriceResponse");
+    private final static QName _GetAmountResponse_QNAME = new QName("http://webservices/", "getAmountResponse");
+    private final static QName _GetStartPriceResponse_QNAME = new QName("http://webservices/", "getStartPriceResponse");
+    private final static QName _CheckTransactionExists_QNAME = new QName("http://webservices/", "checkTransactionExists");
+    private final static QName _GetExpiryDateTimeResponse_QNAME = new QName("http://webservices/", "getExpiryDateTimeResponse");
+    private final static QName _GetExpiryDateTime_QNAME = new QName("http://webservices/", "getExpiryDateTime");
+    private final static QName _SetEndPrice_QNAME = new QName("http://webservices/", "setEndPrice");
+    private final static QName _GetDateTimeResponse_QNAME = new QName("http://webservices/", "getDateTimeResponse");
+    private final static QName _GetEndPriceResponse_QNAME = new QName("http://webservices/", "getEndPriceResponse");
+    private final static QName _SetResultResponse_QNAME = new QName("http://webservices/", "setResultResponse");
+    private final static QName _GetDateTime_QNAME = new QName("http://webservices/", "getDateTime");
+    private final static QName _GetAmount_QNAME = new QName("http://webservices/", "getAmount");
+    private final static QName _CheckTransactionExistsResponse_QNAME = new QName("http://webservices/", "checkTransactionExistsResponse");
+    private final static QName _InsertIntoDb_QNAME = new QName("http://webservices/", "insertIntoDb");
+    private final static QName _GetCurrency1_QNAME = new QName("http://webservices/", "getCurrency1");
+    private final static QName _GetStartPrice_QNAME = new QName("http://webservices/", "getStartPrice");
+    private final static QName _GetCurrency2_QNAME = new QName("http://webservices/", "getCurrency2");
+    private final static QName _GetTimeFrame_QNAME = new QName("http://webservices/", "getTimeFrame");
+    private final static QName _GetTimeFrameResponse_QNAME = new QName("http://webservices/", "getTimeFrameResponse");
+    private final static QName _SetEndPriceResponse_QNAME = new QName("http://webservices/", "setEndPriceResponse");
+    private final static QName _GetCurrency1Response_QNAME = new QName("http://webservices/", "getCurrency1Response");
+    private final static QName _GetCurrency2Response_QNAME = new QName("http://webservices/", "getCurrency2Response");
+    private final static QName _GetPendingTransactionType_QNAME = new QName("http://webservices/", "getPendingTransactionType");
+    private final static QName _InsertIntoDbResponse_QNAME = new QName("http://webservices/", "insertIntoDbResponse");
+    private final static QName _SetResult_QNAME = new QName("http://webservices/", "setResult");
+    private final static QName _GetFinishedTransactionPrice_QNAME = new QName("http://webservices/", "getFinishedTransactionPrice");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservices
@@ -47,241 +61,479 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetEndMethodResponse }
+     * Create an instance of {@link GetFinishedTransactionPrice }
      * 
      */
-    public GetEndMethodResponse createGetEndMethodResponse() {
-        return new GetEndMethodResponse();
+    public GetFinishedTransactionPrice createGetFinishedTransactionPrice() {
+        return new GetFinishedTransactionPrice();
     }
 
     /**
-     * Create an instance of {@link InsertIntoDBResponse }
+     * Create an instance of {@link SetResult }
      * 
      */
-    public InsertIntoDBResponse createInsertIntoDBResponse() {
-        return new InsertIntoDBResponse();
+    public SetResult createSetResult() {
+        return new SetResult();
     }
 
     /**
-     * Create an instance of {@link GetTransactionResult }
+     * Create an instance of {@link InsertIntoDbResponse }
      * 
      */
-    public GetTransactionResult createGetTransactionResult() {
-        return new GetTransactionResult();
+    public InsertIntoDbResponse createInsertIntoDbResponse() {
+        return new InsertIntoDbResponse();
     }
 
     /**
-     * Create an instance of {@link GetEndMethod }
+     * Create an instance of {@link GetPendingTransactionType }
      * 
      */
-    public GetEndMethod createGetEndMethod() {
-        return new GetEndMethod();
+    public GetPendingTransactionType createGetPendingTransactionType() {
+        return new GetPendingTransactionType();
     }
 
     /**
-     * Create an instance of {@link InsertIntoDetailsResponse }
+     * Create an instance of {@link GetCurrency1Response }
      * 
      */
-    public InsertIntoDetailsResponse createInsertIntoDetailsResponse() {
-        return new InsertIntoDetailsResponse();
+    public GetCurrency1Response createGetCurrency1Response() {
+        return new GetCurrency1Response();
     }
 
     /**
-     * Create an instance of {@link GetProfitValue }
+     * Create an instance of {@link GetCurrency2Response }
      * 
      */
-    public GetProfitValue createGetProfitValue() {
-        return new GetProfitValue();
+    public GetCurrency2Response createGetCurrency2Response() {
+        return new GetCurrency2Response();
     }
 
     /**
-     * Create an instance of {@link GetTransactionResultResponse }
+     * Create an instance of {@link SetEndPriceResponse }
      * 
      */
-    public GetTransactionResultResponse createGetTransactionResultResponse() {
-        return new GetTransactionResultResponse();
+    public SetEndPriceResponse createSetEndPriceResponse() {
+        return new SetEndPriceResponse();
     }
 
     /**
-     * Create an instance of {@link GetTransactionAmount }
+     * Create an instance of {@link GetTimeFrameResponse }
      * 
      */
-    public GetTransactionAmount createGetTransactionAmount() {
-        return new GetTransactionAmount();
+    public GetTimeFrameResponse createGetTimeFrameResponse() {
+        return new GetTimeFrameResponse();
     }
 
     /**
-     * Create an instance of {@link InsertIntoDetails }
+     * Create an instance of {@link GetTimeFrame }
      * 
      */
-    public InsertIntoDetails createInsertIntoDetails() {
-        return new InsertIntoDetails();
+    public GetTimeFrame createGetTimeFrame() {
+        return new GetTimeFrame();
     }
 
     /**
-     * Create an instance of {@link GetLossValueResponse }
+     * Create an instance of {@link GetCurrency2 }
      * 
      */
-    public GetLossValueResponse createGetLossValueResponse() {
-        return new GetLossValueResponse();
+    public GetCurrency2 createGetCurrency2() {
+        return new GetCurrency2();
     }
 
     /**
-     * Create an instance of {@link InsertIntoDB }
+     * Create an instance of {@link GetCurrency1 }
      * 
      */
-    public InsertIntoDB createInsertIntoDB() {
-        return new InsertIntoDB();
+    public GetCurrency1 createGetCurrency1() {
+        return new GetCurrency1();
     }
 
     /**
-     * Create an instance of {@link GetLossValue }
+     * Create an instance of {@link GetStartPrice }
      * 
      */
-    public GetLossValue createGetLossValue() {
-        return new GetLossValue();
+    public GetStartPrice createGetStartPrice() {
+        return new GetStartPrice();
     }
 
     /**
-     * Create an instance of {@link GetTransactionAmountResponse }
+     * Create an instance of {@link CheckTransactionExistsResponse }
      * 
      */
-    public GetTransactionAmountResponse createGetTransactionAmountResponse() {
-        return new GetTransactionAmountResponse();
+    public CheckTransactionExistsResponse createCheckTransactionExistsResponse() {
+        return new CheckTransactionExistsResponse();
     }
 
     /**
-     * Create an instance of {@link GetProfitValueResponse }
+     * Create an instance of {@link InsertIntoDb }
      * 
      */
-    public GetProfitValueResponse createGetProfitValueResponse() {
-        return new GetProfitValueResponse();
+    public InsertIntoDb createInsertIntoDb() {
+        return new InsertIntoDb();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetProfitValueResponse }{@code >}}
+     * Create an instance of {@link GetAmount }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getProfitValueResponse")
-    public JAXBElement<GetProfitValueResponse> createGetProfitValueResponse(GetProfitValueResponse value) {
-        return new JAXBElement<GetProfitValueResponse>(_GetProfitValueResponse_QNAME, GetProfitValueResponse.class, null, value);
+    public GetAmount createGetAmount() {
+        return new GetAmount();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetTransactionAmountResponse }{@code >}}
+     * Create an instance of {@link GetDateTime }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getTransactionAmountResponse")
-    public JAXBElement<GetTransactionAmountResponse> createGetTransactionAmountResponse(GetTransactionAmountResponse value) {
-        return new JAXBElement<GetTransactionAmountResponse>(_GetTransactionAmountResponse_QNAME, GetTransactionAmountResponse.class, null, value);
+    public GetDateTime createGetDateTime() {
+        return new GetDateTime();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetLossValue }{@code >}}
+     * Create an instance of {@link SetResultResponse }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getLossValue")
-    public JAXBElement<GetLossValue> createGetLossValue(GetLossValue value) {
-        return new JAXBElement<GetLossValue>(_GetLossValue_QNAME, GetLossValue.class, null, value);
+    public SetResultResponse createSetResultResponse() {
+        return new SetResultResponse();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetLossValueResponse }{@code >}}
+     * Create an instance of {@link GetDateTimeResponse }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getLossValueResponse")
-    public JAXBElement<GetLossValueResponse> createGetLossValueResponse(GetLossValueResponse value) {
-        return new JAXBElement<GetLossValueResponse>(_GetLossValueResponse_QNAME, GetLossValueResponse.class, null, value);
+    public GetDateTimeResponse createGetDateTimeResponse() {
+        return new GetDateTimeResponse();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link InsertIntoDB }{@code >}}
+     * Create an instance of {@link GetEndPriceResponse }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "insertIntoDB")
-    public JAXBElement<InsertIntoDB> createInsertIntoDB(InsertIntoDB value) {
-        return new JAXBElement<InsertIntoDB>(_InsertIntoDB_QNAME, InsertIntoDB.class, null, value);
+    public GetEndPriceResponse createGetEndPriceResponse() {
+        return new GetEndPriceResponse();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link InsertIntoDetails }{@code >}}
+     * Create an instance of {@link SetEndPrice }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "insertIntoDetails")
-    public JAXBElement<InsertIntoDetails> createInsertIntoDetails(InsertIntoDetails value) {
-        return new JAXBElement<InsertIntoDetails>(_InsertIntoDetails_QNAME, InsertIntoDetails.class, null, value);
+    public SetEndPrice createSetEndPrice() {
+        return new SetEndPrice();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetTransactionAmount }{@code >}}
+     * Create an instance of {@link GetExpiryDateTime }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getTransactionAmount")
-    public JAXBElement<GetTransactionAmount> createGetTransactionAmount(GetTransactionAmount value) {
-        return new JAXBElement<GetTransactionAmount>(_GetTransactionAmount_QNAME, GetTransactionAmount.class, null, value);
+    public GetExpiryDateTime createGetExpiryDateTime() {
+        return new GetExpiryDateTime();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetTransactionResultResponse }{@code >}}
+     * Create an instance of {@link GetExpiryDateTimeResponse }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getTransactionResultResponse")
-    public JAXBElement<GetTransactionResultResponse> createGetTransactionResultResponse(GetTransactionResultResponse value) {
-        return new JAXBElement<GetTransactionResultResponse>(_GetTransactionResultResponse_QNAME, GetTransactionResultResponse.class, null, value);
+    public GetExpiryDateTimeResponse createGetExpiryDateTimeResponse() {
+        return new GetExpiryDateTimeResponse();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetProfitValue }{@code >}}
+     * Create an instance of {@link CheckTransactionExists }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getProfitValue")
-    public JAXBElement<GetProfitValue> createGetProfitValue(GetProfitValue value) {
-        return new JAXBElement<GetProfitValue>(_GetProfitValue_QNAME, GetProfitValue.class, null, value);
+    public CheckTransactionExists createCheckTransactionExists() {
+        return new CheckTransactionExists();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetEndMethod }{@code >}}
+     * Create an instance of {@link GetStartPriceResponse }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getEndMethod")
-    public JAXBElement<GetEndMethod> createGetEndMethod(GetEndMethod value) {
-        return new JAXBElement<GetEndMethod>(_GetEndMethod_QNAME, GetEndMethod.class, null, value);
+    public GetStartPriceResponse createGetStartPriceResponse() {
+        return new GetStartPriceResponse();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link InsertIntoDetailsResponse }{@code >}}
+     * Create an instance of {@link GetAmountResponse }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "insertIntoDetailsResponse")
-    public JAXBElement<InsertIntoDetailsResponse> createInsertIntoDetailsResponse(InsertIntoDetailsResponse value) {
-        return new JAXBElement<InsertIntoDetailsResponse>(_InsertIntoDetailsResponse_QNAME, InsertIntoDetailsResponse.class, null, value);
+    public GetAmountResponse createGetAmountResponse() {
+        return new GetAmountResponse();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetTransactionResult }{@code >}}
+     * Create an instance of {@link GetFinishedTransactionPriceResponse }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getTransactionResult")
-    public JAXBElement<GetTransactionResult> createGetTransactionResult(GetTransactionResult value) {
-        return new JAXBElement<GetTransactionResult>(_GetTransactionResult_QNAME, GetTransactionResult.class, null, value);
+    public GetFinishedTransactionPriceResponse createGetFinishedTransactionPriceResponse() {
+        return new GetFinishedTransactionPriceResponse();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetEndMethodResponse }{@code >}}
+     * Create an instance of {@link GetEndPrice }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getEndMethodResponse")
-    public JAXBElement<GetEndMethodResponse> createGetEndMethodResponse(GetEndMethodResponse value) {
-        return new JAXBElement<GetEndMethodResponse>(_GetEndMethodResponse_QNAME, GetEndMethodResponse.class, null, value);
+    public GetEndPrice createGetEndPrice() {
+        return new GetEndPrice();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link InsertIntoDBResponse }{@code >}}
+     * Create an instance of {@link GetPendingTransactionTypeResponse }
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "insertIntoDBResponse")
-    public JAXBElement<InsertIntoDBResponse> createInsertIntoDBResponse(InsertIntoDBResponse value) {
-        return new JAXBElement<InsertIntoDBResponse>(_InsertIntoDBResponse_QNAME, InsertIntoDBResponse.class, null, value);
+    public GetPendingTransactionTypeResponse createGetPendingTransactionTypeResponse() {
+        return new GetPendingTransactionTypeResponse();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetEndPrice }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getEndPrice")
+    public JAXBElement<GetEndPrice> createGetEndPrice(GetEndPrice value) {
+        return new JAXBElement<GetEndPrice>(_GetEndPrice_QNAME, GetEndPrice.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetPendingTransactionTypeResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getPendingTransactionTypeResponse")
+    public JAXBElement<GetPendingTransactionTypeResponse> createGetPendingTransactionTypeResponse(GetPendingTransactionTypeResponse value) {
+        return new JAXBElement<GetPendingTransactionTypeResponse>(_GetPendingTransactionTypeResponse_QNAME, GetPendingTransactionTypeResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetFinishedTransactionPriceResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getFinishedTransactionPriceResponse")
+    public JAXBElement<GetFinishedTransactionPriceResponse> createGetFinishedTransactionPriceResponse(GetFinishedTransactionPriceResponse value) {
+        return new JAXBElement<GetFinishedTransactionPriceResponse>(_GetFinishedTransactionPriceResponse_QNAME, GetFinishedTransactionPriceResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAmountResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getAmountResponse")
+    public JAXBElement<GetAmountResponse> createGetAmountResponse(GetAmountResponse value) {
+        return new JAXBElement<GetAmountResponse>(_GetAmountResponse_QNAME, GetAmountResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetStartPriceResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getStartPriceResponse")
+    public JAXBElement<GetStartPriceResponse> createGetStartPriceResponse(GetStartPriceResponse value) {
+        return new JAXBElement<GetStartPriceResponse>(_GetStartPriceResponse_QNAME, GetStartPriceResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckTransactionExists }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkTransactionExists")
+    public JAXBElement<CheckTransactionExists> createCheckTransactionExists(CheckTransactionExists value) {
+        return new JAXBElement<CheckTransactionExists>(_CheckTransactionExists_QNAME, CheckTransactionExists.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetExpiryDateTimeResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getExpiryDateTimeResponse")
+    public JAXBElement<GetExpiryDateTimeResponse> createGetExpiryDateTimeResponse(GetExpiryDateTimeResponse value) {
+        return new JAXBElement<GetExpiryDateTimeResponse>(_GetExpiryDateTimeResponse_QNAME, GetExpiryDateTimeResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetExpiryDateTime }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getExpiryDateTime")
+    public JAXBElement<GetExpiryDateTime> createGetExpiryDateTime(GetExpiryDateTime value) {
+        return new JAXBElement<GetExpiryDateTime>(_GetExpiryDateTime_QNAME, GetExpiryDateTime.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetEndPrice }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "setEndPrice")
+    public JAXBElement<SetEndPrice> createSetEndPrice(SetEndPrice value) {
+        return new JAXBElement<SetEndPrice>(_SetEndPrice_QNAME, SetEndPrice.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDateTimeResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getDateTimeResponse")
+    public JAXBElement<GetDateTimeResponse> createGetDateTimeResponse(GetDateTimeResponse value) {
+        return new JAXBElement<GetDateTimeResponse>(_GetDateTimeResponse_QNAME, GetDateTimeResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetEndPriceResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getEndPriceResponse")
+    public JAXBElement<GetEndPriceResponse> createGetEndPriceResponse(GetEndPriceResponse value) {
+        return new JAXBElement<GetEndPriceResponse>(_GetEndPriceResponse_QNAME, GetEndPriceResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetResultResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "setResultResponse")
+    public JAXBElement<SetResultResponse> createSetResultResponse(SetResultResponse value) {
+        return new JAXBElement<SetResultResponse>(_SetResultResponse_QNAME, SetResultResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDateTime }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getDateTime")
+    public JAXBElement<GetDateTime> createGetDateTime(GetDateTime value) {
+        return new JAXBElement<GetDateTime>(_GetDateTime_QNAME, GetDateTime.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAmount }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getAmount")
+    public JAXBElement<GetAmount> createGetAmount(GetAmount value) {
+        return new JAXBElement<GetAmount>(_GetAmount_QNAME, GetAmount.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckTransactionExistsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkTransactionExistsResponse")
+    public JAXBElement<CheckTransactionExistsResponse> createCheckTransactionExistsResponse(CheckTransactionExistsResponse value) {
+        return new JAXBElement<CheckTransactionExistsResponse>(_CheckTransactionExistsResponse_QNAME, CheckTransactionExistsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InsertIntoDb }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "insertIntoDb")
+    public JAXBElement<InsertIntoDb> createInsertIntoDb(InsertIntoDb value) {
+        return new JAXBElement<InsertIntoDb>(_InsertIntoDb_QNAME, InsertIntoDb.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrency1 }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrency1")
+    public JAXBElement<GetCurrency1> createGetCurrency1(GetCurrency1 value) {
+        return new JAXBElement<GetCurrency1>(_GetCurrency1_QNAME, GetCurrency1 .class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetStartPrice }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getStartPrice")
+    public JAXBElement<GetStartPrice> createGetStartPrice(GetStartPrice value) {
+        return new JAXBElement<GetStartPrice>(_GetStartPrice_QNAME, GetStartPrice.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrency2 }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrency2")
+    public JAXBElement<GetCurrency2> createGetCurrency2(GetCurrency2 value) {
+        return new JAXBElement<GetCurrency2>(_GetCurrency2_QNAME, GetCurrency2 .class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetTimeFrame }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getTimeFrame")
+    public JAXBElement<GetTimeFrame> createGetTimeFrame(GetTimeFrame value) {
+        return new JAXBElement<GetTimeFrame>(_GetTimeFrame_QNAME, GetTimeFrame.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetTimeFrameResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getTimeFrameResponse")
+    public JAXBElement<GetTimeFrameResponse> createGetTimeFrameResponse(GetTimeFrameResponse value) {
+        return new JAXBElement<GetTimeFrameResponse>(_GetTimeFrameResponse_QNAME, GetTimeFrameResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetEndPriceResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "setEndPriceResponse")
+    public JAXBElement<SetEndPriceResponse> createSetEndPriceResponse(SetEndPriceResponse value) {
+        return new JAXBElement<SetEndPriceResponse>(_SetEndPriceResponse_QNAME, SetEndPriceResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrency1Response }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrency1Response")
+    public JAXBElement<GetCurrency1Response> createGetCurrency1Response(GetCurrency1Response value) {
+        return new JAXBElement<GetCurrency1Response>(_GetCurrency1Response_QNAME, GetCurrency1Response.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrency2Response }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrency2Response")
+    public JAXBElement<GetCurrency2Response> createGetCurrency2Response(GetCurrency2Response value) {
+        return new JAXBElement<GetCurrency2Response>(_GetCurrency2Response_QNAME, GetCurrency2Response.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetPendingTransactionType }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getPendingTransactionType")
+    public JAXBElement<GetPendingTransactionType> createGetPendingTransactionType(GetPendingTransactionType value) {
+        return new JAXBElement<GetPendingTransactionType>(_GetPendingTransactionType_QNAME, GetPendingTransactionType.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link InsertIntoDbResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "insertIntoDbResponse")
+    public JAXBElement<InsertIntoDbResponse> createInsertIntoDbResponse(InsertIntoDbResponse value) {
+        return new JAXBElement<InsertIntoDbResponse>(_InsertIntoDbResponse_QNAME, InsertIntoDbResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SetResult }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "setResult")
+    public JAXBElement<SetResult> createSetResult(SetResult value) {
+        return new JAXBElement<SetResult>(_SetResult_QNAME, SetResult.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetFinishedTransactionPrice }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getFinishedTransactionPrice")
+    public JAXBElement<GetFinishedTransactionPrice> createGetFinishedTransactionPrice(GetFinishedTransactionPrice value) {
+        return new JAXBElement<GetFinishedTransactionPrice>(_GetFinishedTransactionPrice_QNAME, GetFinishedTransactionPrice.class, null, value);
     }
 
 }
