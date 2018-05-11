@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://webservices/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservices/">
+
+<xs:element name="connectToChat" type="tns:connectToChat"/>
+
+<xs:element name="connectToChatResponse" type="tns:connectToChatResponse"/>
+
+<xs:element name="disconnectFromChat" type="tns:disconnectFromChat"/>
+
+<xs:element name="disconnectFromChatResponse" type="tns:disconnectFromChatResponse"/>
+
+<xs:element name="getLastChatDateTime" type="tns:getLastChatDateTime"/>
+
+<xs:element name="getLastChatDateTimeResponse" type="tns:getLastChatDateTimeResponse"/>
+
+<xs:element name="getLastChatId" type="tns:getLastChatId"/>
+
+<xs:element name="getLastChatIdResponse" type="tns:getLastChatIdResponse"/>
+
+<xs:element name="getLastChatUserId" type="tns:getLastChatUserId"/>
+
+<xs:element name="getLastChatUserIdResponse" type="tns:getLastChatUserIdResponse"/>
+
+<xs:element name="getLastMessage" type="tns:getLastMessage"/>
+
+<xs:element name="getLastMessageResponse" type="tns:getLastMessageResponse"/>
+
+<xs:element name="getOldChatIds" type="tns:getOldChatIds"/>
+
+<xs:element name="getOldChatIdsResponse" type="tns:getOldChatIdsResponse"/>
+
+<xs:element name="getOldDatetimes" type="tns:getOldDatetimes"/>
+
+<xs:element name="getOldDatetimesResponse" type="tns:getOldDatetimesResponse"/>
+
+<xs:element name="getOldMessages" type="tns:getOldMessages"/>
+
+<xs:element name="getOldMessagesResponse" type="tns:getOldMessagesResponse"/>
+
+<xs:element name="getUserIdFromChatId" type="tns:getUserIdFromChatId"/>
+
+<xs:element name="getUserIdFromChatIdResponse" type="tns:getUserIdFromChatIdResponse"/>
+
+<xs:element name="onlineUsersList" type="tns:onlineUsersList"/>
+
+<xs:element name="onlineUsersListResponse" type="tns:onlineUsersListResponse"/>
+
+<xs:element name="saveMessage" type="tns:saveMessage"/>
+
+<xs:element name="saveMessageResponse" type="tns:saveMessageResponse"/>
+
+<xs:complexType name="getLastChatUserId">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getLastChatUserIdResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOldChatIds">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getOldChatIdsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="saveMessage">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="saveMessageResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLastChatId">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getLastChatIdResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOldMessages">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getOldMessagesResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="onlineUsersList">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="onlineUsersListResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="disconnectFromChat">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="disconnectFromChatResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getLastMessage">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getLastMessageResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLastChatDateTime">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getLastChatDateTimeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserIdFromChatId">
+<xs:sequence>
+<xs:element name="chat_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserIdFromChatIdResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getOldDatetimes">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getOldDatetimesResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="connectToChat">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="connectToChatResponse">
+<xs:sequence/>
+</xs:complexType>
+</xs:schema>

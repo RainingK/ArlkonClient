@@ -28,6 +28,21 @@ public interface IWWS {
      * 
      * @param userId
      * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getEndMethod", targetNamespace = "http://webservices/", className = "webservices.GetEndMethod")
+    @ResponseWrapper(localName = "getEndMethodResponse", targetNamespace = "http://webservices/", className = "webservices.GetEndMethodResponse")
+    @Action(input = "http://webservices/IWWS/getEndMethodRequest", output = "http://webservices/IWWS/getEndMethodResponse")
+    public String getEndMethod(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param userId
+     * @return
      *     returns double
      */
     @WebMethod
@@ -38,6 +53,30 @@ public interface IWWS {
     public double getProfitValue(
         @WebParam(name = "user_id", targetNamespace = "")
         int userId);
+
+    /**
+     * 
+     * @param transactionAmount
+     * @param currency
+     * @param lossValue
+     * @param userId
+     * @param profitValue
+     */
+    @WebMethod
+    @RequestWrapper(localName = "insertInDb", targetNamespace = "http://webservices/", className = "webservices.InsertInDb")
+    @ResponseWrapper(localName = "insertInDbResponse", targetNamespace = "http://webservices/", className = "webservices.InsertInDbResponse")
+    @Action(input = "http://webservices/IWWS/insertInDbRequest", output = "http://webservices/IWWS/insertInDbResponse")
+    public void insertInDb(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId,
+        @WebParam(name = "transaction_amount", targetNamespace = "")
+        double transactionAmount,
+        @WebParam(name = "currency", targetNamespace = "")
+        String currency,
+        @WebParam(name = "profit_value", targetNamespace = "")
+        double profitValue,
+        @WebParam(name = "loss_value", targetNamespace = "")
+        double lossValue);
 
     /**
      * 
@@ -58,58 +97,16 @@ public interface IWWS {
      * 
      * @param userId
      * @return
-     *     returns java.lang.String
+     *     returns java.lang.Boolean
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getEndMethod", targetNamespace = "http://webservices/", className = "webservices.GetEndMethod")
-    @ResponseWrapper(localName = "getEndMethodResponse", targetNamespace = "http://webservices/", className = "webservices.GetEndMethodResponse")
-    @Action(input = "http://webservices/IWWS/getEndMethodRequest", output = "http://webservices/IWWS/getEndMethodResponse")
-    public String getEndMethod(
+    @RequestWrapper(localName = "checkTransactionExists", targetNamespace = "http://webservices/", className = "webservices.CheckTransactionExists")
+    @ResponseWrapper(localName = "checkTransactionExistsResponse", targetNamespace = "http://webservices/", className = "webservices.CheckTransactionExistsResponse")
+    @Action(input = "http://webservices/IWWS/checkTransactionExistsRequest", output = "http://webservices/IWWS/checkTransactionExistsResponse")
+    public Boolean checkTransactionExists(
         @WebParam(name = "user_id", targetNamespace = "")
         int userId);
-
-    /**
-     * 
-     * @param transactionAmount
-     * @param currency
-     * @param lossValue
-     * @param userId
-     * @param profitValue
-     */
-    @WebMethod
-    @RequestWrapper(localName = "insertIntoDB", targetNamespace = "http://webservices/", className = "webservices.InsertIntoDB")
-    @ResponseWrapper(localName = "insertIntoDBResponse", targetNamespace = "http://webservices/", className = "webservices.InsertIntoDBResponse")
-    @Action(input = "http://webservices/IWWS/insertIntoDBRequest", output = "http://webservices/IWWS/insertIntoDBResponse")
-    public void insertIntoDB(
-        @WebParam(name = "user_id", targetNamespace = "")
-        int userId,
-        @WebParam(name = "transaction_amount", targetNamespace = "")
-        double transactionAmount,
-        @WebParam(name = "currency", targetNamespace = "")
-        String currency,
-        @WebParam(name = "profit_value", targetNamespace = "")
-        double profitValue,
-        @WebParam(name = "loss_value", targetNamespace = "")
-        double lossValue);
-
-    /**
-     * 
-     * @param endMethod
-     * @param userId
-     * @param transactionResult
-     */
-    @WebMethod
-    @RequestWrapper(localName = "insertIntoDetails", targetNamespace = "http://webservices/", className = "webservices.InsertIntoDetails")
-    @ResponseWrapper(localName = "insertIntoDetailsResponse", targetNamespace = "http://webservices/", className = "webservices.InsertIntoDetailsResponse")
-    @Action(input = "http://webservices/IWWS/insertIntoDetailsRequest", output = "http://webservices/IWWS/insertIntoDetailsResponse")
-    public void insertIntoDetails(
-        @WebParam(name = "user_id", targetNamespace = "")
-        int userId,
-        @WebParam(name = "transaction_result", targetNamespace = "")
-        double transactionResult,
-        @WebParam(name = "end_method", targetNamespace = "")
-        String endMethod);
 
     /**
      * 
@@ -140,5 +137,23 @@ public interface IWWS {
     public double getTransactionAmount(
         @WebParam(name = "user_id", targetNamespace = "")
         int userId);
+
+    /**
+     * 
+     * @param endMethod
+     * @param userId
+     * @param transactionResult
+     */
+    @WebMethod
+    @RequestWrapper(localName = "insertIntoDetails", targetNamespace = "http://webservices/", className = "webservices.InsertIntoDetails")
+    @ResponseWrapper(localName = "insertIntoDetailsResponse", targetNamespace = "http://webservices/", className = "webservices.InsertIntoDetailsResponse")
+    @Action(input = "http://webservices/IWWS/insertIntoDetailsRequest", output = "http://webservices/IWWS/insertIntoDetailsResponse")
+    public void insertIntoDetails(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId,
+        @WebParam(name = "transaction_result", targetNamespace = "")
+        double transactionResult,
+        @WebParam(name = "end_method", targetNamespace = "")
+        String endMethod);
 
 }

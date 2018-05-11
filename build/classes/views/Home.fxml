@@ -184,9 +184,19 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="invest_pane1" layoutX="530.0" layoutY="181.0" prefHeight="147.0" prefWidth="183.0" styleClass="feature_containers">
+      <Pane fx:id="group_chat_pane" layoutX="530.0" layoutY="181.0" onMouseClicked="#loadGroupChat" onMouseEntered="#groupChatHoverIn" onMouseExited="#groupChatHoverOut" prefHeight="147.0" prefWidth="183.0" styleClass="feature_containers">
          <children>
-            <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#1a2a2b" height="147.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="feature_containers" width="183.0" />
+            <Rectangle fx:id="groupChatRectangle" arcHeight="15.0" arcWidth="15.0" fill="#1a2a2b" height="147.0" stroke="TRANSPARENT" strokeType="INSIDE" styleClass="feature_containers" width="183.0" />
+            <Label layoutX="42.0" layoutY="90.0" prefHeight="45.0" prefWidth="115.0" styleClass="feature_labels" text="Group Chat" textFill="WHITE">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="73.0" fitWidth="57.0" layoutX="71.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" styleClass="feature_icons">
+               <image>
+                  <Image url="@../res/assets/icons/chat.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="logout_btn_pane" layoutX="661.0" layoutY="8.0" onMouseClicked="#logout" prefHeight="51.0" prefWidth="40.0">

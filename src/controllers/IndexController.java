@@ -43,8 +43,10 @@ public class IndexController implements Initializable {
     // Login inputs
     @FXML
     JFXTextField login_username_input;
+    
     @FXML
     JFXPasswordField login_password_input;
+    
     @FXML
     JFXButton login_btn;
 
@@ -55,9 +57,13 @@ public class IndexController implements Initializable {
     @FXML
     Label errors_label;
 
+    @FXML
+    Label forgotPasswordLabel;
+    
     // Close and Minimize Buttons
     @FXML
     ImageView close_btn;
+    
     @FXML
     ImageView minimize_btn;
 
@@ -94,6 +100,15 @@ public class IndexController implements Initializable {
             }
         });
 
+        // Forgot password button clicked
+        forgotPasswordLabel.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                trans.setWindow(main_window);
+                trans.fadeOutTransition("/views/forgotPassword.fxml");
+            }
+        });
+        
         // Login on Enter in username field
         login_username_input.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
@@ -139,7 +154,7 @@ public class IndexController implements Initializable {
                 }
             }
         });
-
+        
         WindowHandler wh = new WindowHandler();
         wh.closeProgram(close_btn);
         wh.minimizeProgram(minimize_btn);

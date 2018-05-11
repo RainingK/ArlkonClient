@@ -36,6 +36,10 @@
 
 <xs:element name="getPendingTransactionTypeResponse" type="tns:getPendingTransactionTypeResponse"/>
 
+<xs:element name="getRisingType" type="tns:getRisingType"/>
+
+<xs:element name="getRisingTypeResponse" type="tns:getRisingTypeResponse"/>
+
 <xs:element name="getStartPrice" type="tns:getStartPrice"/>
 
 <xs:element name="getStartPriceResponse" type="tns:getStartPriceResponse"/>
@@ -76,7 +80,17 @@
 
 <xs:complexType name="checkTransactionExistsResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:boolean"/>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getRisingType">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getRisingTypeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

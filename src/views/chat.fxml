@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane id="main_window" fx:id="main_window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="1024.0" stylesheets="@../res/css/chat.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ChatController">
+   <children>
+      <Pane id="top_pane" prefHeight="73.0" prefWidth="768.0">
+         <children>
+            <ImageView fitHeight="81.0" fitWidth="82.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="346.0" layoutY="18.0" text="Group Chat" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="help_btn_pane" layoutX="735.0" layoutY="4.0" prefHeight="52.0" prefWidth="28.0">
+         <children>
+            <ImageView fx:id="help_btn" fitHeight="28.0" fitWidth="28.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/question_white.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="help_btn_label" layoutX="-1.0" layoutY="37.0" text="Help" textFill="WHITE" visible="false" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="home_btn_pane" layoutX="495.0" layoutY="10.0" onMouseClicked="#loadHome" prefHeight="52.0" prefWidth="44.0">
+         <children>
+            <ImageView fx:id="home_btn" fitHeight="28.0" fitWidth="28.0" layoutX="7.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/home_white.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="home_btn_label" layoutX="2.0" layoutY="33.0" text="Home" textFill="WHITE" visible="false" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="profile_btn_pane" layoutX="562.0" layoutY="10.0" onMouseClicked="#loadProfile" prefHeight="52.0" prefWidth="40.0">
+         <children>
+            <ImageView fx:id="profile_btn" fitHeight="28.0" fitWidth="28.0" layoutX="4.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/user_white.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="profile_btn_label" layoutX="-2.0" layoutY="33.0" text="Profile" textFill="WHITE" visible="false" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="settings_btn_pane" layoutX="620.0" layoutY="10.0" prefHeight="52.0" prefWidth="40.0">
+         <children>
+            <ImageView fx:id="settings_btn" fitHeight="28.0" fitWidth="28.0" layoutX="6.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/settings_white.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="settings_btn_label" layoutX="-7.0" layoutY="33.0" text="Settings" textFill="WHITE" visible="false" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="logout_btn_pane" layoutX="681.0" layoutY="7.0" onMouseClicked="#logout" prefHeight="51.0" prefWidth="40.0">
+         <children>
+            <ImageView fx:id="logout_btn" fitHeight="45.0" fitWidth="31.0" layoutX="6.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/logout.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="logout_btn_label" layoutX="-6.0" layoutY="36.0" text="Logout" textFill="WHITE" visible="false" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane id="right_pane" fx:id="right_pane" layoutX="762.0" prefHeight="537.0" prefWidth="272.0">
+         <children>
+            <Rectangle id="balance_container" arcHeight="15.0" arcWidth="15.0" fill="#202f32" height="45.0" layoutX="30.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="214.0" />
+            <ImageView fitHeight="26.0" fitWidth="22.0" layoutX="42.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/coins.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="76.0" layoutY="83.0" text="Balance" textFill="WHITE" />
+            <Label fx:id="balance_val_label" layoutX="146.0" layoutY="83.0" prefHeight="21.0" prefWidth="82.0" style="-fx-alignment: center-right;" text="\$10000" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="profit_rate_label" layoutX="186.0" layoutY="305.0" prefHeight="34.0" prefWidth="58.0" style="-fx-alignment: center-right;" textFill="#41ff5c">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="151.0" text="Online Users" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ScrollPane fx:id="online_users_container" hbarPolicy="NEVER" layoutX="14.0" layoutY="181.0" prefHeight="298.0" prefWidth="220.0" vvalue="1.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+              </content>
+            </ScrollPane>
+         </children>
+      </Pane>
+      <Pane layoutX="960.0" layoutY="11.0" prefHeight="26.0" prefWidth="57.0">
+         <children>
+            <ImageView id="close_image" fx:id="close_btn" fitHeight="19.0" fitWidth="14.0" layoutX="35.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" styleClass="close_image">
+               <image>
+                  <Image url="@../res/assets/icons/close_white.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView id="minimize_image" fx:id="minimize_btn" fitHeight="19.0" fitWidth="14.0" layoutX="1.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" styleClass="minimize_image">
+               <image>
+                  <Image url="@../res/assets/icons/minus_white.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Pane>
+      <ScrollPane id="chat_container" fx:id="chat_container" hbarPolicy="NEVER" layoutX="29.0" layoutY="98.0" prefHeight="338.0" prefWidth="706.0" vvalue="1.0" />
+      <JFXTextField id="chat_input" fx:id="chat_input" focusColor="#2d4144" layoutX="29.0" layoutY="461.0" onKeyPressed="#chatInputKeyPressed" onKeyTyped="#chatInputKeyTyped" prefHeight="45.0" prefWidth="601.0" />
+      <JFXButton id="send_btn" fx:id="send_btn" layoutX="640.0" layoutY="461.0" onAction="#sendMessage" prefHeight="45.0" prefWidth="91.0" text="Send" />
+   </children>
+</Pane>

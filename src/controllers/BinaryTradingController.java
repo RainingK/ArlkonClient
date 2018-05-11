@@ -26,7 +26,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -107,6 +106,9 @@ public class BinaryTradingController implements Initializable {
     @FXML
     private Label tip_content_label;
     
+    @FXML
+    private ImageView call_rising_icon, put_rising_icon;
+    
     // Called amount and end time labels
     @FXML
     private Label called_amount_label, end_time_label, called_at_val_label, put_amount_label, put_end_time_label, put_at_val_label;
@@ -169,6 +171,9 @@ public class BinaryTradingController implements Initializable {
 
         // Display current time
         displayCurrentTime();
+        
+        // Show rising type
+        showRisingType();
 
         // Set user's balance on load
         loadBalanceToLabel();
@@ -237,12 +242,7 @@ public class BinaryTradingController implements Initializable {
         Task<String> showTipTask = new Task<String>() {
             @Override
             protected String call() throws Exception {
-                String avg = getAverage();
-                
-                if(avg.equals("")){
-                    call();
-                }
-                return avg;
+                return getAverage();
             }
         };
         
@@ -295,9 +295,7 @@ public class BinaryTradingController implements Initializable {
                 max = (currentPrice) + 0.1;
                 
                 // Generate random decimals
-                Random rand = new Random();
-                generatedDecimal = -0.01 + (0.1 - (-0.01)) * rand.nextDouble();
-                generatedDecimal = Math.round(generatedDecimal * 100.0) / 100.0;
+                generatedDecimal = getRandomNumbers();
 
                 if ((currentPrice - 0.1) < min) {
                     min = (currentPrice) - 0.1;
@@ -778,6 +776,29 @@ public class BinaryTradingController implements Initializable {
         }
     }
     
+    private void showRisingType(){
+        Timeline checkRisingTypeThread = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            String type = getRisingType();
+            
+            if(type.equals("call")){
+                call_rising_icon.setVisible(true);
+                put_rising_icon.setVisible(false);
+            } else if(type.equals("put")){
+                put_rising_icon.setVisible(true);
+                call_rising_icon.setVisible(false);
+            } else {
+                call_rising_icon.setVisible(false);
+                put_rising_icon.setVisible(false);
+            }
+        }),
+                // Refresh every 1 second
+                new KeyFrame(Duration.seconds(1))
+        );
+
+        checkRisingTypeThread.setCycleCount(Animation.INDEFINITE);
+        checkRisingTypeThread.play();
+    }
+    
     /***************** END TRANSACTIONS *****************/
     
     @FXML
@@ -1026,6 +1047,18 @@ public class BinaryTradingController implements Initializable {
         webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
         return port.returnCurrency();
+    }
+
+    private static double getRandomNumbers() {
+        webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
+        webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
+        return port.getRandomNumbers();
+    }
+
+    private static String getRisingType() {
+        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
+        return port.getRisingType();
     }
 }
 

@@ -24,6 +24,8 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _GetUsername_QNAME = new QName("http://webservices/", "getUsername");
+    private final static QName _GetUsernameResponse_QNAME = new QName("http://webservices/", "getUsernameResponse");
     private final static QName _GetUserIdFromUsername_QNAME = new QName("http://webservices/", "getUserIdFromUsername");
     private final static QName _SetBalance_QNAME = new QName("http://webservices/", "setBalance");
     private final static QName _GetBalanceResponse_QNAME = new QName("http://webservices/", "getBalanceResponse");
@@ -102,6 +104,40 @@ public class ObjectFactory {
      */
     public SetBalance createSetBalance() {
         return new SetBalance();
+    }
+
+    /**
+     * Create an instance of {@link GetUsernameResponse }
+     * 
+     */
+    public GetUsernameResponse createGetUsernameResponse() {
+        return new GetUsernameResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetUsername }
+     * 
+     */
+    public GetUsername createGetUsername() {
+        return new GetUsername();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUsername }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getUsername")
+    public JAXBElement<GetUsername> createGetUsername(GetUsername value) {
+        return new JAXBElement<GetUsername>(_GetUsername_QNAME, GetUsername.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUsernameResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getUsernameResponse")
+    public JAXBElement<GetUsernameResponse> createGetUsernameResponse(GetUsernameResponse value) {
+        return new JAXBElement<GetUsernameResponse>(_GetUsernameResponse_QNAME, GetUsernameResponse.class, null, value);
     }
 
     /**

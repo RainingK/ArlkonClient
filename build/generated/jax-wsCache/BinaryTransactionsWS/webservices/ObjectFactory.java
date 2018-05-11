@@ -29,9 +29,11 @@ public class ObjectFactory {
     private final static QName _GetFinishedTransactionPriceResponse_QNAME = new QName("http://webservices/", "getFinishedTransactionPriceResponse");
     private final static QName _GetAmountResponse_QNAME = new QName("http://webservices/", "getAmountResponse");
     private final static QName _GetStartPriceResponse_QNAME = new QName("http://webservices/", "getStartPriceResponse");
+    private final static QName _GetRisingType_QNAME = new QName("http://webservices/", "getRisingType");
     private final static QName _CheckTransactionExists_QNAME = new QName("http://webservices/", "checkTransactionExists");
     private final static QName _GetExpiryDateTimeResponse_QNAME = new QName("http://webservices/", "getExpiryDateTimeResponse");
     private final static QName _GetExpiryDateTime_QNAME = new QName("http://webservices/", "getExpiryDateTime");
+    private final static QName _GetRisingTypeResponse_QNAME = new QName("http://webservices/", "getRisingTypeResponse");
     private final static QName _SetEndPrice_QNAME = new QName("http://webservices/", "setEndPrice");
     private final static QName _GetDateTimeResponse_QNAME = new QName("http://webservices/", "getDateTimeResponse");
     private final static QName _GetEndPriceResponse_QNAME = new QName("http://webservices/", "getEndPriceResponse");
@@ -221,6 +223,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetRisingTypeResponse }
+     * 
+     */
+    public GetRisingTypeResponse createGetRisingTypeResponse() {
+        return new GetRisingTypeResponse();
+    }
+
+    /**
      * Create an instance of {@link GetExpiryDateTime }
      * 
      */
@@ -242,6 +252,14 @@ public class ObjectFactory {
      */
     public CheckTransactionExists createCheckTransactionExists() {
         return new CheckTransactionExists();
+    }
+
+    /**
+     * Create an instance of {@link GetRisingType }
+     * 
+     */
+    public GetRisingType createGetRisingType() {
+        return new GetRisingType();
     }
 
     /**
@@ -330,6 +348,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRisingType }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getRisingType")
+    public JAXBElement<GetRisingType> createGetRisingType(GetRisingType value) {
+        return new JAXBElement<GetRisingType>(_GetRisingType_QNAME, GetRisingType.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CheckTransactionExists }{@code >}}
      * 
      */
@@ -354,6 +381,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "getExpiryDateTime")
     public JAXBElement<GetExpiryDateTime> createGetExpiryDateTime(GetExpiryDateTime value) {
         return new JAXBElement<GetExpiryDateTime>(_GetExpiryDateTime_QNAME, GetExpiryDateTime.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRisingTypeResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getRisingTypeResponse")
+    public JAXBElement<GetRisingTypeResponse> createGetRisingTypeResponse(GetRisingTypeResponse value) {
+        return new JAXBElement<GetRisingTypeResponse>(_GetRisingTypeResponse_QNAME, GetRisingTypeResponse.class, null, value);
     }
 
     /**

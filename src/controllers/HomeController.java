@@ -57,7 +57,7 @@ public class HomeController implements Initializable {
 
     // Rectangles
     @FXML
-    private Rectangle binaryTradingRectangle, investmentsRectangle;
+    private Rectangle binaryTradingRectangle, investmentsRectangle, groupChatRectangle;
     
     // Labels
     @FXML
@@ -313,6 +313,17 @@ public class HomeController implements Initializable {
     }
 
     @FXML
+    void loadGroupChat(MouseEvent event) {
+        trans.setWindow(main_window);
+        
+        try {
+            trans.loadNextScene("/views/chat.fxml");
+        } catch (IOException ex) {
+            System.out.println("IOException: " + ex.getMessage());
+        }
+    }
+    
+    @FXML
     void loadInvestments(MouseEvent event) {
         trans.setWindow(main_window);
         
@@ -382,6 +393,16 @@ public class HomeController implements Initializable {
     @FXML
     void investmentsHoverOut(MouseEvent event) {
         investmentsRectangle.setStyle("-fx-fill: #1a2a2b");
+    }
+    
+    @FXML
+    void groupChatHoverIn(MouseEvent event) {
+        groupChatRectangle.setStyle("-fx-fill: #213435;");
+    }
+
+    @FXML
+    void groupChatHoverOut(MouseEvent event) {
+        groupChatRectangle.setStyle("-fx-fill: #1a2a2b;");
     }
     
     /************* HOVER OVER ITEMS END *************/

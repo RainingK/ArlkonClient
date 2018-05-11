@@ -27,21 +27,6 @@ public interface UserWS {
 
     /**
      * 
-     * @param userId
-     * @return
-     *     returns double
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getBalance", targetNamespace = "http://webservices/", className = "webservices.GetBalance")
-    @ResponseWrapper(localName = "getBalanceResponse", targetNamespace = "http://webservices/", className = "webservices.GetBalanceResponse")
-    @Action(input = "http://webservices/UserWS/getBalanceRequest", output = "http://webservices/UserWS/getBalanceResponse")
-    public double getBalance(
-        @WebParam(name = "user_id", targetNamespace = "")
-        int userId);
-
-    /**
-     * 
      * @param balance
      * @param userId
      */
@@ -57,18 +42,33 @@ public interface UserWS {
 
     /**
      * 
-     * @param arg0
+     * @param userId
      * @return
-     *     returns java.util.List<java.lang.String>
+     *     returns double
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getRecentActivities", targetNamespace = "http://webservices/", className = "webservices.GetRecentActivities")
-    @ResponseWrapper(localName = "getRecentActivitiesResponse", targetNamespace = "http://webservices/", className = "webservices.GetRecentActivitiesResponse")
-    @Action(input = "http://webservices/UserWS/getRecentActivitiesRequest", output = "http://webservices/UserWS/getRecentActivitiesResponse")
-    public List<String> getRecentActivities(
-        @WebParam(name = "arg0", targetNamespace = "")
-        int arg0);
+    @RequestWrapper(localName = "getBalance", targetNamespace = "http://webservices/", className = "webservices.GetBalance")
+    @ResponseWrapper(localName = "getBalanceResponse", targetNamespace = "http://webservices/", className = "webservices.GetBalanceResponse")
+    @Action(input = "http://webservices/UserWS/getBalanceRequest", output = "http://webservices/UserWS/getBalanceResponse")
+    public double getBalance(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param userId
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getUsername", targetNamespace = "http://webservices/", className = "webservices.GetUsername")
+    @ResponseWrapper(localName = "getUsernameResponse", targetNamespace = "http://webservices/", className = "webservices.GetUsernameResponse")
+    @Action(input = "http://webservices/UserWS/getUsernameRequest", output = "http://webservices/UserWS/getUsernameResponse")
+    public String getUsername(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
 
     /**
      * 
@@ -84,5 +84,20 @@ public interface UserWS {
     public int getUserIdFromUsername(
         @WebParam(name = "username", targetNamespace = "")
         String username);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<java.lang.String>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getRecentActivities", targetNamespace = "http://webservices/", className = "webservices.GetRecentActivities")
+    @ResponseWrapper(localName = "getRecentActivitiesResponse", targetNamespace = "http://webservices/", className = "webservices.GetRecentActivitiesResponse")
+    @Action(input = "http://webservices/UserWS/getRecentActivitiesRequest", output = "http://webservices/UserWS/getRecentActivitiesResponse")
+    public List<String> getRecentActivities(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0);
 
 }

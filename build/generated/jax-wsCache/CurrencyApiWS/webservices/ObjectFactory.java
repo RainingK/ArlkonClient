@@ -32,6 +32,8 @@ public class ObjectFactory {
     private final static QName _GetCurrencyListResponse_QNAME = new QName("http://webservices/", "getCurrencyListResponse");
     private final static QName _ReturnCurrencyResponse_QNAME = new QName("http://webservices/", "returnCurrencyResponse");
     private final static QName _GetCurrentPriceResponse_QNAME = new QName("http://webservices/", "getCurrentPriceResponse");
+    private final static QName _GetRandomNumbers_QNAME = new QName("http://webservices/", "getRandomNumbers");
+    private final static QName _GetRandomNumbersResponse_QNAME = new QName("http://webservices/", "getRandomNumbersResponse");
     private final static QName _GetHistoricalDataResponse_QNAME = new QName("http://webservices/", "getHistoricalDataResponse");
     private final static QName _GetHistoricalData_QNAME = new QName("http://webservices/", "getHistoricalData");
 
@@ -59,11 +61,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetRandomNumbersResponse }
+     * 
+     */
+    public GetRandomNumbersResponse createGetRandomNumbersResponse() {
+        return new GetRandomNumbersResponse();
+    }
+
+    /**
      * Create an instance of {@link GetCurrentPriceResponse }
      * 
      */
     public GetCurrentPriceResponse createGetCurrentPriceResponse() {
         return new GetCurrentPriceResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetRandomNumbers }
+     * 
+     */
+    public GetRandomNumbers createGetRandomNumbers() {
+        return new GetRandomNumbers();
     }
 
     /**
@@ -192,6 +210,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "getCurrentPriceResponse")
     public JAXBElement<GetCurrentPriceResponse> createGetCurrentPriceResponse(GetCurrentPriceResponse value) {
         return new JAXBElement<GetCurrentPriceResponse>(_GetCurrentPriceResponse_QNAME, GetCurrentPriceResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRandomNumbers }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getRandomNumbers")
+    public JAXBElement<GetRandomNumbers> createGetRandomNumbers(GetRandomNumbers value) {
+        return new JAXBElement<GetRandomNumbers>(_GetRandomNumbers_QNAME, GetRandomNumbers.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRandomNumbersResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getRandomNumbersResponse")
+    public JAXBElement<GetRandomNumbersResponse> createGetRandomNumbersResponse(GetRandomNumbersResponse value) {
+        return new JAXBElement<GetRandomNumbersResponse>(_GetRandomNumbersResponse_QNAME, GetRandomNumbersResponse.class, null, value);
     }
 
     /**

@@ -53,7 +53,7 @@
             <Image url="@../res/assets/icons/dollar-value.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="53.0" fitWidth="52.0" layoutX="333.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="53.0" fitWidth="57.0" layoutX="333.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../res/assets/icons/investment.png" />
          </image></ImageView>

@@ -5,30 +5,33 @@
  */
 package main;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialog;
-import com.jfoenix.controls.JFXDialogLayout;
+import controllers.ChatController;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import utils.Transition;
 
 /**
  *
  * @author DELL
  */
 public class ArlkonClient extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
     
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -43,7 +46,14 @@ public class ArlkonClient extends Application {
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
+                
+                // Disconnect from group chat
+                if(getIdFromFile() != -1){
+                    disconnectFromChat(getIdFromFile());
+                }
+                
                 logout();
+                
                 Platform.exit();
                 System.exit(0);
             }
@@ -57,12 +67,35 @@ public class ArlkonClient extends Application {
             file.delete();
         }
     }
+    
+    private int getIdFromFile() {
+        File file = new File("user_data.txt");
+        
+        if(!file.exists()){
+            return -1;
+        }
+        
+        Scanner in = null;
+        try {
+            in = new Scanner(new FileReader("user_data.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
+        int user_id = 0;
+        if (in.hasNext()) {
+            user_id = in.nextInt();
+        }
+
+        in.close();
+
+        return user_id;
+    }
+
+    private static void disconnectFromChat(int userId) {
+        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
+        webservices.ChatWS port = service.getChatWSPort();
+        port.disconnectFromChat(userId);
     }
     
 }

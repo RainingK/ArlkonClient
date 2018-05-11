@@ -1,0 +1,55 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+#main_window {
+    -fx-background-color: #152123;
+}
+
+#right_pane, #top_pane {
+    -fx-background-color: #121c1e;
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background-color: #121c1e;
+    -fx-padding: 20px;
+}
+
+.message_view_labels {
+    -fx-text-fill: white;
+}
+
+.username_label {
+    -fx-font-weight: bold;
+}
+
+.message_label {
+    -fx-padding: 5 0 15 50;
+}
+
+#chat_input {
+    -fx-padding: 10px;
+    -fx-text-fill: white;
+}
+
+#send_btn {
+    -fx-border-radius: 10px;
+    -fx-background-color: #008742;
+    -fx-text-fill: white;
+}
+
+#send_btn:hover {
+    -fx-background-color: #01773b;
+}
+
+#send_btn:hover {
+    -fx-cursor: hand;
+}
+
+.online_users_pane {
+    -fx-padding: 0 0 7 0;
+}

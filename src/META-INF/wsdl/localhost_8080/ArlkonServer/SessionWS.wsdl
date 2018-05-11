@@ -4,17 +4,11 @@
 <xsd:import namespace="http://webservices/" schemaLocation="http://localhost:8080/ArlkonServer/SessionWS?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="checkUsernameExists">
-<part name="parameters" element="tns:checkUsernameExists"/>
+<message name="signUp">
+<part name="parameters" element="tns:signUp"/>
 </message>
-<message name="checkUsernameExistsResponse">
-<part name="parameters" element="tns:checkUsernameExistsResponse"/>
-</message>
-<message name="login">
-<part name="parameters" element="tns:login"/>
-</message>
-<message name="loginResponse">
-<part name="parameters" element="tns:loginResponse"/>
+<message name="signUpResponse">
+<part name="parameters" element="tns:signUpResponse"/>
 </message>
 <message name="checkEmailExists">
 <part name="parameters" element="tns:checkEmailExists"/>
@@ -22,42 +16,39 @@
 <message name="checkEmailExistsResponse">
 <part name="parameters" element="tns:checkEmailExistsResponse"/>
 </message>
-<message name="signUp">
-<part name="parameters" element="tns:signUp"/>
+<message name="login">
+<part name="parameters" element="tns:login"/>
 </message>
-<message name="signUpResponse">
-<part name="parameters" element="tns:signUpResponse"/>
+<message name="loginResponse">
+<part name="parameters" element="tns:loginResponse"/>
+</message>
+<message name="checkUsernameExists">
+<part name="parameters" element="tns:checkUsernameExists"/>
+</message>
+<message name="checkUsernameExistsResponse">
+<part name="parameters" element="tns:checkUsernameExistsResponse"/>
 </message>
 <portType name="SessionWS">
-<operation name="checkUsernameExists">
-<input wsam:Action="http://webservices/SessionWS/checkUsernameExistsRequest" message="tns:checkUsernameExists"/>
-<output wsam:Action="http://webservices/SessionWS/checkUsernameExistsResponse" message="tns:checkUsernameExistsResponse"/>
-</operation>
-<operation name="login">
-<input wsam:Action="http://webservices/SessionWS/loginRequest" message="tns:login"/>
-<output wsam:Action="http://webservices/SessionWS/loginResponse" message="tns:loginResponse"/>
+<operation name="signUp">
+<input wsam:Action="http://webservices/SessionWS/signUpRequest" message="tns:signUp"/>
+<output wsam:Action="http://webservices/SessionWS/signUpResponse" message="tns:signUpResponse"/>
 </operation>
 <operation name="checkEmailExists">
 <input wsam:Action="http://webservices/SessionWS/checkEmailExistsRequest" message="tns:checkEmailExists"/>
 <output wsam:Action="http://webservices/SessionWS/checkEmailExistsResponse" message="tns:checkEmailExistsResponse"/>
 </operation>
-<operation name="signUp">
-<input wsam:Action="http://webservices/SessionWS/signUpRequest" message="tns:signUp"/>
-<output wsam:Action="http://webservices/SessionWS/signUpResponse" message="tns:signUpResponse"/>
+<operation name="login">
+<input wsam:Action="http://webservices/SessionWS/loginRequest" message="tns:login"/>
+<output wsam:Action="http://webservices/SessionWS/loginResponse" message="tns:loginResponse"/>
+</operation>
+<operation name="checkUsernameExists">
+<input wsam:Action="http://webservices/SessionWS/checkUsernameExistsRequest" message="tns:checkUsernameExists"/>
+<output wsam:Action="http://webservices/SessionWS/checkUsernameExistsResponse" message="tns:checkUsernameExistsResponse"/>
 </operation>
 </portType>
 <binding name="SessionWSPortBinding" type="tns:SessionWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="checkUsernameExists">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="login">
+<operation name="signUp">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -75,7 +66,16 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="signUp">
+<operation name="login">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="checkUsernameExists">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

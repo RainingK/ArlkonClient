@@ -5,7 +5,13 @@
  */
 package utils;
 
+import controllers.ChatController;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -19,15 +25,23 @@ import javafx.stage.Stage;
 public class WindowHandler {
     public void closeProgram(ImageView img){
         img.setOnMouseClicked((MouseEvent e) -> {
+            disconnectFromChat(getIdFromFile());
             Platform.exit();
+            System.exit(0);
         });
     }
     
     public void closeProgram(ImageView img, Pane main_window){
         img.setOnMouseClicked((MouseEvent e) -> {
             File file = new File("user_data.txt");
-        
+            
+            if(!file.exists()){
+                System.exit(0);
+                Platform.exit();
+            }
+            
             if(file.delete()) {
+                System.exit(0);
                 Platform.exit();
             }
         });
@@ -39,5 +53,35 @@ public class WindowHandler {
             stage = (Stage) ((ImageView) e.getSource()).getScene().getWindow();
             stage.setIconified(true);
         });
+    }
+    
+    private int getIdFromFile() {
+        File file = new File("user_data.txt");
+        
+        if(!file.exists()){
+            return -1;
+        }
+        
+        Scanner in = null;
+        try {
+            in = new Scanner(new FileReader("user_data.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        int user_id = 0;
+        if (in.hasNext()) {
+            user_id = in.nextInt();
+        }
+
+        in.close();
+
+        return user_id;
+    }
+
+    private static void disconnectFromChat(int userId) {
+        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
+        webservices.ChatWS port = service.getChatWSPort();
+        port.disconnectFromChat(userId);
     }
 }

@@ -28,5 +28,5 @@
 }
 
 #close_image, #minimize_image:hover {
-	-fx-cursor: hand;
+    -fx-cursor: hand;
 }

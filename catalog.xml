@@ -22,16 +22,33 @@
     
     
     
-    <system systemId="http://localhost:8080/ArlkonServer/UserWS?wsdl" uri="xml-resources/web-service-references/UserWS/wsdl/localhost_8080/ArlkonServer/UserWS.wsdl"/>
-    <system systemId="http://localhost:8080/ArlkonServer/UserWS?xsd=1" uri="xml-resources/web-service-references/UserWS/wsdl/localhost_8080/ArlkonServer/UserWS.xsd_1.xsd"/>
+    
+    
+    
+    <system systemId="http://172.28.17.135:8080/ArlkonServer/SessionWS?WSDL" uri="xml-resources/web-service-references/SessionWS/wsdl/172.28.17.135_8080/ArlkonServer/SessionWS.wsdl"/>
+    <system systemId="http://172.28.17.135:8080/ArlkonServer/SessionWS?xsd=1" uri="xml-resources/web-service-references/SessionWS/wsdl/172.28.17.135_8080/ArlkonServer/SessionWS.xsd_1.xsd"/>
+    <system systemId="http://172.28.17.135:8080/ArlkonServer/ProfileWS?wsdl" uri="xml-resources/web-service-references/ProfileWS/wsdl/172.28.17.135_8080/ArlkonServer/ProfileWS.wsdl"/>
+    <system systemId="http://172.28.17.135:8080/ArlkonServer/ProfileWS?xsd=1" uri="xml-resources/web-service-references/ProfileWS/wsdl/172.28.17.135_8080/ArlkonServer/ProfileWS.xsd_1.xsd"/>
+    <system systemId="http://172.28.17.135:8080/ArlkonServer/UserWS?wsdl" uri="xml-resources/web-service-references/UserWS/wsdl/172.28.17.135_8080/ArlkonServer/UserWS.wsdl"/>
+    <system systemId="http://172.28.17.135:8080/ArlkonServer/UserWS?xsd=1" uri="xml-resources/web-service-references/UserWS/wsdl/172.28.17.135_8080/ArlkonServer/UserWS.xsd_1.xsd"/>
+    <system systemId="http://172.28.17.135:8080/ArlkonServer/IWWS?wsdl" uri="xml-resources/web-service-references/IWWS/wsdl/172.28.17.135_8080/ArlkonServer/IWWS.wsdl"/>
+    <system systemId="http://172.28.17.135:8080/ArlkonServer/IWWS?xsd=1" uri="xml-resources/web-service-references/IWWS/wsdl/172.28.17.135_8080/ArlkonServer/IWWS.xsd_1.xsd"/>
+    <system systemId="http://172.28.17.135:8080/ArlkonServer/BinaryTransactionsWS?wsdl" uri="xml-resources/web-service-references/BinaryTransactionsWS/wsdl/172.28.17.135_8080/ArlkonServer/BinaryTransactionsWS.wsdl"/>
+    <system systemId="http://172.28.17.135:8080/ArlkonServer/BinaryTransactionsWS?xsd=1" uri="xml-resources/web-service-references/BinaryTransactionsWS/wsdl/172.28.17.135_8080/ArlkonServer/BinaryTransactionsWS.xsd_1.xsd"/>
+    <system systemId="http://172.28.17.135:8080/ArlkonServer/CurrencyApiWS?wsdl" uri="xml-resources/web-service-references/CurrencyApiWS/wsdl/172.28.17.135_8080/ArlkonServer/CurrencyApiWS.wsdl"/>
+    <system systemId="http://172.28.17.135:8080/ArlkonServer/CurrencyApiWS?xsd=1" uri="xml-resources/web-service-references/CurrencyApiWS/wsdl/172.28.17.135_8080/ArlkonServer/CurrencyApiWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl" uri="xml-resources/web-service-references/CurrencyApiWS/wsdl/localhost_8080/ArlkonServer/CurrencyApiWS.wsdl"/>
+    <system systemId="http://localhost:8080/ArlkonServer/CurrencyApiWS?xsd=1" uri="xml-resources/web-service-references/CurrencyApiWS/wsdl/localhost_8080/ArlkonServer/CurrencyApiWS.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/ArlkonServer/IWWS?wsdl" uri="xml-resources/web-service-references/IWWS/wsdl/localhost_8080/ArlkonServer/IWWS.wsdl"/>
     <system systemId="http://localhost:8080/ArlkonServer/IWWS?xsd=1" uri="xml-resources/web-service-references/IWWS/wsdl/localhost_8080/ArlkonServer/IWWS.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/ArlkonServer/ProfileWS?wsdl" uri="xml-resources/web-service-references/ProfileWS/wsdl/localhost_8080/ArlkonServer/ProfileWS.wsdl"/>
     <system systemId="http://localhost:8080/ArlkonServer/ProfileWS?xsd=1" uri="xml-resources/web-service-references/ProfileWS/wsdl/localhost_8080/ArlkonServer/ProfileWS.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl" uri="xml-resources/web-service-references/CurrencyApiWS/wsdl/localhost_8080/ArlkonServer/CurrencyApiWS.wsdl"/>
-    <system systemId="http://localhost:8080/ArlkonServer/CurrencyApiWS?xsd=1" uri="xml-resources/web-service-references/CurrencyApiWS/wsdl/localhost_8080/ArlkonServer/CurrencyApiWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ArlkonServer/UserWS?wsdl" uri="xml-resources/web-service-references/UserWS/wsdl/localhost_8080/ArlkonServer/UserWS.wsdl"/>
+    <system systemId="http://localhost:8080/ArlkonServer/UserWS?xsd=1" uri="xml-resources/web-service-references/UserWS/wsdl/localhost_8080/ArlkonServer/UserWS.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/ArlkonServer/SessionWS?wsdl" uri="xml-resources/web-service-references/SessionWS/wsdl/localhost_8080/ArlkonServer/SessionWS.wsdl"/>
     <system systemId="http://localhost:8080/ArlkonServer/SessionWS?xsd=1" uri="xml-resources/web-service-references/SessionWS/wsdl/localhost_8080/ArlkonServer/SessionWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ArlkonServer/ChatWS?wsdl" uri="xml-resources/web-service-references/ChatWS/wsdl/localhost_8080/ArlkonServer/ChatWS.wsdl"/>
+    <system systemId="http://localhost:8080/ArlkonServer/ChatWS?xsd=1" uri="xml-resources/web-service-references/ChatWS/wsdl/localhost_8080/ArlkonServer/ChatWS.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl" uri="xml-resources/web-service-references/BinaryTransactionsWS/wsdl/localhost_8080/ArlkonServer/BinaryTransactionsWS.wsdl"/>
     <system systemId="http://localhost:8080/ArlkonServer/BinaryTransactionsWS?xsd=1" uri="xml-resources/web-service-references/BinaryTransactionsWS/wsdl/localhost_8080/ArlkonServer/BinaryTransactionsWS.xsd_1.xsd"/>
 </catalog>

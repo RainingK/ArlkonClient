@@ -34,9 +34,9 @@
         </wsimport-option>
       </wsimport-options>
     </client>
-    <client name="CurrencyApiWS">
-      <wsdl-url>http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl</wsdl-url>
-      <local-wsdl-file>localhost_8080/ArlkonServer/CurrencyApiWS.wsdl</local-wsdl-file>
+    <client name="BinaryTransactionsWS">
+      <wsdl-url>http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl</wsdl-url>
+      <local-wsdl-file>localhost_8080/ArlkonServer/BinaryTransactionsWS.wsdl</local-wsdl-file>
       <package-name>webservices</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
@@ -54,7 +54,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
@@ -162,9 +162,9 @@
         </wsimport-option>
       </wsimport-options>
     </client>
-    <client name="BinaryTransactionsWS">
-      <wsdl-url>http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl</wsdl-url>
-      <local-wsdl-file>localhost_8080/ArlkonServer/BinaryTransactionsWS.wsdl</local-wsdl-file>
+    <client name="CurrencyApiWS">
+      <wsdl-url>http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl</wsdl-url>
+      <local-wsdl-file>localhost_8080/ArlkonServer/CurrencyApiWS.wsdl</local-wsdl-file>
       <package-name>webservices</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
@@ -182,7 +182,39 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>xnocompile</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>xendorsed</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+      </wsimport-options>
+    </client>
+    <client name="ChatWS">
+      <wsdl-url>http://localhost:8080/ArlkonServer/ChatWS?wsdl</wsdl-url>
+      <local-wsdl-file>localhost_8080/ArlkonServer/ChatWS.wsdl</local-wsdl-file>
+      <package-name>webservices</package-name>
+      <catalog-file>catalog.xml</catalog-file>
+      <wsimport-options>
+        <wsimport-option>
+          <wsimport-option-name>extension</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>verbose</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>fork</wsimport-option-name>
+          <wsimport-option-value>false</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>wsdlLocation</wsimport-option-name>
+          <wsimport-option-value>http://localhost:8080/ArlkonServer/ChatWS?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
