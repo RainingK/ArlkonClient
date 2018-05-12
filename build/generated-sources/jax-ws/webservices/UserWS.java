@@ -27,36 +27,6 @@ public interface UserWS {
 
     /**
      * 
-     * @param balance
-     * @param userId
-     */
-    @WebMethod
-    @RequestWrapper(localName = "setBalance", targetNamespace = "http://webservices/", className = "webservices.SetBalance")
-    @ResponseWrapper(localName = "setBalanceResponse", targetNamespace = "http://webservices/", className = "webservices.SetBalanceResponse")
-    @Action(input = "http://webservices/UserWS/setBalanceRequest", output = "http://webservices/UserWS/setBalanceResponse")
-    public void setBalance(
-        @WebParam(name = "balance", targetNamespace = "")
-        double balance,
-        @WebParam(name = "user_id", targetNamespace = "")
-        int userId);
-
-    /**
-     * 
-     * @param userId
-     * @return
-     *     returns double
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getBalance", targetNamespace = "http://webservices/", className = "webservices.GetBalance")
-    @ResponseWrapper(localName = "getBalanceResponse", targetNamespace = "http://webservices/", className = "webservices.GetBalanceResponse")
-    @Action(input = "http://webservices/UserWS/getBalanceRequest", output = "http://webservices/UserWS/getBalanceResponse")
-    public double getBalance(
-        @WebParam(name = "user_id", targetNamespace = "")
-        int userId);
-
-    /**
-     * 
      * @param userId
      * @return
      *     returns java.lang.String
@@ -87,7 +57,7 @@ public interface UserWS {
 
     /**
      * 
-     * @param arg0
+     * @param userId
      * @return
      *     returns java.util.List<java.lang.String>
      */
@@ -97,7 +67,82 @@ public interface UserWS {
     @ResponseWrapper(localName = "getRecentActivitiesResponse", targetNamespace = "http://webservices/", className = "webservices.GetRecentActivitiesResponse")
     @Action(input = "http://webservices/UserWS/getRecentActivitiesRequest", output = "http://webservices/UserWS/getRecentActivitiesResponse")
     public List<String> getRecentActivities(
-        @WebParam(name = "arg0", targetNamespace = "")
-        int arg0);
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param email
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getUserIdFromEmail", targetNamespace = "http://webservices/", className = "webservices.GetUserIdFromEmail")
+    @ResponseWrapper(localName = "getUserIdFromEmailResponse", targetNamespace = "http://webservices/", className = "webservices.GetUserIdFromEmailResponse")
+    @Action(input = "http://webservices/UserWS/getUserIdFromEmailRequest", output = "http://webservices/UserWS/getUserIdFromEmailResponse")
+    public int getUserIdFromEmail(
+        @WebParam(name = "email", targetNamespace = "")
+        String email);
+
+    /**
+     * 
+     * @param userId
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "processforgotPassword", targetNamespace = "http://webservices/", className = "webservices.ProcessforgotPassword")
+    @ResponseWrapper(localName = "processforgotPasswordResponse", targetNamespace = "http://webservices/", className = "webservices.ProcessforgotPasswordResponse")
+    @Action(input = "http://webservices/UserWS/processforgotPasswordRequest", output = "http://webservices/UserWS/processforgotPasswordResponse")
+    public String processforgotPassword(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param balance
+     * @param userId
+     */
+    @WebMethod
+    @RequestWrapper(localName = "setBalance", targetNamespace = "http://webservices/", className = "webservices.SetBalance")
+    @ResponseWrapper(localName = "setBalanceResponse", targetNamespace = "http://webservices/", className = "webservices.SetBalanceResponse")
+    @Action(input = "http://webservices/UserWS/setBalanceRequest", output = "http://webservices/UserWS/setBalanceResponse")
+    public void setBalance(
+        @WebParam(name = "balance", targetNamespace = "")
+        double balance,
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param userId
+     * @return
+     *     returns double
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getBalance", targetNamespace = "http://webservices/", className = "webservices.GetBalance")
+    @ResponseWrapper(localName = "getBalanceResponse", targetNamespace = "http://webservices/", className = "webservices.GetBalanceResponse")
+    @Action(input = "http://webservices/UserWS/getBalanceRequest", output = "http://webservices/UserWS/getBalanceResponse")
+    public double getBalance(
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
+
+    /**
+     * 
+     * @param password
+     * @param userId
+     */
+    @WebMethod
+    @RequestWrapper(localName = "updatePassword", targetNamespace = "http://webservices/", className = "webservices.UpdatePassword")
+    @ResponseWrapper(localName = "updatePasswordResponse", targetNamespace = "http://webservices/", className = "webservices.UpdatePasswordResponse")
+    @Action(input = "http://webservices/UserWS/updatePasswordRequest", output = "http://webservices/UserWS/updatePasswordResponse")
+    public void updatePassword(
+        @WebParam(name = "password", targetNamespace = "")
+        String password,
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
 
 }

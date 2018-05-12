@@ -27,27 +27,21 @@ public interface CurrencyApiWS {
 
     /**
      * 
+     * @param currency1
+     * @param currency2
      * @return
      *     returns double
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "returnCurrency", targetNamespace = "http://webservices/", className = "webservices.ReturnCurrency")
-    @ResponseWrapper(localName = "returnCurrencyResponse", targetNamespace = "http://webservices/", className = "webservices.ReturnCurrencyResponse")
-    @Action(input = "http://webservices/CurrencyApiWS/returnCurrencyRequest", output = "http://webservices/CurrencyApiWS/returnCurrencyResponse")
-    public double returnCurrency();
-
-    /**
-     * 
-     * @return
-     *     returns double
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getRandomNumbers", targetNamespace = "http://webservices/", className = "webservices.GetRandomNumbers")
-    @ResponseWrapper(localName = "getRandomNumbersResponse", targetNamespace = "http://webservices/", className = "webservices.GetRandomNumbersResponse")
-    @Action(input = "http://webservices/CurrencyApiWS/getRandomNumbersRequest", output = "http://webservices/CurrencyApiWS/getRandomNumbersResponse")
-    public double getRandomNumbers();
+    @RequestWrapper(localName = "getHistoricalData", targetNamespace = "http://webservices/", className = "webservices.GetHistoricalData")
+    @ResponseWrapper(localName = "getHistoricalDataResponse", targetNamespace = "http://webservices/", className = "webservices.GetHistoricalDataResponse")
+    @Action(input = "http://webservices/CurrencyApiWS/getHistoricalDataRequest", output = "http://webservices/CurrencyApiWS/getHistoricalDataResponse")
+    public double getHistoricalData(
+        @WebParam(name = "currency1", targetNamespace = "")
+        String currency1,
+        @WebParam(name = "currency2", targetNamespace = "")
+        String currency2);
 
     /**
      * 
@@ -60,18 +54,6 @@ public interface CurrencyApiWS {
     @ResponseWrapper(localName = "getAverageResponse", targetNamespace = "http://webservices/", className = "webservices.GetAverageResponse")
     @Action(input = "http://webservices/CurrencyApiWS/getAverageRequest", output = "http://webservices/CurrencyApiWS/getAverageResponse")
     public String getAverage();
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<java.lang.String>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getCurrencyList", targetNamespace = "http://webservices/", className = "webservices.GetCurrencyList")
-    @ResponseWrapper(localName = "getCurrencyListResponse", targetNamespace = "http://webservices/", className = "webservices.GetCurrencyListResponse")
-    @Action(input = "http://webservices/CurrencyApiWS/getCurrencyListRequest", output = "http://webservices/CurrencyApiWS/getCurrencyListResponse")
-    public List<String> getCurrencyList();
 
     /**
      * 
@@ -93,20 +75,38 @@ public interface CurrencyApiWS {
 
     /**
      * 
-     * @param currency1
-     * @param currency2
      * @return
      *     returns double
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getHistoricalData", targetNamespace = "http://webservices/", className = "webservices.GetHistoricalData")
-    @ResponseWrapper(localName = "getHistoricalDataResponse", targetNamespace = "http://webservices/", className = "webservices.GetHistoricalDataResponse")
-    @Action(input = "http://webservices/CurrencyApiWS/getHistoricalDataRequest", output = "http://webservices/CurrencyApiWS/getHistoricalDataResponse")
-    public double getHistoricalData(
-        @WebParam(name = "currency1", targetNamespace = "")
-        String currency1,
-        @WebParam(name = "currency2", targetNamespace = "")
-        String currency2);
+    @RequestWrapper(localName = "getRandomNumbers", targetNamespace = "http://webservices/", className = "webservices.GetRandomNumbers")
+    @ResponseWrapper(localName = "getRandomNumbersResponse", targetNamespace = "http://webservices/", className = "webservices.GetRandomNumbersResponse")
+    @Action(input = "http://webservices/CurrencyApiWS/getRandomNumbersRequest", output = "http://webservices/CurrencyApiWS/getRandomNumbersResponse")
+    public double getRandomNumbers();
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<java.lang.String>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getCurrencyList", targetNamespace = "http://webservices/", className = "webservices.GetCurrencyList")
+    @ResponseWrapper(localName = "getCurrencyListResponse", targetNamespace = "http://webservices/", className = "webservices.GetCurrencyListResponse")
+    @Action(input = "http://webservices/CurrencyApiWS/getCurrencyListRequest", output = "http://webservices/CurrencyApiWS/getCurrencyListResponse")
+    public List<String> getCurrencyList();
+
+    /**
+     * 
+     * @return
+     *     returns double
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "returnCurrency", targetNamespace = "http://webservices/", className = "webservices.ReturnCurrency")
+    @ResponseWrapper(localName = "returnCurrencyResponse", targetNamespace = "http://webservices/", className = "webservices.ReturnCurrencyResponse")
+    @Action(input = "http://webservices/CurrencyApiWS/returnCurrencyRequest", output = "http://webservices/CurrencyApiWS/returnCurrencyResponse")
+    public double returnCurrency();
 
 }

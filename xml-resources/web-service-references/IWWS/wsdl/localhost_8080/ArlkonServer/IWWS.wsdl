@@ -4,41 +4,11 @@
 <xsd:import namespace="http://webservices/" schemaLocation="http://localhost:8080/ArlkonServer/IWWS?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="getEndMethod">
-<part name="parameters" element="tns:getEndMethod"/>
-</message>
-<message name="getEndMethodResponse">
-<part name="parameters" element="tns:getEndMethodResponse"/>
-</message>
-<message name="getProfitValue">
-<part name="parameters" element="tns:getProfitValue"/>
-</message>
-<message name="getProfitValueResponse">
-<part name="parameters" element="tns:getProfitValueResponse"/>
-</message>
-<message name="insertInDb">
-<part name="parameters" element="tns:insertInDb"/>
-</message>
-<message name="insertInDbResponse">
-<part name="parameters" element="tns:insertInDbResponse"/>
-</message>
-<message name="getLossValue">
-<part name="parameters" element="tns:getLossValue"/>
-</message>
-<message name="getLossValueResponse">
-<part name="parameters" element="tns:getLossValueResponse"/>
-</message>
 <message name="checkTransactionExists">
 <part name="parameters" element="tns:checkTransactionExists"/>
 </message>
 <message name="checkTransactionExistsResponse">
 <part name="parameters" element="tns:checkTransactionExistsResponse"/>
-</message>
-<message name="getTransactionResult">
-<part name="parameters" element="tns:getTransactionResult"/>
-</message>
-<message name="getTransactionResultResponse">
-<part name="parameters" element="tns:getTransactionResultResponse"/>
 </message>
 <message name="getTransactionAmount">
 <part name="parameters" element="tns:getTransactionAmount"/>
@@ -52,30 +22,40 @@
 <message name="insertIntoDetailsResponse">
 <part name="parameters" element="tns:insertIntoDetailsResponse"/>
 </message>
+<message name="getTransactionResult">
+<part name="parameters" element="tns:getTransactionResult"/>
+</message>
+<message name="getTransactionResultResponse">
+<part name="parameters" element="tns:getTransactionResultResponse"/>
+</message>
+<message name="insertInDb">
+<part name="parameters" element="tns:insertInDb"/>
+</message>
+<message name="insertInDbResponse">
+<part name="parameters" element="tns:insertInDbResponse"/>
+</message>
+<message name="getEndMethod">
+<part name="parameters" element="tns:getEndMethod"/>
+</message>
+<message name="getEndMethodResponse">
+<part name="parameters" element="tns:getEndMethodResponse"/>
+</message>
+<message name="getLossValue">
+<part name="parameters" element="tns:getLossValue"/>
+</message>
+<message name="getLossValueResponse">
+<part name="parameters" element="tns:getLossValueResponse"/>
+</message>
+<message name="getProfitValue">
+<part name="parameters" element="tns:getProfitValue"/>
+</message>
+<message name="getProfitValueResponse">
+<part name="parameters" element="tns:getProfitValueResponse"/>
+</message>
 <portType name="IWWS">
-<operation name="getEndMethod">
-<input wsam:Action="http://webservices/IWWS/getEndMethodRequest" message="tns:getEndMethod"/>
-<output wsam:Action="http://webservices/IWWS/getEndMethodResponse" message="tns:getEndMethodResponse"/>
-</operation>
-<operation name="getProfitValue">
-<input wsam:Action="http://webservices/IWWS/getProfitValueRequest" message="tns:getProfitValue"/>
-<output wsam:Action="http://webservices/IWWS/getProfitValueResponse" message="tns:getProfitValueResponse"/>
-</operation>
-<operation name="insertInDb">
-<input wsam:Action="http://webservices/IWWS/insertInDbRequest" message="tns:insertInDb"/>
-<output wsam:Action="http://webservices/IWWS/insertInDbResponse" message="tns:insertInDbResponse"/>
-</operation>
-<operation name="getLossValue">
-<input wsam:Action="http://webservices/IWWS/getLossValueRequest" message="tns:getLossValue"/>
-<output wsam:Action="http://webservices/IWWS/getLossValueResponse" message="tns:getLossValueResponse"/>
-</operation>
 <operation name="checkTransactionExists">
 <input wsam:Action="http://webservices/IWWS/checkTransactionExistsRequest" message="tns:checkTransactionExists"/>
 <output wsam:Action="http://webservices/IWWS/checkTransactionExistsResponse" message="tns:checkTransactionExistsResponse"/>
-</operation>
-<operation name="getTransactionResult">
-<input wsam:Action="http://webservices/IWWS/getTransactionResultRequest" message="tns:getTransactionResult"/>
-<output wsam:Action="http://webservices/IWWS/getTransactionResultResponse" message="tns:getTransactionResultResponse"/>
 </operation>
 <operation name="getTransactionAmount">
 <input wsam:Action="http://webservices/IWWS/getTransactionAmountRequest" message="tns:getTransactionAmount"/>
@@ -85,55 +65,30 @@
 <input wsam:Action="http://webservices/IWWS/insertIntoDetailsRequest" message="tns:insertIntoDetails"/>
 <output wsam:Action="http://webservices/IWWS/insertIntoDetailsResponse" message="tns:insertIntoDetailsResponse"/>
 </operation>
+<operation name="getTransactionResult">
+<input wsam:Action="http://webservices/IWWS/getTransactionResultRequest" message="tns:getTransactionResult"/>
+<output wsam:Action="http://webservices/IWWS/getTransactionResultResponse" message="tns:getTransactionResultResponse"/>
+</operation>
+<operation name="insertInDb">
+<input wsam:Action="http://webservices/IWWS/insertInDbRequest" message="tns:insertInDb"/>
+<output wsam:Action="http://webservices/IWWS/insertInDbResponse" message="tns:insertInDbResponse"/>
+</operation>
+<operation name="getEndMethod">
+<input wsam:Action="http://webservices/IWWS/getEndMethodRequest" message="tns:getEndMethod"/>
+<output wsam:Action="http://webservices/IWWS/getEndMethodResponse" message="tns:getEndMethodResponse"/>
+</operation>
+<operation name="getLossValue">
+<input wsam:Action="http://webservices/IWWS/getLossValueRequest" message="tns:getLossValue"/>
+<output wsam:Action="http://webservices/IWWS/getLossValueResponse" message="tns:getLossValueResponse"/>
+</operation>
+<operation name="getProfitValue">
+<input wsam:Action="http://webservices/IWWS/getProfitValueRequest" message="tns:getProfitValue"/>
+<output wsam:Action="http://webservices/IWWS/getProfitValueResponse" message="tns:getProfitValueResponse"/>
+</operation>
 </portType>
 <binding name="IWWSPortBinding" type="tns:IWWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="getEndMethod">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getProfitValue">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="insertInDb">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getLossValue">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="checkTransactionExists">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getTransactionResult">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -152,6 +107,51 @@
 </output>
 </operation>
 <operation name="insertIntoDetails">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getTransactionResult">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="insertInDb">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getEndMethod">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getLossValue">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getProfitValue">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

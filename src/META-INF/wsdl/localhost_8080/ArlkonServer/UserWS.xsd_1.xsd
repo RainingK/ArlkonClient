@@ -8,6 +8,10 @@
 
 <xs:element name="getRecentActivitiesResponse" type="tns:getRecentActivitiesResponse"/>
 
+<xs:element name="getUserIdFromEmail" type="tns:getUserIdFromEmail"/>
+
+<xs:element name="getUserIdFromEmailResponse" type="tns:getUserIdFromEmailResponse"/>
+
 <xs:element name="getUserIdFromUsername" type="tns:getUserIdFromUsername"/>
 
 <xs:element name="getUserIdFromUsernameResponse" type="tns:getUserIdFromUsernameResponse"/>
@@ -16,9 +20,29 @@
 
 <xs:element name="getUsernameResponse" type="tns:getUsernameResponse"/>
 
+<xs:element name="processforgotPassword" type="tns:processforgotPassword"/>
+
+<xs:element name="processforgotPasswordResponse" type="tns:processforgotPasswordResponse"/>
+
 <xs:element name="setBalance" type="tns:setBalance"/>
 
 <xs:element name="setBalanceResponse" type="tns:setBalanceResponse"/>
+
+<xs:element name="updatePassword" type="tns:updatePassword"/>
+
+<xs:element name="updatePasswordResponse" type="tns:updatePasswordResponse"/>
+
+<xs:complexType name="processforgotPassword">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="processforgotPasswordResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
 
 <xs:complexType name="getBalance">
 <xs:sequence>
@@ -32,9 +56,32 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="updatePassword">
+<xs:sequence>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updatePasswordResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getUserIdFromEmail">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserIdFromEmailResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getRecentActivities">
 <xs:sequence>
-<xs:element name="arg0" type="xs:int"/>
+<xs:element name="user_id" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -56,17 +103,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="setBalance">
-<xs:sequence>
-<xs:element name="balance" type="xs:double"/>
-<xs:element name="user_id" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="setBalanceResponse">
-<xs:sequence/>
-</xs:complexType>
-
 <xs:complexType name="getUserIdFromUsername">
 <xs:sequence>
 <xs:element name="username" type="xs:string" minOccurs="0"/>
@@ -77,5 +113,16 @@
 <xs:sequence>
 <xs:element name="return" type="xs:int"/>
 </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setBalance">
+<xs:sequence>
+<xs:element name="balance" type="xs:double"/>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setBalanceResponse">
+<xs:sequence/>
 </xs:complexType>
 </xs:schema>

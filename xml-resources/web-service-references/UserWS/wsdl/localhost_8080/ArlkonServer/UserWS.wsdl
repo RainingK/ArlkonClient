@@ -4,18 +4,6 @@
 <xsd:import namespace="http://webservices/" schemaLocation="http://localhost:8080/ArlkonServer/UserWS?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="setBalance">
-<part name="parameters" element="tns:setBalance"/>
-</message>
-<message name="setBalanceResponse">
-<part name="parameters" element="tns:setBalanceResponse"/>
-</message>
-<message name="getBalance">
-<part name="parameters" element="tns:getBalance"/>
-</message>
-<message name="getBalanceResponse">
-<part name="parameters" element="tns:getBalanceResponse"/>
-</message>
 <message name="getUsername">
 <part name="parameters" element="tns:getUsername"/>
 </message>
@@ -34,15 +22,37 @@
 <message name="getRecentActivitiesResponse">
 <part name="parameters" element="tns:getRecentActivitiesResponse"/>
 </message>
+<message name="getUserIdFromEmail">
+<part name="parameters" element="tns:getUserIdFromEmail"/>
+</message>
+<message name="getUserIdFromEmailResponse">
+<part name="parameters" element="tns:getUserIdFromEmailResponse"/>
+</message>
+<message name="processforgotPassword">
+<part name="parameters" element="tns:processforgotPassword"/>
+</message>
+<message name="processforgotPasswordResponse">
+<part name="parameters" element="tns:processforgotPasswordResponse"/>
+</message>
+<message name="setBalance">
+<part name="parameters" element="tns:setBalance"/>
+</message>
+<message name="setBalanceResponse">
+<part name="parameters" element="tns:setBalanceResponse"/>
+</message>
+<message name="getBalance">
+<part name="parameters" element="tns:getBalance"/>
+</message>
+<message name="getBalanceResponse">
+<part name="parameters" element="tns:getBalanceResponse"/>
+</message>
+<message name="updatePassword">
+<part name="parameters" element="tns:updatePassword"/>
+</message>
+<message name="updatePasswordResponse">
+<part name="parameters" element="tns:updatePasswordResponse"/>
+</message>
 <portType name="UserWS">
-<operation name="setBalance">
-<input wsam:Action="http://webservices/UserWS/setBalanceRequest" message="tns:setBalance"/>
-<output wsam:Action="http://webservices/UserWS/setBalanceResponse" message="tns:setBalanceResponse"/>
-</operation>
-<operation name="getBalance">
-<input wsam:Action="http://webservices/UserWS/getBalanceRequest" message="tns:getBalance"/>
-<output wsam:Action="http://webservices/UserWS/getBalanceResponse" message="tns:getBalanceResponse"/>
-</operation>
 <operation name="getUsername">
 <input wsam:Action="http://webservices/UserWS/getUsernameRequest" message="tns:getUsername"/>
 <output wsam:Action="http://webservices/UserWS/getUsernameResponse" message="tns:getUsernameResponse"/>
@@ -55,27 +65,29 @@
 <input wsam:Action="http://webservices/UserWS/getRecentActivitiesRequest" message="tns:getRecentActivities"/>
 <output wsam:Action="http://webservices/UserWS/getRecentActivitiesResponse" message="tns:getRecentActivitiesResponse"/>
 </operation>
+<operation name="getUserIdFromEmail">
+<input wsam:Action="http://webservices/UserWS/getUserIdFromEmailRequest" message="tns:getUserIdFromEmail"/>
+<output wsam:Action="http://webservices/UserWS/getUserIdFromEmailResponse" message="tns:getUserIdFromEmailResponse"/>
+</operation>
+<operation name="processforgotPassword">
+<input wsam:Action="http://webservices/UserWS/processforgotPasswordRequest" message="tns:processforgotPassword"/>
+<output wsam:Action="http://webservices/UserWS/processforgotPasswordResponse" message="tns:processforgotPasswordResponse"/>
+</operation>
+<operation name="setBalance">
+<input wsam:Action="http://webservices/UserWS/setBalanceRequest" message="tns:setBalance"/>
+<output wsam:Action="http://webservices/UserWS/setBalanceResponse" message="tns:setBalanceResponse"/>
+</operation>
+<operation name="getBalance">
+<input wsam:Action="http://webservices/UserWS/getBalanceRequest" message="tns:getBalance"/>
+<output wsam:Action="http://webservices/UserWS/getBalanceResponse" message="tns:getBalanceResponse"/>
+</operation>
+<operation name="updatePassword">
+<input wsam:Action="http://webservices/UserWS/updatePasswordRequest" message="tns:updatePassword"/>
+<output wsam:Action="http://webservices/UserWS/updatePasswordResponse" message="tns:updatePasswordResponse"/>
+</operation>
 </portType>
 <binding name="UserWSPortBinding" type="tns:UserWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="setBalance">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getBalance">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="getUsername">
 <soap:operation soapAction=""/>
 <input>
@@ -95,6 +107,51 @@
 </output>
 </operation>
 <operation name="getRecentActivities">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getUserIdFromEmail">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="processforgotPassword">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="setBalance">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getBalance">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="updatePassword">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

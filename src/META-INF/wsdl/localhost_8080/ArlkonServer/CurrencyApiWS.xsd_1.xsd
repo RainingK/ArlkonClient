@@ -34,16 +34,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="returnCurrency">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="returnCurrencyResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="getAverage">
 <xs:sequence/>
 </xs:complexType>
@@ -51,6 +41,16 @@
 <xs:complexType name="getAverageResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="returnCurrency">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="returnCurrencyResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double"/>
 </xs:sequence>
 </xs:complexType>
 

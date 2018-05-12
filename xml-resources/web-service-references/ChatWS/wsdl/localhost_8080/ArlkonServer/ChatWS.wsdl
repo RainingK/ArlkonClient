@@ -4,17 +4,29 @@
 <xsd:import namespace="http://webservices/" schemaLocation="http://localhost:8080/ArlkonServer/ChatWS?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="getOldDatetimes">
-<part name="parameters" element="tns:getOldDatetimes"/>
+<message name="disconnectFromChat">
+<part name="parameters" element="tns:disconnectFromChat"/>
 </message>
-<message name="getOldDatetimesResponse">
-<part name="parameters" element="tns:getOldDatetimesResponse"/>
+<message name="disconnectFromChatResponse">
+<part name="parameters" element="tns:disconnectFromChatResponse"/>
 </message>
-<message name="getOldMessages">
-<part name="parameters" element="tns:getOldMessages"/>
+<message name="getUserIdFromChatId">
+<part name="parameters" element="tns:getUserIdFromChatId"/>
 </message>
-<message name="getOldMessagesResponse">
-<part name="parameters" element="tns:getOldMessagesResponse"/>
+<message name="getUserIdFromChatIdResponse">
+<part name="parameters" element="tns:getUserIdFromChatIdResponse"/>
+</message>
+<message name="getLastChatUserId">
+<part name="parameters" element="tns:getLastChatUserId"/>
+</message>
+<message name="getLastChatUserIdResponse">
+<part name="parameters" element="tns:getLastChatUserIdResponse"/>
+</message>
+<message name="getLastChatDateTime">
+<part name="parameters" element="tns:getLastChatDateTime"/>
+</message>
+<message name="getLastChatDateTimeResponse">
+<part name="parameters" element="tns:getLastChatDateTimeResponse"/>
 </message>
 <message name="getLastMessage">
 <part name="parameters" element="tns:getLastMessage"/>
@@ -22,23 +34,17 @@
 <message name="getLastMessageResponse">
 <part name="parameters" element="tns:getLastMessageResponse"/>
 </message>
+<message name="getOldDatetimes">
+<part name="parameters" element="tns:getOldDatetimes"/>
+</message>
+<message name="getOldDatetimesResponse">
+<part name="parameters" element="tns:getOldDatetimesResponse"/>
+</message>
 <message name="saveMessage">
 <part name="parameters" element="tns:saveMessage"/>
 </message>
 <message name="saveMessageResponse">
 <part name="parameters" element="tns:saveMessageResponse"/>
-</message>
-<message name="getLastChatId">
-<part name="parameters" element="tns:getLastChatId"/>
-</message>
-<message name="getLastChatIdResponse">
-<part name="parameters" element="tns:getLastChatIdResponse"/>
-</message>
-<message name="getOldChatIds">
-<part name="parameters" element="tns:getOldChatIds"/>
-</message>
-<message name="getOldChatIdsResponse">
-<part name="parameters" element="tns:getOldChatIdsResponse"/>
 </message>
 <message name="connectToChat">
 <part name="parameters" element="tns:connectToChat"/>
@@ -52,54 +58,52 @@
 <message name="onlineUsersListResponse">
 <part name="parameters" element="tns:onlineUsersListResponse"/>
 </message>
-<message name="getLastChatUserId">
-<part name="parameters" element="tns:getLastChatUserId"/>
+<message name="getLastChatId">
+<part name="parameters" element="tns:getLastChatId"/>
 </message>
-<message name="getLastChatUserIdResponse">
-<part name="parameters" element="tns:getLastChatUserIdResponse"/>
+<message name="getLastChatIdResponse">
+<part name="parameters" element="tns:getLastChatIdResponse"/>
 </message>
-<message name="disconnectFromChat">
-<part name="parameters" element="tns:disconnectFromChat"/>
+<message name="getOldChatIds">
+<part name="parameters" element="tns:getOldChatIds"/>
 </message>
-<message name="disconnectFromChatResponse">
-<part name="parameters" element="tns:disconnectFromChatResponse"/>
+<message name="getOldChatIdsResponse">
+<part name="parameters" element="tns:getOldChatIdsResponse"/>
 </message>
-<message name="getUserIdFromChatId">
-<part name="parameters" element="tns:getUserIdFromChatId"/>
+<message name="getOldMessages">
+<part name="parameters" element="tns:getOldMessages"/>
 </message>
-<message name="getUserIdFromChatIdResponse">
-<part name="parameters" element="tns:getUserIdFromChatIdResponse"/>
-</message>
-<message name="getLastChatDateTime">
-<part name="parameters" element="tns:getLastChatDateTime"/>
-</message>
-<message name="getLastChatDateTimeResponse">
-<part name="parameters" element="tns:getLastChatDateTimeResponse"/>
+<message name="getOldMessagesResponse">
+<part name="parameters" element="tns:getOldMessagesResponse"/>
 </message>
 <portType name="ChatWS">
-<operation name="getOldDatetimes">
-<input wsam:Action="http://webservices/ChatWS/getOldDatetimesRequest" message="tns:getOldDatetimes"/>
-<output wsam:Action="http://webservices/ChatWS/getOldDatetimesResponse" message="tns:getOldDatetimesResponse"/>
+<operation name="disconnectFromChat">
+<input wsam:Action="http://webservices/ChatWS/disconnectFromChatRequest" message="tns:disconnectFromChat"/>
+<output wsam:Action="http://webservices/ChatWS/disconnectFromChatResponse" message="tns:disconnectFromChatResponse"/>
 </operation>
-<operation name="getOldMessages">
-<input wsam:Action="http://webservices/ChatWS/getOldMessagesRequest" message="tns:getOldMessages"/>
-<output wsam:Action="http://webservices/ChatWS/getOldMessagesResponse" message="tns:getOldMessagesResponse"/>
+<operation name="getUserIdFromChatId">
+<input wsam:Action="http://webservices/ChatWS/getUserIdFromChatIdRequest" message="tns:getUserIdFromChatId"/>
+<output wsam:Action="http://webservices/ChatWS/getUserIdFromChatIdResponse" message="tns:getUserIdFromChatIdResponse"/>
+</operation>
+<operation name="getLastChatUserId">
+<input wsam:Action="http://webservices/ChatWS/getLastChatUserIdRequest" message="tns:getLastChatUserId"/>
+<output wsam:Action="http://webservices/ChatWS/getLastChatUserIdResponse" message="tns:getLastChatUserIdResponse"/>
+</operation>
+<operation name="getLastChatDateTime">
+<input wsam:Action="http://webservices/ChatWS/getLastChatDateTimeRequest" message="tns:getLastChatDateTime"/>
+<output wsam:Action="http://webservices/ChatWS/getLastChatDateTimeResponse" message="tns:getLastChatDateTimeResponse"/>
 </operation>
 <operation name="getLastMessage">
 <input wsam:Action="http://webservices/ChatWS/getLastMessageRequest" message="tns:getLastMessage"/>
 <output wsam:Action="http://webservices/ChatWS/getLastMessageResponse" message="tns:getLastMessageResponse"/>
 </operation>
+<operation name="getOldDatetimes">
+<input wsam:Action="http://webservices/ChatWS/getOldDatetimesRequest" message="tns:getOldDatetimes"/>
+<output wsam:Action="http://webservices/ChatWS/getOldDatetimesResponse" message="tns:getOldDatetimesResponse"/>
+</operation>
 <operation name="saveMessage">
 <input wsam:Action="http://webservices/ChatWS/saveMessageRequest" message="tns:saveMessage"/>
 <output wsam:Action="http://webservices/ChatWS/saveMessageResponse" message="tns:saveMessageResponse"/>
-</operation>
-<operation name="getLastChatId">
-<input wsam:Action="http://webservices/ChatWS/getLastChatIdRequest" message="tns:getLastChatId"/>
-<output wsam:Action="http://webservices/ChatWS/getLastChatIdResponse" message="tns:getLastChatIdResponse"/>
-</operation>
-<operation name="getOldChatIds">
-<input wsam:Action="http://webservices/ChatWS/getOldChatIdsRequest" message="tns:getOldChatIds"/>
-<output wsam:Action="http://webservices/ChatWS/getOldChatIdsResponse" message="tns:getOldChatIdsResponse"/>
 </operation>
 <operation name="connectToChat">
 <input wsam:Action="http://webservices/ChatWS/connectToChatRequest" message="tns:connectToChat"/>
@@ -109,26 +113,22 @@
 <input wsam:Action="http://webservices/ChatWS/onlineUsersListRequest" message="tns:onlineUsersList"/>
 <output wsam:Action="http://webservices/ChatWS/onlineUsersListResponse" message="tns:onlineUsersListResponse"/>
 </operation>
-<operation name="getLastChatUserId">
-<input wsam:Action="http://webservices/ChatWS/getLastChatUserIdRequest" message="tns:getLastChatUserId"/>
-<output wsam:Action="http://webservices/ChatWS/getLastChatUserIdResponse" message="tns:getLastChatUserIdResponse"/>
+<operation name="getLastChatId">
+<input wsam:Action="http://webservices/ChatWS/getLastChatIdRequest" message="tns:getLastChatId"/>
+<output wsam:Action="http://webservices/ChatWS/getLastChatIdResponse" message="tns:getLastChatIdResponse"/>
 </operation>
-<operation name="disconnectFromChat">
-<input wsam:Action="http://webservices/ChatWS/disconnectFromChatRequest" message="tns:disconnectFromChat"/>
-<output wsam:Action="http://webservices/ChatWS/disconnectFromChatResponse" message="tns:disconnectFromChatResponse"/>
+<operation name="getOldChatIds">
+<input wsam:Action="http://webservices/ChatWS/getOldChatIdsRequest" message="tns:getOldChatIds"/>
+<output wsam:Action="http://webservices/ChatWS/getOldChatIdsResponse" message="tns:getOldChatIdsResponse"/>
 </operation>
-<operation name="getUserIdFromChatId">
-<input wsam:Action="http://webservices/ChatWS/getUserIdFromChatIdRequest" message="tns:getUserIdFromChatId"/>
-<output wsam:Action="http://webservices/ChatWS/getUserIdFromChatIdResponse" message="tns:getUserIdFromChatIdResponse"/>
-</operation>
-<operation name="getLastChatDateTime">
-<input wsam:Action="http://webservices/ChatWS/getLastChatDateTimeRequest" message="tns:getLastChatDateTime"/>
-<output wsam:Action="http://webservices/ChatWS/getLastChatDateTimeResponse" message="tns:getLastChatDateTimeResponse"/>
+<operation name="getOldMessages">
+<input wsam:Action="http://webservices/ChatWS/getOldMessagesRequest" message="tns:getOldMessages"/>
+<output wsam:Action="http://webservices/ChatWS/getOldMessagesResponse" message="tns:getOldMessagesResponse"/>
 </operation>
 </portType>
 <binding name="ChatWSPortBinding" type="tns:ChatWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="getOldDatetimes">
+<operation name="disconnectFromChat">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -137,7 +137,25 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getOldMessages">
+<operation name="getUserIdFromChatId">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getLastChatUserId">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getLastChatDateTime">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -155,25 +173,16 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="getOldDatetimes">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="saveMessage">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getLastChatId">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getOldChatIds">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -200,7 +209,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getLastChatUserId">
+<operation name="getLastChatId">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -209,7 +218,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="disconnectFromChat">
+<operation name="getOldChatIds">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -218,16 +227,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getUserIdFromChatId">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getLastChatDateTime">
+<operation name="getOldMessages">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
