@@ -9,7 +9,9 @@
 <xs:element name="printInvestDataResponse" type="tns:printInvestDataResponse"/>
 
 <xs:complexType name="printInvestData">
-<xs:sequence/>
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="printInvestDataResponse">
@@ -19,7 +21,9 @@
 </xs:complexType>
 
 <xs:complexType name="printData">
-<xs:sequence/>
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="printDataResponse">

@@ -24,14 +24,18 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _GetDateJoin_QNAME = new QName("http://webservices/", "getDateJoin");
     private final static QName _SetBalance_QNAME = new QName("http://webservices/", "setBalance");
     private final static QName _GetBalanceResponse_QNAME = new QName("http://webservices/", "getBalanceResponse");
+    private final static QName _GetEmail_QNAME = new QName("http://webservices/", "getEmail");
     private final static QName _GetUserIdFromEmail_QNAME = new QName("http://webservices/", "getUserIdFromEmail");
     private final static QName _GetUserIdFromUsernameResponse_QNAME = new QName("http://webservices/", "getUserIdFromUsernameResponse");
     private final static QName _GetBalance_QNAME = new QName("http://webservices/", "getBalance");
     private final static QName _GetUsername_QNAME = new QName("http://webservices/", "getUsername");
     private final static QName _GetUsernameResponse_QNAME = new QName("http://webservices/", "getUsernameResponse");
+    private final static QName _GetDateJoinResponse_QNAME = new QName("http://webservices/", "getDateJoinResponse");
     private final static QName _GetUserIdFromUsername_QNAME = new QName("http://webservices/", "getUserIdFromUsername");
+    private final static QName _GetEmailResponse_QNAME = new QName("http://webservices/", "getEmailResponse");
     private final static QName _GetRecentActivities_QNAME = new QName("http://webservices/", "getRecentActivities");
     private final static QName _GetUserIdFromEmailResponse_QNAME = new QName("http://webservices/", "getUserIdFromEmailResponse");
     private final static QName _SetBalanceResponse_QNAME = new QName("http://webservices/", "setBalanceResponse");
@@ -113,6 +117,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetEmailResponse }
+     * 
+     */
+    public GetEmailResponse createGetEmailResponse() {
+        return new GetEmailResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetDateJoinResponse }
+     * 
+     */
+    public GetDateJoinResponse createGetDateJoinResponse() {
+        return new GetDateJoinResponse();
+    }
+
+    /**
      * Create an instance of {@link GetUserIdFromUsername }
      * 
      */
@@ -161,6 +181,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetEmail }
+     * 
+     */
+    public GetEmail createGetEmail() {
+        return new GetEmail();
+    }
+
+    /**
      * Create an instance of {@link GetBalanceResponse }
      * 
      */
@@ -174,6 +202,23 @@ public class ObjectFactory {
      */
     public SetBalance createSetBalance() {
         return new SetBalance();
+    }
+
+    /**
+     * Create an instance of {@link GetDateJoin }
+     * 
+     */
+    public GetDateJoin createGetDateJoin() {
+        return new GetDateJoin();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDateJoin }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getDateJoin")
+    public JAXBElement<GetDateJoin> createGetDateJoin(GetDateJoin value) {
+        return new JAXBElement<GetDateJoin>(_GetDateJoin_QNAME, GetDateJoin.class, null, value);
     }
 
     /**
@@ -192,6 +237,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "getBalanceResponse")
     public JAXBElement<GetBalanceResponse> createGetBalanceResponse(GetBalanceResponse value) {
         return new JAXBElement<GetBalanceResponse>(_GetBalanceResponse_QNAME, GetBalanceResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetEmail }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getEmail")
+    public JAXBElement<GetEmail> createGetEmail(GetEmail value) {
+        return new JAXBElement<GetEmail>(_GetEmail_QNAME, GetEmail.class, null, value);
     }
 
     /**
@@ -240,12 +294,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetDateJoinResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getDateJoinResponse")
+    public JAXBElement<GetDateJoinResponse> createGetDateJoinResponse(GetDateJoinResponse value) {
+        return new JAXBElement<GetDateJoinResponse>(_GetDateJoinResponse_QNAME, GetDateJoinResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetUserIdFromUsername }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://webservices/", name = "getUserIdFromUsername")
     public JAXBElement<GetUserIdFromUsername> createGetUserIdFromUsername(GetUserIdFromUsername value) {
         return new JAXBElement<GetUserIdFromUsername>(_GetUserIdFromUsername_QNAME, GetUserIdFromUsername.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetEmailResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getEmailResponse")
+    public JAXBElement<GetEmailResponse> createGetEmailResponse(GetEmailResponse value) {
+        return new JAXBElement<GetEmailResponse>(_GetEmailResponse_QNAME, GetEmailResponse.class, null, value);
     }
 
     /**

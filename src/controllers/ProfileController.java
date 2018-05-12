@@ -1,6 +1,10 @@
 package controllers;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,15 +18,21 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 import utils.Transition;
 import utils.WindowHandler;
@@ -30,25 +40,53 @@ import utils.WindowHandler;
 public class ProfileController implements Initializable {
     @FXML private Pane main_window;
     
+    @FXML private Label username_label, email_label, date_label, balance_val_label;
+    @FXML private ImageView profile_pic_icon;
+    
+    // Header
+    @FXML
+    private Pane home_btn_pane, settings_btn_pane, help_btn_pane, logout_btn_pane;
+    
+    @FXML
+    private ImageView home_btn, settings_btn, help_btn, logout_btn;
+    
+    @FXML
+    private Label home_btn_label, settings_btn_label, help_btn_label, logout_btn_label;
+    
+    
     @FXML private ImageView close_btn;
     @FXML private ImageView minimize_btn;
     
     @FXML private TableView<List<String>> transaction_history;
     @FXML private TableView<List<String>> withdraw_transaction;
     
-    static String Text = printData(), Text2 = printInvestData();;
+    Transition trans = new Transition();
+    
+    String Text = printData(getIdFromFile());
+    String Text2 = printInvestData(getIdFromFile());
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {        
         //Fadein transition
-        Transition tr = new Transition();
-        tr.fadeInTransition();
+        trans.fadeInTransition();
+        
+        // Header effects
+        trans.applyHeaderEffect(home_btn_pane, home_btn, home_btn_label);
+        trans.applyHeaderEffect(settings_btn_pane, settings_btn, settings_btn_label);
+        trans.applyHeaderEffect(logout_btn_pane, logout_btn, logout_btn_label);
+        trans.applyHeaderEffect(help_btn_pane, help_btn, help_btn_label);
         
         //Creating Binary Columns
         createBinaryTable();
         
         //Create Investment Tables
         createInvestTables();
+        
+        // Load balance to label
+        loadBalanceToLabel();
+        
+        // Display user info
+        displayInfo();
         
         //Close and Minimize Buttons
         WindowHandler wh = new WindowHandler();
@@ -59,6 +97,8 @@ public class ProfileController implements Initializable {
     
     public void createBinaryTable(){
         TableColumn Col1 = new TableColumn("ID");
+        Col1.setMinWidth(100);
+        Col1.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Col1.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Column1"));
         Col1.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
@@ -69,7 +109,8 @@ public class ProfileController implements Initializable {
         });
         
         TableColumn Col2 = new TableColumn("Type");
-        Col2.setMinWidth(75);
+        Col2.setMinWidth(100);
+        Col2.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Col2.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Column2"));
         Col2.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
@@ -80,7 +121,8 @@ public class ProfileController implements Initializable {
         });
         
         TableColumn Col3 = new TableColumn("Amount");
-        Col3.setMinWidth(75);
+        Col3.setMinWidth(100);
+        Col3.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Col3.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Column3"));
         Col3.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
@@ -91,27 +133,41 @@ public class ProfileController implements Initializable {
         });
         
         TableColumn Col4 = new TableColumn("Result");
-        Col4.setMinWidth(75);
+        Col4.setMinWidth(115);
+        Col4.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Col4.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Column4"));
         Col4.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
             public ObservableValue<String> call(CellDataFeatures<List<String>, String> data) {
-                return new ReadOnlyStringWrapper(data.getValue().get(3));
+                String val = data.getValue().get(3);
+                
+                if(val.equals("null")){
+                    val = "-";
+                }
+                return new ReadOnlyStringWrapper(val);
             }
             
         });
         
-        TableColumn Col5 = new TableColumn("TimeFrame");
+        TableColumn Col5 = new TableColumn("Timeframe");
+        Col5.setMinWidth(120);
+        Col5.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Col5.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Column5"));
         Col5.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
             public ObservableValue<String> call(CellDataFeatures<List<String>, String> data) {
-                return new ReadOnlyStringWrapper(data.getValue().get(4));
+                String val = data.getValue().get(4);
+                
+                if(val.equals("null")){
+                    val = "-";
+                }
+                return new ReadOnlyStringWrapper(val);
             }
             
         });
         
         TableColumn Col6 = new TableColumn("Transaction Date");
+        Col6.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Col6.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Column6"));
         Col6.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
@@ -127,6 +183,7 @@ public class ProfileController implements Initializable {
     
     public void createInvestTables(){
         TableColumn Colu1 = new TableColumn("ID");
+        Colu1.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Colu1.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Co1"));
         Colu1.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
@@ -137,7 +194,8 @@ public class ProfileController implements Initializable {
         });
         
         TableColumn Colu2 = new TableColumn("Amount");
-        Colu2.setMinWidth(75);
+        Colu2.setMinWidth(100);
+        Colu2.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Colu2.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Col2"));
         Colu2.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
@@ -148,7 +206,8 @@ public class ProfileController implements Initializable {
         });
         
         TableColumn Colu3 = new TableColumn("Profit");
-        Colu3.setMinWidth(75);
+        Colu3.setMinWidth(100);
+        Colu3.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Colu3.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Col3"));
         Colu3.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
@@ -159,7 +218,8 @@ public class ProfileController implements Initializable {
         });
         
         TableColumn Colu4 = new TableColumn("Loss");
-        Colu4.setMinWidth(75);
+        Colu4.setMinWidth(100);
+        Colu4.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Colu4.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Col4"));
         Colu4.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
@@ -170,6 +230,8 @@ public class ProfileController implements Initializable {
         });
         
         TableColumn Colu5 = new TableColumn("Transaction Date");
+        Colu5.setMinWidth(100);
+        Colu5.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Colu5.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Col5"));
         Colu5.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
@@ -182,7 +244,7 @@ public class ProfileController implements Initializable {
         withdraw_transaction.getColumns().addAll(Colu1, Colu2, Colu3, Colu4, Colu5);
     }
     
-    public static ObservableList<List<String>> getData() {
+    public ObservableList<List<String>> getData() {
         ObservableList<List<String>> data = FXCollections.observableArrayList();
         try {
             String filepath = "..\\ArlkonClient\\src\\res\\txtFiles\\TransactionHistory.txt";
@@ -226,7 +288,7 @@ public class ProfileController implements Initializable {
         return data;
     }
     
-    public static ObservableList<List<String>> getInvestmentData() {
+    public ObservableList<List<String>> getInvestmentData() {
         ObservableList<List<String>> data = FXCollections.observableArrayList();
         try {
             System.out.println("Function Started");
@@ -259,7 +321,6 @@ public class ProfileController implements Initializable {
             
             bufferedReader.close();
             fileReader.close();
-            System.out.println("Read Complete");
         } catch (FileNotFoundException ex) { 
             System.out.println("FileNotFoundException: " + ex.getMessage());
         } catch (IOException ex) {
@@ -269,24 +330,52 @@ public class ProfileController implements Initializable {
         return data;
     }
 
-    private static String printData() {
-        webservices.ProfileWS_Service service = new webservices.ProfileWS_Service();
-        webservices.ProfileWS port = service.getProfileWSPort();
-        return port.printData();
-    }
-
-    private static String printInvestData() {
-        webservices.ProfileWS_Service service = new webservices.ProfileWS_Service();
-        webservices.ProfileWS port = service.getProfileWSPort();
-        return port.printInvestData();
+    public void displayInfo(){
+        int user_id = getIdFromFile();
+        String username = firstLetterUpper(getUsername(user_id));
+        
+        username_label.setText(username);
+        email_label.setText(getEmail(user_id));
+        date_label.setText("Joined on " + getDateJoin(user_id).substring(0, 10));
+        balance_val_label.setText("$" + getBalance(user_id));
+        
+        profile_pic_icon.setImage(new Image("/res/assets/icons/letters/letter-" + getUsername(user_id).toLowerCase().charAt(0) + ".png"));
+        
     }
     
-    @FXML
-    void loadProfile(MouseEvent event) {
-        Transition trans = new Transition();
-        trans.setWindow(main_window);
+    private String firstLetterUpper(String word){
+        return word.substring(0, 1).toUpperCase() + word.substring(1);
+    }
+    
+    private void setBalanceToLabel(double bal){
+        // Round balance to 2 decimal points
+        bal = bal * 100;
+        bal = Math.round(bal);
+        bal = bal / 100;
         
-        trans.fadeOutTransition("/views/profile.fxml");
+        balance_val_label.setText("$" + bal);
+    }
+    
+    private void loadBalanceToLabel() {     
+        setBalanceToLabel(getBalance(getIdFromFile()));
+    }
+    
+    private static int getIdFromFile() {
+        Scanner in = null;
+        try {
+            in = new Scanner(new FileReader("user_data.txt"));
+        } catch (FileNotFoundException ex) {
+            System.out.println("FileNotFoundException: " + ex.getMessage());
+        }
+
+        int user_id = 0;
+        if (in.hasNext()) {
+            user_id = in.nextInt();
+        }
+
+        in.close();
+
+        return user_id;
     }
 
     @FXML
@@ -295,6 +384,90 @@ public class ProfileController implements Initializable {
         trans.setWindow(main_window);
         
         trans.fadeOutTransition("/views/Home.fxml");
+    }
+
+    @FXML
+    void logout(MouseEvent event){
+        disconnectFromChat(getIdFromFile());
+        File file = new File("user_data.txt");
+        
+        if(file.delete()) {
+            trans.setWindow(main_window);
+            try {
+                trans.loadNextScene("/views/index.fxml");
+            } catch (IOException ex) {
+                System.out.println("IOException: " + ex.getMessage());
+            }
+        } else {
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setHeading(new Text("Oops!"));
+            content.setBody(new Text("There was a problem logging out, please try again!"));
+            
+            StackPane dialog_container = new StackPane();
+            
+            // Add stack pane to the main_window
+            main_window.getChildren().add(dialog_container);
+            
+            // Center the dialog container
+            dialog_container.layoutXProperty().bind(main_window.widthProperty().subtract(dialog_container.widthProperty()).divide(2));
+            dialog_container.layoutYProperty().bind(main_window.heightProperty().subtract(dialog_container.heightProperty()).divide(2));
+            
+            JFXDialog dialog = new JFXDialog(dialog_container, content, JFXDialog.DialogTransition.CENTER);
+            JFXButton button = new JFXButton("Okay");
+            
+            button.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent event) {
+                    dialog.close();
+                }
+            });
+            
+            content.setActions(button);
+            dialog.show();
+        }
+    }
+
+
+    private static String getUsername(int userId) {
+        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS port = service.getUserWSPort();
+        return port.getUsername(userId);
+    }
+
+    private static double getBalance(int userId) {
+        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS port = service.getUserWSPort();
+        return port.getBalance(userId);
+    }
+
+    private static String getEmail(int userId) {
+        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS port = service.getUserWSPort();
+        return port.getEmail(userId);
+    }
+
+    private static String getDateJoin(int userId) {
+        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS port = service.getUserWSPort();
+        return port.getDateJoin(userId);
+    }
+
+    private static void disconnectFromChat(int userId) {
+        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
+        webservices.ChatWS port = service.getChatWSPort();
+        port.disconnectFromChat(userId);
+    }
+
+    private static String printData(int userId) {
+        webservices.ProfileWS_Service service = new webservices.ProfileWS_Service();
+        webservices.ProfileWS port = service.getProfileWSPort();
+        return port.printData(userId);
+    }
+
+    private static String printInvestData(int userId) {
+        webservices.ProfileWS_Service service = new webservices.ProfileWS_Service();
+        webservices.ProfileWS port = service.getProfileWSPort();
+        return port.printInvestData(userId);
     }
     
 }

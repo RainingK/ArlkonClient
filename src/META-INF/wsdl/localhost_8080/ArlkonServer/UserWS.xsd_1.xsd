@@ -4,6 +4,14 @@
 
 <xs:element name="getBalanceResponse" type="tns:getBalanceResponse"/>
 
+<xs:element name="getDateJoin" type="tns:getDateJoin"/>
+
+<xs:element name="getDateJoinResponse" type="tns:getDateJoinResponse"/>
+
+<xs:element name="getEmail" type="tns:getEmail"/>
+
+<xs:element name="getEmailResponse" type="tns:getEmailResponse"/>
+
 <xs:element name="getRecentActivities" type="tns:getRecentActivities"/>
 
 <xs:element name="getRecentActivitiesResponse" type="tns:getRecentActivitiesResponse"/>
@@ -44,6 +52,17 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="updatePassword">
+<xs:sequence>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updatePasswordResponse">
+<xs:sequence/>
+</xs:complexType>
+
 <xs:complexType name="getBalance">
 <xs:sequence>
 <xs:element name="user_id" type="xs:int"/>
@@ -56,17 +75,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="updatePassword">
-<xs:sequence>
-<xs:element name="password" type="xs:string" minOccurs="0"/>
-<xs:element name="user_id" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="updatePasswordResponse">
-<xs:sequence/>
-</xs:complexType>
-
 <xs:complexType name="getUserIdFromEmail">
 <xs:sequence>
 <xs:element name="email" type="xs:string" minOccurs="0"/>
@@ -76,6 +84,18 @@
 <xs:complexType name="getUserIdFromEmailResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getEmail">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getEmailResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -91,6 +111,18 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="getDateJoin">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getDateJoinResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getUsername">
 <xs:sequence>
 <xs:element name="user_id" type="xs:int"/>
@@ -103,6 +135,17 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="setBalance">
+<xs:sequence>
+<xs:element name="balance" type="xs:double"/>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setBalanceResponse">
+<xs:sequence/>
+</xs:complexType>
+
 <xs:complexType name="getUserIdFromUsername">
 <xs:sequence>
 <xs:element name="username" type="xs:string" minOccurs="0"/>
@@ -113,16 +156,5 @@
 <xs:sequence>
 <xs:element name="return" type="xs:int"/>
 </xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="setBalance">
-<xs:sequence>
-<xs:element name="balance" type="xs:double"/>
-<xs:element name="user_id" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="setBalanceResponse">
-<xs:sequence/>
 </xs:complexType>
 </xs:schema>
