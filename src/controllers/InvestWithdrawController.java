@@ -16,14 +16,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
@@ -47,8 +45,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import utils.WindowHandler;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -230,7 +226,7 @@ public class InvestWithdrawController implements Initializable {
         
         String currency = currency_dropdown.getValue().toString();
         
-        double currentPrice = getCurrentPrice("USD", currency);
+        double currentPrice = getCurrentPrice(currency, "USD");
 
         yAxisVal.setAutoRanging(false);
         yAxisVal.setLowerBound(currentPrice - 0.01);
@@ -249,7 +245,7 @@ public class InvestWithdrawController implements Initializable {
             public void handle(ActionEvent event) {
                 String currency = currency_dropdown.getValue().toString();
         
-                double currentPrice = getCurrentPrice("USD", currency);
+                double currentPrice = getCurrentPrice(currency, "USD");
                 generatedDecimal = getRandomNumbers();
                 
                 min = (currentPrice) - 0.1;
@@ -348,8 +344,7 @@ public class InvestWithdrawController implements Initializable {
     }
 
     private void populateDropdowns() {
-        List<String> currencies = getCurrencyList();
-        currencies.remove(0);
+        List<String> currencies = getCryptoCurrencyList();
         
         currency_dropdown.getItems().addAll(currencies);
 
@@ -425,8 +420,6 @@ public class InvestWithdrawController implements Initializable {
     // Display graph based on user selected currencies
     @FXML
     private void displayGraph() {
-        System.out.println("DISPLAY GRAPH");
-        
         // View Button is clicked
         Platform.runLater(() -> {
             view_graph_btn.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -447,7 +440,7 @@ public class InvestWithdrawController implements Initializable {
 
         double currentBalance = getBalance(user_id);
         int id = getIdFromFile();
-        double currentPrice = Math.round((getCurrentPrice("USD", "INR") + getRandomNumbers()) * 10000d) / 10000d;
+        double currentPrice = Math.round((getCurrentPrice(currency_dropdown.getSelectionModel().getSelectedItem().toString(), "USD") + getRandomNumbers()) * 10000d) / 10000d;
        
         double range = PROFIT_PERCENTAGE * currentPrice;
 
@@ -512,7 +505,7 @@ public class InvestWithdrawController implements Initializable {
             int id = getIdFromFile();
              double invest_amount = getTransactionAmount(id);
              double lossAmount = 0.5 * invest_amount;
-              double currentPrice = Math.round((getCurrentPrice("USD", "INR") + generatedDecimal) * 10000d) / 10000d;
+              double currentPrice = Math.round((getCurrentPrice(currency_dropdown.getSelectionModel().getSelectedItem().toString(), "USD") + generatedDecimal) * 10000d) / 10000d;
               System.out.println("Current price at stop loss : " +currentPrice);
              String end_method = "stop_loss";
             Task<Void> task = new Task<Void>() {
@@ -546,7 +539,7 @@ public class InvestWithdrawController implements Initializable {
     @FXML
     void takeProfit_clicked(ActionEvent event) throws FileNotFoundException {
         int id = getIdFromFile();
-        double currentPrice = Math.round((getCurrentPrice("USD", "INR") + generatedDecimal) * 10000d) / 10000d;
+        double currentPrice = Math.round((getCurrentPrice(currency_dropdown.getSelectionModel().getSelectedItem().toString(), "USD") + generatedDecimal) * 10000d) / 10000d;
 
         double invest_amount = getTransactionAmount(id);
         double profitAmount = 0.5 * invest_amount;
@@ -585,7 +578,7 @@ public class InvestWithdrawController implements Initializable {
             int id = getIdFromFile();
             
             String end_method= getEndMethod(id);
-            double currentPrice = Math.round((getCurrentPrice("USD", "INR") + generatedDecimal) * 10000d) / 10000d;
+            double currentPrice = Math.round((getCurrentPrice(currency_dropdown.getSelectionModel().getSelectedItem().toString(), "USD") + generatedDecimal) * 10000d) / 10000d;
             if(end_method.equals("take_profit")){
                   message = "Your transaction has been closed with a profit earned of $ " +getTransactionResult(id) + " at price level $ " + currentPrice;
             }
@@ -786,13 +779,7 @@ public class InvestWithdrawController implements Initializable {
         webservices.IWWS port = service.getIWWSPort();
         return port.getLossValue(userId);
     }
-
-    private static java.util.List<java.lang.String> getCurrencyList() {
-        webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
-        webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
-        return port.getCurrencyList();
-    }
-
+    
     private static void insertInDb(int userId, double transactionAmount, java.lang.String currency, double profitValue, double lossValue) {
         webservices.IWWS_Service service = new webservices.IWWS_Service();
         webservices.IWWS port = service.getIWWSPort();
@@ -833,6 +820,12 @@ public class InvestWithdrawController implements Initializable {
         webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
         return port.getRandomNumbers();
+    }
+
+    private static java.util.List<java.lang.String> getCryptoCurrencyList() {
+        webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
+        webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
+        return port.getCryptoCurrencyList();
     }
 
     

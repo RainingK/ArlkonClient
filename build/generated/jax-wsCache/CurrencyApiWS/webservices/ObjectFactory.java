@@ -25,14 +25,16 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _GetCurrencyList_QNAME = new QName("http://webservices/", "getCurrencyList");
-    private final static QName _GetAverage_QNAME = new QName("http://webservices/", "getAverage");
     private final static QName _ReturnCurrency_QNAME = new QName("http://webservices/", "returnCurrency");
     private final static QName _GetAverageResponse_QNAME = new QName("http://webservices/", "getAverageResponse");
-    private final static QName _GetCurrentPrice_QNAME = new QName("http://webservices/", "getCurrentPrice");
     private final static QName _GetCurrencyListResponse_QNAME = new QName("http://webservices/", "getCurrencyListResponse");
+    private final static QName _GetCryptoCurrencyList_QNAME = new QName("http://webservices/", "getCryptoCurrencyList");
+    private final static QName _GetRandomNumbers_QNAME = new QName("http://webservices/", "getRandomNumbers");
+    private final static QName _GetAverage_QNAME = new QName("http://webservices/", "getAverage");
+    private final static QName _GetCurrentPrice_QNAME = new QName("http://webservices/", "getCurrentPrice");
+    private final static QName _GetCryptoCurrencyListResponse_QNAME = new QName("http://webservices/", "getCryptoCurrencyListResponse");
     private final static QName _ReturnCurrencyResponse_QNAME = new QName("http://webservices/", "returnCurrencyResponse");
     private final static QName _GetCurrentPriceResponse_QNAME = new QName("http://webservices/", "getCurrentPriceResponse");
-    private final static QName _GetRandomNumbers_QNAME = new QName("http://webservices/", "getRandomNumbers");
     private final static QName _GetRandomNumbersResponse_QNAME = new QName("http://webservices/", "getRandomNumbersResponse");
     private final static QName _GetHistoricalDataResponse_QNAME = new QName("http://webservices/", "getHistoricalDataResponse");
     private final static QName _GetHistoricalData_QNAME = new QName("http://webservices/", "getHistoricalData");
@@ -77,14 +79,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetRandomNumbers }
-     * 
-     */
-    public GetRandomNumbers createGetRandomNumbers() {
-        return new GetRandomNumbers();
-    }
-
-    /**
      * Create an instance of {@link ReturnCurrencyResponse }
      * 
      */
@@ -93,19 +87,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetCurrencyListResponse }
+     * Create an instance of {@link GetCryptoCurrencyListResponse }
      * 
      */
-    public GetCurrencyListResponse createGetCurrencyListResponse() {
-        return new GetCurrencyListResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetAverageResponse }
-     * 
-     */
-    public GetAverageResponse createGetAverageResponse() {
-        return new GetAverageResponse();
+    public GetCryptoCurrencyListResponse createGetCryptoCurrencyListResponse() {
+        return new GetCryptoCurrencyListResponse();
     }
 
     /**
@@ -122,6 +108,38 @@ public class ObjectFactory {
      */
     public GetAverage createGetAverage() {
         return new GetAverage();
+    }
+
+    /**
+     * Create an instance of {@link GetRandomNumbers }
+     * 
+     */
+    public GetRandomNumbers createGetRandomNumbers() {
+        return new GetRandomNumbers();
+    }
+
+    /**
+     * Create an instance of {@link GetCryptoCurrencyList }
+     * 
+     */
+    public GetCryptoCurrencyList createGetCryptoCurrencyList() {
+        return new GetCryptoCurrencyList();
+    }
+
+    /**
+     * Create an instance of {@link GetCurrencyListResponse }
+     * 
+     */
+    public GetCurrencyListResponse createGetCurrencyListResponse() {
+        return new GetCurrencyListResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetAverageResponse }
+     * 
+     */
+    public GetAverageResponse createGetAverageResponse() {
+        return new GetAverageResponse();
     }
 
     /**
@@ -150,15 +168,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetAverage }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getAverage")
-    public JAXBElement<GetAverage> createGetAverage(GetAverage value) {
-        return new JAXBElement<GetAverage>(_GetAverage_QNAME, GetAverage.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ReturnCurrency }{@code >}}
      * 
      */
@@ -177,6 +186,42 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrencyListResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrencyListResponse")
+    public JAXBElement<GetCurrencyListResponse> createGetCurrencyListResponse(GetCurrencyListResponse value) {
+        return new JAXBElement<GetCurrencyListResponse>(_GetCurrencyListResponse_QNAME, GetCurrencyListResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCryptoCurrencyList }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getCryptoCurrencyList")
+    public JAXBElement<GetCryptoCurrencyList> createGetCryptoCurrencyList(GetCryptoCurrencyList value) {
+        return new JAXBElement<GetCryptoCurrencyList>(_GetCryptoCurrencyList_QNAME, GetCryptoCurrencyList.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRandomNumbers }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getRandomNumbers")
+    public JAXBElement<GetRandomNumbers> createGetRandomNumbers(GetRandomNumbers value) {
+        return new JAXBElement<GetRandomNumbers>(_GetRandomNumbers_QNAME, GetRandomNumbers.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAverage }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "getAverage")
+    public JAXBElement<GetAverage> createGetAverage(GetAverage value) {
+        return new JAXBElement<GetAverage>(_GetAverage_QNAME, GetAverage.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrentPrice }{@code >}}
      * 
      */
@@ -186,12 +231,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrencyListResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCryptoCurrencyListResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrencyListResponse")
-    public JAXBElement<GetCurrencyListResponse> createGetCurrencyListResponse(GetCurrencyListResponse value) {
-        return new JAXBElement<GetCurrencyListResponse>(_GetCurrencyListResponse_QNAME, GetCurrencyListResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "getCryptoCurrencyListResponse")
+    public JAXBElement<GetCryptoCurrencyListResponse> createGetCryptoCurrencyListResponse(GetCryptoCurrencyListResponse value) {
+        return new JAXBElement<GetCryptoCurrencyListResponse>(_GetCryptoCurrencyListResponse_QNAME, GetCryptoCurrencyListResponse.class, null, value);
     }
 
     /**
@@ -210,15 +255,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "getCurrentPriceResponse")
     public JAXBElement<GetCurrentPriceResponse> createGetCurrentPriceResponse(GetCurrentPriceResponse value) {
         return new JAXBElement<GetCurrentPriceResponse>(_GetCurrentPriceResponse_QNAME, GetCurrentPriceResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetRandomNumbers }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getRandomNumbers")
-    public JAXBElement<GetRandomNumbers> createGetRandomNumbers(GetRandomNumbers value) {
-        return new JAXBElement<GetRandomNumbers>(_GetRandomNumbers_QNAME, GetRandomNumbers.class, null, value);
     }
 
     /**

@@ -4,6 +4,10 @@
 
 <xs:element name="getAverageResponse" type="tns:getAverageResponse"/>
 
+<xs:element name="getCryptoCurrencyList" type="tns:getCryptoCurrencyList"/>
+
+<xs:element name="getCryptoCurrencyListResponse" type="tns:getCryptoCurrencyListResponse"/>
+
 <xs:element name="getCurrencyList" type="tns:getCurrencyList"/>
 
 <xs:element name="getCurrencyListResponse" type="tns:getCurrencyListResponse"/>
@@ -34,16 +38,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="getAverage">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getAverageResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="returnCurrency">
 <xs:sequence/>
 </xs:complexType>
@@ -51,6 +45,16 @@
 <xs:complexType name="returnCurrencyResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAverage">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getAverageResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -64,6 +68,16 @@
 <xs:complexType name="getCurrentPriceResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCryptoCurrencyList">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getCryptoCurrencyListResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
