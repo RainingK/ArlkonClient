@@ -97,7 +97,7 @@ public class ProfileController implements Initializable {
     
     public void createBinaryTable(){
         TableColumn Col1 = new TableColumn("ID");
-        Col1.setMinWidth(100);
+        Col1.setMinWidth(60);
         Col1.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Col1.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Column1"));
         Col1.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
@@ -109,13 +109,25 @@ public class ProfileController implements Initializable {
         });
         
         TableColumn Col2 = new TableColumn("Type");
-        Col2.setMinWidth(100);
+        Col2.setMinWidth(80);
         Col2.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Col2.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Column2"));
         Col2.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
             public ObservableValue<String> call(CellDataFeatures<List<String>, String> data) {
                 return new ReadOnlyStringWrapper(data.getValue().get(1));
+            }
+            
+        });
+        
+        TableColumn Col7 = new TableColumn("Currency");
+        Col7.setMinWidth(75);
+        Col7.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
+        Col7.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Column7"));
+        Col7.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<List<String>, String> data) {
+                return new ReadOnlyStringWrapper(data.getValue().get(2));
             }
             
         });
@@ -127,19 +139,19 @@ public class ProfileController implements Initializable {
         Col3.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
             public ObservableValue<String> call(CellDataFeatures<List<String>, String> data) {
-                return new ReadOnlyStringWrapper(data.getValue().get(2));
+                return new ReadOnlyStringWrapper(data.getValue().get(3));
             }
             
         });
         
         TableColumn Col4 = new TableColumn("Result");
-        Col4.setMinWidth(115);
+        Col4.setMinWidth(108);
         Col4.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Col4.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Column4"));
         Col4.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
             public ObservableValue<String> call(CellDataFeatures<List<String>, String> data) {
-                String val = data.getValue().get(3);
+                String val = data.getValue().get(4);
                 
                 if(val.equals("null")){
                     val = "-";
@@ -150,13 +162,13 @@ public class ProfileController implements Initializable {
         });
         
         TableColumn Col5 = new TableColumn("Timeframe");
-        Col5.setMinWidth(120);
+        Col5.setMinWidth(80);
         Col5.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Col5.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Column5"));
         Col5.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
             public ObservableValue<String> call(CellDataFeatures<List<String>, String> data) {
-                String val = data.getValue().get(4);
+                String val = data.getValue().get(5);
                 
                 if(val.equals("null")){
                     val = "-";
@@ -172,13 +184,13 @@ public class ProfileController implements Initializable {
         Col6.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
             public ObservableValue<String> call(CellDataFeatures<List<String>, String> data) {
-                return new ReadOnlyStringWrapper(data.getValue().get(5));
+                return new ReadOnlyStringWrapper(data.getValue().get(6));
             }
             
         });
         
         transaction_history.setItems(getData());
-        transaction_history.getColumns().addAll(Col1, Col2, Col3, Col4, Col5, Col6);
+        transaction_history.getColumns().addAll(Col1, Col2, Col7, Col3, Col4, Col5, Col6);
     }
     
     public void createInvestTables(){
@@ -194,7 +206,7 @@ public class ProfileController implements Initializable {
         });
         
         TableColumn Colu2 = new TableColumn("Amount");
-        Colu2.setMinWidth(100);
+        Colu2.setMinWidth(75);
         Colu2.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Colu2.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Col2"));
         Colu2.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
@@ -205,11 +217,11 @@ public class ProfileController implements Initializable {
             
         });
         
-        TableColumn Colu3 = new TableColumn("Profit");
-        Colu3.setMinWidth(100);
-        Colu3.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
-        Colu3.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Col3"));
-        Colu3.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
+        TableColumn Colu6 = new TableColumn("Currency");
+        Colu6.setMinWidth(75);
+        Colu6.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
+        Colu6.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Col3"));
+        Colu6.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
             public ObservableValue<String> call(CellDataFeatures<List<String>, String> data) {
                 return new ReadOnlyStringWrapper(data.getValue().get(2));
@@ -217,11 +229,11 @@ public class ProfileController implements Initializable {
             
         });
         
-        TableColumn Colu4 = new TableColumn("Loss");
-        Colu4.setMinWidth(100);
-        Colu4.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
-        Colu4.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Col4"));
-        Colu4.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
+        TableColumn Colu3 = new TableColumn("Profit");
+        Colu3.setMinWidth(80);
+        Colu3.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
+        Colu3.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Col3"));
+        Colu3.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
             public ObservableValue<String> call(CellDataFeatures<List<String>, String> data) {
                 return new ReadOnlyStringWrapper(data.getValue().get(3));
@@ -229,19 +241,31 @@ public class ProfileController implements Initializable {
             
         });
         
+        TableColumn Colu4 = new TableColumn("Loss");
+        Colu4.setMinWidth(80);
+        Colu4.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
+        Colu4.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Col4"));
+        Colu4.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
+            @Override
+            public ObservableValue<String> call(CellDataFeatures<List<String>, String> data) {
+                return new ReadOnlyStringWrapper(data.getValue().get(4));
+            }
+            
+        });
+        
         TableColumn Colu5 = new TableColumn("Transaction Date");
-        Colu5.setMinWidth(100);
+        Colu5.setMinWidth(130);
         Colu5.setStyle("-fx-text-fill: white;-fx-alignment: CENTER;");
         Colu5.setCellValueFactory(new PropertyValueFactory<List<String>,String>("Col5"));
         Colu5.setCellValueFactory(new Callback<CellDataFeatures<List<String>, String>, ObservableValue<String>>(){
             @Override
             public ObservableValue<String> call(CellDataFeatures<List<String>, String> data) {
-                return new ReadOnlyStringWrapper(data.getValue().get(4));
+                return new ReadOnlyStringWrapper(data.getValue().get(5));
             }
         });
         
         withdraw_transaction.setItems(getInvestmentData());
-        withdraw_transaction.getColumns().addAll(Colu1, Colu2, Colu3, Colu4, Colu5);
+        withdraw_transaction.getColumns().addAll(Colu1, Colu2, Colu6, Colu3, Colu4, Colu5);
     }
     
     public ObservableList<List<String>> getData() {
@@ -426,7 +450,6 @@ public class ProfileController implements Initializable {
             dialog.show();
         }
     }
-
 
     private static String getUsername(int userId) {
         webservices.UserWS_Service service = new webservices.UserWS_Service();

@@ -55,6 +55,11 @@
     -fx-background-color: transparent;
 }
 
+.jfx-tab-pane .tab-header-area .jfx-rippler{
+    -jfx-rippler-fill: black;
+    -fx-opacity: 0.5;
+}
+
 .table-view .column-header-background .label{
     -fx-background-color: #121c1e;
     -fx-text-fill: white;

@@ -95,7 +95,7 @@
             </Label>
             <Label fx:id="date_label" alignment="CENTER" layoutX="53.0" layoutY="473.0" prefHeight="26.0" prefWidth="174.0" styleClass="user_info_label" text="Joined on">
                <font>
-                  <Font size="17.0" />
+                  <Font name="System Italic" size="17.0" />
                </font>
             </Label>
             <ImageView fx:id="profile_pic_icon" fitHeight="67.0" fitWidth="62.0" layoutX="115.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true" smooth="false">
