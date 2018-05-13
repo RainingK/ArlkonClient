@@ -24,20 +24,16 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _GetCurrencyList_QNAME = new QName("http://webservices/", "getCurrencyList");
-    private final static QName _ReturnCurrency_QNAME = new QName("http://webservices/", "returnCurrency");
-    private final static QName _GetAverageResponse_QNAME = new QName("http://webservices/", "getAverageResponse");
-    private final static QName _GetCurrencyListResponse_QNAME = new QName("http://webservices/", "getCurrencyListResponse");
-    private final static QName _GetCryptoCurrencyList_QNAME = new QName("http://webservices/", "getCryptoCurrencyList");
-    private final static QName _GetRandomNumbers_QNAME = new QName("http://webservices/", "getRandomNumbers");
-    private final static QName _GetAverage_QNAME = new QName("http://webservices/", "getAverage");
-    private final static QName _GetCurrentPrice_QNAME = new QName("http://webservices/", "getCurrentPrice");
-    private final static QName _GetCryptoCurrencyListResponse_QNAME = new QName("http://webservices/", "getCryptoCurrencyListResponse");
-    private final static QName _ReturnCurrencyResponse_QNAME = new QName("http://webservices/", "returnCurrencyResponse");
-    private final static QName _GetCurrentPriceResponse_QNAME = new QName("http://webservices/", "getCurrentPriceResponse");
-    private final static QName _GetRandomNumbersResponse_QNAME = new QName("http://webservices/", "getRandomNumbersResponse");
-    private final static QName _GetHistoricalDataResponse_QNAME = new QName("http://webservices/", "getHistoricalDataResponse");
-    private final static QName _GetHistoricalData_QNAME = new QName("http://webservices/", "getHistoricalData");
+    private final static QName _CheckUsernameExists_QNAME = new QName("http://webservices/", "checkUsernameExists");
+    private final static QName _CheckEmailExistsResponse_QNAME = new QName("http://webservices/", "checkEmailExistsResponse");
+    private final static QName _SignUp_QNAME = new QName("http://webservices/", "signUp");
+    private final static QName _CheckOldPassword_QNAME = new QName("http://webservices/", "checkOldPassword");
+    private final static QName _Login_QNAME = new QName("http://webservices/", "login");
+    private final static QName _SignUpResponse_QNAME = new QName("http://webservices/", "signUpResponse");
+    private final static QName _CheckEmailExists_QNAME = new QName("http://webservices/", "checkEmailExists");
+    private final static QName _CheckOldPasswordResponse_QNAME = new QName("http://webservices/", "checkOldPasswordResponse");
+    private final static QName _CheckUsernameExistsResponse_QNAME = new QName("http://webservices/", "checkUsernameExistsResponse");
+    private final static QName _LoginResponse_QNAME = new QName("http://webservices/", "loginResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservices
@@ -47,241 +43,173 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetHistoricalData }
+     * Create an instance of {@link CheckUsernameExistsResponse }
      * 
      */
-    public GetHistoricalData createGetHistoricalData() {
-        return new GetHistoricalData();
+    public CheckUsernameExistsResponse createCheckUsernameExistsResponse() {
+        return new CheckUsernameExistsResponse();
     }
 
     /**
-     * Create an instance of {@link GetHistoricalDataResponse }
+     * Create an instance of {@link LoginResponse }
      * 
      */
-    public GetHistoricalDataResponse createGetHistoricalDataResponse() {
-        return new GetHistoricalDataResponse();
+    public LoginResponse createLoginResponse() {
+        return new LoginResponse();
     }
 
     /**
-     * Create an instance of {@link GetRandomNumbersResponse }
+     * Create an instance of {@link CheckEmailExists }
      * 
      */
-    public GetRandomNumbersResponse createGetRandomNumbersResponse() {
-        return new GetRandomNumbersResponse();
+    public CheckEmailExists createCheckEmailExists() {
+        return new CheckEmailExists();
     }
 
     /**
-     * Create an instance of {@link GetCurrentPriceResponse }
+     * Create an instance of {@link CheckOldPasswordResponse }
      * 
      */
-    public GetCurrentPriceResponse createGetCurrentPriceResponse() {
-        return new GetCurrentPriceResponse();
+    public CheckOldPasswordResponse createCheckOldPasswordResponse() {
+        return new CheckOldPasswordResponse();
     }
 
     /**
-     * Create an instance of {@link ReturnCurrencyResponse }
+     * Create an instance of {@link SignUpResponse }
      * 
      */
-    public ReturnCurrencyResponse createReturnCurrencyResponse() {
-        return new ReturnCurrencyResponse();
+    public SignUpResponse createSignUpResponse() {
+        return new SignUpResponse();
     }
 
     /**
-     * Create an instance of {@link GetCryptoCurrencyListResponse }
+     * Create an instance of {@link CheckOldPassword }
      * 
      */
-    public GetCryptoCurrencyListResponse createGetCryptoCurrencyListResponse() {
-        return new GetCryptoCurrencyListResponse();
+    public CheckOldPassword createCheckOldPassword() {
+        return new CheckOldPassword();
     }
 
     /**
-     * Create an instance of {@link GetCurrentPrice }
+     * Create an instance of {@link Login }
      * 
      */
-    public GetCurrentPrice createGetCurrentPrice() {
-        return new GetCurrentPrice();
+    public Login createLogin() {
+        return new Login();
     }
 
     /**
-     * Create an instance of {@link GetAverage }
+     * Create an instance of {@link CheckEmailExistsResponse }
      * 
      */
-    public GetAverage createGetAverage() {
-        return new GetAverage();
+    public CheckEmailExistsResponse createCheckEmailExistsResponse() {
+        return new CheckEmailExistsResponse();
     }
 
     /**
-     * Create an instance of {@link GetRandomNumbers }
+     * Create an instance of {@link SignUp }
      * 
      */
-    public GetRandomNumbers createGetRandomNumbers() {
-        return new GetRandomNumbers();
+    public SignUp createSignUp() {
+        return new SignUp();
     }
 
     /**
-     * Create an instance of {@link GetCryptoCurrencyList }
+     * Create an instance of {@link CheckUsernameExists }
      * 
      */
-    public GetCryptoCurrencyList createGetCryptoCurrencyList() {
-        return new GetCryptoCurrencyList();
+    public CheckUsernameExists createCheckUsernameExists() {
+        return new CheckUsernameExists();
     }
 
     /**
-     * Create an instance of {@link GetCurrencyListResponse }
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckUsernameExists }{@code >}}
      * 
      */
-    public GetCurrencyListResponse createGetCurrencyListResponse() {
-        return new GetCurrencyListResponse();
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkUsernameExists")
+    public JAXBElement<CheckUsernameExists> createCheckUsernameExists(CheckUsernameExists value) {
+        return new JAXBElement<CheckUsernameExists>(_CheckUsernameExists_QNAME, CheckUsernameExists.class, null, value);
     }
 
     /**
-     * Create an instance of {@link GetAverageResponse }
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckEmailExistsResponse }{@code >}}
      * 
      */
-    public GetAverageResponse createGetAverageResponse() {
-        return new GetAverageResponse();
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkEmailExistsResponse")
+    public JAXBElement<CheckEmailExistsResponse> createCheckEmailExistsResponse(CheckEmailExistsResponse value) {
+        return new JAXBElement<CheckEmailExistsResponse>(_CheckEmailExistsResponse_QNAME, CheckEmailExistsResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link ReturnCurrency }
+     * Create an instance of {@link JAXBElement }{@code <}{@link SignUp }{@code >}}
      * 
      */
-    public ReturnCurrency createReturnCurrency() {
-        return new ReturnCurrency();
+    @XmlElementDecl(namespace = "http://webservices/", name = "signUp")
+    public JAXBElement<SignUp> createSignUp(SignUp value) {
+        return new JAXBElement<SignUp>(_SignUp_QNAME, SignUp.class, null, value);
     }
 
     /**
-     * Create an instance of {@link GetCurrencyList }
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckOldPassword }{@code >}}
      * 
      */
-    public GetCurrencyList createGetCurrencyList() {
-        return new GetCurrencyList();
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkOldPassword")
+    public JAXBElement<CheckOldPassword> createCheckOldPassword(CheckOldPassword value) {
+        return new JAXBElement<CheckOldPassword>(_CheckOldPassword_QNAME, CheckOldPassword.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrencyList }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link Login }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrencyList")
-    public JAXBElement<GetCurrencyList> createGetCurrencyList(GetCurrencyList value) {
-        return new JAXBElement<GetCurrencyList>(_GetCurrencyList_QNAME, GetCurrencyList.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "login")
+    public JAXBElement<Login> createLogin(Login value) {
+        return new JAXBElement<Login>(_Login_QNAME, Login.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ReturnCurrency }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link SignUpResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "returnCurrency")
-    public JAXBElement<ReturnCurrency> createReturnCurrency(ReturnCurrency value) {
-        return new JAXBElement<ReturnCurrency>(_ReturnCurrency_QNAME, ReturnCurrency.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "signUpResponse")
+    public JAXBElement<SignUpResponse> createSignUpResponse(SignUpResponse value) {
+        return new JAXBElement<SignUpResponse>(_SignUpResponse_QNAME, SignUpResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetAverageResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckEmailExists }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getAverageResponse")
-    public JAXBElement<GetAverageResponse> createGetAverageResponse(GetAverageResponse value) {
-        return new JAXBElement<GetAverageResponse>(_GetAverageResponse_QNAME, GetAverageResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkEmailExists")
+    public JAXBElement<CheckEmailExists> createCheckEmailExists(CheckEmailExists value) {
+        return new JAXBElement<CheckEmailExists>(_CheckEmailExists_QNAME, CheckEmailExists.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrencyListResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckOldPasswordResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrencyListResponse")
-    public JAXBElement<GetCurrencyListResponse> createGetCurrencyListResponse(GetCurrencyListResponse value) {
-        return new JAXBElement<GetCurrencyListResponse>(_GetCurrencyListResponse_QNAME, GetCurrencyListResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkOldPasswordResponse")
+    public JAXBElement<CheckOldPasswordResponse> createCheckOldPasswordResponse(CheckOldPasswordResponse value) {
+        return new JAXBElement<CheckOldPasswordResponse>(_CheckOldPasswordResponse_QNAME, CheckOldPasswordResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCryptoCurrencyList }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckUsernameExistsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getCryptoCurrencyList")
-    public JAXBElement<GetCryptoCurrencyList> createGetCryptoCurrencyList(GetCryptoCurrencyList value) {
-        return new JAXBElement<GetCryptoCurrencyList>(_GetCryptoCurrencyList_QNAME, GetCryptoCurrencyList.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkUsernameExistsResponse")
+    public JAXBElement<CheckUsernameExistsResponse> createCheckUsernameExistsResponse(CheckUsernameExistsResponse value) {
+        return new JAXBElement<CheckUsernameExistsResponse>(_CheckUsernameExistsResponse_QNAME, CheckUsernameExistsResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetRandomNumbers }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link LoginResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getRandomNumbers")
-    public JAXBElement<GetRandomNumbers> createGetRandomNumbers(GetRandomNumbers value) {
-        return new JAXBElement<GetRandomNumbers>(_GetRandomNumbers_QNAME, GetRandomNumbers.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetAverage }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getAverage")
-    public JAXBElement<GetAverage> createGetAverage(GetAverage value) {
-        return new JAXBElement<GetAverage>(_GetAverage_QNAME, GetAverage.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrentPrice }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrentPrice")
-    public JAXBElement<GetCurrentPrice> createGetCurrentPrice(GetCurrentPrice value) {
-        return new JAXBElement<GetCurrentPrice>(_GetCurrentPrice_QNAME, GetCurrentPrice.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCryptoCurrencyListResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getCryptoCurrencyListResponse")
-    public JAXBElement<GetCryptoCurrencyListResponse> createGetCryptoCurrencyListResponse(GetCryptoCurrencyListResponse value) {
-        return new JAXBElement<GetCryptoCurrencyListResponse>(_GetCryptoCurrencyListResponse_QNAME, GetCryptoCurrencyListResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ReturnCurrencyResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "returnCurrencyResponse")
-    public JAXBElement<ReturnCurrencyResponse> createReturnCurrencyResponse(ReturnCurrencyResponse value) {
-        return new JAXBElement<ReturnCurrencyResponse>(_ReturnCurrencyResponse_QNAME, ReturnCurrencyResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrentPriceResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrentPriceResponse")
-    public JAXBElement<GetCurrentPriceResponse> createGetCurrentPriceResponse(GetCurrentPriceResponse value) {
-        return new JAXBElement<GetCurrentPriceResponse>(_GetCurrentPriceResponse_QNAME, GetCurrentPriceResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetRandomNumbersResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getRandomNumbersResponse")
-    public JAXBElement<GetRandomNumbersResponse> createGetRandomNumbersResponse(GetRandomNumbersResponse value) {
-        return new JAXBElement<GetRandomNumbersResponse>(_GetRandomNumbersResponse_QNAME, GetRandomNumbersResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetHistoricalDataResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getHistoricalDataResponse")
-    public JAXBElement<GetHistoricalDataResponse> createGetHistoricalDataResponse(GetHistoricalDataResponse value) {
-        return new JAXBElement<GetHistoricalDataResponse>(_GetHistoricalDataResponse_QNAME, GetHistoricalDataResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetHistoricalData }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getHistoricalData")
-    public JAXBElement<GetHistoricalData> createGetHistoricalData(GetHistoricalData value) {
-        return new JAXBElement<GetHistoricalData>(_GetHistoricalData_QNAME, GetHistoricalData.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "loginResponse")
+    public JAXBElement<LoginResponse> createLoginResponse(LoginResponse value) {
+        return new JAXBElement<LoginResponse>(_LoginResponse_QNAME, LoginResponse.class, null, value);
     }
 
 }

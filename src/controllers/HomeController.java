@@ -291,17 +291,6 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    void loadProfile(MouseEvent event) {
-        trans.setWindow(main_window);
-        
-        try {
-            trans.loadNextScene("/views/profile.fxml");
-        } catch (IOException ex) {
-            System.out.println("IOException: " + ex.getMessage());
-        }
-    }
-
-    @FXML
     void loadBinaryTrading(MouseEvent event) {
         trans.setWindow(main_window);
         
@@ -332,6 +321,31 @@ public class HomeController implements Initializable {
         } catch (IOException ex) {
             System.out.println("IOException: " + ex.getMessage());
         }
+    }
+    
+    @FXML
+    void loadProfile(MouseEvent event) {
+        trans.setWindow(main_window);
+        
+        try {
+            trans.loadNextScene("/views/profile.fxml");
+        } catch (IOException ex) {
+            System.out.println("IOException: " + ex.getMessage());
+        }
+    }
+    
+    @FXML
+    void loadSettings(MouseEvent event) {
+        trans.setWindow(main_window);
+        
+//        try {
+//            trans.loadNextScene("/views/settings.fxml");
+//        } catch (IOException ex) {
+//            System.out.println("IOException: " + ex);
+//        }
+
+trans.fadeOutTransition("/views/settings.fxml");
+
     }
     
     @FXML

@@ -4,29 +4,11 @@
 <xsd:import namespace="http://webservices/" schemaLocation="http://localhost:8080/ArlkonServer/CurrencyApiWS?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="getCurrencyList">
-<part name="parameters" element="tns:getCurrencyList"/>
-</message>
-<message name="getCurrencyListResponse">
-<part name="parameters" element="tns:getCurrencyListResponse"/>
-</message>
-<message name="getRandomNumbers">
-<part name="parameters" element="tns:getRandomNumbers"/>
-</message>
-<message name="getRandomNumbersResponse">
-<part name="parameters" element="tns:getRandomNumbersResponse"/>
-</message>
 <message name="getCurrentPrice">
 <part name="parameters" element="tns:getCurrentPrice"/>
 </message>
 <message name="getCurrentPriceResponse">
 <part name="parameters" element="tns:getCurrentPriceResponse"/>
-</message>
-<message name="returnCurrency">
-<part name="parameters" element="tns:returnCurrency"/>
-</message>
-<message name="returnCurrencyResponse">
-<part name="parameters" element="tns:returnCurrencyResponse"/>
 </message>
 <message name="getAverage">
 <part name="parameters" element="tns:getAverage"/>
@@ -34,11 +16,23 @@
 <message name="getAverageResponse">
 <part name="parameters" element="tns:getAverageResponse"/>
 </message>
-<message name="getCryptoCurrencyList">
-<part name="parameters" element="tns:getCryptoCurrencyList"/>
+<message name="returnCurrency">
+<part name="parameters" element="tns:returnCurrency"/>
 </message>
-<message name="getCryptoCurrencyListResponse">
-<part name="parameters" element="tns:getCryptoCurrencyListResponse"/>
+<message name="returnCurrencyResponse">
+<part name="parameters" element="tns:returnCurrencyResponse"/>
+</message>
+<message name="getRandomNumbers">
+<part name="parameters" element="tns:getRandomNumbers"/>
+</message>
+<message name="getRandomNumbersResponse">
+<part name="parameters" element="tns:getRandomNumbersResponse"/>
+</message>
+<message name="getCurrencyList">
+<part name="parameters" element="tns:getCurrencyList"/>
+</message>
+<message name="getCurrencyListResponse">
+<part name="parameters" element="tns:getCurrencyListResponse"/>
 </message>
 <message name="getHistoricalData">
 <part name="parameters" element="tns:getHistoricalData"/>
@@ -46,66 +40,45 @@
 <message name="getHistoricalDataResponse">
 <part name="parameters" element="tns:getHistoricalDataResponse"/>
 </message>
+<message name="getCryptoCurrencyList">
+<part name="parameters" element="tns:getCryptoCurrencyList"/>
+</message>
+<message name="getCryptoCurrencyListResponse">
+<part name="parameters" element="tns:getCryptoCurrencyListResponse"/>
+</message>
 <portType name="CurrencyApiWS">
-<operation name="getCurrencyList">
-<input wsam:Action="http://webservices/CurrencyApiWS/getCurrencyListRequest" message="tns:getCurrencyList"/>
-<output wsam:Action="http://webservices/CurrencyApiWS/getCurrencyListResponse" message="tns:getCurrencyListResponse"/>
-</operation>
-<operation name="getRandomNumbers">
-<input wsam:Action="http://webservices/CurrencyApiWS/getRandomNumbersRequest" message="tns:getRandomNumbers"/>
-<output wsam:Action="http://webservices/CurrencyApiWS/getRandomNumbersResponse" message="tns:getRandomNumbersResponse"/>
-</operation>
 <operation name="getCurrentPrice">
 <input wsam:Action="http://webservices/CurrencyApiWS/getCurrentPriceRequest" message="tns:getCurrentPrice"/>
 <output wsam:Action="http://webservices/CurrencyApiWS/getCurrentPriceResponse" message="tns:getCurrentPriceResponse"/>
-</operation>
-<operation name="returnCurrency">
-<input wsam:Action="http://webservices/CurrencyApiWS/returnCurrencyRequest" message="tns:returnCurrency"/>
-<output wsam:Action="http://webservices/CurrencyApiWS/returnCurrencyResponse" message="tns:returnCurrencyResponse"/>
 </operation>
 <operation name="getAverage">
 <input wsam:Action="http://webservices/CurrencyApiWS/getAverageRequest" message="tns:getAverage"/>
 <output wsam:Action="http://webservices/CurrencyApiWS/getAverageResponse" message="tns:getAverageResponse"/>
 </operation>
-<operation name="getCryptoCurrencyList">
-<input wsam:Action="http://webservices/CurrencyApiWS/getCryptoCurrencyListRequest" message="tns:getCryptoCurrencyList"/>
-<output wsam:Action="http://webservices/CurrencyApiWS/getCryptoCurrencyListResponse" message="tns:getCryptoCurrencyListResponse"/>
+<operation name="returnCurrency">
+<input wsam:Action="http://webservices/CurrencyApiWS/returnCurrencyRequest" message="tns:returnCurrency"/>
+<output wsam:Action="http://webservices/CurrencyApiWS/returnCurrencyResponse" message="tns:returnCurrencyResponse"/>
+</operation>
+<operation name="getRandomNumbers">
+<input wsam:Action="http://webservices/CurrencyApiWS/getRandomNumbersRequest" message="tns:getRandomNumbers"/>
+<output wsam:Action="http://webservices/CurrencyApiWS/getRandomNumbersResponse" message="tns:getRandomNumbersResponse"/>
+</operation>
+<operation name="getCurrencyList">
+<input wsam:Action="http://webservices/CurrencyApiWS/getCurrencyListRequest" message="tns:getCurrencyList"/>
+<output wsam:Action="http://webservices/CurrencyApiWS/getCurrencyListResponse" message="tns:getCurrencyListResponse"/>
 </operation>
 <operation name="getHistoricalData">
 <input wsam:Action="http://webservices/CurrencyApiWS/getHistoricalDataRequest" message="tns:getHistoricalData"/>
 <output wsam:Action="http://webservices/CurrencyApiWS/getHistoricalDataResponse" message="tns:getHistoricalDataResponse"/>
 </operation>
+<operation name="getCryptoCurrencyList">
+<input wsam:Action="http://webservices/CurrencyApiWS/getCryptoCurrencyListRequest" message="tns:getCryptoCurrencyList"/>
+<output wsam:Action="http://webservices/CurrencyApiWS/getCryptoCurrencyListResponse" message="tns:getCryptoCurrencyListResponse"/>
+</operation>
 </portType>
 <binding name="CurrencyApiWSPortBinding" type="tns:CurrencyApiWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="getCurrencyList">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getRandomNumbers">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="getCurrentPrice">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="returnCurrency">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -123,7 +96,25 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getCryptoCurrencyList">
+<operation name="returnCurrency">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getRandomNumbers">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getCurrencyList">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -133,6 +124,15 @@
 </output>
 </operation>
 <operation name="getHistoricalData">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getCryptoCurrencyList">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

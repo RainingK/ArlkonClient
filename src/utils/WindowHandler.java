@@ -25,7 +25,6 @@ import javafx.stage.Stage;
 public class WindowHandler {
     public void closeProgram(ImageView img){
         img.setOnMouseClicked((MouseEvent e) -> {
-            disconnectFromChat(getIdFromFile());
             Platform.exit();
             System.exit(0);
         });
@@ -77,11 +76,5 @@ public class WindowHandler {
         in.close();
 
         return user_id;
-    }
-
-    private static void disconnectFromChat(int userId) {
-        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
-        webservices.ChatWS port = service.getChatWSPort();
-        port.disconnectFromChat(userId);
     }
 }

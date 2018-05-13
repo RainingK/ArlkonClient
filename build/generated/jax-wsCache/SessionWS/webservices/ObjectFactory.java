@@ -27,9 +27,11 @@ public class ObjectFactory {
     private final static QName _CheckUsernameExists_QNAME = new QName("http://webservices/", "checkUsernameExists");
     private final static QName _CheckEmailExistsResponse_QNAME = new QName("http://webservices/", "checkEmailExistsResponse");
     private final static QName _SignUp_QNAME = new QName("http://webservices/", "signUp");
+    private final static QName _CheckOldPassword_QNAME = new QName("http://webservices/", "checkOldPassword");
     private final static QName _Login_QNAME = new QName("http://webservices/", "login");
     private final static QName _SignUpResponse_QNAME = new QName("http://webservices/", "signUpResponse");
     private final static QName _CheckEmailExists_QNAME = new QName("http://webservices/", "checkEmailExists");
+    private final static QName _CheckOldPasswordResponse_QNAME = new QName("http://webservices/", "checkOldPasswordResponse");
     private final static QName _CheckUsernameExistsResponse_QNAME = new QName("http://webservices/", "checkUsernameExistsResponse");
     private final static QName _LoginResponse_QNAME = new QName("http://webservices/", "loginResponse");
 
@@ -65,11 +67,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link CheckOldPasswordResponse }
+     * 
+     */
+    public CheckOldPasswordResponse createCheckOldPasswordResponse() {
+        return new CheckOldPasswordResponse();
+    }
+
+    /**
      * Create an instance of {@link SignUpResponse }
      * 
      */
     public SignUpResponse createSignUpResponse() {
         return new SignUpResponse();
+    }
+
+    /**
+     * Create an instance of {@link CheckOldPassword }
+     * 
+     */
+    public CheckOldPassword createCheckOldPassword() {
+        return new CheckOldPassword();
     }
 
     /**
@@ -132,6 +150,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckOldPassword }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkOldPassword")
+    public JAXBElement<CheckOldPassword> createCheckOldPassword(CheckOldPassword value) {
+        return new JAXBElement<CheckOldPassword>(_CheckOldPassword_QNAME, CheckOldPassword.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Login }{@code >}}
      * 
      */
@@ -156,6 +183,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "checkEmailExists")
     public JAXBElement<CheckEmailExists> createCheckEmailExists(CheckEmailExists value) {
         return new JAXBElement<CheckEmailExists>(_CheckEmailExists_QNAME, CheckEmailExists.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckOldPasswordResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkOldPasswordResponse")
+    public JAXBElement<CheckOldPasswordResponse> createCheckOldPasswordResponse(CheckOldPasswordResponse value) {
+        return new JAXBElement<CheckOldPasswordResponse>(_CheckOldPasswordResponse_QNAME, CheckOldPasswordResponse.class, null, value);
     }
 
     /**

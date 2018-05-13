@@ -4,6 +4,10 @@
 
 <xs:element name="checkEmailExistsResponse" type="tns:checkEmailExistsResponse"/>
 
+<xs:element name="checkOldPassword" type="tns:checkOldPassword"/>
+
+<xs:element name="checkOldPasswordResponse" type="tns:checkOldPasswordResponse"/>
+
 <xs:element name="checkUsernameExists" type="tns:checkUsernameExists"/>
 
 <xs:element name="checkUsernameExistsResponse" type="tns:checkUsernameExistsResponse"/>
@@ -36,6 +40,19 @@
 </xs:complexType>
 
 <xs:complexType name="loginResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkOldPassword">
+<xs:sequence>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkOldPasswordResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>

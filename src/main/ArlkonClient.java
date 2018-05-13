@@ -47,11 +47,6 @@ public class ArlkonClient extends Application {
             @Override
             public void handle(WindowEvent event) {
                 
-                // Disconnect from group chat
-                if(getIdFromFile() != -1){
-                    disconnectFromChat(getIdFromFile());
-                }
-                
                 logout();
                 
                 Platform.exit();
@@ -67,35 +62,4 @@ public class ArlkonClient extends Application {
             file.delete();
         }
     }
-    
-    private int getIdFromFile() {
-        File file = new File("user_data.txt");
-        
-        if(!file.exists()){
-            return -1;
-        }
-        
-        Scanner in = null;
-        try {
-            in = new Scanner(new FileReader("user_data.txt"));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        int user_id = 0;
-        if (in.hasNext()) {
-            user_id = in.nextInt();
-        }
-
-        in.close();
-
-        return user_id;
-    }
-
-    private static void disconnectFromChat(int userId) {
-        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
-        webservices.ChatWS port = service.getChatWSPort();
-        port.disconnectFromChat(userId);
-    }
-    
 }

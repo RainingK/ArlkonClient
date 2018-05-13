@@ -106,8 +106,6 @@ public class ChatController implements Initializable {
         trans.applyHeaderEffect(logout_btn_pane, logout_btn, logout_btn_label);
         trans.applyHeaderEffect(help_btn_pane, help_btn, help_btn_label);
         
-        connectUserToChat();
-        
         // Load old messages when the page loads
         loadOldMessages();
         
@@ -117,66 +115,69 @@ public class ChatController implements Initializable {
         // Load user's balance to the label
         loadBalanceToLabel();
         
-        // Populate list of online users
-        setOnlineUsers();
-        
         // Set up close and minimize buttons
         WindowHandler wh = new WindowHandler();
         wh.closeProgram(close_btn, main_window);
         wh.minimizeProgram(minimize_btn);
     }
     
-    private void connectUserToChat(){
-        connectToChat(getIdFromFile());
-    }
-    
-    private void setOnlineUsers(){
-        
-        Timeline checkOnlineUsersThread = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-            List<Integer> onlineUsers = onlineUsersList();
-            
-            if(numberOfUsers == onlineUsersList().size()){
-                return;
-            } else {
-                numberOfUsers = onlineUsersList().size();
-            }
-        
-            for(int i = 0; i < onlineUsers.size(); i++){
-                Pane pane =  new Pane();
-                String username = getUsername(onlineUsers.get(i));
-
-                if(username.equals(getUsername(getIdFromFile()))){
-                    username = "You";
-                }
-
-                // Create ImageView for green online icon
-                ImageView onlineIcon = new ImageView("/res/assets/icons/online.png");
-
-                // Label containing username
-                Label usernameLabel = new Label(firstLetterUpper(username));
-
-                // Username label properties
-                usernameLabel.setTextFill(Color.WHITE);
-                trans.translate(40, usernameLabel);
-
-                // Add ImageView and label to the pane
-                pane.getChildren().addAll(onlineIcon, usernameLabel);
-                
-                pane.getStyleClass().add("online_users_pane");
-
-                // Add pane to the VBox
-                onlineUsersHolder.getChildren().add(pane);
-            }
-
-            online_users_container.setContent(onlineUsersHolder);
-        }),
-                // Refresh every 1 second
-                new KeyFrame(Duration.seconds(1))
-        );
-
-        checkOnlineUsersThread.setCycleCount(Animation.INDEFINITE);
-        checkOnlineUsersThread.play();
-    }
+//    private void connectUserToChat(){
+//        connectToChat(getIdFromFile());
+//    }
+//    
+//    private void setOnlineUsers(){
+//        
+//        Timeline checkOnlineUsersThread = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+//            List<Integer> onlineUsers = onlineUsersList();
+//            
+//            if(numberOfUsers == onlineUsersList().size()){
+//                return;
+//            } else {
+//                numberOfUsers = onlineUsersList().size();
+//            }
+//        
+//            for(int i = 0; i < onlineUsers.size(); i++){
+//                Pane pane =  new Pane();
+//                String username = getUsername(onlineUsers.get(i));
+//
+//                if(username.equals(getUsername(getIdFromFile()))){
+//                    username = "You";
+//                }
+//
+//                // Create ImageView for green online icon
+//                ImageView onlineIcon = new ImageView("/res/assets/icons/online.png");
+//
+//                for(int k = 0; k < i; k++){
+//                    if(onlineUsers.get(k).equals("You")){
+//                        return;
+//                    }
+//                }
+//                
+//                // Label containing username
+//                Label usernameLabel = new Label(firstLetterUpper(username));
+//
+//                // Username label properties
+//                usernameLabel.setTextFill(Color.WHITE);
+//                trans.translate(40, usernameLabel);
+//
+//                // Add ImageView and label to the pane
+//                pane.getChildren().addAll(onlineIcon, usernameLabel);
+//                
+//                pane.getStyleClass().add("online_users_pane");
+//
+//                // Add pane to the VBox
+//                onlineUsersHolder.getChildren().add(pane);
+//            }
+//
+//            online_users_container.setContent(onlineUsersHolder);
+//        }),
+//                // Refresh every 1 second
+//                new KeyFrame(Duration.seconds(1))
+//        );
+//
+//        checkOnlineUsersThread.setCycleCount(Animation.INDEFINITE);
+//        checkOnlineUsersThread.play();
+//    }
     
     private void loadOldMessages(){
         List<String> messages = getOldMessages();
@@ -219,7 +220,7 @@ public class ChatController implements Initializable {
             String username = getUsername(getLastChatUserId());
             username = firstLetterUpper(username);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             
             Date currentDateTime = null;
             Date chatDateTime = null;
@@ -302,7 +303,7 @@ public class ChatController implements Initializable {
         messageLabel.setTextAlignment(TextAlignment.JUSTIFY);
         
         usernameLabel.setTranslateX(50);
-        datetimeLabel.setTranslateX(538);
+        datetimeLabel.setTranslateX(515);
 
         // Add stylesheets classes
         usernameLabel.getStyleClass().add("message_view_labels");
@@ -366,7 +367,7 @@ public class ChatController implements Initializable {
         try {
             in = new Scanner(new FileReader("user_data.txt"));
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("FileNotFoundException in getIdFromFile(): " + ex);
         }
 
         int user_id = 0;
@@ -464,7 +465,6 @@ public class ChatController implements Initializable {
     
     @FXML
     void logout(MouseEvent event){
-        disconnectFromChat(getIdFromFile());
         File file = new File("user_data.txt");
         
         if(file.delete()) {

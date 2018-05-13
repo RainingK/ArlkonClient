@@ -121,7 +121,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <Pane fx:id="settings_btn_pane" layoutX="600.0" layoutY="11.0" prefHeight="52.0" prefWidth="40.0">
+      <Pane fx:id="settings_btn_pane" layoutX="600.0" layoutY="11.0" onMouseClicked="#loadSettings" prefHeight="52.0" prefWidth="40.0">
          <children>
             <ImageView fx:id="settings_btn" fitHeight="28.0" fitWidth="28.0" layoutX="6.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>

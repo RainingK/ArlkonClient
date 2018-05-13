@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane id="main_window" fx:id="main_window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="1024.0" stylesheets="@../res/css/settings.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SettingsController">
+   <children>
+      <Pane id="right_pane" fx:id="right_pane" layoutX="752.0" prefHeight="537.0" prefWidth="272.0">
+         <children>
+            <Rectangle id="balance_container" arcHeight="15.0" arcWidth="15.0" fill="#202f32" height="45.0" layoutX="30.0" layoutY="71.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="214.0" />
+            <ImageView fitHeight="26.0" fitWidth="22.0" layoutX="42.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/coins.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="76.0" layoutY="83.0" text="Balance" textFill="WHITE" />
+            <Label fx:id="balance_val_label" layoutX="146.0" layoutY="83.0" prefHeight="21.0" prefWidth="82.0" style="-fx-alignment: center-right;" text="\$10000" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="call_rising_icon" fitHeight="22.0" fitWidth="22.0" layoutX="53.0" layoutY="414.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../res/assets/icons/rising_option.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="put_rising_icon" fitHeight="22.0" fitWidth="22.0" layoutX="53.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../res/assets/icons/rising_option.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane id="top_pane" prefHeight="73.0" prefWidth="752.0">
+         <children>
+            <ImageView fitHeight="81.0" fitWidth="82.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="388.0" layoutY="20.0" text="Settings" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="help_btn_pane" layoutX="725.0" layoutY="4.0" prefHeight="52.0" prefWidth="28.0">
+         <children>
+            <ImageView fx:id="help_btn" fitHeight="28.0" fitWidth="28.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/question_white.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="help_btn_label" layoutX="-1.0" layoutY="37.0" text="Help" textFill="WHITE" visible="false" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="home_btn_pane" layoutX="485.0" layoutY="10.0" onMouseClicked="#loadHome" prefHeight="52.0" prefWidth="44.0">
+         <children>
+            <ImageView fx:id="home_btn" fitHeight="28.0" fitWidth="28.0" layoutX="7.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/home_white.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="home_btn_label" layoutX="2.0" layoutY="33.0" text="Home" textFill="WHITE" visible="false" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="profile_btn_pane" layoutX="552.0" layoutY="10.0" onMouseClicked="#loadProfile" prefHeight="52.0" prefWidth="40.0">
+         <children>
+            <ImageView fx:id="profile_btn" fitHeight="28.0" fitWidth="28.0" layoutX="4.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/user_white.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="profile_btn_label" layoutX="-2.0" layoutY="33.0" text="Profile" textFill="WHITE" visible="false" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="settings_btn_pane" layoutX="610.0" layoutY="10.0" prefHeight="52.0" prefWidth="40.0">
+         <children>
+            <ImageView fx:id="settings_btn" fitHeight="28.0" fitWidth="28.0" layoutX="6.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/settings_white.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="settings_btn_label" layoutX="-7.0" layoutY="33.0" text="Settings" textFill="WHITE" visible="false" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="logout_btn_pane" layoutX="671.0" layoutY="7.0" onMouseClicked="#logout" prefHeight="51.0" prefWidth="40.0">
+         <children>
+            <ImageView fx:id="logout_btn" fitHeight="45.0" fitWidth="31.0" layoutX="6.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/logout.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="logout_btn_label" layoutX="-6.0" layoutY="36.0" text="Logout" textFill="WHITE" visible="false" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <ScrollPane id="settings_options_container" hbarPolicy="NEVER" layoutX="35.0" layoutY="101.0" prefHeight="437.0" prefWidth="686.0" styleClass="edge-to-edge">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="488.0" prefWidth="685.0">
+               <children>
+                  <JFXButton id="change_password_btn" fx:id="confirm_but" layoutX="38.0" layoutY="200.0" onMouseClicked="#confirmPassword_clicked" prefHeight="45.0" prefWidth="145.0" text="Change password" textFill="WHITE" />
+                  <JFXPasswordField fx:id="old_passfield" focusColor="WHITE" layoutX="161.0" layoutY="67.0" prefHeight="31.0" prefWidth="183.0" styleClass="password_text_fields" unFocusColor="#ababab" />
+                  <Label fx:id="old_pass_label" layoutX="38.0" layoutY="79.0" prefHeight="25.0" prefWidth="108.0" text="Old Password" textFill="WHITE" />
+                  <Label fx:id="new_pass_label" layoutX="38.0" layoutY="137.0" prefHeight="25.0" prefWidth="108.0" text="New Password" textFill="WHITE" />
+                  <JFXPasswordField fx:id="new_passfield" focusColor="WHITE" layoutX="161.0" layoutY="125.0" prefHeight="31.0" prefWidth="186.0" styleClass="password_text_fields" unFocusColor="#ababab" />
+                  <JFXButton id="reset_balance_btn" fx:id="resetbal_btn" layoutX="38.0" layoutY="421.0" onMouseClicked="#resetbal_btn_clicked" prefHeight="45.0" prefWidth="145.0" text="Reset Balance" textFill="WHITE" />
+                  <Label fx:id="old_pass_label1" layoutX="14.0" layoutY="7.0" prefHeight="45.0" prefWidth="243.0" text="Change Password" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="281.0" prefHeight="45.0" prefWidth="125.0" text="Balance" textFill="WHITE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="38.0" layoutY="345.0" prefHeight="21.0" prefWidth="366.0" text="Start over by resetting your balance back to $10,000. " textFill="WHITE" />
+                  <Label layoutX="123.0" layoutY="378.0" prefHeight="21.0" prefWidth="440.0" text="Balance cannot be reverted back to the old state once reset" textFill="WHITE" />
+                  <Label layoutX="38.0" layoutY="378.0" text="WARNING:" textFill="#ff3c3c" />
+               </children></AnchorPane>
+        </content>
+      </ScrollPane>
+      <Pane layoutX="963.0" layoutY="14.0" prefHeight="26.0" prefWidth="57.0">
+         <children>
+            <ImageView id="close_image" fx:id="close_btn" fitHeight="19.0" fitWidth="14.0" layoutX="35.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" styleClass="close_image">
+               <image>
+                  <Image url="@../res/assets/icons/close_white.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView id="minimize_image" fx:id="minimize_btn" fitHeight="19.0" fitWidth="14.0" layoutX="1.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" styleClass="minimize_image">
+               <image>
+                  <Image url="@../res/assets/icons/minus_white.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Pane>
+   </children>
+</Pane>

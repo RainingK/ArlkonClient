@@ -68,6 +68,16 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="getLastChatId">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getLastChatIdResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="saveMessage">
 <xs:sequence>
 <xs:element name="user_id" type="xs:int"/>
@@ -78,16 +88,6 @@
 <xs:complexType name="saveMessageResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getLastChatId">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="getLastChatIdResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 

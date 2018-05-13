@@ -26,6 +26,21 @@ public interface SessionWS {
 
     /**
      * 
+     * @param username
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "checkUsernameExists", targetNamespace = "http://webservices/", className = "webservices.CheckUsernameExists")
+    @ResponseWrapper(localName = "checkUsernameExistsResponse", targetNamespace = "http://webservices/", className = "webservices.CheckUsernameExistsResponse")
+    @Action(input = "http://webservices/SessionWS/checkUsernameExistsRequest", output = "http://webservices/SessionWS/checkUsernameExistsResponse")
+    public Boolean checkUsernameExists(
+        @WebParam(name = "username", targetNamespace = "")
+        String username);
+
+    /**
+     * 
      * @param password
      * @param username
      * @return
@@ -41,21 +56,6 @@ public interface SessionWS {
         String username,
         @WebParam(name = "password", targetNamespace = "")
         String password);
-
-    /**
-     * 
-     * @param username
-     * @return
-     *     returns java.lang.Boolean
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "checkUsernameExists", targetNamespace = "http://webservices/", className = "webservices.CheckUsernameExists")
-    @ResponseWrapper(localName = "checkUsernameExistsResponse", targetNamespace = "http://webservices/", className = "webservices.CheckUsernameExistsResponse")
-    @Action(input = "http://webservices/SessionWS/checkUsernameExistsRequest", output = "http://webservices/SessionWS/checkUsernameExistsResponse")
-    public Boolean checkUsernameExists(
-        @WebParam(name = "username", targetNamespace = "")
-        String username);
 
     /**
      * 
@@ -95,5 +95,23 @@ public interface SessionWS {
     public Boolean checkEmailExists(
         @WebParam(name = "email", targetNamespace = "")
         String email);
+
+    /**
+     * 
+     * @param password
+     * @param userId
+     * @return
+     *     returns java.lang.Boolean
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "checkOldPassword", targetNamespace = "http://webservices/", className = "webservices.CheckOldPassword")
+    @ResponseWrapper(localName = "checkOldPasswordResponse", targetNamespace = "http://webservices/", className = "webservices.CheckOldPasswordResponse")
+    @Action(input = "http://webservices/SessionWS/checkOldPasswordRequest", output = "http://webservices/SessionWS/checkOldPasswordResponse")
+    public Boolean checkOldPassword(
+        @WebParam(name = "password", targetNamespace = "")
+        String password,
+        @WebParam(name = "user_id", targetNamespace = "")
+        int userId);
 
 }

@@ -58,14 +58,14 @@ public interface BinaryTransactionsWS {
      * 
      * @param userId
      * @return
-     *     returns java.lang.Boolean
+     *     returns boolean
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "checkTransactionExists", targetNamespace = "http://webservices/", className = "webservices.CheckTransactionExists")
     @ResponseWrapper(localName = "checkTransactionExistsResponse", targetNamespace = "http://webservices/", className = "webservices.CheckTransactionExistsResponse")
     @Action(input = "http://webservices/BinaryTransactionsWS/checkTransactionExistsRequest", output = "http://webservices/BinaryTransactionsWS/checkTransactionExistsResponse")
-    public Boolean checkTransactionExists(
+    public boolean checkTransactionExists(
         @WebParam(name = "user_id", targetNamespace = "")
         int userId);
 

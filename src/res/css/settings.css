@@ -1,0 +1,57 @@
+#right_pane, #top_pane {
+    -fx-background-color: #121c1e;
+}
+
+#main_window, #areaChart {
+    -fx-background-color: #152123;
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: #152123;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: #172326;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #121c1e;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: #172326;
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-background-color: white;
+}
+
+.scroll-bar:vertical .increment-button, .scroll-bar:vertical .decrement-button {
+    -fx-background-color: #172326;
+}
+
+#change_password_btn {
+    -fx-border-radius: 10px;
+    -fx-background-color: #008742;
+    -fx-text-fill: white;
+}
+
+#change_password_btn:hover {
+    -fx-background-color: #009147;
+    -fx-cursor: hand;
+}
+
+#reset_balance_btn {
+    -fx-border-radius: 10px;
+    -fx-background-color: #be222c;
+    -fx-text-fill: white;
+}
+
+#reset_balance_btn:hover {
+    -fx-background-color: #b71f28;
+    -fx-cursor: hand;
+}
+
+.password_text_fields {
+    -fx-text-fill: white;
+}
