@@ -9,11 +9,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -34,6 +37,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import javax.xml.ws.WebServiceException;
 import utils.Transition;
 import utils.WindowHandler;
 
@@ -64,6 +68,8 @@ public class ProfileController implements Initializable {
     
     String Text = printData(getIdFromFile());
     String Text2 = printInvestData(getIdFromFile());
+    
+    static final String HOST_ADDR = "172.28.18.204";
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {        
@@ -404,15 +410,39 @@ public class ProfileController implements Initializable {
 
     @FXML
     void loadHome(MouseEvent event) {
-        Transition trans = new Transition();
         trans.setWindow(main_window);
         
-        trans.fadeOutTransition("/views/Home.fxml");
+        try {
+            trans.loadNextScene("/views/Home.fxml");
+        } catch (IOException ex) {
+            System.out.println("IOException: " + ex.getMessage());
+        }
     }
 
     @FXML
+    void loadSettings(MouseEvent event) {
+        trans.setWindow(main_window);
+        
+        try {
+            trans.loadNextScene("/views/settings.fxml");
+        } catch (IOException ex) {
+            System.out.println("IOException: " + ex);
+        }
+    }
+    
+    @FXML
+    void loadHelp(MouseEvent event) {
+        trans.setWindow(main_window);
+        
+        try {
+            trans.loadNextScene("/views/help.fxml");
+        } catch (IOException ex) {
+            System.out.println("IOException: " + ex);
+        }
+    }
+    
+    @FXML
     void logout(MouseEvent event){
-        disconnectFromChat(getIdFromFile());
         File file = new File("user_data.txt");
         
         if(file.delete()) {
@@ -450,45 +480,125 @@ public class ProfileController implements Initializable {
             dialog.show();
         }
     }
+ 
 
     private static String getUsername(int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        
+        webservices.UserWS_Service service = null;
+        try {
+            try {
+                service = new webservices.UserWS_Service(new URL("http://localhost:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.UserWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.UserWS port = service.getUserWSPort();
         return port.getUsername(userId);
     }
 
     private static double getBalance(int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            try {
+                service = new webservices.UserWS_Service(new URL("http://localhost:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.UserWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.UserWS port = service.getUserWSPort();
         return port.getBalance(userId);
     }
 
     private static String getEmail(int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            try {
+                service = new webservices.UserWS_Service(new URL("http://localhost:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.UserWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.UserWS port = service.getUserWSPort();
         return port.getEmail(userId);
     }
 
     private static String getDateJoin(int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+       webservices.UserWS_Service service = null;
+        try {
+            try {
+                service = new webservices.UserWS_Service(new URL("http://localhost:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.UserWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.UserWS port = service.getUserWSPort();
         return port.getDateJoin(userId);
     }
 
-    private static void disconnectFromChat(int userId) {
-        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
-        webservices.ChatWS port = service.getChatWSPort();
-        port.disconnectFromChat(userId);
-    }
-
     private static String printData(int userId) {
-        webservices.ProfileWS_Service service = new webservices.ProfileWS_Service();
+        webservices.ProfileWS_Service service = null;
+        try {
+            try {
+                service = new webservices.ProfileWS_Service(new URL("http://localhost:8080/ArlkonServer/ProfileWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.ProfileWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/ProfileWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.ProfileWS port = service.getProfileWSPort();
         return port.printData(userId);
     }
 
     private static String printInvestData(int userId) {
-        webservices.ProfileWS_Service service = new webservices.ProfileWS_Service();
+        webservices.ProfileWS_Service service = null;
+        try {
+            try {
+                service = new webservices.ProfileWS_Service(new URL("http://localhost:8080/ArlkonServer/ProfileWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.ProfileWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/ProfileWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.ProfileWS port = service.getProfileWSPort();
         return port.printInvestData(userId);
     }

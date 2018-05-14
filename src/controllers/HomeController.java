@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,10 +22,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,6 +37,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javax.xml.ws.WebServiceException;
 import utils.Transition;
 import utils.WindowHandler;
 
@@ -78,7 +83,7 @@ public class HomeController implements Initializable {
     
     @FXML
     private Label noRecentActivity_label;
-
+            
     // Close and minimze buttons
     @FXML
     private ImageView close_btn, minimize_btn;
@@ -338,14 +343,22 @@ public class HomeController implements Initializable {
     void loadSettings(MouseEvent event) {
         trans.setWindow(main_window);
         
-//        try {
-//            trans.loadNextScene("/views/settings.fxml");
-//        } catch (IOException ex) {
-//            System.out.println("IOException: " + ex);
-//        }
-
-trans.fadeOutTransition("/views/settings.fxml");
-
+        try {
+            trans.loadNextScene("/views/settings.fxml");
+        } catch (IOException ex) {
+            System.out.println("IOException: " + ex);
+        }
+    }
+    
+    @FXML
+    void loadHelp(MouseEvent event) {
+        trans.setWindow(main_window);
+        
+        try {
+            trans.loadNextScene("/views/help.fxml");
+        } catch (IOException ex) {
+            System.out.println("IOException: " + ex);
+        }
     }
     
     @FXML
@@ -422,61 +435,194 @@ trans.fadeOutTransition("/views/settings.fxml");
     /************* HOVER OVER ITEMS END *************/
     
     private static double getBalance(int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            try {
+                service = new webservices.UserWS_Service(new URL("http://localhost:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.UserWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.UserWS port = service.getUserWSPort();
         return port.getBalance(userId);
     }
     
     private static java.util.List<java.lang.String> getRecentActivities(int arg0) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            try {
+                service = new webservices.UserWS_Service(new URL("http://localhost:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.UserWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.UserWS port = service.getUserWSPort();
         return port.getRecentActivities(arg0);
     }
 
-    private static boolean checkTransactionExists(int userId) {
+    private static Boolean checkTransactionExists(int userId) {
         webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.checkTransactionExists(userId);
     }
 
     private static String getPendingTransactionType(int userId) {
-        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS_Service service = null;
+                
+        try {
+            try {
+                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getPendingTransactionType(userId);
     }
 
     private static String getExpiryDateTime(int userId) {
-        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS_Service service = null;
+                
+        try {
+            try {
+                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getExpiryDateTime(userId);
     }
 
     private static double getStartPrice(int userId) {
-        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS_Service service = null;
+                
+        try {
+            try {
+                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getStartPrice(userId);
     }
 
     private static double getFinishedTransactionPrice(int userId) {
-        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS_Service service = null;
+                
+        try {
+            try {
+                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getFinishedTransactionPrice(userId);
     }
 
     private static void setEndPrice(double price, int userId) {
-        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS_Service service = null;
+                
+        try {
+            try {
+                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         port.setEndPrice(price, userId);
     }
 
     private static double getAmount(int userId) {
-        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS_Service service = null;
+                
+        try {
+            try {
+                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getAmount(userId);
     }
 
     private static void setResult(double result, int userId) {
-        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS_Service service = null;
+                
+        try {
+            try {
+                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         port.setResult(result, userId);
     }

@@ -32,14 +32,24 @@ public class ObjectFactory {
     private final static QName _SignUpResponse_QNAME = new QName("http://webservices/", "signUpResponse");
     private final static QName _CheckEmailExists_QNAME = new QName("http://webservices/", "checkEmailExists");
     private final static QName _CheckOldPasswordResponse_QNAME = new QName("http://webservices/", "checkOldPasswordResponse");
+    private final static QName _CheckServer_QNAME = new QName("http://webservices/", "checkServer");
     private final static QName _CheckUsernameExistsResponse_QNAME = new QName("http://webservices/", "checkUsernameExistsResponse");
     private final static QName _LoginResponse_QNAME = new QName("http://webservices/", "loginResponse");
+    private final static QName _CheckServerResponse_QNAME = new QName("http://webservices/", "checkServerResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservices
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link CheckServerResponse }
+     * 
+     */
+    public CheckServerResponse createCheckServerResponse() {
+        return new CheckServerResponse();
     }
 
     /**
@@ -72,6 +82,14 @@ public class ObjectFactory {
      */
     public CheckOldPasswordResponse createCheckOldPasswordResponse() {
         return new CheckOldPasswordResponse();
+    }
+
+    /**
+     * Create an instance of {@link CheckServer }
+     * 
+     */
+    public CheckServer createCheckServer() {
+        return new CheckServer();
     }
 
     /**
@@ -195,6 +213,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckServer }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkServer")
+    public JAXBElement<CheckServer> createCheckServer(CheckServer value) {
+        return new JAXBElement<CheckServer>(_CheckServer_QNAME, CheckServer.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CheckUsernameExistsResponse }{@code >}}
      * 
      */
@@ -210,6 +237,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservices/", name = "loginResponse")
     public JAXBElement<LoginResponse> createLoginResponse(LoginResponse value) {
         return new JAXBElement<LoginResponse>(_LoginResponse_QNAME, LoginResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckServerResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "checkServerResponse")
+    public JAXBElement<CheckServerResponse> createCheckServerResponse(CheckServerResponse value) {
+        return new JAXBElement<CheckServerResponse>(_CheckServerResponse_QNAME, CheckServerResponse.class, null, value);
     }
 
 }

@@ -10,42 +10,6 @@
 <message name="getUsernameResponse">
 <part name="parameters" element="tns:getUsernameResponse"/>
 </message>
-<message name="getDateJoin">
-<part name="parameters" element="tns:getDateJoin"/>
-</message>
-<message name="getDateJoinResponse">
-<part name="parameters" element="tns:getDateJoinResponse"/>
-</message>
-<message name="getEmail">
-<part name="parameters" element="tns:getEmail"/>
-</message>
-<message name="getEmailResponse">
-<part name="parameters" element="tns:getEmailResponse"/>
-</message>
-<message name="updatePassword">
-<part name="parameters" element="tns:updatePassword"/>
-</message>
-<message name="updatePasswordResponse">
-<part name="parameters" element="tns:updatePasswordResponse"/>
-</message>
-<message name="getBalance">
-<part name="parameters" element="tns:getBalance"/>
-</message>
-<message name="getBalanceResponse">
-<part name="parameters" element="tns:getBalanceResponse"/>
-</message>
-<message name="setBalance">
-<part name="parameters" element="tns:setBalance"/>
-</message>
-<message name="setBalanceResponse">
-<part name="parameters" element="tns:setBalanceResponse"/>
-</message>
-<message name="getRecentActivities">
-<part name="parameters" element="tns:getRecentActivities"/>
-</message>
-<message name="getRecentActivitiesResponse">
-<part name="parameters" element="tns:getRecentActivitiesResponse"/>
-</message>
 <message name="getUserIdFromUsername">
 <part name="parameters" element="tns:getUserIdFromUsername"/>
 </message>
@@ -64,34 +28,46 @@
 <message name="processforgotPasswordResponse">
 <part name="parameters" element="tns:processforgotPasswordResponse"/>
 </message>
+<message name="getRecentActivities">
+<part name="parameters" element="tns:getRecentActivities"/>
+</message>
+<message name="getRecentActivitiesResponse">
+<part name="parameters" element="tns:getRecentActivitiesResponse"/>
+</message>
+<message name="getEmail">
+<part name="parameters" element="tns:getEmail"/>
+</message>
+<message name="getEmailResponse">
+<part name="parameters" element="tns:getEmailResponse"/>
+</message>
+<message name="setBalance">
+<part name="parameters" element="tns:setBalance"/>
+</message>
+<message name="setBalanceResponse">
+<part name="parameters" element="tns:setBalanceResponse"/>
+</message>
+<message name="updatePassword">
+<part name="parameters" element="tns:updatePassword"/>
+</message>
+<message name="updatePasswordResponse">
+<part name="parameters" element="tns:updatePasswordResponse"/>
+</message>
+<message name="getBalance">
+<part name="parameters" element="tns:getBalance"/>
+</message>
+<message name="getBalanceResponse">
+<part name="parameters" element="tns:getBalanceResponse"/>
+</message>
+<message name="getDateJoin">
+<part name="parameters" element="tns:getDateJoin"/>
+</message>
+<message name="getDateJoinResponse">
+<part name="parameters" element="tns:getDateJoinResponse"/>
+</message>
 <portType name="UserWS">
 <operation name="getUsername">
 <input wsam:Action="http://webservices/UserWS/getUsernameRequest" message="tns:getUsername"/>
 <output wsam:Action="http://webservices/UserWS/getUsernameResponse" message="tns:getUsernameResponse"/>
-</operation>
-<operation name="getDateJoin">
-<input wsam:Action="http://webservices/UserWS/getDateJoinRequest" message="tns:getDateJoin"/>
-<output wsam:Action="http://webservices/UserWS/getDateJoinResponse" message="tns:getDateJoinResponse"/>
-</operation>
-<operation name="getEmail">
-<input wsam:Action="http://webservices/UserWS/getEmailRequest" message="tns:getEmail"/>
-<output wsam:Action="http://webservices/UserWS/getEmailResponse" message="tns:getEmailResponse"/>
-</operation>
-<operation name="updatePassword">
-<input wsam:Action="http://webservices/UserWS/updatePasswordRequest" message="tns:updatePassword"/>
-<output wsam:Action="http://webservices/UserWS/updatePasswordResponse" message="tns:updatePasswordResponse"/>
-</operation>
-<operation name="getBalance">
-<input wsam:Action="http://webservices/UserWS/getBalanceRequest" message="tns:getBalance"/>
-<output wsam:Action="http://webservices/UserWS/getBalanceResponse" message="tns:getBalanceResponse"/>
-</operation>
-<operation name="setBalance">
-<input wsam:Action="http://webservices/UserWS/setBalanceRequest" message="tns:setBalance"/>
-<output wsam:Action="http://webservices/UserWS/setBalanceResponse" message="tns:setBalanceResponse"/>
-</operation>
-<operation name="getRecentActivities">
-<input wsam:Action="http://webservices/UserWS/getRecentActivitiesRequest" message="tns:getRecentActivities"/>
-<output wsam:Action="http://webservices/UserWS/getRecentActivitiesResponse" message="tns:getRecentActivitiesResponse"/>
 </operation>
 <operation name="getUserIdFromUsername">
 <input wsam:Action="http://webservices/UserWS/getUserIdFromUsernameRequest" message="tns:getUserIdFromUsername"/>
@@ -105,64 +81,34 @@
 <input wsam:Action="http://webservices/UserWS/processforgotPasswordRequest" message="tns:processforgotPassword"/>
 <output wsam:Action="http://webservices/UserWS/processforgotPasswordResponse" message="tns:processforgotPasswordResponse"/>
 </operation>
+<operation name="getRecentActivities">
+<input wsam:Action="http://webservices/UserWS/getRecentActivitiesRequest" message="tns:getRecentActivities"/>
+<output wsam:Action="http://webservices/UserWS/getRecentActivitiesResponse" message="tns:getRecentActivitiesResponse"/>
+</operation>
+<operation name="getEmail">
+<input wsam:Action="http://webservices/UserWS/getEmailRequest" message="tns:getEmail"/>
+<output wsam:Action="http://webservices/UserWS/getEmailResponse" message="tns:getEmailResponse"/>
+</operation>
+<operation name="setBalance">
+<input wsam:Action="http://webservices/UserWS/setBalanceRequest" message="tns:setBalance"/>
+<output wsam:Action="http://webservices/UserWS/setBalanceResponse" message="tns:setBalanceResponse"/>
+</operation>
+<operation name="updatePassword">
+<input wsam:Action="http://webservices/UserWS/updatePasswordRequest" message="tns:updatePassword"/>
+<output wsam:Action="http://webservices/UserWS/updatePasswordResponse" message="tns:updatePasswordResponse"/>
+</operation>
+<operation name="getBalance">
+<input wsam:Action="http://webservices/UserWS/getBalanceRequest" message="tns:getBalance"/>
+<output wsam:Action="http://webservices/UserWS/getBalanceResponse" message="tns:getBalanceResponse"/>
+</operation>
+<operation name="getDateJoin">
+<input wsam:Action="http://webservices/UserWS/getDateJoinRequest" message="tns:getDateJoin"/>
+<output wsam:Action="http://webservices/UserWS/getDateJoinResponse" message="tns:getDateJoinResponse"/>
+</operation>
 </portType>
 <binding name="UserWSPortBinding" type="tns:UserWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
 <operation name="getUsername">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getDateJoin">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getEmail">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="updatePassword">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getBalance">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="setBalance">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="getRecentActivities">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -190,6 +136,60 @@
 </output>
 </operation>
 <operation name="processforgotPassword">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getRecentActivities">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getEmail">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="setBalance">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="updatePassword">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getBalance">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getDateJoin">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

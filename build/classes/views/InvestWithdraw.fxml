@@ -140,7 +140,7 @@
       <JFXButton fx:id="invest_close_btn" disable="true" layoutX="483.0" layoutY="108.0" onAction="#close_btn_clicked" prefHeight="31.0" prefWidth="82.0" style="-fx-background-color: #202f32;" text="Close" textFill="WHITE" visible="false" />
       <JFXButton fx:id="view_graph_btn" disable="true" layoutX="248.0" layoutY="107.0" onAction="#displayGraph" style="-fx-background-color: #202f32;" text="Reset" textFill="WHITE" />
       <Label layoutX="333.0" layoutY="485.0" prefHeight="34.0" prefWidth="145.0" textFill="WHITE" />
-      <Pane fx:id="help_btn_pane" layoutX="720.0" layoutY="7.0" prefHeight="52.0" prefWidth="28.0">
+      <Pane fx:id="help_btn_pane" layoutX="720.0" layoutY="7.0" onMouseClicked="#loadHelp" prefHeight="52.0" prefWidth="28.0">
          <children>
             <ImageView fx:id="help_btn" fitHeight="28.0" fitWidth="28.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -179,7 +179,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <Pane fx:id="settings_btn_pane" layoutX="605.0" layoutY="13.0" prefHeight="52.0" prefWidth="40.0">
+      <Pane fx:id="settings_btn_pane" layoutX="605.0" layoutY="13.0" onMouseClicked="#loadSettings" prefHeight="52.0" prefWidth="40.0">
          <children>
             <ImageView fx:id="settings_btn" fitHeight="28.0" fitWidth="28.0" layoutX="6.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>

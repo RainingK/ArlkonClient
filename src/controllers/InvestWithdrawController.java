@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -45,6 +46,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import utils.WindowHandler;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -53,6 +56,7 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.Event;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javax.xml.ws.WebServiceException;
 import utils.Transition;
 
 /**
@@ -382,6 +386,9 @@ public class InvestWithdrawController implements Initializable {
         trans.setWindow(main_window);
         trans.translate(-100, chartContainer);
         makeProfit_container.setVisible(true);
+        
+        amount_textfield.setDisable(true);
+        buy_btn.setDisable(true);
 
         //Setting the investment amount label in container
         invest_val_label.setVisible(true);
@@ -472,6 +479,8 @@ public class InvestWithdrawController implements Initializable {
         });
 
         new Thread(task).start();
+        
+        amount_textfield.setText("");
     }
 
     @FXML
@@ -534,6 +543,7 @@ public class InvestWithdrawController implements Initializable {
         });
 
         new Thread(task).start();
+        amount_textfield.setDisable(false);
     }
 
     @FXML
@@ -570,6 +580,7 @@ public class InvestWithdrawController implements Initializable {
         });
 
         new Thread(task).start();
+        amount_textfield.setDisable(false);
     }
         
     @FXML
@@ -593,6 +604,8 @@ public class InvestWithdrawController implements Initializable {
             takeProfit_btn.setVisible(false);
             stopLoss_btn.setVisible(false);
             invest_close_btn.setVisible(false);
+            
+            resetControlPositions();
                 
             final JFXSnackbar snackBar = new JFXSnackbar(main_window);
 
@@ -605,7 +618,7 @@ public class InvestWithdrawController implements Initializable {
             };
 
             snackBar.show(message, "Close", 100000, handler);
-
+            amount_textfield.setDisable(false);
     }
 
     void popUp(String end_method, double amount, double current_price) {
@@ -701,6 +714,22 @@ public class InvestWithdrawController implements Initializable {
     }
     
     @FXML
+    void loadHelp(MouseEvent event) {
+        Transition trans = new Transition();
+        trans.setWindow(main_window);
+        
+        trans.fadeOutTransition("/views/help.fxml");
+    }
+    
+    @FXML
+    void loadSettings(MouseEvent event) {
+        Transition trans = new Transition();
+        trans.setWindow(main_window);
+        
+        trans.fadeOutTransition("/views/settings.fxml");
+    }
+    
+    @FXML
     void logout(MouseEvent event){
         File file = new File("user_data.txt");
         
@@ -751,79 +780,253 @@ public class InvestWithdrawController implements Initializable {
      * *********** SERVER RETRIEVED FUNCTIONS ************
      */
     private static double getCurrentPrice(java.lang.String currency1, java.lang.String currency2) {
-        webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
+        webservices.CurrencyApiWS_Service service = null;
+        try {
+            try {
+                service = new webservices.CurrencyApiWS_Service(new URL("http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.CurrencyApiWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/CurrencyApiWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
         return port.getCurrentPrice(currency1, currency2);
     }
 
     private static void insertIntoDetails(int userId, double transactionResult, java.lang.String endMethod) {
-        webservices.IWWS_Service service = new webservices.IWWS_Service();
+        
+        webservices.IWWS_Service service = null;
+        try {
+            try {
+                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.IWWS port = service.getIWWSPort();
         port.insertIntoDetails(userId, transactionResult, endMethod);
     }
 
     private static double getTransactionAmount(int userId) {
-        webservices.IWWS_Service service = new webservices.IWWS_Service();
+        webservices.IWWS_Service service = null;
+        try {
+            try {
+                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         webservices.IWWS port = service.getIWWSPort();
         return port.getTransactionAmount(userId);
     }
 
     private static double getProfitValue(int userId) {
-        webservices.IWWS_Service service = new webservices.IWWS_Service();
+        webservices.IWWS_Service service = null;
+        try {
+            try {
+                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         webservices.IWWS port = service.getIWWSPort();
         return port.getProfitValue(userId);
     }
 
     private static double getLossValue(int userId) {
-        webservices.IWWS_Service service = new webservices.IWWS_Service();
+        webservices.IWWS_Service service = null;
+        try {
+            try {
+                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         webservices.IWWS port = service.getIWWSPort();
         return port.getLossValue(userId);
     }
     
     private static void insertInDb(int userId, double transactionAmount, java.lang.String currency, double profitValue, double lossValue) {
-        webservices.IWWS_Service service = new webservices.IWWS_Service();
+        webservices.IWWS_Service service = null;
+        try {
+            try {
+                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         webservices.IWWS port = service.getIWWSPort();
         port.insertInDb(userId, transactionAmount, currency, profitValue, lossValue);
     }
 
     private static double getBalance(int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            try {
+                service = new webservices.UserWS_Service(new URL("http://localhost:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.UserWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.UserWS port = service.getUserWSPort();
         return port.getBalance(userId);
     }
 
     private static void setBalance(double balance, int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            try {
+                service = new webservices.UserWS_Service(new URL("http://localhost:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.UserWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/UserWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         webservices.UserWS port = service.getUserWSPort();
         port.setBalance(balance, userId);
     }
 
     private static double getTransactionResult(int userId) {
-        webservices.IWWS_Service service = new webservices.IWWS_Service();
+        webservices.IWWS_Service service = null;
+        try {
+            try {
+                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         webservices.IWWS port = service.getIWWSPort();
         return port.getTransactionResult(userId);
     }
 
     private static String getEndMethod(int userId) {
-        webservices.IWWS_Service service = new webservices.IWWS_Service();
+        webservices.IWWS_Service service = null;
+        try {
+            try {
+                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         webservices.IWWS port = service.getIWWSPort();
         return port.getEndMethod(userId);
     }
 
     private static Boolean checkTransactionExists(int userId) {
-        webservices.IWWS_Service service = new webservices.IWWS_Service();
+        webservices.IWWS_Service service = null;
+        try {
+            try {
+                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         webservices.IWWS port = service.getIWWSPort();
         return port.checkTransactionExists(userId);
     }
 
     private static double getRandomNumbers() {
-        webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
+        webservices.CurrencyApiWS_Service service = null;
+        try {
+            try {
+                service = new webservices.CurrencyApiWS_Service(new URL("http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.CurrencyApiWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/CurrencyApiWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
         return port.getRandomNumbers();
     }
 
     private static java.util.List<java.lang.String> getCryptoCurrencyList() {
-        webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
+        webservices.CurrencyApiWS_Service service = null;
+        try {
+            try {
+                service = new webservices.CurrencyApiWS_Service(new URL("http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(WebServiceException e){
+            try {
+                service = new webservices.CurrencyApiWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/CurrencyApiWS?wsdl"));
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
         return port.getCryptoCurrencyList();
     }

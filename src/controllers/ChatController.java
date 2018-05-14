@@ -25,8 +25,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -44,7 +42,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
@@ -450,6 +447,20 @@ public class ChatController implements Initializable {
         trans.setWindow(main_window);
         
         trans.fadeOutTransition("/views/Home.fxml");
+    }
+    
+    @FXML
+    void loadHelp(MouseEvent event) {
+        trans.setWindow(main_window);
+        
+        trans.fadeOutTransition("/views/help.fxml");
+    }
+    
+    @FXML
+    void loadSettings(MouseEvent event) {
+        trans.setWindow(main_window);
+        
+        trans.fadeOutTransition("/views/settings.fxml");
     }
     
     @FXML

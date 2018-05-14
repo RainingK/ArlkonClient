@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="main_window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="1024.0" stylesheets="@../res/css/help.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HelpController">
+   <children>
+      <Pane id="top_pane" prefHeight="73.0" prefWidth="1024.0">
+         <children>
+            <ImageView fitHeight="81.0" fitWidth="82.0" layoutX="8.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Label layoutX="42.0" layoutY="94.0" text="Guides" textFill="WHITE">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Pane layoutX="956.0" layoutY="14.0" prefHeight="26.0" prefWidth="57.0">
+         <children>
+            <ImageView id="close_image" fx:id="close_btn" fitHeight="19.0" fitWidth="14.0" layoutX="35.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" styleClass="close_image">
+               <image>
+                  <Image url="@../res/assets/icons/close_white.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView id="minimize_image" fx:id="minimize_btn" fitHeight="19.0" fitWidth="14.0" layoutX="1.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" styleClass="minimize_image">
+               <image>
+                  <Image url="@../res/assets/icons/minus_white.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="help_btn_pane" layoutX="625.0" layoutY="4.0" prefHeight="52.0" prefWidth="28.0">
+         <children>
+            <ImageView fx:id="help_btn" fitHeight="28.0" fitWidth="28.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/question_white.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="help_btn_label" layoutX="-1.0" layoutY="37.0" text="Help" textFill="WHITE" visible="false" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="home_btn_pane" layoutX="385.0" layoutY="10.0" onMouseClicked="#loadHome" prefHeight="52.0" prefWidth="44.0">
+         <children>
+            <ImageView fx:id="home_btn" fitHeight="28.0" fitWidth="28.0" layoutX="7.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/home_white.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="home_btn_label" layoutX="2.0" layoutY="33.0" text="Home" textFill="WHITE" visible="false" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="profile_btn_pane" layoutX="452.0" layoutY="10.0" onMouseClicked="#loadProfile" prefHeight="52.0" prefWidth="40.0">
+         <children>
+            <ImageView fx:id="profile_btn" fitHeight="28.0" fitWidth="28.0" layoutX="4.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/user_white.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="profile_btn_label" layoutX="-2.0" layoutY="33.0" text="Profile" textFill="WHITE" visible="false" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="settings_btn_pane" layoutX="510.0" layoutY="10.0" onMouseClicked="#loadSettings" prefHeight="52.0" prefWidth="40.0">
+         <children>
+            <ImageView fx:id="settings_btn" fitHeight="28.0" fitWidth="28.0" layoutX="6.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/settings_white.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="settings_btn_label" layoutX="-7.0" layoutY="33.0" text="Settings" textFill="WHITE" visible="false" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <Pane fx:id="logout_btn_pane" layoutX="571.0" layoutY="7.0" onMouseClicked="#logout" prefHeight="51.0" prefWidth="40.0">
+         <children>
+            <ImageView fx:id="logout_btn" fitHeight="45.0" fitWidth="31.0" layoutX="6.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/assets/icons/logout.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="logout_btn_label" layoutX="-6.0" layoutY="36.0" text="Logout" textFill="WHITE" visible="false" />
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Pane>
+      <ScrollPane layoutX="42.0" layoutY="160.0" prefHeight="377.0" prefWidth="982.0" style="-fx-background-color: transparent;">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1157.0" prefWidth="963.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="45.0" prefWidth="170.0" text="Binary Trading" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="79.0" prefHeight="21.0" prefWidth="921.0" text="1. Binary Options Trading allows users to cash in a particular amount and predict whether the price level for a selected option will rise or " textFill="WHITE" />
+                  <Label layoutX="14.0" layoutY="108.0" prefHeight="21.0" prefWidth="921.0" text="   fall after a selected period of time. Users can earn almost double the amount they invest or even lose all of it." textFill="WHITE" />
+                  <Label layoutX="14.0" layoutY="142.0" prefHeight="21.0" prefWidth="940.0" text="2. CALL option is where users predict the price level for a selected currency to increase after a specified amount of time. If the user prediction" textFill="WHITE" />
+                  <Label layoutX="14.0" layoutY="170.0" prefHeight="21.0" prefWidth="921.0" text="   turns out to be right, he/she is awarded the amount invested with an additional amount depending on the profit rate." textFill="WHITE" />
+                  <Label layoutX="14.0" layoutY="203.0" prefHeight="21.0" prefWidth="937.0" text="3. PUT option is selected when the user feels that the price level for a selected currency will drop. The amount earned for the right prediction" textFill="WHITE" />
+                  <Label layoutX="14.0" layoutY="231.0" prefHeight="21.0" prefWidth="921.0" text="   is same as in CALL in the call option." textFill="WHITE" />
+                  <Label layoutX="14.0" layoutY="263.0" prefHeight="21.0" prefWidth="937.0" text="4. In case of a wrong prediction, the user loses all the invested amount. " textFill="WHITE" />
+                  <Label layoutX="14.0" layoutY="293.0" prefHeight="21.0" prefWidth="937.0" text="5. To give users an added advantage on what choice to pick, the rising type icon (          ) is displayed on the choice (CALL or PUT)." textFill="WHITE" />
+                  <Label layoutX="14.0" layoutY="321.0" prefHeight="21.0" prefWidth="921.0" text="   This lets the user know what the highest picked choice is for the selected currencies or binary option." textFill="WHITE" />
+                  <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="563.0" layoutY="293.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../res/assets/icons/rising_option.png" />
+                     </image></ImageView>
+                  <Label layoutX="14.0" layoutY="353.0" prefHeight="21.0" prefWidth="937.0" text="6. The user can also find a tip that analyzes the historical data and provides them with a suggestion on what option to put their money on." textFill="WHITE" />
+                  <Label layoutX="16.0" layoutY="398.0" prefHeight="45.0" prefWidth="170.0" text="Investments" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="16.0" layoutY="462.0" prefHeight="21.0" prefWidth="921.0" text="1. Investments is more of a long term process when compared to Binary Option Trading. It allows users to invest on a specific " textFill="WHITE" />
+                  <Label layoutX="16.0" layoutY="488.0" prefHeight="21.0" prefWidth="921.0" text="   cryptocurrency. When the user successfully invests on a currency, a gap is generated between which the user will not make any profits. " textFill="WHITE" />
+                  <Label layoutX="16.0" layoutY="515.0" prefHeight="21.0" prefWidth="921.0" text="   If the price level goes above the gap/margin, user is allowed to take a profit. If the price level falls below the margin, the user is given an" textFill="WHITE" />
+                  <Label layoutX="16.0" layoutY="541.0" prefHeight="21.0" prefWidth="921.0" text="   option to stop their losses so they do not incur any more losses in the future." textFill="WHITE" />
+                  <Label layoutX="16.0" layoutY="572.0" prefHeight="21.0" prefWidth="921.0" text="2. It is to be kept in mind that, when the user invests on a currency, a given price is deducted as part of the commission fee." textFill="WHITE" />
+                  <Label layoutX="16.0" layoutY="602.0" prefHeight="21.0" prefWidth="921.0" text="3. There is no given time limit or an ending period, since investments are long term, the user can choose to withdraw at any given point." textFill="WHITE" />
+                  <Label layoutX="15.0" layoutY="648.0" prefHeight="45.0" prefWidth="322.0" text="Frequently Asked Questions" textFill="WHITE">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="21.0" layoutY="713.0" prefHeight="21.0" prefWidth="628.0" text="1) Can I invest/withdraw actual currency and perform transactions?" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="40.0" layoutY="744.0" prefHeight="21.0" prefWidth="927.0" text="No, Arlkon is a simulation platform that allows users to learn more about how binary trading or investments work in the real world." textFill="WHITE" />
+                  <Label layoutX="40.0" layoutY="770.0" prefHeight="21.0" prefWidth="927.0" text="Users cannot input any real currency or withdraw them." textFill="WHITE" />
+                  <Label layoutX="21.0" layoutY="813.0" prefHeight="21.0" prefWidth="628.0" text="2) Why are the currency levels not fully accurate?" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="40.0" layoutY="844.0" prefHeight="21.0" prefWidth="927.0" text="The currency levels are made as accurate as possible so the users can have the best experience but at times, due to technical difficulties" textFill="WHITE" />
+                  <Label layoutX="40.0" layoutY="870.0" prefHeight="21.0" prefWidth="927.0" text="caused by the currency price level provider, the values might tend to be slightly inaccurate." textFill="WHITE" />
+                  <Label layoutX="21.0" layoutY="914.0" prefHeight="21.0" prefWidth="628.0" text="3) How many transactions can I have at a time?" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="40.0" layoutY="944.0" prefHeight="21.0" prefWidth="927.0" text="For a particular feature, the user can have at most one transaction. For example, a user can have one transaction in Binary Options Trading" textFill="WHITE" />
+                  <Label layoutX="40.0" layoutY="970.0" prefHeight="21.0" prefWidth="927.0" text="and another in investments." textFill="WHITE" />
+                  <Label layoutX="21.0" layoutY="1012.0" prefHeight="21.0" prefWidth="628.0" text="4) Where can I find my previous transactions history?" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="40.0" layoutY="1042.0" prefHeight="21.0" prefWidth="927.0" text="All your transaction history and their details can be found in the Profile page. The history includes both Binary Trading and Investments." textFill="WHITE" />
+                  <Label layoutX="21.0" layoutY="1084.0" prefHeight="21.0" prefWidth="628.0" text="5) Why can't I login with two accounts at the same time but with different windows?" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="40.0" layoutY="1114.0" prefHeight="21.0" prefWidth="927.0" text="At a time, only one user is allowed to be logged in to make sure that the user's transactions are not conflicting with that of the others." textFill="WHITE" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</Pane>

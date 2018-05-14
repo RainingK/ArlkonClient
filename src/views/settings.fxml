@@ -38,6 +38,26 @@
                   <Image url="@../res/assets/icons/rising_option.png" />
                </image>
             </ImageView>
+            <Label fx:id="username_label" alignment="CENTER" layoutX="46.0" layoutY="260.0" prefHeight="26.0" prefWidth="185.0" styleClass="user_info_label" text="Username" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="email_label" alignment="CENTER" layoutX="46.0" layoutY="311.0" prefHeight="26.0" prefWidth="185.0" styleClass="user_info_label" text="Email" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Label fx:id="date_label" alignment="CENTER" layoutX="52.0" layoutY="475.0" prefHeight="26.0" prefWidth="174.0" styleClass="user_info_label" text="Joined on" textFill="WHITE">
+               <font>
+                  <Font name="System Italic" size="17.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="profile_pic_icon" fitHeight="67.0" fitWidth="62.0" layoutX="114.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+               <image>
+                  <Image url="@../res/assets/icons/letters/letter-a.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane id="top_pane" prefHeight="73.0" prefWidth="752.0">
@@ -54,7 +74,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="help_btn_pane" layoutX="725.0" layoutY="4.0" prefHeight="52.0" prefWidth="28.0">
+      <Pane fx:id="help_btn_pane" layoutX="725.0" layoutY="4.0" onMouseClicked="#loadHelp" prefHeight="52.0" prefWidth="28.0">
          <children>
             <ImageView fx:id="help_btn" fitHeight="28.0" fitWidth="28.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -119,15 +139,25 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <ScrollPane id="settings_options_container" hbarPolicy="NEVER" layoutX="35.0" layoutY="101.0" prefHeight="437.0" prefWidth="686.0" styleClass="edge-to-edge">
+      <ScrollPane id="settings_options_container" hbarPolicy="NEVER" layoutX="35.0" layoutY="101.0" prefHeight="437.0" prefWidth="717.0" styleClass="edge-to-edge">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="488.0" prefWidth="685.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="524.0" prefWidth="699.0">
                <children>
-                  <JFXButton id="change_password_btn" fx:id="confirm_but" layoutX="38.0" layoutY="200.0" onMouseClicked="#confirmPassword_clicked" prefHeight="45.0" prefWidth="145.0" text="Change password" textFill="WHITE" />
-                  <JFXPasswordField fx:id="old_passfield" focusColor="WHITE" layoutX="161.0" layoutY="67.0" prefHeight="31.0" prefWidth="183.0" styleClass="password_text_fields" unFocusColor="#ababab" />
+                  <Pane fx:id="password_changed_pane" layoutX="211.0" layoutY="197.0" prefHeight="45.0" prefWidth="178.0" visible="false">
+                     <children>
+                        <ImageView fitHeight="31.0" fitWidth="28.0" layoutX="8.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../res/assets/icons/check-mark-button.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="47.0" layoutY="14.0" prefHeight="21.0" prefWidth="131.0" text="Password changed" textFill="WHITE" />
+                     </children>
+                  </Pane>
+                  <JFXButton id="change_password_btn" fx:id="confirm_but" disable="true" layoutX="38.0" layoutY="200.0" onMouseClicked="#confirmPassword_clicked" prefHeight="45.0" prefWidth="145.0" text="Change password" textFill="WHITE" />
+                  <JFXPasswordField fx:id="old_passfield" focusColor="WHITE" layoutX="161.0" layoutY="67.0" onKeyTyped="#disableSubmitIfShortCPassword" prefHeight="31.0" prefWidth="183.0" styleClass="password_text_fields" unFocusColor="#ababab" />
                   <Label fx:id="old_pass_label" layoutX="38.0" layoutY="79.0" prefHeight="25.0" prefWidth="108.0" text="Old Password" textFill="WHITE" />
                   <Label fx:id="new_pass_label" layoutX="38.0" layoutY="137.0" prefHeight="25.0" prefWidth="108.0" text="New Password" textFill="WHITE" />
-                  <JFXPasswordField fx:id="new_passfield" focusColor="WHITE" layoutX="161.0" layoutY="125.0" prefHeight="31.0" prefWidth="186.0" styleClass="password_text_fields" unFocusColor="#ababab" />
+                  <JFXPasswordField fx:id="new_passfield" focusColor="WHITE" layoutX="161.0" layoutY="125.0" onKeyTyped="#disableSubmitIfShortCPassword" prefHeight="31.0" prefWidth="186.0" styleClass="password_text_fields" unFocusColor="#ababab" />
                   <JFXButton id="reset_balance_btn" fx:id="resetbal_btn" layoutX="38.0" layoutY="421.0" onMouseClicked="#resetbal_btn_clicked" prefHeight="45.0" prefWidth="145.0" text="Reset Balance" textFill="WHITE" />
                   <Label fx:id="old_pass_label1" layoutX="14.0" layoutY="7.0" prefHeight="45.0" prefWidth="243.0" text="Change Password" textFill="WHITE">
                      <font>
@@ -142,6 +172,16 @@
                   <Label layoutX="38.0" layoutY="345.0" prefHeight="21.0" prefWidth="366.0" text="Start over by resetting your balance back to $10,000. " textFill="WHITE" />
                   <Label layoutX="123.0" layoutY="378.0" prefHeight="21.0" prefWidth="440.0" text="Balance cannot be reverted back to the old state once reset" textFill="WHITE" />
                   <Label layoutX="38.0" layoutY="378.0" text="WARNING:" textFill="#ff3c3c" />
+                  <Pane fx:id="balance_reset_pane" layoutX="221.0" layoutY="418.0" prefHeight="45.0" prefWidth="255.0" visible="false">
+                     <children>
+                        <ImageView fitHeight="31.0" fitWidth="28.0" layoutX="8.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../res/assets/icons/check-mark-button.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="47.0" layoutY="14.0" prefHeight="21.0" prefWidth="196.0" text="Balance has been reset" textFill="WHITE" />
+                     </children>
+                  </Pane>
                </children></AnchorPane>
         </content>
       </ScrollPane>

@@ -5,14 +5,8 @@
  */
 package main;
 
-import controllers.ChatController;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -22,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import javax.xml.ws.WebServiceException;
 
 /**
  *
@@ -41,6 +36,26 @@ public class ArlkonClient extends Application {
         
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setScene(scene);
+        
+        Thread test = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true){
+                    // Check if server is running    
+                    try {
+                        if(checkServer().equals("alive")){
+                            System.out.println("works");
+                        } else {
+                            System.out.println("Dead");
+                        }
+                    } catch(WebServiceException e){
+                        System.out.println("fixed");
+                    }
+                }
+            }
+        });
+        
+        test.start();
         primaryStage.show();
         
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -61,5 +76,11 @@ public class ArlkonClient extends Application {
         if(file.exists() && !file.isDirectory()){
             file.delete();
         }
+    }
+
+    private static String checkServer() {
+        webservices.SessionWS_Service service = new webservices.SessionWS_Service();
+        webservices.SessionWS port = service.getSessionWSPort();
+        return port.checkServer();
     }
 }

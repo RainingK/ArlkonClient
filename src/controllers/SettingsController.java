@@ -25,6 +25,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -54,6 +55,9 @@ public class SettingsController implements Initializable {
 
     @FXML
     private Label new_passlabel;
+    
+    @FXML
+    private Pane password_changed_pane, balance_reset_pane;
 
     @FXML
     private JFXPasswordField new_passfield;
@@ -66,15 +70,15 @@ public class SettingsController implements Initializable {
 
     @FXML
     private JFXButton resetbal_btn;
-
-    @FXML
-    private Label username_label;
-
-    @FXML
-    private Label email_label;
     
     @FXML
     private Label balance_val_label;
+    
+    @FXML
+    private Label username_label, email_label, date_label;
+    
+    @FXML
+    private ImageView profile_pic_icon;
     
     // Header
     @FXML
@@ -92,6 +96,9 @@ public class SettingsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadBalanceToLabel();
+        
+        // Display user details
+        displayInfo();
         
         // Header effects
         trans.applyHeaderEffect(home_btn_pane, home_btn, home_btn_label);
@@ -149,8 +156,31 @@ public class SettingsController implements Initializable {
         return user_id;
     }
     
+    public void displayInfo(){
+        int user_id = 0;
+        try {
+            user_id = getIdFromFile();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String username = firstLetterUpper(getUsername(user_id));
+        
+        username_label.setText(username);
+        email_label.setText(getEmail(user_id));
+        date_label.setText("Joined on " + getDateJoin(user_id).substring(0, 10));
+        balance_val_label.setText("$" + getBalance(user_id));
+        
+        profile_pic_icon.setImage(new Image("/res/assets/icons/letters/letter-" + getUsername(user_id).toLowerCase().charAt(0) + ".png"));
+        
+    }
+    
+    private String firstLetterUpper(String word){
+        return word.substring(0, 1).toUpperCase() + word.substring(1);
+    }
+    
     @FXML
     void disableSubmitIfShortCPassword(KeyEvent event) {
+        password_changed_pane.setVisible(false);
         if ((new_passfield.getText().trim().length() < 6) || (old_passfield.getText().trim().equals(""))) {
             confirm_but.setDisable(true);
         } else {
@@ -192,22 +222,23 @@ public class SettingsController implements Initializable {
                 old_buffer.append(Integer.toString((byteData1[i] & 0xff) + 0x100, 16).substring(1));
             }
         } catch (NoSuchAlgorithmException ex) {
-            System.out.println("error");
+            System.out.println("NoSuchAlgorithmException: " + ex);
         }
 
         if (checkOldPassword(new_buffer.toString(), user_id)) {
-            error_message = "Entered old password. Enter new one";
+            error_message = "Your new password cannot be the same as old password, try again!";
 
         } else if (!checkOldPassword(old_buffer.toString(), user_id)) {
-            error_message = "Old password doesn't match old";
+            error_message = "Your old password is incorrect, try again!";
         } else {
-
+            password_changed_pane.setVisible(true);
+            confirm_but.setDisable(true);
             updatePassword(new_buffer.toString(), user_id);
             return;
         }
 
         JFXDialogLayout content = new JFXDialogLayout();
-        content.setHeading(new Text("ERROR!!"));
+        content.setHeading(new Text("Oops!"));
         content.setBody(new Text(error_message));
 
         StackPane dialog_container = new StackPane();
@@ -241,69 +272,82 @@ public class SettingsController implements Initializable {
             Logger.getLogger(InvestWithdrawController.class.getName()).log(Level.SEVERE, null, ex);
         }
         setBalance(10000, user_id);
+        setBalanceToLabel(getBalance(user_id));
+        balance_reset_pane.setVisible(true);
     }
     
     @FXML
     void loadProfile(MouseEvent event) {
-//        trans.setWindow(main_window);
-//        try {
-//            trans.loadNextScene("/views/profile.fxml");
-//        } catch (IOException ex) {
-//            System.out.println("IOException: " + ex.getMessage());
-//        }
+        trans.setWindow(main_window);
+        try {
+            trans.loadNextScene("/views/profile.fxml");
+        } catch (IOException ex) {
+            System.out.println("IOException: " + ex.getMessage());
+        }
     }
     
     @FXML
     void loadHome(MouseEvent event) {
-//        trans.setWindow(main_window);
-//        
-//        try {
-//            trans.loadNextScene("/views/Home.fxml");
-//        } catch (IOException ex) {
-//            System.out.println("IOException: " + ex.getMessage());
-//        }
+        trans.setWindow(main_window);
+        
+        try {
+            trans.loadNextScene("/views/Home.fxml");
+        } catch (IOException ex) {
+            System.out.println("IOException: " + ex.getMessage());
+        }
+    }
+    
+    @FXML
+    void loadHelp(MouseEvent event) {
+        trans.setWindow(main_window);
+        
+        try {
+            trans.loadNextScene("/views/help.fxml");
+        } catch (IOException ex) {
+            System.out.println("IOException: " + ex);
+        }
     }
     
     @FXML
     void logout(MouseEvent event){
-//        File file = new File("user_data.txt");
-//        
-//        if(file.delete()) {
-//            Transition trans = new Transition();
-//            
-//            trans.setWindow(main_window);
-//            try {
-//                trans.loadNextScene("/views/index.fxml");
-//            } catch (IOException ex) {
-//                System.out.println("IOException: " + ex.getMessage());
-//            }
-//        } else {
-//            JFXDialogLayout content = new JFXDialogLayout();
-//            content.setHeading(new Text("Oops!"));
-//            content.setBody(new Text("There was a problem logging out, please try again!"));
-//            
-//            StackPane dialog_container = new StackPane();
-//            
-//            // Add stack pane to the main_window
-//            main_window.getChildren().add(dialog_container);
-//            
-//            // Center the dialog container
-//            dialog_container.layoutXProperty().bind(main_window.widthProperty().subtract(dialog_container.widthProperty()).divide(2));
-//            dialog_container.layoutYProperty().bind(main_window.heightProperty().subtract(dialog_container.heightProperty()).divide(2));
-//            
-//            JFXDialog dialog = new JFXDialog(dialog_container, content, JFXDialog.DialogTransition.CENTER);
-//            JFXButton button = new JFXButton("Okay");
-//            
-//            button.setOnAction(new EventHandler<ActionEvent>(){
-//                @Override
-//                public void handle(ActionEvent event) {
-//                    dialog.close();
-//                }
-//            });
-//            
-//            content.setActions(button);
-//            dialog.show();
-//        }
+        File file = new File("user_data.txt");
+        
+        if(file.delete()) {
+            Transition trans = new Transition();
+            
+            trans.setWindow(main_window);
+            try {
+                trans.loadNextScene("/views/index.fxml");
+            } catch (IOException ex) {
+                System.out.println("IOException: " + ex.getMessage());
+            }
+        } else {
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setHeading(new Text("Oops!"));
+            content.setBody(new Text("There was a problem logging out, please try again!"));
+            
+            StackPane dialog_container = new StackPane();
+            
+            // Add stack pane to the main_window
+            main_window.getChildren().add(dialog_container);
+            
+            // Center the dialog container
+            dialog_container.layoutXProperty().bind(main_window.widthProperty().subtract(dialog_container.widthProperty()).divide(2));
+            dialog_container.layoutYProperty().bind(main_window.heightProperty().subtract(dialog_container.heightProperty()).divide(2));
+            
+            JFXDialog dialog = new JFXDialog(dialog_container, content, JFXDialog.DialogTransition.CENTER);
+            JFXButton button = new JFXButton("Okay");
+            
+            button.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent event) {
+                    dialog.close();
+                }
+            });
+            
+            content.setActions(button);
+            dialog.show();
+        }
     }
 
     private static void updatePassword(java.lang.String password, int userId) {
@@ -340,6 +384,12 @@ public class SettingsController implements Initializable {
         webservices.UserWS_Service service = new webservices.UserWS_Service();
         webservices.UserWS port = service.getUserWSPort();
         return port.getBalance(userId);
+    }
+
+    private static String getDateJoin(int userId) {
+        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS port = service.getUserWSPort();
+        return port.getDateJoin(userId);
     }
 
 }

@@ -8,6 +8,10 @@
 
 <xs:element name="checkOldPasswordResponse" type="tns:checkOldPasswordResponse"/>
 
+<xs:element name="checkServer" type="tns:checkServer"/>
+
+<xs:element name="checkServerResponse" type="tns:checkServerResponse"/>
+
 <xs:element name="checkUsernameExists" type="tns:checkUsernameExists"/>
 
 <xs:element name="checkUsernameExistsResponse" type="tns:checkUsernameExistsResponse"/>
@@ -32,16 +36,13 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="login">
-<xs:sequence>
-<xs:element name="username" type="xs:string" minOccurs="0"/>
-<xs:element name="password" type="xs:string" minOccurs="0"/>
-</xs:sequence>
+<xs:complexType name="checkServer">
+<xs:sequence/>
 </xs:complexType>
 
-<xs:complexType name="loginResponse">
+<xs:complexType name="checkServerResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -53,6 +54,19 @@
 </xs:complexType>
 
 <xs:complexType name="checkOldPasswordResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="login">
+<xs:sequence>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="loginResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:boolean" minOccurs="0"/>
 </xs:sequence>

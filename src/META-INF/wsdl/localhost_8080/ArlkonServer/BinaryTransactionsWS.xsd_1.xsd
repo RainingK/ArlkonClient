@@ -60,18 +60,6 @@
 
 <xs:element name="setResultResponse" type="tns:setResultResponse"/>
 
-<xs:complexType name="checkTransactionExists">
-<xs:sequence>
-<xs:element name="user_id" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="checkTransactionExistsResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:boolean"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="getTimeFrame">
 <xs:sequence>
 <xs:element name="user_id" type="xs:int"/>
@@ -84,11 +72,38 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="checkTransactionExists">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="checkTransactionExistsResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getRisingType">
-<xs:sequence/>
+<xs:sequence>
+<xs:element name="arg0" type="xs:string" minOccurs="0"/>
+<xs:element name="arg1" type="xs:string" minOccurs="0"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="getRisingTypeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCurrency1">
+<xs:sequence>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCurrency1Response">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
@@ -103,18 +118,6 @@
 <xs:complexType name="getStartPriceResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:double"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getCurrency1">
-<xs:sequence>
-<xs:element name="user_id" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getCurrency1Response">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -207,6 +210,17 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="setEndPrice">
+<xs:sequence>
+<xs:element name="price" type="xs:double"/>
+<xs:element name="user_id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="setEndPriceResponse">
+<xs:sequence/>
+</xs:complexType>
+
 <xs:complexType name="getPendingTransactionType">
 <xs:sequence>
 <xs:element name="user_id" type="xs:int"/>
@@ -217,17 +231,6 @@
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="setEndPrice">
-<xs:sequence>
-<xs:element name="price" type="xs:double"/>
-<xs:element name="user_id" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="setEndPriceResponse">
-<xs:sequence/>
 </xs:complexType>
 
 <xs:complexType name="getExpiryDateTime">

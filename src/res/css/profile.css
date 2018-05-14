@@ -78,6 +78,10 @@
     -fx-border-color: transparent;
 }
 
+.scroll-bar:horizontal {
+    -fx-opacity: 0;
+}
+
 .table-view .thumb {
     -fx-background-color: #121c1e;
 }
@@ -92,6 +96,7 @@
 
 .table-view .increment-button, .table-view .decrement-button {
     -fx-background-color: #172326;
+    -fx-border-color: #172326;
 }
 
 #close_image, #minimize_image:hover {

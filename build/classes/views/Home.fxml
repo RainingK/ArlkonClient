@@ -82,7 +82,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="help_btn_pane" layoutX="715.0" layoutY="5.0" prefHeight="52.0" prefWidth="28.0">
+      <Pane fx:id="help_btn_pane" layoutX="715.0" layoutY="5.0" onMouseClicked="#loadHelp" prefHeight="52.0" prefWidth="28.0">
          <children>
             <ImageView fx:id="help_btn" fitHeight="28.0" fitWidth="28.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
