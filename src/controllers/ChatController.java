@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,6 +26,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -443,6 +446,17 @@ public class ChatController implements Initializable {
         return days + hours + minutes + seconds;
 	
     }
+    
+    private static String getServerIp() {
+        Scanner input = null;
+        try {
+            input = new Scanner(new FileReader("server_ip.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return input.next();
+    }
 
     /*********************** FXML FUNCTIONS ***********************/
     
@@ -548,85 +562,169 @@ public class ChatController implements Initializable {
     /*********************** SERVER FUNCTIONS ***********************/
     
     private static String getUsername(int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            service = new webservices.UserWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/UserWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.UserWS port = service.getUserWSPort();
         return port.getUsername(userId);
     }
 
     private static int getLastChatId() {
-        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
+        webservices.ChatWS_Service service = null;
+        try {
+            service = new webservices.ChatWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/ChatWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.ChatWS port = service.getChatWSPort();
         return port.getLastChatId();
     }
 
     private static int getLastChatUserId() {
-        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
+        webservices.ChatWS_Service service = null;
+        try {
+            service = new webservices.ChatWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/ChatWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.ChatWS port = service.getChatWSPort();
         return port.getLastChatUserId();
     }
 
     private static String getLastMessage() {
-        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
+        webservices.ChatWS_Service service = null;
+        try {
+            service = new webservices.ChatWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/ChatWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.ChatWS port = service.getChatWSPort();
         return port.getLastMessage();
     }
     
     private static String getLastChatDateTime() {
-        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
+        webservices.ChatWS_Service service = null;
+        try {
+            service = new webservices.ChatWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/ChatWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.ChatWS port = service.getChatWSPort();
         return port.getLastChatDateTime();
     }
 
     private static boolean saveMessage(int userId, java.lang.String message) {
-        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
+        webservices.ChatWS_Service service = null;
+        try {
+            service = new webservices.ChatWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/ChatWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.ChatWS port = service.getChatWSPort();
         return port.saveMessage(userId, message);
     }
 
     private static java.util.List<java.lang.String> getOldMessages() {
-        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
+        webservices.ChatWS_Service service = null;
+        try {
+            service = new webservices.ChatWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/ChatWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.ChatWS port = service.getChatWSPort();
         return port.getOldMessages();
     }
 
     private static java.util.List<java.lang.Integer> getOldChatIds() {
-        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
+        webservices.ChatWS_Service service = null;
+        try {
+            service = new webservices.ChatWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/ChatWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.ChatWS port = service.getChatWSPort();
         return port.getOldChatIds();
     }
 
     private static int getUserIdFromChatId(int chatId) {
-        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
+        webservices.ChatWS_Service service = null;
+        try {
+            service = new webservices.ChatWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/ChatWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.ChatWS port = service.getChatWSPort();
         return port.getUserIdFromChatId(chatId);
     }
 
     private static double getBalance(int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            service = new webservices.UserWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/UserWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.UserWS port = service.getUserWSPort();
         return port.getBalance(userId);
     }
 
     private static java.util.List<java.lang.String> getOldDatetimes() {
-        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
+        webservices.ChatWS_Service service = null;
+        try {
+            service = new webservices.ChatWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/ChatWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.ChatWS port = service.getChatWSPort();
         return port.getOldDatetimes();
     }
 
     private static void connectToChat(int arg0) {
-        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
+        webservices.ChatWS_Service service = null;
+        try {
+            service = new webservices.ChatWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/ChatWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.ChatWS port = service.getChatWSPort();
         port.connectToChat(arg0);
     }
 
     private static void disconnectFromChat(int userId) {
-        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
+        webservices.ChatWS_Service service = null;
+        try {
+            service = new webservices.ChatWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/ChatWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.ChatWS port = service.getChatWSPort();
         port.disconnectFromChat(userId);
     }
 
     private static java.util.List<java.lang.Integer> onlineUsersList() {
-        webservices.ChatWS_Service service = new webservices.ChatWS_Service();
+        webservices.ChatWS_Service service = null;
+        try {
+            service = new webservices.ChatWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/ChatWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.ChatWS port = service.getChatWSPort();
         return port.onlineUsersList();
     }

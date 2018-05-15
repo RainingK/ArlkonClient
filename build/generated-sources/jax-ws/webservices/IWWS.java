@@ -28,14 +28,14 @@ public interface IWWS {
      * 
      * @param userId
      * @return
-     *     returns boolean
+     *     returns java.lang.Boolean
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "checkTransactionExists", targetNamespace = "http://webservices/", className = "webservices.CheckTransactionExists")
     @ResponseWrapper(localName = "checkTransactionExistsResponse", targetNamespace = "http://webservices/", className = "webservices.CheckTransactionExistsResponse")
     @Action(input = "http://webservices/IWWS/checkTransactionExistsRequest", output = "http://webservices/IWWS/checkTransactionExistsResponse")
-    public boolean checkTransactionExists(
+    public Boolean checkTransactionExists(
         @WebParam(name = "user_id", targetNamespace = "")
         int userId);
 

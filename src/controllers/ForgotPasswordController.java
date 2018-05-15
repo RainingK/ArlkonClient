@@ -7,12 +7,16 @@ package controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -124,29 +128,63 @@ public class ForgotPasswordController implements Initializable {
 
         return new String(c);
     }
+    
+    private static String getServerIp() {
+        Scanner input = null;
+        try {
+            input = new Scanner(new FileReader("server_ip.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return input.next();
+    }
 
     private static Boolean checkEmailExists(java.lang.String email) {
-        webservices.SessionWS_Service service = new webservices.SessionWS_Service();
+        webservices.SessionWS_Service service = null;
+        try {
+            service = new webservices.SessionWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/SessionWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ForgotPasswordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.SessionWS port = service.getSessionWSPort();
         return port.checkEmailExists(email);
     }
 
     private static String getUsername(int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            service = new webservices.UserWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/UserWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ForgotPasswordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.UserWS port = service.getUserWSPort();
         return port.getUsername(userId);
     }
 
     private static int getUserIdFromEmail(java.lang.String email) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            service = new webservices.UserWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/UserWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ForgotPasswordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.UserWS port = service.getUserWSPort();
         return port.getUserIdFromEmail(email);
     }
 
     private static String processforgotPassword(int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            service = new webservices.UserWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/UserWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ForgotPasswordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.UserWS port = service.getUserWSPort();
         return port.processforgotPassword(userId);
     }
-
 }

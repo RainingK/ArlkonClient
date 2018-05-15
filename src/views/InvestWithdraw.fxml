@@ -67,12 +67,12 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="commissionRateLabel" alignment="CENTER_RIGHT" layoutX="133.0" layoutY="302.0" prefHeight="34.0" prefWidth="111.0" textFill="#41ff5c">
+            <Label fx:id="commissionRateLabel" alignment="CENTER_RIGHT" layoutX="133.0" layoutY="302.0" prefHeight="34.0" prefWidth="111.0" text="-" textFill="#41ff5c">
                <font>
                   <Font size="23.0" />
                </font>
             </Label>
-            <JFXButton id="invest_btn" fx:id="buy_btn" layoutX="29.0" layoutY="396.0" onAction="#buy_clicked" prefHeight="52.0" prefWidth="214.0" stylesheets="@../res/css/investwithdraw.css" text="INVEST" textFill="WHITE">
+            <JFXButton id="invest_btn" fx:id="buy_btn" disable="true" layoutX="29.0" layoutY="396.0" onAction="#buy_clicked" prefHeight="52.0" prefWidth="214.0" stylesheets="@../res/css/investwithdraw.css" text="INVEST" textFill="WHITE">
                <font>
                   <Font size="22.0" />
                </font>
