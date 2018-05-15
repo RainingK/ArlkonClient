@@ -24,36 +24,30 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _GetEndPrice_QNAME = new QName("http://webservices/", "getEndPrice");
-    private final static QName _GetPendingTransactionTypeResponse_QNAME = new QName("http://webservices/", "getPendingTransactionTypeResponse");
-    private final static QName _GetFinishedTransactionPriceResponse_QNAME = new QName("http://webservices/", "getFinishedTransactionPriceResponse");
-    private final static QName _GetAmountResponse_QNAME = new QName("http://webservices/", "getAmountResponse");
-    private final static QName _GetStartPriceResponse_QNAME = new QName("http://webservices/", "getStartPriceResponse");
-    private final static QName _GetRisingType_QNAME = new QName("http://webservices/", "getRisingType");
-    private final static QName _CheckTransactionExists_QNAME = new QName("http://webservices/", "checkTransactionExists");
-    private final static QName _GetExpiryDateTimeResponse_QNAME = new QName("http://webservices/", "getExpiryDateTimeResponse");
-    private final static QName _GetExpiryDateTime_QNAME = new QName("http://webservices/", "getExpiryDateTime");
-    private final static QName _GetRisingTypeResponse_QNAME = new QName("http://webservices/", "getRisingTypeResponse");
-    private final static QName _SetEndPrice_QNAME = new QName("http://webservices/", "setEndPrice");
-    private final static QName _GetDateTimeResponse_QNAME = new QName("http://webservices/", "getDateTimeResponse");
-    private final static QName _GetEndPriceResponse_QNAME = new QName("http://webservices/", "getEndPriceResponse");
-    private final static QName _SetResultResponse_QNAME = new QName("http://webservices/", "setResultResponse");
-    private final static QName _GetDateTime_QNAME = new QName("http://webservices/", "getDateTime");
-    private final static QName _GetAmount_QNAME = new QName("http://webservices/", "getAmount");
-    private final static QName _CheckTransactionExistsResponse_QNAME = new QName("http://webservices/", "checkTransactionExistsResponse");
-    private final static QName _InsertIntoDb_QNAME = new QName("http://webservices/", "insertIntoDb");
-    private final static QName _GetCurrency1_QNAME = new QName("http://webservices/", "getCurrency1");
-    private final static QName _GetStartPrice_QNAME = new QName("http://webservices/", "getStartPrice");
-    private final static QName _GetCurrency2_QNAME = new QName("http://webservices/", "getCurrency2");
-    private final static QName _GetTimeFrame_QNAME = new QName("http://webservices/", "getTimeFrame");
-    private final static QName _GetTimeFrameResponse_QNAME = new QName("http://webservices/", "getTimeFrameResponse");
-    private final static QName _SetEndPriceResponse_QNAME = new QName("http://webservices/", "setEndPriceResponse");
-    private final static QName _GetCurrency1Response_QNAME = new QName("http://webservices/", "getCurrency1Response");
-    private final static QName _GetCurrency2Response_QNAME = new QName("http://webservices/", "getCurrency2Response");
-    private final static QName _GetPendingTransactionType_QNAME = new QName("http://webservices/", "getPendingTransactionType");
-    private final static QName _InsertIntoDbResponse_QNAME = new QName("http://webservices/", "insertIntoDbResponse");
-    private final static QName _SetResult_QNAME = new QName("http://webservices/", "setResult");
-    private final static QName _GetFinishedTransactionPrice_QNAME = new QName("http://webservices/", "getFinishedTransactionPrice");
+    private final static QName _GetLastChatId_QNAME = new QName("http://webservices/", "getLastChatId");
+    private final static QName _GetOldMessagesResponse_QNAME = new QName("http://webservices/", "getOldMessagesResponse");
+    private final static QName _SaveMessage_QNAME = new QName("http://webservices/", "saveMessage");
+    private final static QName _GetLastChatUserId_QNAME = new QName("http://webservices/", "getLastChatUserId");
+    private final static QName _GetOldChatIds_QNAME = new QName("http://webservices/", "getOldChatIds");
+    private final static QName _SaveMessageResponse_QNAME = new QName("http://webservices/", "saveMessageResponse");
+    private final static QName _GetOldMessages_QNAME = new QName("http://webservices/", "getOldMessages");
+    private final static QName _OnlineUsersList_QNAME = new QName("http://webservices/", "onlineUsersList");
+    private final static QName _GetLastChatDateTimeResponse_QNAME = new QName("http://webservices/", "getLastChatDateTimeResponse");
+    private final static QName _DisconnectFromChatResponse_QNAME = new QName("http://webservices/", "disconnectFromChatResponse");
+    private final static QName _GetLastMessage_QNAME = new QName("http://webservices/", "getLastMessage");
+    private final static QName _GetOldChatIdsResponse_QNAME = new QName("http://webservices/", "getOldChatIdsResponse");
+    private final static QName _GetUserIdFromChatIdResponse_QNAME = new QName("http://webservices/", "getUserIdFromChatIdResponse");
+    private final static QName _GetLastMessageResponse_QNAME = new QName("http://webservices/", "getLastMessageResponse");
+    private final static QName _GetLastChatIdResponse_QNAME = new QName("http://webservices/", "getLastChatIdResponse");
+    private final static QName _OnlineUsersListResponse_QNAME = new QName("http://webservices/", "onlineUsersListResponse");
+    private final static QName _ConnectToChatResponse_QNAME = new QName("http://webservices/", "connectToChatResponse");
+    private final static QName _GetLastChatUserIdResponse_QNAME = new QName("http://webservices/", "getLastChatUserIdResponse");
+    private final static QName _GetLastChatDateTime_QNAME = new QName("http://webservices/", "getLastChatDateTime");
+    private final static QName _GetUserIdFromChatId_QNAME = new QName("http://webservices/", "getUserIdFromChatId");
+    private final static QName _DisconnectFromChat_QNAME = new QName("http://webservices/", "disconnectFromChat");
+    private final static QName _GetOldDatetimes_QNAME = new QName("http://webservices/", "getOldDatetimes");
+    private final static QName _ConnectToChat_QNAME = new QName("http://webservices/", "connectToChat");
+    private final static QName _GetOldDatetimesResponse_QNAME = new QName("http://webservices/", "getOldDatetimesResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservices
@@ -63,513 +57,411 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetFinishedTransactionPrice }
+     * Create an instance of {@link ConnectToChat }
      * 
      */
-    public GetFinishedTransactionPrice createGetFinishedTransactionPrice() {
-        return new GetFinishedTransactionPrice();
+    public ConnectToChat createConnectToChat() {
+        return new ConnectToChat();
     }
 
     /**
-     * Create an instance of {@link SetResult }
+     * Create an instance of {@link GetOldDatetimesResponse }
      * 
      */
-    public SetResult createSetResult() {
-        return new SetResult();
+    public GetOldDatetimesResponse createGetOldDatetimesResponse() {
+        return new GetOldDatetimesResponse();
     }
 
     /**
-     * Create an instance of {@link InsertIntoDbResponse }
+     * Create an instance of {@link GetOldDatetimes }
      * 
      */
-    public InsertIntoDbResponse createInsertIntoDbResponse() {
-        return new InsertIntoDbResponse();
+    public GetOldDatetimes createGetOldDatetimes() {
+        return new GetOldDatetimes();
     }
 
     /**
-     * Create an instance of {@link GetPendingTransactionType }
+     * Create an instance of {@link DisconnectFromChat }
      * 
      */
-    public GetPendingTransactionType createGetPendingTransactionType() {
-        return new GetPendingTransactionType();
+    public DisconnectFromChat createDisconnectFromChat() {
+        return new DisconnectFromChat();
     }
 
     /**
-     * Create an instance of {@link GetCurrency1Response }
+     * Create an instance of {@link GetUserIdFromChatId }
      * 
      */
-    public GetCurrency1Response createGetCurrency1Response() {
-        return new GetCurrency1Response();
+    public GetUserIdFromChatId createGetUserIdFromChatId() {
+        return new GetUserIdFromChatId();
     }
 
     /**
-     * Create an instance of {@link GetCurrency2Response }
+     * Create an instance of {@link GetLastChatDateTime }
      * 
      */
-    public GetCurrency2Response createGetCurrency2Response() {
-        return new GetCurrency2Response();
+    public GetLastChatDateTime createGetLastChatDateTime() {
+        return new GetLastChatDateTime();
     }
 
     /**
-     * Create an instance of {@link SetEndPriceResponse }
+     * Create an instance of {@link ConnectToChatResponse }
      * 
      */
-    public SetEndPriceResponse createSetEndPriceResponse() {
-        return new SetEndPriceResponse();
+    public ConnectToChatResponse createConnectToChatResponse() {
+        return new ConnectToChatResponse();
     }
 
     /**
-     * Create an instance of {@link GetTimeFrameResponse }
+     * Create an instance of {@link GetLastChatUserIdResponse }
      * 
      */
-    public GetTimeFrameResponse createGetTimeFrameResponse() {
-        return new GetTimeFrameResponse();
+    public GetLastChatUserIdResponse createGetLastChatUserIdResponse() {
+        return new GetLastChatUserIdResponse();
     }
 
     /**
-     * Create an instance of {@link GetTimeFrame }
+     * Create an instance of {@link OnlineUsersListResponse }
      * 
      */
-    public GetTimeFrame createGetTimeFrame() {
-        return new GetTimeFrame();
+    public OnlineUsersListResponse createOnlineUsersListResponse() {
+        return new OnlineUsersListResponse();
     }
 
     /**
-     * Create an instance of {@link GetCurrency2 }
+     * Create an instance of {@link GetLastChatIdResponse }
      * 
      */
-    public GetCurrency2 createGetCurrency2() {
-        return new GetCurrency2();
+    public GetLastChatIdResponse createGetLastChatIdResponse() {
+        return new GetLastChatIdResponse();
     }
 
     /**
-     * Create an instance of {@link GetCurrency1 }
+     * Create an instance of {@link GetLastMessageResponse }
      * 
      */
-    public GetCurrency1 createGetCurrency1() {
-        return new GetCurrency1();
+    public GetLastMessageResponse createGetLastMessageResponse() {
+        return new GetLastMessageResponse();
     }
 
     /**
-     * Create an instance of {@link GetStartPrice }
+     * Create an instance of {@link GetUserIdFromChatIdResponse }
      * 
      */
-    public GetStartPrice createGetStartPrice() {
-        return new GetStartPrice();
+    public GetUserIdFromChatIdResponse createGetUserIdFromChatIdResponse() {
+        return new GetUserIdFromChatIdResponse();
     }
 
     /**
-     * Create an instance of {@link CheckTransactionExistsResponse }
+     * Create an instance of {@link GetOldChatIdsResponse }
      * 
      */
-    public CheckTransactionExistsResponse createCheckTransactionExistsResponse() {
-        return new CheckTransactionExistsResponse();
+    public GetOldChatIdsResponse createGetOldChatIdsResponse() {
+        return new GetOldChatIdsResponse();
     }
 
     /**
-     * Create an instance of {@link InsertIntoDb }
+     * Create an instance of {@link DisconnectFromChatResponse }
      * 
      */
-    public InsertIntoDb createInsertIntoDb() {
-        return new InsertIntoDb();
+    public DisconnectFromChatResponse createDisconnectFromChatResponse() {
+        return new DisconnectFromChatResponse();
     }
 
     /**
-     * Create an instance of {@link GetAmount }
+     * Create an instance of {@link GetLastMessage }
      * 
      */
-    public GetAmount createGetAmount() {
-        return new GetAmount();
+    public GetLastMessage createGetLastMessage() {
+        return new GetLastMessage();
     }
 
     /**
-     * Create an instance of {@link GetDateTime }
+     * Create an instance of {@link GetLastChatDateTimeResponse }
      * 
      */
-    public GetDateTime createGetDateTime() {
-        return new GetDateTime();
+    public GetLastChatDateTimeResponse createGetLastChatDateTimeResponse() {
+        return new GetLastChatDateTimeResponse();
     }
 
     /**
-     * Create an instance of {@link SetResultResponse }
+     * Create an instance of {@link GetOldMessages }
      * 
      */
-    public SetResultResponse createSetResultResponse() {
-        return new SetResultResponse();
+    public GetOldMessages createGetOldMessages() {
+        return new GetOldMessages();
     }
 
     /**
-     * Create an instance of {@link GetDateTimeResponse }
+     * Create an instance of {@link OnlineUsersList }
      * 
      */
-    public GetDateTimeResponse createGetDateTimeResponse() {
-        return new GetDateTimeResponse();
+    public OnlineUsersList createOnlineUsersList() {
+        return new OnlineUsersList();
     }
 
     /**
-     * Create an instance of {@link GetEndPriceResponse }
+     * Create an instance of {@link GetOldChatIds }
      * 
      */
-    public GetEndPriceResponse createGetEndPriceResponse() {
-        return new GetEndPriceResponse();
+    public GetOldChatIds createGetOldChatIds() {
+        return new GetOldChatIds();
     }
 
     /**
-     * Create an instance of {@link SetEndPrice }
+     * Create an instance of {@link SaveMessageResponse }
      * 
      */
-    public SetEndPrice createSetEndPrice() {
-        return new SetEndPrice();
+    public SaveMessageResponse createSaveMessageResponse() {
+        return new SaveMessageResponse();
     }
 
     /**
-     * Create an instance of {@link GetRisingTypeResponse }
+     * Create an instance of {@link GetLastChatUserId }
      * 
      */
-    public GetRisingTypeResponse createGetRisingTypeResponse() {
-        return new GetRisingTypeResponse();
+    public GetLastChatUserId createGetLastChatUserId() {
+        return new GetLastChatUserId();
     }
 
     /**
-     * Create an instance of {@link GetExpiryDateTime }
+     * Create an instance of {@link GetLastChatId }
      * 
      */
-    public GetExpiryDateTime createGetExpiryDateTime() {
-        return new GetExpiryDateTime();
+    public GetLastChatId createGetLastChatId() {
+        return new GetLastChatId();
     }
 
     /**
-     * Create an instance of {@link GetExpiryDateTimeResponse }
+     * Create an instance of {@link GetOldMessagesResponse }
      * 
      */
-    public GetExpiryDateTimeResponse createGetExpiryDateTimeResponse() {
-        return new GetExpiryDateTimeResponse();
+    public GetOldMessagesResponse createGetOldMessagesResponse() {
+        return new GetOldMessagesResponse();
     }
 
     /**
-     * Create an instance of {@link CheckTransactionExists }
+     * Create an instance of {@link SaveMessage }
      * 
      */
-    public CheckTransactionExists createCheckTransactionExists() {
-        return new CheckTransactionExists();
+    public SaveMessage createSaveMessage() {
+        return new SaveMessage();
     }
 
     /**
-     * Create an instance of {@link GetRisingType }
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetLastChatId }{@code >}}
      * 
      */
-    public GetRisingType createGetRisingType() {
-        return new GetRisingType();
+    @XmlElementDecl(namespace = "http://webservices/", name = "getLastChatId")
+    public JAXBElement<GetLastChatId> createGetLastChatId(GetLastChatId value) {
+        return new JAXBElement<GetLastChatId>(_GetLastChatId_QNAME, GetLastChatId.class, null, value);
     }
 
     /**
-     * Create an instance of {@link GetStartPriceResponse }
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetOldMessagesResponse }{@code >}}
      * 
      */
-    public GetStartPriceResponse createGetStartPriceResponse() {
-        return new GetStartPriceResponse();
+    @XmlElementDecl(namespace = "http://webservices/", name = "getOldMessagesResponse")
+    public JAXBElement<GetOldMessagesResponse> createGetOldMessagesResponse(GetOldMessagesResponse value) {
+        return new JAXBElement<GetOldMessagesResponse>(_GetOldMessagesResponse_QNAME, GetOldMessagesResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link GetAmountResponse }
+     * Create an instance of {@link JAXBElement }{@code <}{@link SaveMessage }{@code >}}
      * 
      */
-    public GetAmountResponse createGetAmountResponse() {
-        return new GetAmountResponse();
+    @XmlElementDecl(namespace = "http://webservices/", name = "saveMessage")
+    public JAXBElement<SaveMessage> createSaveMessage(SaveMessage value) {
+        return new JAXBElement<SaveMessage>(_SaveMessage_QNAME, SaveMessage.class, null, value);
     }
 
     /**
-     * Create an instance of {@link GetFinishedTransactionPriceResponse }
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetLastChatUserId }{@code >}}
      * 
      */
-    public GetFinishedTransactionPriceResponse createGetFinishedTransactionPriceResponse() {
-        return new GetFinishedTransactionPriceResponse();
+    @XmlElementDecl(namespace = "http://webservices/", name = "getLastChatUserId")
+    public JAXBElement<GetLastChatUserId> createGetLastChatUserId(GetLastChatUserId value) {
+        return new JAXBElement<GetLastChatUserId>(_GetLastChatUserId_QNAME, GetLastChatUserId.class, null, value);
     }
 
     /**
-     * Create an instance of {@link GetEndPrice }
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetOldChatIds }{@code >}}
      * 
      */
-    public GetEndPrice createGetEndPrice() {
-        return new GetEndPrice();
+    @XmlElementDecl(namespace = "http://webservices/", name = "getOldChatIds")
+    public JAXBElement<GetOldChatIds> createGetOldChatIds(GetOldChatIds value) {
+        return new JAXBElement<GetOldChatIds>(_GetOldChatIds_QNAME, GetOldChatIds.class, null, value);
     }
 
     /**
-     * Create an instance of {@link GetPendingTransactionTypeResponse }
+     * Create an instance of {@link JAXBElement }{@code <}{@link SaveMessageResponse }{@code >}}
      * 
      */
-    public GetPendingTransactionTypeResponse createGetPendingTransactionTypeResponse() {
-        return new GetPendingTransactionTypeResponse();
+    @XmlElementDecl(namespace = "http://webservices/", name = "saveMessageResponse")
+    public JAXBElement<SaveMessageResponse> createSaveMessageResponse(SaveMessageResponse value) {
+        return new JAXBElement<SaveMessageResponse>(_SaveMessageResponse_QNAME, SaveMessageResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetEndPrice }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetOldMessages }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getEndPrice")
-    public JAXBElement<GetEndPrice> createGetEndPrice(GetEndPrice value) {
-        return new JAXBElement<GetEndPrice>(_GetEndPrice_QNAME, GetEndPrice.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "getOldMessages")
+    public JAXBElement<GetOldMessages> createGetOldMessages(GetOldMessages value) {
+        return new JAXBElement<GetOldMessages>(_GetOldMessages_QNAME, GetOldMessages.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetPendingTransactionTypeResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link OnlineUsersList }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getPendingTransactionTypeResponse")
-    public JAXBElement<GetPendingTransactionTypeResponse> createGetPendingTransactionTypeResponse(GetPendingTransactionTypeResponse value) {
-        return new JAXBElement<GetPendingTransactionTypeResponse>(_GetPendingTransactionTypeResponse_QNAME, GetPendingTransactionTypeResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "onlineUsersList")
+    public JAXBElement<OnlineUsersList> createOnlineUsersList(OnlineUsersList value) {
+        return new JAXBElement<OnlineUsersList>(_OnlineUsersList_QNAME, OnlineUsersList.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetFinishedTransactionPriceResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetLastChatDateTimeResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getFinishedTransactionPriceResponse")
-    public JAXBElement<GetFinishedTransactionPriceResponse> createGetFinishedTransactionPriceResponse(GetFinishedTransactionPriceResponse value) {
-        return new JAXBElement<GetFinishedTransactionPriceResponse>(_GetFinishedTransactionPriceResponse_QNAME, GetFinishedTransactionPriceResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "getLastChatDateTimeResponse")
+    public JAXBElement<GetLastChatDateTimeResponse> createGetLastChatDateTimeResponse(GetLastChatDateTimeResponse value) {
+        return new JAXBElement<GetLastChatDateTimeResponse>(_GetLastChatDateTimeResponse_QNAME, GetLastChatDateTimeResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetAmountResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link DisconnectFromChatResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getAmountResponse")
-    public JAXBElement<GetAmountResponse> createGetAmountResponse(GetAmountResponse value) {
-        return new JAXBElement<GetAmountResponse>(_GetAmountResponse_QNAME, GetAmountResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "disconnectFromChatResponse")
+    public JAXBElement<DisconnectFromChatResponse> createDisconnectFromChatResponse(DisconnectFromChatResponse value) {
+        return new JAXBElement<DisconnectFromChatResponse>(_DisconnectFromChatResponse_QNAME, DisconnectFromChatResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetStartPriceResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetLastMessage }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getStartPriceResponse")
-    public JAXBElement<GetStartPriceResponse> createGetStartPriceResponse(GetStartPriceResponse value) {
-        return new JAXBElement<GetStartPriceResponse>(_GetStartPriceResponse_QNAME, GetStartPriceResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "getLastMessage")
+    public JAXBElement<GetLastMessage> createGetLastMessage(GetLastMessage value) {
+        return new JAXBElement<GetLastMessage>(_GetLastMessage_QNAME, GetLastMessage.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetRisingType }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetOldChatIdsResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getRisingType")
-    public JAXBElement<GetRisingType> createGetRisingType(GetRisingType value) {
-        return new JAXBElement<GetRisingType>(_GetRisingType_QNAME, GetRisingType.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "getOldChatIdsResponse")
+    public JAXBElement<GetOldChatIdsResponse> createGetOldChatIdsResponse(GetOldChatIdsResponse value) {
+        return new JAXBElement<GetOldChatIdsResponse>(_GetOldChatIdsResponse_QNAME, GetOldChatIdsResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CheckTransactionExists }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserIdFromChatIdResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "checkTransactionExists")
-    public JAXBElement<CheckTransactionExists> createCheckTransactionExists(CheckTransactionExists value) {
-        return new JAXBElement<CheckTransactionExists>(_CheckTransactionExists_QNAME, CheckTransactionExists.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "getUserIdFromChatIdResponse")
+    public JAXBElement<GetUserIdFromChatIdResponse> createGetUserIdFromChatIdResponse(GetUserIdFromChatIdResponse value) {
+        return new JAXBElement<GetUserIdFromChatIdResponse>(_GetUserIdFromChatIdResponse_QNAME, GetUserIdFromChatIdResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetExpiryDateTimeResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetLastMessageResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getExpiryDateTimeResponse")
-    public JAXBElement<GetExpiryDateTimeResponse> createGetExpiryDateTimeResponse(GetExpiryDateTimeResponse value) {
-        return new JAXBElement<GetExpiryDateTimeResponse>(_GetExpiryDateTimeResponse_QNAME, GetExpiryDateTimeResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "getLastMessageResponse")
+    public JAXBElement<GetLastMessageResponse> createGetLastMessageResponse(GetLastMessageResponse value) {
+        return new JAXBElement<GetLastMessageResponse>(_GetLastMessageResponse_QNAME, GetLastMessageResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetExpiryDateTime }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetLastChatIdResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getExpiryDateTime")
-    public JAXBElement<GetExpiryDateTime> createGetExpiryDateTime(GetExpiryDateTime value) {
-        return new JAXBElement<GetExpiryDateTime>(_GetExpiryDateTime_QNAME, GetExpiryDateTime.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "getLastChatIdResponse")
+    public JAXBElement<GetLastChatIdResponse> createGetLastChatIdResponse(GetLastChatIdResponse value) {
+        return new JAXBElement<GetLastChatIdResponse>(_GetLastChatIdResponse_QNAME, GetLastChatIdResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetRisingTypeResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link OnlineUsersListResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getRisingTypeResponse")
-    public JAXBElement<GetRisingTypeResponse> createGetRisingTypeResponse(GetRisingTypeResponse value) {
-        return new JAXBElement<GetRisingTypeResponse>(_GetRisingTypeResponse_QNAME, GetRisingTypeResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "onlineUsersListResponse")
+    public JAXBElement<OnlineUsersListResponse> createOnlineUsersListResponse(OnlineUsersListResponse value) {
+        return new JAXBElement<OnlineUsersListResponse>(_OnlineUsersListResponse_QNAME, OnlineUsersListResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SetEndPrice }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ConnectToChatResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "setEndPrice")
-    public JAXBElement<SetEndPrice> createSetEndPrice(SetEndPrice value) {
-        return new JAXBElement<SetEndPrice>(_SetEndPrice_QNAME, SetEndPrice.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "connectToChatResponse")
+    public JAXBElement<ConnectToChatResponse> createConnectToChatResponse(ConnectToChatResponse value) {
+        return new JAXBElement<ConnectToChatResponse>(_ConnectToChatResponse_QNAME, ConnectToChatResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetDateTimeResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetLastChatUserIdResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getDateTimeResponse")
-    public JAXBElement<GetDateTimeResponse> createGetDateTimeResponse(GetDateTimeResponse value) {
-        return new JAXBElement<GetDateTimeResponse>(_GetDateTimeResponse_QNAME, GetDateTimeResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "getLastChatUserIdResponse")
+    public JAXBElement<GetLastChatUserIdResponse> createGetLastChatUserIdResponse(GetLastChatUserIdResponse value) {
+        return new JAXBElement<GetLastChatUserIdResponse>(_GetLastChatUserIdResponse_QNAME, GetLastChatUserIdResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetEndPriceResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetLastChatDateTime }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getEndPriceResponse")
-    public JAXBElement<GetEndPriceResponse> createGetEndPriceResponse(GetEndPriceResponse value) {
-        return new JAXBElement<GetEndPriceResponse>(_GetEndPriceResponse_QNAME, GetEndPriceResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "getLastChatDateTime")
+    public JAXBElement<GetLastChatDateTime> createGetLastChatDateTime(GetLastChatDateTime value) {
+        return new JAXBElement<GetLastChatDateTime>(_GetLastChatDateTime_QNAME, GetLastChatDateTime.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SetResultResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetUserIdFromChatId }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "setResultResponse")
-    public JAXBElement<SetResultResponse> createSetResultResponse(SetResultResponse value) {
-        return new JAXBElement<SetResultResponse>(_SetResultResponse_QNAME, SetResultResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "getUserIdFromChatId")
+    public JAXBElement<GetUserIdFromChatId> createGetUserIdFromChatId(GetUserIdFromChatId value) {
+        return new JAXBElement<GetUserIdFromChatId>(_GetUserIdFromChatId_QNAME, GetUserIdFromChatId.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetDateTime }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link DisconnectFromChat }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getDateTime")
-    public JAXBElement<GetDateTime> createGetDateTime(GetDateTime value) {
-        return new JAXBElement<GetDateTime>(_GetDateTime_QNAME, GetDateTime.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "disconnectFromChat")
+    public JAXBElement<DisconnectFromChat> createDisconnectFromChat(DisconnectFromChat value) {
+        return new JAXBElement<DisconnectFromChat>(_DisconnectFromChat_QNAME, DisconnectFromChat.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetAmount }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetOldDatetimes }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getAmount")
-    public JAXBElement<GetAmount> createGetAmount(GetAmount value) {
-        return new JAXBElement<GetAmount>(_GetAmount_QNAME, GetAmount.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "getOldDatetimes")
+    public JAXBElement<GetOldDatetimes> createGetOldDatetimes(GetOldDatetimes value) {
+        return new JAXBElement<GetOldDatetimes>(_GetOldDatetimes_QNAME, GetOldDatetimes.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CheckTransactionExistsResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ConnectToChat }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "checkTransactionExistsResponse")
-    public JAXBElement<CheckTransactionExistsResponse> createCheckTransactionExistsResponse(CheckTransactionExistsResponse value) {
-        return new JAXBElement<CheckTransactionExistsResponse>(_CheckTransactionExistsResponse_QNAME, CheckTransactionExistsResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "connectToChat")
+    public JAXBElement<ConnectToChat> createConnectToChat(ConnectToChat value) {
+        return new JAXBElement<ConnectToChat>(_ConnectToChat_QNAME, ConnectToChat.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link InsertIntoDb }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetOldDatetimesResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservices/", name = "insertIntoDb")
-    public JAXBElement<InsertIntoDb> createInsertIntoDb(InsertIntoDb value) {
-        return new JAXBElement<InsertIntoDb>(_InsertIntoDb_QNAME, InsertIntoDb.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrency1 }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrency1")
-    public JAXBElement<GetCurrency1> createGetCurrency1(GetCurrency1 value) {
-        return new JAXBElement<GetCurrency1>(_GetCurrency1_QNAME, GetCurrency1 .class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetStartPrice }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getStartPrice")
-    public JAXBElement<GetStartPrice> createGetStartPrice(GetStartPrice value) {
-        return new JAXBElement<GetStartPrice>(_GetStartPrice_QNAME, GetStartPrice.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrency2 }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrency2")
-    public JAXBElement<GetCurrency2> createGetCurrency2(GetCurrency2 value) {
-        return new JAXBElement<GetCurrency2>(_GetCurrency2_QNAME, GetCurrency2 .class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetTimeFrame }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getTimeFrame")
-    public JAXBElement<GetTimeFrame> createGetTimeFrame(GetTimeFrame value) {
-        return new JAXBElement<GetTimeFrame>(_GetTimeFrame_QNAME, GetTimeFrame.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetTimeFrameResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getTimeFrameResponse")
-    public JAXBElement<GetTimeFrameResponse> createGetTimeFrameResponse(GetTimeFrameResponse value) {
-        return new JAXBElement<GetTimeFrameResponse>(_GetTimeFrameResponse_QNAME, GetTimeFrameResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SetEndPriceResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "setEndPriceResponse")
-    public JAXBElement<SetEndPriceResponse> createSetEndPriceResponse(SetEndPriceResponse value) {
-        return new JAXBElement<SetEndPriceResponse>(_SetEndPriceResponse_QNAME, SetEndPriceResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrency1Response }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrency1Response")
-    public JAXBElement<GetCurrency1Response> createGetCurrency1Response(GetCurrency1Response value) {
-        return new JAXBElement<GetCurrency1Response>(_GetCurrency1Response_QNAME, GetCurrency1Response.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCurrency2Response }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getCurrency2Response")
-    public JAXBElement<GetCurrency2Response> createGetCurrency2Response(GetCurrency2Response value) {
-        return new JAXBElement<GetCurrency2Response>(_GetCurrency2Response_QNAME, GetCurrency2Response.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetPendingTransactionType }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getPendingTransactionType")
-    public JAXBElement<GetPendingTransactionType> createGetPendingTransactionType(GetPendingTransactionType value) {
-        return new JAXBElement<GetPendingTransactionType>(_GetPendingTransactionType_QNAME, GetPendingTransactionType.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link InsertIntoDbResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "insertIntoDbResponse")
-    public JAXBElement<InsertIntoDbResponse> createInsertIntoDbResponse(InsertIntoDbResponse value) {
-        return new JAXBElement<InsertIntoDbResponse>(_InsertIntoDbResponse_QNAME, InsertIntoDbResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SetResult }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "setResult")
-    public JAXBElement<SetResult> createSetResult(SetResult value) {
-        return new JAXBElement<SetResult>(_SetResult_QNAME, SetResult.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetFinishedTransactionPrice }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservices/", name = "getFinishedTransactionPrice")
-    public JAXBElement<GetFinishedTransactionPrice> createGetFinishedTransactionPrice(GetFinishedTransactionPrice value) {
-        return new JAXBElement<GetFinishedTransactionPrice>(_GetFinishedTransactionPrice_QNAME, GetFinishedTransactionPrice.class, null, value);
+    @XmlElementDecl(namespace = "http://webservices/", name = "getOldDatetimesResponse")
+    public JAXBElement<GetOldDatetimesResponse> createGetOldDatetimesResponse(GetOldDatetimesResponse value) {
+        return new JAXBElement<GetOldDatetimesResponse>(_GetOldDatetimesResponse_QNAME, GetOldDatetimesResponse.class, null, value);
     }
 
 }

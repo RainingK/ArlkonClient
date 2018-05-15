@@ -38,11 +38,11 @@ public class HelpController implements Initializable {
 
     // Header
     @FXML
-    private Pane profile_btn_pane, settings_btn_pane, logout_btn_pane;
+    private Pane home_btn_pane, profile_btn_pane, settings_btn_pane, logout_btn_pane;
     @FXML
-    private ImageView profile_btn, settings_btn, logout_btn;
+    private ImageView home_btn, profile_btn, settings_btn, logout_btn;
     @FXML
-    private Label profile_btn_label, settings_btn_label, logout_btn_label;
+    private Label home_btn_label, profile_btn_label, settings_btn_label, logout_btn_label;
     
     // Close and minimze buttons
     @FXML
@@ -53,6 +53,7 @@ public class HelpController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Header effects
+        trans.applyHeaderEffect(home_btn_pane, home_btn, home_btn_label);
         trans.applyHeaderEffect(profile_btn_pane, profile_btn, profile_btn_label);
         trans.applyHeaderEffect(settings_btn_pane, settings_btn, settings_btn_label);
         trans.applyHeaderEffect(logout_btn_pane, logout_btn, logout_btn_label);

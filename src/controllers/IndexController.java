@@ -6,11 +6,13 @@ import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.concurrent.Task;
@@ -248,44 +250,36 @@ public class IndexController implements Initializable {
             return false;
         }
     }
+    
+    private static String getServerIp(){
+        Scanner input = null;
+        try {
+            input = new Scanner(new FileReader("server_ip.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return input.next();
+    }
 
     private static Boolean login(java.lang.String username, java.lang.String password) {
         webservices.SessionWS_Service service = null;
         try {
-            try {
-                service = new webservices.SessionWS_Service(new URL("http://localhost:8080/ArlkonServer/SessionWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.SessionWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/SessionWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.SessionWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/SessionWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         webservices.SessionWS port = service.getSessionWSPort();
         return port.login(username, password);
     }
 
     private static int getUserIdFromUsername(java.lang.String username) {
-        
         webservices.UserWS_Service service = null;
         try {
-            try {
-                service = new webservices.UserWS_Service(new URL("http://localhost:8080/ArlkonServer/UserWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.UserWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/UserWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.UserWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/UserWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         webservices.UserWS port = service.getUserWSPort();
         return port.getUserIdFromUsername(username);
     }

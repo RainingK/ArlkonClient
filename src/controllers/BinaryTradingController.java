@@ -804,6 +804,17 @@ public class BinaryTradingController implements Initializable {
         checkRisingTypeThread.play();
     }
     
+    private static String getServerIp() {
+        Scanner input = null;
+        try {
+            input = new Scanner(new FileReader("server_ip.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return input.next();
+    }
+    
     /***************** END TRANSACTIONS *****************/
     
     @FXML
@@ -981,19 +992,9 @@ public class BinaryTradingController implements Initializable {
     private static double getCurrentPrice(java.lang.String currency1, java.lang.String currency2) {
         webservices.CurrencyApiWS_Service service = null;
         try {
-            System.out.println("TEST");
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://localhost:8080/ArlkonServer/CurrencyApiWS?WSDL"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            System.out.println("TESSTTT@@@@");
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/CurrencyApiWS?WSDL"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.CurrencyApiWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/CurrencyApiWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
@@ -1003,17 +1004,9 @@ public class BinaryTradingController implements Initializable {
     private static boolean insertIntoDb(int userId, java.lang.String type, java.lang.String currency1, java.lang.String currency2, double amount, double priceLevel, int seconds) {
         webservices.BinaryTransactionsWS_Service service = null;
         try {
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.BinaryTransactionsWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
@@ -1023,17 +1016,9 @@ public class BinaryTradingController implements Initializable {
     private static java.util.List<java.lang.String> getCurrencyList() {
         webservices.CurrencyApiWS_Service service = null;
         try {
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/CurrencyApiWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.CurrencyApiWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/CurrencyApiWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
@@ -1043,18 +1028,11 @@ public class BinaryTradingController implements Initializable {
     private static void setResult(double result, int userId) {
         webservices.BinaryTransactionsWS_Service service = null;
         try {
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.BinaryTransactionsWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         port.setResult(result, userId);
     }
@@ -1062,18 +1040,11 @@ public class BinaryTradingController implements Initializable {
     private static void setBalance(double balance, int userId) {
         webservices.UserWS_Service service = null;
         try {
-            try {
-                service = new webservices.UserWS_Service(new URL("http://localhost:8080/ArlkonServer/UserWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.UserWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/UserWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.UserWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/UserWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         webservices.UserWS port = service.getUserWSPort();
         port.setBalance(balance, userId);
     }
@@ -1081,18 +1052,11 @@ public class BinaryTradingController implements Initializable {
     private static void setEndPrice(double price, int userId) {
         webservices.BinaryTransactionsWS_Service service = null;
         try {
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.BinaryTransactionsWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         port.setEndPrice(price, userId);
     }
@@ -1100,17 +1064,9 @@ public class BinaryTradingController implements Initializable {
     private static double getBalance(int userId) {
         webservices.UserWS_Service service = null;
         try {
-            try {
-                service = new webservices.UserWS_Service(new URL("http://localhost:8080/ArlkonServer/UserWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.UserWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/UserWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.UserWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/UserWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         webservices.UserWS port = service.getUserWSPort();
@@ -1120,18 +1076,11 @@ public class BinaryTradingController implements Initializable {
     private static double getStartPrice(int userId) {
         webservices.BinaryTransactionsWS_Service service = null;
         try {
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.BinaryTransactionsWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getStartPrice(userId);
     }
@@ -1139,18 +1088,11 @@ public class BinaryTradingController implements Initializable {
     private static double getAmount(int userId) {
         webservices.BinaryTransactionsWS_Service service = null;
         try {
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.BinaryTransactionsWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getAmount(userId);
     }
@@ -1158,18 +1100,11 @@ public class BinaryTradingController implements Initializable {
     private static String getCurrency1(int userId) {
         webservices.BinaryTransactionsWS_Service service = null;
         try {
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.BinaryTransactionsWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getCurrency1(userId);
     }
@@ -1177,18 +1112,11 @@ public class BinaryTradingController implements Initializable {
     private static String getCurrency2(int userId) {
         webservices.BinaryTransactionsWS_Service service = null;
         try {
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.BinaryTransactionsWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getCurrency2(userId);
     }
@@ -1196,18 +1124,11 @@ public class BinaryTradingController implements Initializable {
     private static String getPendingTransactionType(int userId) {
         webservices.BinaryTransactionsWS_Service service = null;
         try {
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.BinaryTransactionsWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getPendingTransactionType(userId);
     }
@@ -1215,18 +1136,11 @@ public class BinaryTradingController implements Initializable {
     private static boolean checkTransactionExists(int userId) {
         webservices.BinaryTransactionsWS_Service service = null;
         try {
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.BinaryTransactionsWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.checkTransactionExists(userId);
     }
@@ -1234,18 +1148,11 @@ public class BinaryTradingController implements Initializable {
     private static String getExpiryDateTime(int userId) {
         webservices.BinaryTransactionsWS_Service service = null;
         try {
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://localhost:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.BinaryTransactionsWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.BinaryTransactionsWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getExpiryDateTime(userId);
     }
@@ -1253,18 +1160,11 @@ public class BinaryTradingController implements Initializable {
     private static String getAverage() {
         webservices.CurrencyApiWS_Service service = null;
         try {
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/CurrencyApiWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.CurrencyApiWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/CurrencyApiWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
         return port.getAverage();
     }
@@ -1272,18 +1172,11 @@ public class BinaryTradingController implements Initializable {
     private static double returnCurrency() {
         webservices.CurrencyApiWS_Service service = null;
         try {
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/CurrencyApiWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.CurrencyApiWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/CurrencyApiWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
         return port.returnCurrency();
     }
@@ -1291,24 +1184,22 @@ public class BinaryTradingController implements Initializable {
     private static double getRandomNumbers() {
         webservices.CurrencyApiWS_Service service = null;
         try {
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://172.28.18.204:8080/ArlkonServer/CurrencyApiWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            service = new webservices.CurrencyApiWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/CurrencyApiWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
         return port.getRandomNumbers();
     }
 
     private static String getRisingType(java.lang.String arg0, java.lang.String arg1) {
-        webservices.BinaryTransactionsWS_Service service = new webservices.BinaryTransactionsWS_Service();
+        webservices.BinaryTransactionsWS_Service service = null;
+        try {
+            service = new webservices.BinaryTransactionsWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/BinaryTransactionsWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(BinaryTradingController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         webservices.BinaryTransactionsWS port = service.getBinaryTransactionsWSPort();
         return port.getRisingType(arg0, arg1);
     }

@@ -59,7 +59,7 @@ public class ChatController implements Initializable {
     private Pane main_window;
     
     @FXML
-    private ScrollPane chat_container, online_users_container;
+    private ScrollPane chat_container;
     
     // Header
     @FXML
@@ -210,14 +210,16 @@ public class ChatController implements Initializable {
         List<String> messages = getOldMessages();
         
         if(messages.size() == 0){
+            System.out.println("NO MESSAGE");
             return;
         }
         
         Timeline checkNewMessagesThread = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            System.out.println("YES MESSAGE");
             String username = getUsername(getLastChatUserId());
             username = firstLetterUpper(username);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             
             Date currentDateTime = null;
             Date chatDateTime = null;
@@ -229,9 +231,11 @@ public class ChatController implements Initializable {
                 System.out.println("ParseException: " + ex.getMessage());
             }
             
-            chatDateTime = addSeconds(chatDateTime, 1);
+            chatDateTime = addSeconds(chatDateTime, 2);
+            System.out.println(currentDateTime + ".equals(" + chatDateTime +"): ");
             
             if(currentDateTime.equals(chatDateTime) && (getLastChatUserId() != user_id)){
+                System.out.println("MESSAGE VIEW: " + username);
                 generateMessageView(username, getLastMessage(), getCurrentDateTime());
                 chatMessageHolder.heightProperty().addListener(observable -> chat_container.setVvalue(1D));
             }

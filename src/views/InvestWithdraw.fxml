@@ -62,12 +62,12 @@
                </font>
             </Label>
             <JFXTextField id="amount_textfield" fx:id="amount_textfield" focusColor="#e8e8e8" layoutX="29.0" layoutY="224.0" onKeyReleased="#validateAmount" onKeyTyped="#numberValidation" prefHeight="45.0" prefWidth="214.0" promptText="Enter an Amount ($)" stylesheets="@../res/css/investwithdraw.css" unFocusColor="WHITE" />
-            <Label layoutX="24.0" layoutY="304.0" text="Commision Rate" textFill="WHITE">
+            <Label layoutX="24.0" layoutY="304.0" text="Commision" textFill="WHITE">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label fx:id="commissionRateLabel" layoutX="187.0" layoutY="302.0" prefHeight="34.0" prefWidth="57.0" textFill="#41ff5c">
+            <Label fx:id="commissionRateLabel" alignment="CENTER_RIGHT" layoutX="133.0" layoutY="302.0" prefHeight="34.0" prefWidth="111.0" textFill="#41ff5c">
                <font>
                   <Font size="23.0" />
                </font>

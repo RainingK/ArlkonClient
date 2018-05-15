@@ -15,13 +15,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.Animation;
@@ -46,8 +49,6 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import utils.WindowHandler;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -56,7 +57,6 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.Event;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-import javax.xml.ws.WebServiceException;
 import utils.Transition;
 
 /**
@@ -152,6 +152,7 @@ public class InvestWithdrawController implements Initializable {
     
     private double generatedDecimal = getRandomNumbers();
     private int user_id;
+    String cur_currency= "";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -173,7 +174,7 @@ public class InvestWithdrawController implements Initializable {
         startGraph();
         
         // Load any pending transaction
-        loadPendingTransaction();
+        //loadPendingTransaction();
 
         // Header effects
         applyHeaderEffect(home_btn_pane, home_btn, home_btn_label);
@@ -237,9 +238,11 @@ public class InvestWithdrawController implements Initializable {
         yAxisVal.setUpperBound(currentPrice + 0.01);
         yAxisVal.setTickUnit(0.1);
 
-        double range = PROFIT_PERCENTAGE * (currentPrice + generatedDecimal);
-        double lossVal = ((currentPrice + generatedDecimal) - range);
+        double range = (currentPrice + generatedDecimal)/10;  //amount to be added or subtracted to and from the range
+        double lossVal = Math.round(((currentPrice + generatedDecimal) - range)* 100.0) / 100.0;
         double profitVal = Math.round(((currentPrice + generatedDecimal) + range) * 100.0) / 100.0;
+        
+
 
         Timeline graphThread = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
             int xVal = 0;
@@ -247,6 +250,10 @@ public class InvestWithdrawController implements Initializable {
 
             @Override
             public void handle(ActionEvent event) {
+                           System.out.println("Profit value :" +profitVal);  //beyond this, take profit
+        
+            System.out.println("loss value " +lossVal);  //below this, stop loss
+                
                 String currency = currency_dropdown.getValue().toString();
         
                 double currentPrice = getCurrentPrice(currency, "USD");
@@ -387,7 +394,7 @@ public class InvestWithdrawController implements Initializable {
         trans.translate(-100, chartContainer);
         makeProfit_container.setVisible(true);
         
-        amount_textfield.setDisable(true);
+        amount_textfield.setDisable(true);		
         buy_btn.setDisable(true);
 
         //Setting the investment amount label in container
@@ -444,25 +451,28 @@ public class InvestWithdrawController implements Initializable {
     
     @FXML
     void buy_clicked(ActionEvent event) throws FileNotFoundException {
-
-        double currentBalance = getBalance(user_id);
+        
+        cur_currency= currency_dropdown.getSelectionModel().getSelectedItem().toString();
+        double currentBalance = getBalance(user_id);   //gets current balance of user
         int id = getIdFromFile();
-        double currentPrice = Math.round((getCurrentPrice(currency_dropdown.getSelectionModel().getSelectedItem().toString(), "USD") + getRandomNumbers()) * 10000d) / 10000d;
+        double currentPrice = Math.round((getCurrentPrice(cur_currency, "USD") + getRandomNumbers()) * 10000d) / 10000d;
        
         double range = PROFIT_PERCENTAGE * currentPrice;
 
         double lossVal = Math.round((currentPrice - range) * 10000d) / 10000d;
         double profitVal = Math.round((currentPrice + range) * 10000d) / 10000d;
-        double amount = Double.parseDouble(amount_textfield.getText());
+     
+        double amount = Double.parseDouble(amount_textfield.getText()); //invested amt
+        double commission = amount * 0.02;
+        double final_amount = amount + commission;
         // Insert into DB
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws FileNotFoundException {
 
                 String currency = currency_dropdown.getValue().toString();
-                insertInDb(id, amount, currency, profitVal, lossVal);
-                setBalance(currentBalance - amount, user_id);
-
+                insertInDb(id, final_amount, currency, profitVal, lossVal);
+                setBalance(currentBalance - final_amount, user_id);
                 return null;
             }
         };
@@ -479,7 +489,6 @@ public class InvestWithdrawController implements Initializable {
         });
 
         new Thread(task).start();
-        
         amount_textfield.setText("");
     }
 
@@ -511,45 +520,44 @@ public class InvestWithdrawController implements Initializable {
 
     @FXML
     void stopLoss_clicked(ActionEvent event) throws FileNotFoundException {
-            int id = getIdFromFile();
-             double invest_amount = getTransactionAmount(id);
-             double lossAmount = 0.5 * invest_amount;
-              double currentPrice = Math.round((getCurrentPrice(currency_dropdown.getSelectionModel().getSelectedItem().toString(), "USD") + generatedDecimal) * 10000d) / 10000d;
-              System.out.println("Current price at stop loss : " +currentPrice);
-             String end_method = "stop_loss";
-            Task<Void> task = new Task<Void>() {
+        int id = getIdFromFile();
+        double invest_amount = getTransactionAmount(id);
+        double lossAmount = 0.5 * invest_amount;
+        double currentPrice = Math.round((getCurrentPrice(cur_currency, "USD") + generatedDecimal) * 10000d) / 10000d;
+        System.out.println("Current price at stop loss : " + currentPrice);
+        String end_method = "stop_loss";
+        Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws FileNotFoundException {
-       
+
                 insertIntoDetails(id, lossAmount, end_method);
                 setBalance(getBalance(id) + (invest_amount - lossAmount), id);
                 return null;
             }
         };
-        
+
         task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
             @Override
             public void handle(WorkerStateEvent event) {
                 setBalanceToLabel(getBalance(id));
                 popUp(end_method, lossAmount, currentPrice);
-                
+
                 takeProfit_btn.setVisible(false);
                 stopLoss_btn.setVisible(false);
                 invest_close_btn.setVisible(false);
-                
+
                 resetControlPositions();
             }
-
         });
+        amount_textfield.setDisable(false);
 
         new Thread(task).start();
-        amount_textfield.setDisable(false);
     }
 
     @FXML
     void takeProfit_clicked(ActionEvent event) throws FileNotFoundException {
         int id = getIdFromFile();
-        double currentPrice = Math.round((getCurrentPrice(currency_dropdown.getSelectionModel().getSelectedItem().toString(), "USD") + generatedDecimal) * 10000d) / 10000d;
+        double currentPrice = Math.round((getCurrentPrice(cur_currency, "USD") + generatedDecimal) * 10000d) / 10000d;
 
         double invest_amount = getTransactionAmount(id);
         double profitAmount = 0.5 * invest_amount;
@@ -585,40 +593,41 @@ public class InvestWithdrawController implements Initializable {
         
     @FXML
     void close_btn_clicked(ActionEvent event) throws FileNotFoundException {
-            String message="";
-            int id = getIdFromFile();
-            
-            String end_method= getEndMethod(id);
-            double currentPrice = Math.round((getCurrentPrice(currency_dropdown.getSelectionModel().getSelectedItem().toString(), "USD") + generatedDecimal) * 10000d) / 10000d;
-            if(end_method.equals("take_profit")){
-                  message = "Your transaction has been closed with a profit earned of $ " +getTransactionResult(id) + " at price level $ " + currentPrice;
+         int id = getIdFromFile();
+        double currentPrice = Math.round((getCurrentPrice(cur_currency, "USD") + generatedDecimal) * 10000d) / 10000d;
+
+        double invest_amount = getTransactionAmount(id);
+        double amount_from_label = getTransactionAmount(user_id);
+        double final_balance = getBalance(id) + invest_amount;
+        String end_method = "close";
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws FileNotFoundException {
+
+                insertIntoDetails(id, invest_amount, end_method);
+
+                setBalance(final_balance, id);
+                return null;
             }
-            else if(end_method.equals("stop_loss")){
-                message = "Your transaction has been closed with a loss of $ " +getTransactionResult(id) + " at price level $ " +currentPrice;
-            }
-            else
-            {
-                message = "Closed transaction ";
-            }
-         
-            takeProfit_btn.setVisible(false);
-            stopLoss_btn.setVisible(false);
-            invest_close_btn.setVisible(false);
-            
-            resetControlPositions();
+        };
+        task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                popUp(end_method, amount_from_label , currentPrice);
+                setBalanceToLabel(getBalance(id));
                 
-            final JFXSnackbar snackBar = new JFXSnackbar(main_window);
+                takeProfit_btn.setVisible(false);
+                stopLoss_btn.setVisible(false);
+                invest_close_btn.setVisible(false);
+                
+                resetControlPositions();
+            }
 
-            EventHandler handler = new EventHandler() {
-                @Override
-                public void handle(Event event) {
-                    // Hide the snackbar
-                    snackBar.unregisterSnackbarContainer(main_window);
-                }
-            };
+        });
 
-            snackBar.show(message, "Close", 100000, handler);
-            amount_textfield.setDisable(false);
+        new Thread(task).start();
+        
+        amount_textfield.setDisable(false);
     }
 
     void popUp(String end_method, double amount, double current_price) {
@@ -652,6 +661,20 @@ public class InvestWithdrawController implements Initializable {
 
             snackBar.show(message, "Close", 100000, handler);
         
+        }else if(end_method.equals("close")){
+          String message = "Transaction closed at price level $ " +current_price;
+            
+               final JFXSnackbar snackBar = new JFXSnackbar(main_window);
+
+            EventHandler handler = new EventHandler() {
+                @Override
+                public void handle(Event event) {
+                    // Hide the snackbar
+                    snackBar.unregisterSnackbarContainer(main_window);
+                }
+            };
+
+            snackBar.show(message, "Close", 100000, handler);
         }
 
     }
@@ -715,18 +738,18 @@ public class InvestWithdrawController implements Initializable {
     
     @FXML
     void loadHelp(MouseEvent event) {
-        Transition trans = new Transition();
-        trans.setWindow(main_window);
-        
-        trans.fadeOutTransition("/views/help.fxml");
-    }
+        Transition trans = new Transition();		
+        trans.setWindow(main_window);		
+	
+        trans.fadeOutTransition("/views/help.fxml");		
+    }		
+
+    @FXML		
+    void loadSettings(MouseEvent event) {		
+        Transition trans = new Transition();		
+        trans.setWindow(main_window);		
+        trans.fadeOutTransition("/views/settings.fxml");		
     
-    @FXML
-    void loadSettings(MouseEvent event) {
-        Transition trans = new Transition();
-        trans.setWindow(main_window);
-        
-        trans.fadeOutTransition("/views/settings.fxml");
     }
     
     @FXML
@@ -780,253 +803,79 @@ public class InvestWithdrawController implements Initializable {
      * *********** SERVER RETRIEVED FUNCTIONS ************
      */
     private static double getCurrentPrice(java.lang.String currency1, java.lang.String currency2) {
-        webservices.CurrencyApiWS_Service service = null;
-        try {
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/CurrencyApiWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
+        webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
         return port.getCurrentPrice(currency1, currency2);
     }
 
     private static void insertIntoDetails(int userId, double transactionResult, java.lang.String endMethod) {
-        
-        webservices.IWWS_Service service = null;
-        try {
-            try {
-                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
+        webservices.IWWS_Service service = new webservices.IWWS_Service();
         webservices.IWWS port = service.getIWWSPort();
         port.insertIntoDetails(userId, transactionResult, endMethod);
     }
 
     private static double getTransactionAmount(int userId) {
-        webservices.IWWS_Service service = null;
-        try {
-            try {
-                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        webservices.IWWS_Service service = new webservices.IWWS_Service();
         webservices.IWWS port = service.getIWWSPort();
         return port.getTransactionAmount(userId);
     }
 
     private static double getProfitValue(int userId) {
-        webservices.IWWS_Service service = null;
-        try {
-            try {
-                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        webservices.IWWS_Service service = new webservices.IWWS_Service();
         webservices.IWWS port = service.getIWWSPort();
         return port.getProfitValue(userId);
     }
 
     private static double getLossValue(int userId) {
-        webservices.IWWS_Service service = null;
-        try {
-            try {
-                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        webservices.IWWS_Service service = new webservices.IWWS_Service();
         webservices.IWWS port = service.getIWWSPort();
         return port.getLossValue(userId);
     }
     
     private static void insertInDb(int userId, double transactionAmount, java.lang.String currency, double profitValue, double lossValue) {
-        webservices.IWWS_Service service = null;
-        try {
-            try {
-                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        webservices.IWWS_Service service = new webservices.IWWS_Service();
         webservices.IWWS port = service.getIWWSPort();
         port.insertInDb(userId, transactionAmount, currency, profitValue, lossValue);
     }
 
     private static double getBalance(int userId) {
-        webservices.UserWS_Service service = null;
-        try {
-            try {
-                service = new webservices.UserWS_Service(new URL("http://localhost:8080/ArlkonServer/UserWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.UserWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/UserWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
+        webservices.UserWS_Service service = new webservices.UserWS_Service();
         webservices.UserWS port = service.getUserWSPort();
         return port.getBalance(userId);
     }
 
     private static void setBalance(double balance, int userId) {
-        webservices.UserWS_Service service = null;
-        try {
-            try {
-                service = new webservices.UserWS_Service(new URL("http://localhost:8080/ArlkonServer/UserWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.UserWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/UserWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
+        webservices.UserWS_Service service = new webservices.UserWS_Service();
         webservices.UserWS port = service.getUserWSPort();
         port.setBalance(balance, userId);
     }
 
     private static double getTransactionResult(int userId) {
-        webservices.IWWS_Service service = null;
-        try {
-            try {
-                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        webservices.IWWS_Service service = new webservices.IWWS_Service();
         webservices.IWWS port = service.getIWWSPort();
         return port.getTransactionResult(userId);
     }
 
     private static String getEndMethod(int userId) {
-        webservices.IWWS_Service service = null;
-        try {
-            try {
-                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        webservices.IWWS_Service service = new webservices.IWWS_Service();
         webservices.IWWS port = service.getIWWSPort();
         return port.getEndMethod(userId);
     }
 
     private static Boolean checkTransactionExists(int userId) {
-        webservices.IWWS_Service service = null;
-        try {
-            try {
-                service = new webservices.IWWS_Service(new URL("http://localhost:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.IWWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/IWWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        webservices.IWWS_Service service = new webservices.IWWS_Service();
         webservices.IWWS port = service.getIWWSPort();
         return port.checkTransactionExists(userId);
     }
 
     private static double getRandomNumbers() {
-        webservices.CurrencyApiWS_Service service = null;
-        try {
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/CurrencyApiWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
         return port.getRandomNumbers();
     }
 
     private static java.util.List<java.lang.String> getCryptoCurrencyList() {
-        webservices.CurrencyApiWS_Service service = null;
-        try {
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://localhost:8080/ArlkonServer/CurrencyApiWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(WebServiceException e){
-            try {
-                service = new webservices.CurrencyApiWS_Service(new URL("http://172.28.22.4:8080/ArlkonServer/CurrencyApiWS?wsdl"));
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        webservices.CurrencyApiWS_Service service = new webservices.CurrencyApiWS_Service();
         webservices.CurrencyApiWS port = service.getCurrencyApiWSPort();
         return port.getCryptoCurrencyList();
     }

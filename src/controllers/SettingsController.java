@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -176,6 +177,17 @@ public class SettingsController implements Initializable {
     
     private String firstLetterUpper(String word){
         return word.substring(0, 1).toUpperCase() + word.substring(1);
+    }
+    
+    private static String getServerIp() {
+        Scanner input = null;
+        try {
+            input = new Scanner(new FileReader("server_ip.txt"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return input.next();
     }
     
     @FXML
@@ -351,43 +363,79 @@ public class SettingsController implements Initializable {
     }
 
     private static void updatePassword(java.lang.String password, int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            service = new webservices.UserWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/UserWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         webservices.UserWS port = service.getUserWSPort();
         port.updatePassword(password, userId);
     }
 
     private static void setBalance(double balance, int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            service = new webservices.UserWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/UserWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         webservices.UserWS port = service.getUserWSPort();
         port.setBalance(balance, userId);
     }
 
     private static String getUsername(int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            service = new webservices.UserWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/UserWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         webservices.UserWS port = service.getUserWSPort();
         return port.getUsername(userId);
     }
 
     private static String getEmail(int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            service = new webservices.UserWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/UserWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         webservices.UserWS port = service.getUserWSPort();
         return port.getEmail(userId);
     }
 
     private static Boolean checkOldPassword(java.lang.String password, int userId) {
-        webservices.SessionWS_Service service = new webservices.SessionWS_Service();
+        webservices.SessionWS_Service service = null;
+        try {
+            service = new webservices.SessionWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/SessionWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         webservices.SessionWS port = service.getSessionWSPort();
         return port.checkOldPassword(password, userId);
     }
 
     private static double getBalance(int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            service = new webservices.UserWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/UserWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         webservices.UserWS port = service.getUserWSPort();
         return port.getBalance(userId);
     }
 
     private static String getDateJoin(int userId) {
-        webservices.UserWS_Service service = new webservices.UserWS_Service();
+        webservices.UserWS_Service service = null;
+        try {
+            service = new webservices.UserWS_Service(new URL("http://" + getServerIp() + ":8080/ArlkonServer/UserWS?wsdl"));
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(SettingsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         webservices.UserWS port = service.getUserWSPort();
         return port.getDateJoin(userId);
     }
