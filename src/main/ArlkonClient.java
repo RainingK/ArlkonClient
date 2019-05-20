@@ -5,8 +5,6 @@
  */
 package main;
 
-import controllers.HomeController;
-import controllers.IndexController;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -62,6 +60,8 @@ public class ArlkonClient extends Application {
                         saveServerIpToFile("localhost");
                         System.out.println("fixed");
                     }
+                    
+                    
                 }
             }
         });
@@ -86,7 +86,7 @@ public class ArlkonClient extends Application {
         try {
             input = new Scanner(new FileReader("server_ip.txt"));
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(IndexController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ArlkonClient.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return input.next();

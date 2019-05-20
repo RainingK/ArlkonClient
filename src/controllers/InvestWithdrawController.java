@@ -177,7 +177,7 @@ public class InvestWithdrawController implements Initializable {
         startGraph();
         
         // Load any pending transaction
-        //loadPendingTransaction();
+        loadPendingTransaction();
 
         // Header effects
         applyHeaderEffect(home_btn_pane, home_btn, home_btn_label);
@@ -232,7 +232,7 @@ public class InvestWithdrawController implements Initializable {
     private void startGraph() {
         XYChart.Series series = new XYChart.Series();
         
-        String currency = currency_dropdown.getValue().toString();
+        String currency = currency_dropdown.getSelectionModel().getSelectedItem().toString();
         
         double currentPrice = getCurrentPrice(currency, "USD");
 

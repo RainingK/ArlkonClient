@@ -4,17 +4,11 @@
 <xsd:import namespace="http://webservices/" schemaLocation="http://localhost:8080/ArlkonServer/SessionWS?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="signUp">
-<part name="parameters" element="tns:signUp"/>
+<message name="checkUsernameExists">
+<part name="parameters" element="tns:checkUsernameExists"/>
 </message>
-<message name="signUpResponse">
-<part name="parameters" element="tns:signUpResponse"/>
-</message>
-<message name="checkEmailExists">
-<part name="parameters" element="tns:checkEmailExists"/>
-</message>
-<message name="checkEmailExistsResponse">
-<part name="parameters" element="tns:checkEmailExistsResponse"/>
+<message name="checkUsernameExistsResponse">
+<part name="parameters" element="tns:checkUsernameExistsResponse"/>
 </message>
 <message name="checkOldPassword">
 <part name="parameters" element="tns:checkOldPassword"/>
@@ -22,17 +16,23 @@
 <message name="checkOldPasswordResponse">
 <part name="parameters" element="tns:checkOldPasswordResponse"/>
 </message>
+<message name="checkEmailExists">
+<part name="parameters" element="tns:checkEmailExists"/>
+</message>
+<message name="checkEmailExistsResponse">
+<part name="parameters" element="tns:checkEmailExistsResponse"/>
+</message>
+<message name="signUp">
+<part name="parameters" element="tns:signUp"/>
+</message>
+<message name="signUpResponse">
+<part name="parameters" element="tns:signUpResponse"/>
+</message>
 <message name="checkServer">
 <part name="parameters" element="tns:checkServer"/>
 </message>
 <message name="checkServerResponse">
 <part name="parameters" element="tns:checkServerResponse"/>
-</message>
-<message name="checkUsernameExists">
-<part name="parameters" element="tns:checkUsernameExists"/>
-</message>
-<message name="checkUsernameExistsResponse">
-<part name="parameters" element="tns:checkUsernameExistsResponse"/>
 </message>
 <message name="login">
 <part name="parameters" element="tns:login"/>
@@ -41,25 +41,25 @@
 <part name="parameters" element="tns:loginResponse"/>
 </message>
 <portType name="SessionWS">
-<operation name="signUp">
-<input wsam:Action="http://webservices/SessionWS/signUpRequest" message="tns:signUp"/>
-<output wsam:Action="http://webservices/SessionWS/signUpResponse" message="tns:signUpResponse"/>
-</operation>
-<operation name="checkEmailExists">
-<input wsam:Action="http://webservices/SessionWS/checkEmailExistsRequest" message="tns:checkEmailExists"/>
-<output wsam:Action="http://webservices/SessionWS/checkEmailExistsResponse" message="tns:checkEmailExistsResponse"/>
+<operation name="checkUsernameExists">
+<input wsam:Action="http://webservices/SessionWS/checkUsernameExistsRequest" message="tns:checkUsernameExists"/>
+<output wsam:Action="http://webservices/SessionWS/checkUsernameExistsResponse" message="tns:checkUsernameExistsResponse"/>
 </operation>
 <operation name="checkOldPassword">
 <input wsam:Action="http://webservices/SessionWS/checkOldPasswordRequest" message="tns:checkOldPassword"/>
 <output wsam:Action="http://webservices/SessionWS/checkOldPasswordResponse" message="tns:checkOldPasswordResponse"/>
 </operation>
+<operation name="checkEmailExists">
+<input wsam:Action="http://webservices/SessionWS/checkEmailExistsRequest" message="tns:checkEmailExists"/>
+<output wsam:Action="http://webservices/SessionWS/checkEmailExistsResponse" message="tns:checkEmailExistsResponse"/>
+</operation>
+<operation name="signUp">
+<input wsam:Action="http://webservices/SessionWS/signUpRequest" message="tns:signUp"/>
+<output wsam:Action="http://webservices/SessionWS/signUpResponse" message="tns:signUpResponse"/>
+</operation>
 <operation name="checkServer">
 <input wsam:Action="http://webservices/SessionWS/checkServerRequest" message="tns:checkServer"/>
 <output wsam:Action="http://webservices/SessionWS/checkServerResponse" message="tns:checkServerResponse"/>
-</operation>
-<operation name="checkUsernameExists">
-<input wsam:Action="http://webservices/SessionWS/checkUsernameExistsRequest" message="tns:checkUsernameExists"/>
-<output wsam:Action="http://webservices/SessionWS/checkUsernameExistsResponse" message="tns:checkUsernameExistsResponse"/>
 </operation>
 <operation name="login">
 <input wsam:Action="http://webservices/SessionWS/loginRequest" message="tns:login"/>
@@ -68,16 +68,7 @@
 </portType>
 <binding name="SessionWSPortBinding" type="tns:SessionWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="signUp">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="checkEmailExists">
+<operation name="checkUsernameExists">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -95,7 +86,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="checkServer">
+<operation name="checkEmailExists">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -104,7 +95,16 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="checkUsernameExists">
+<operation name="signUp">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="checkServer">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
